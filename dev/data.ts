@@ -24,6 +24,18 @@ interface StateDataResult {
   'Text box': string;
 }
 
+function camelcase(p: string) {
+  return p
+    .split(/[^\w\d]+/i)
+    .map(
+      (s, i) =>
+        i > 0
+          ? s.charAt(0).toUpperCase() + s.slice(1, s.length).toLowerCase()
+          : s.toLowerCase()
+    )
+    .join('');
+}
+
 export async function run() {
   const program = commander
     .option('-s, --state-data <csvfile>', 'parse state data file')
@@ -40,10 +52,13 @@ export async function run() {
     );
 
     const states = result.map(r => r.State);
-    const reduced = result.reduce((out, r) => {
-      out[r.State] = r;
+    const reduced = result.reduce((out, r: any) => {
+      out[r.State] = Object.keys(r).reduce((d, k) => {
+        d[camelcase(k)] = r[k];
+        return d;
+      }, {} as any);
       return out;
-    }, {} as { [key: string]: StateDataResult });
+    }, {} as any);
 
     const code = format(
       `

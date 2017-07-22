@@ -20,7 +20,9 @@
     "@types/mapbox-gl": "^0.39.2",
     "@types/react": "^15.0.38",
     "@types/react-dom": "^15.5.1",
+    "@types/react-router-dom": "^4.0.7",
     "@types/react-select": "^1.0.48",
+    "@types/recharts": "^0.22.1",
     "@types/webpack": "^3.0.4",
     "bluebird": "^3.5.0",
     "commander": "^2.11.0",
@@ -35,7 +37,9 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-mapbox-gl": "^2.1.0",
+    "react-router-dom": "^4.1.2",
     "react-select": "^1.0.0-rc.5",
+    "recharts": "^1.0.0-alpha.2",
     "source-map-loader": "^0.2.1",
     "spectre.css": "^0.2.14",
     "style-loader": "^0.18.2",
@@ -47,6 +51,8 @@
     "webpack-dev-server": "^2.6.0"
   },
   "dependencies": {
-    "@types/prettier": "^1.5.0"
+    "@types/d3-format": "^1.2.0",
+    "@types/prettier": "^1.5.0",
+    "d3-format": "^1.2.0"
   }
 }

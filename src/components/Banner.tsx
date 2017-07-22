@@ -3,7 +3,10 @@ import * as React from 'react';
 import * as Select from 'react-select';
 import { style } from 'typestyle';
 import { Title } from './Title';
-import { stateList, StateName } from '../states';
+import { stateList, StateName, stateData } from '../states';
+import { format } from 'd3-format';
+
+const percent = format('.0%');
 
 const bannerClassName = style({
   marginBottom: 20,
@@ -27,11 +30,20 @@ export type BannerProps = Readonly<{
 
 const options = stateList.map(s => ({ value: s, label: s }));
 
+const getPercentInDeserts = (state?: StateName) =>
+  state
+    ? percent(stateData[state].percentInDesertsAll)
+    : percent(stateData['All states'].percentInDesertsAll);
+
+const titleText = (state?: StateName) =>
+  <Title>
+    {getPercentInDeserts(state)} of children in {state || 'these states'} live
+    in a child care desert.
+  </Title>;
+
 export const Banner = (props: BannerProps) =>
   <div className={bannerClassName}>
-    <Title>
-      {' '}40% of Americans in these states live in a child care desert.{' '}
-    </Title>
+    {titleText(props.selectedState)}
     <p>
       A child care desert is any ZIP code with more than 30 children under age 5
       that contains either zero child care centers or so few centers that there

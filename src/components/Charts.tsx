@@ -1,8 +1,14 @@
 import * as React from 'react';
+import {} from 'recharts';
+import { StateName, stateData } from '../states';
+
+export type ChartsState = Readonly<{
+  selectedState?: StateName;
+}>;
 
 export const Charts = () =>
   <div className="columns">
-    <div className="column col-4">chart 1</div>
-    <div className="column col-4">chart 2</div>
-    <div className="column col-4">chart 3</div>
+    <div className="column col-4" />
+    <div className="column col-4" />
+    <div className="column col-4" />
   </div>;
