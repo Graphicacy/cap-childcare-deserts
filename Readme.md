@@ -9,7 +9,7 @@
     npm install
     ```
 
-    Or, if you have `yarn` installed,
+    Or, if [you have `yarn` installed](https://yarnpkg.com/en/) (often has better performance and guarantees),
 
     ```shell
     yarn
