@@ -63,6 +63,9 @@ const config: webpack.Configuration = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      __ACCESS_TOKEN__: JSON.stringify(require('./keys.json').accessToken)
+    }),
     new HTMLPlugin({
       filename: 'index.html',
       templateContent

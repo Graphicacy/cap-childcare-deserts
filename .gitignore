@@ -4,3 +4,4 @@ data
 public/bundles
 public/index.html
 **/*.DS_Store
+keys.json
