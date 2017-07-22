@@ -1,7 +1,6 @@
+import 'react-select/dist/react-select.css';
 import * as React from 'react';
 import * as Select from 'react-select';
-import 'react-select/dist/react-select.css';
-
 import { style } from 'typestyle';
 import { Title } from './Title';
 
@@ -20,11 +19,11 @@ const selectClass = style({
   margin: '0 auto'
 });
 
-export const Banner = ({
-  onSelectState
-}: {
+export type BannerProps = Readonly<{
   onSelectState: (state: string) => void;
-}) =>
+}>;
+
+export const Banner = (props: BannerProps) =>
   <div className={bannerClassName}>
     <Title>
       {' '}40% of Americans in these states live in a child care desert.{' '}
