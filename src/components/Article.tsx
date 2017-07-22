@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { style } from 'typestyle';
 import { Title } from './Title';
-import { StateBarChart } from './StateBarChart';
+import { StateBarChart } from './charts/';
 
 const articleClass = style({
   textAlign: 'left',

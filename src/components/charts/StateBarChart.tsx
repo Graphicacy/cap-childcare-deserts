@@ -10,8 +10,8 @@ import {
   Bar,
   ResponsiveContainer
 } from 'recharts';
-import { StateName, stateData, stateList } from '../states';
-import { Colors } from '../colors';
+import { StateName, stateData, stateList } from '../../states';
+import { Colors } from '../../colors';
 
 const barChartContainer = style({
   margin: '0 auto',

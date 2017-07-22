@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Header } from './Header';
 import { Article } from './Article';
 import { Map } from './Map';
-import { Charts } from './Charts';
+import { ChartRow } from './ChartRow';
 import { Banner } from './Banner';
 import { style } from 'typestyle';
 import { StateName } from '../states';
@@ -36,7 +36,7 @@ export class App extends React.Component<{}, AppState> {
             selectedState={this.state.selectedState}
             onSelectState={this.selectState}
           />
-          <Charts />
+          <ChartRow />
           <Article />
         </div>
       </div>
