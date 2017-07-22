@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {} from 'recharts';
 import { StateName, stateData } from '../states';
 
 export type ChartsState = Readonly<{
