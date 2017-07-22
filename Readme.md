@@ -3,20 +3,25 @@
 ### Getting started
 
 1) [Install nodejs version 6 or greater](https://nodejs.org/en/)
-2) Install the dependencies
+2) Install the dependencies by running the following command in your terminal.
 
-```shell
-npm install
+    ```shell
+    npm install
+    ```
 
-# or, if you have `yarn` installed
-yarn
-```
+    Or, if you have `yarn` installed,
+
+    ```shell
+    yarn
+    ```
+
+
 
 3) start the development server
 
-```shell
-npm start
-```
+    ```shell
+    npm start
+    ```
 
 ### Building the production version
 
