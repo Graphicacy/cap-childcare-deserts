@@ -13,7 +13,7 @@ const templateContent = `
     <div id="root"></div>
   </body>
 </html>
-`;
+`.trim();
 
 const config: webpack.Configuration = {
   entry: './src/index.tsx',

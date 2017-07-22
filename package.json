@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "prettier": "prettier --single-quote --write './src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
     "@types/html-webpack-plugin": "^2.28.0",
