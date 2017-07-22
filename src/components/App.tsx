@@ -5,6 +5,7 @@ import { Map } from './Map';
 import { Charts } from './Charts';
 import { Banner } from './Banner';
 import { style } from 'typestyle';
+import { StateName } from '../states';
 
 const contentClass = style({
   paddingLeft: 50,
@@ -13,13 +14,15 @@ const contentClass = style({
 });
 
 export type AppState = Readonly<{
-  selectedState?: string;
+  selectedState?: StateName;
 }>;
 
 export class App extends React.Component<{}, AppState> {
-  selectState = (state: string) => {
+  state: AppState = {};
+
+  selectState = (state: StateName | null) => {
     this.setState({
-      selectedState: state
+      selectedState: state || undefined
     });
   };
 
@@ -29,7 +32,10 @@ export class App extends React.Component<{}, AppState> {
         <Header />
         <Map />
         <div className={contentClass}>
-          <Banner onSelectState={this.selectState} />
+          <Banner
+            selectedState={this.state.selectedState}
+            onSelectState={this.selectState}
+          />
           <Charts />
           <Article />
         </div>

@@ -19,7 +19,7 @@ const config: webpack.Configuration = {
   entry: './src/index.tsx',
   output: {
     filename: 'bundles/main.js',
-    path: __dirname + '/public'
+    path: path.join(__dirname, '../public')
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -59,12 +59,12 @@ const config: webpack.Configuration = {
   },
 
   devServer: {
-    contentBase: path.join(__dirname, 'public')
+    contentBase: path.join(__dirname, '../public')
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      __ACCESS_TOKEN__: JSON.stringify(require('./keys.json').accessToken)
+      __ACCESS_TOKEN__: JSON.stringify(require('../keys.json').accessToken)
     }),
     new HTMLPlugin({
       filename: 'index.html',

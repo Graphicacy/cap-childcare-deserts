@@ -3,5 +3,6 @@ node_modules
 data
 public/bundles
 public/index.html
+public/data
 **/*.DS_Store
 keys.json

@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as Select from 'react-select';
 import { style } from 'typestyle';
 import { Title } from './Title';
+import { stateList, StateName } from '../states';
 
 const bannerClassName = style({
   marginBottom: 20,
@@ -20,8 +21,11 @@ const selectClass = style({
 });
 
 export type BannerProps = Readonly<{
-  onSelectState: (state: string) => void;
+  selectedState?: StateName;
+  onSelectState: (state: StateName | null) => void;
 }>;
+
+const options = stateList.map(s => ({ value: s, label: s }));
 
 export const Banner = (props: BannerProps) =>
   <div className={bannerClassName}>
@@ -34,6 +38,14 @@ export const Banner = (props: BannerProps) =>
       are more than three times as many children as spaces in the centers.
     </p>
     <div className={selectContainerClass}>
-      <Select className={selectClass} />
+      <Select
+        className={selectClass}
+        options={options}
+        value={props.selectedState}
+        onChange={s =>
+          props.onSelectState(
+            s && ((Array.isArray(s) ? s[0].value : s!.value) as StateName)
+          )}
+      />
     </div>
   </div>;
