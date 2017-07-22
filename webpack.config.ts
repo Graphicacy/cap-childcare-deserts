@@ -18,7 +18,7 @@ const templateContent = `
 const config: webpack.Configuration = {
   entry: './src/index.tsx',
   output: {
-    filename: 'bundle.js',
+    filename: 'bundles/main.js',
     path: __dirname + '/public'
   },
 

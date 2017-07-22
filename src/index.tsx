@@ -1,4 +1,5 @@
 import 'spectre.css/dist/spectre.css';
+import 'core-js/shim';
 import * as React from 'react';
 import { render } from 'react-dom';
 import { App } from './components/App';
