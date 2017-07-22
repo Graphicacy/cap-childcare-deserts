@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { style } from 'typestyle';
 import { Map as ReactMapboxGl, Layer, Feature } from 'react-mapbox-gl';
 
 declare const __ACCESS_TOKEN__: string;
@@ -6,8 +7,12 @@ declare const __ACCESS_TOKEN__: string;
 const accessToken = __ACCESS_TOKEN__;
 const MapBoxMap = ReactMapboxGl({ accessToken });
 
+const mapContainerClass = style({
+  marginTop: -10
+});
+
 export const Map = () =>
-  <div className="columns">
+  <div className={`columns ${mapContainerClass}`}>
     <div className="column col-12">
       <MapBoxMap
         style="mapbox://styles/mapbox/streets-v9"
