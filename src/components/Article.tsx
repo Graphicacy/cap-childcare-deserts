@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { style } from 'typestyle';
+import { Title } from './Title';
 
 const articleClass = style({
   borderTop: '1px solid #ccc',
@@ -7,18 +8,10 @@ const articleClass = style({
   textAlign: 'left'
 });
 
-const headerClass = style({
-  fontWeight: 'bold',
-  textAlign: 'center',
-  width: '100%',
-  fontSize: 20,
-  marginBottom: 20
-});
-
 export const Article = () =>
   <div className="columns">
     <div className={`column col-12 ${articleClass}`}>
-      <div className={headerClass}>About the Study</div>
+      <Title> About the Study </Title>
       <p>
         Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin reris
         etur? Re am consed que dolut lam erum quate velenisti dolora nimporiti o

@@ -7,7 +7,7 @@ const templateContent = `
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Webpack App</title>
+    <title>Childcare Deserts</title>
   </head>
   <body>
     <div id="root"></div>

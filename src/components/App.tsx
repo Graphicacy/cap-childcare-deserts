@@ -3,6 +3,7 @@ import { Header } from './Header';
 import { Article } from './Article';
 import { Map } from './Map';
 import { Charts } from './Charts';
+import { Banner } from './Banner';
 import { style } from 'typestyle';
 
 const contentClass = style({
@@ -16,6 +17,7 @@ export const App = () =>
     <Header />
     <Map />
     <div className={contentClass}>
+      <Banner />
       <Charts />
       <Article />
     </div>
