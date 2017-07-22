@@ -27,25 +27,29 @@ const config: webpack.Configuration = {
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.json'],
+    mainFields: ['module', 'jsnext:main', 'browser', 'main']
   },
 
   module: {
     rules: [
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-      { test: /\.tsx?$/, loader: 'ts-loader' },
-
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'source-map-loader',
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
         options: {
           compilerOptions: {
             module: 'es2015',
             target: 'es3'
           }
         }
+      },
+
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader'
       },
       {
         test: /\.css$/,
