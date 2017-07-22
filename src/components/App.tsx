@@ -12,13 +12,28 @@ const contentClass = style({
   textAlign: 'center'
 });
 
-export const App = () =>
-  <div>
-    <Header />
-    <Map />
-    <div className={contentClass}>
-      <Banner />
-      <Charts />
-      <Article />
-    </div>
-  </div>;
+export type AppState = Readonly<{
+  selectedState?: string;
+}>;
+
+export class App extends React.Component<{}, AppState> {
+  selectState = (state: string) => {
+    this.setState({
+      selectedState: state
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <Map />
+        <div className={contentClass}>
+          <Banner onSelectState={this.selectState} />
+          <Charts />
+          <Article />
+        </div>
+      </div>
+    );
+  }
+}
