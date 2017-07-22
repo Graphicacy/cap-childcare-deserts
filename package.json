@@ -1,4 +1,10 @@
 {
+  "version": "2.0.0",
+  "name": "cap-childcare-deserts",
+  "author": {
+    "name": "Ben Southgate",
+    "email": "bsouthga@gmail.com"
+  },
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
