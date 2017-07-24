@@ -1,27 +1,28 @@
 import * as React from 'react';
 import { style } from 'typestyle';
-import {
-  BarChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  Bar,
-  ResponsiveContainer
-} from 'recharts';
 import { StateName, stateData, stateList } from '../../states';
 import { Colors } from '../../colors';
+import { format } from 'd3-format';
+import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+
+const percent = format('.0%');
+
+const barChartTitleClass = style({
+  fontWeight: 'bold',
+  fontSize: 14
+});
 
 const barChartContainer = style({
   margin: '0 auto',
   textAlign: 'center',
-  maxWidth: 800,
+  maxWidth: 700,
+  height: 230,
   width: '100%'
 });
 
-const data = stateList.map(s => ({
+const data = stateList.filter(s => s !== 'All states').map(s => ({
   percent: stateData[s].percentInDesertsAll,
+  abbr: stateData[s].abbr,
   state: s
 }));
 
@@ -30,20 +31,32 @@ data.sort((a, b) => {
 });
 
 /**
- * hack get around typings bug by casting viewBox prop to any
+ * hacks around typings:
+ *  - tickFormatter/viewBox cast to any
+ *  - spread fill
  */
-export const StateBarChart = () =>
+export const StateBarChart = ({
+  selectedState
+}: {
+  selectedState?: StateName;
+}) =>
   <div className={barChartContainer}>
-    <ResponsiveContainer height={200}>
-      <BarChart data={data} margin={{ top: 5, right: 30, left: 10, bottom: 5 }}>
-        <XAxis dataKey="state" />
-        <YAxis />
-        <Tooltip isAnimationActive={false} viewBox={undefined as any} />
-        <Bar
-          isAnimationActive={false}
-          dataKey="percent"
-          {...{ fill: Colors.ORANGE }}
-        />
-      </BarChart>
-    </ResponsiveContainer>
+    <div className={barChartTitleClass}>
+      Percent in a child care desert, by state
+    </div>
+    <VictoryChart width={600} domainPadding={{ x: 20 }}>
+      <VictoryBar
+        y="percent"
+        x="abbr"
+        data={data.map(x => ({
+          ...x,
+          fill:
+            !selectedState || x.state === selectedState
+              ? Colors.ORANGE
+              : Colors.GRAY
+        }))}
+      />
+      <VictoryAxis dependentAxis tickFormat={percent} />
+      <VictoryAxis />
+    </VictoryChart>
   </div>;

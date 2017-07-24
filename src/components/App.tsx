@@ -36,8 +36,8 @@ export class App extends React.Component<{}, AppState> {
             selectedState={this.state.selectedState}
             onSelectState={this.selectState}
           />
-          <ChartRow />
-          <Article />
+          <ChartRow selectedState={this.state.selectedState} />
+          <Article selectedState={this.state.selectedState} />
         </div>
       </div>
     );

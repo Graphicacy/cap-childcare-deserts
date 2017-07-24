@@ -2,6 +2,7 @@ import * as React from 'react';
 import { style } from 'typestyle';
 import { Title } from './Title';
 import { StateBarChart } from './charts/';
+import { StateName } from '../states';
 
 const articleClass = style({
   textAlign: 'left',
@@ -14,10 +15,10 @@ const articleContainerClass = style({
   padding: 60
 });
 
-export const Article = () =>
+export const Article = ({ selectedState }: { selectedState?: StateName }) =>
   <div className={`columns ${articleContainerClass}`}>
     <div className={`column col-12`}>
-      <StateBarChart />
+      <StateBarChart selectedState={selectedState} />
     </div>
     <div className={`column col-12 ${articleClass}`}>
       <Title> About the Study </Title>

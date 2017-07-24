@@ -1,3 +1,5 @@
 import * as React from 'react';
+import { StateName, stateData } from '../../states';
 
-export const IncomeChart = () => <div />;
+export const IncomeChart = ({ selectedState }: { selectedState?: StateName }) =>
+  <div />;

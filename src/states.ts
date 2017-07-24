@@ -70,7 +70,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 1696870,
     childrenUnder5InDesertsUrban: 372111,
     childrenUnder5NotInDesertsUrban: 382846,
-    textBox: ''
+    textBox: '',
+    abbr: 'US'
   },
   Arizona: {
     state: 'Arizona',
@@ -84,7 +85,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 679831,
     childrenUnder5InDesertsUrban: 80514,
     childrenUnder5NotInDesertsUrban: 197435,
-    textBox: 'Text about Arizona'
+    textBox: 'Text about Arizona',
+    abbr: 'AZ'
   },
   California: {
     state: 'California',
@@ -98,7 +100,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 290382,
     childrenUnder5InDesertsUrban: 77222,
     childrenUnder5NotInDesertsUrban: 148809,
-    textBox: 'Text about California'
+    textBox: 'Text about California',
+    abbr: 'CA'
   },
   Colorado: {
     state: 'Colorado',
@@ -112,7 +115,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 651702,
     childrenUnder5InDesertsUrban: 50051,
     childrenUnder5NotInDesertsUrban: 115294,
-    textBox: 'Text about Colorado'
+    textBox: 'Text about Colorado',
+    abbr: 'CO'
   },
   Connecticut: {
     state: 'Connecticut',
@@ -126,7 +130,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 185073,
     childrenUnder5InDesertsUrban: 43211,
     childrenUnder5NotInDesertsUrban: 76329,
-    textBox: 'Text about Connecticut'
+    textBox: 'Text about Connecticut',
+    abbr: 'CT'
   },
   Deleware: {
     state: 'Deleware',
@@ -140,7 +145,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 609855,
     childrenUnder5InDesertsUrban: 29433,
     childrenUnder5NotInDesertsUrban: 68735,
-    textBox: 'Text about Deleware'
+    textBox: 'Text about Deleware',
+    abbr: 'DE'
   },
   Florida: {
     state: 'Florida',
@@ -154,7 +160,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 641870,
     childrenUnder5InDesertsUrban: 70676,
     childrenUnder5NotInDesertsUrban: 24616,
-    textBox: 'Text about Florida'
+    textBox: 'Text about Florida',
+    abbr: 'FL'
   },
   Georgia: {
     state: 'Georgia',
@@ -168,7 +175,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 209531,
     childrenUnder5InDesertsUrban: 23314,
     childrenUnder5NotInDesertsUrban: 158649,
-    textBox: 'Text about Georgia'
+    textBox: 'Text about Georgia',
+    abbr: 'GA'
   },
   Iowa: {
     state: 'Iowa',
@@ -182,7 +190,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 585144,
     childrenUnder5InDesertsUrban: 35247,
     childrenUnder5NotInDesertsUrban: 108746,
-    textBox: 'Text about Iowa'
+    textBox: 'Text about Iowa',
+    abbr: 'IA'
   },
   Illinois: {
     state: 'Illinois',
@@ -196,7 +205,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 588623,
     childrenUnder5InDesertsUrban: 59702,
     childrenUnder5NotInDesertsUrban: 134516,
-    textBox: 'Text about Illinois'
+    textBox: 'Text about Illinois',
+    abbr: 'IL'
   },
   Kentucky: {
     state: 'Kentucky',
@@ -210,7 +220,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 384898,
     childrenUnder5InDesertsUrban: 61831,
     childrenUnder5NotInDesertsUrban: 138485,
-    textBox: 'Text about Kentucky'
+    textBox: 'Text about Kentucky',
+    abbr: 'KY'
   },
   Michigan: {
     state: 'Michigan',
@@ -224,7 +235,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 608304,
     childrenUnder5InDesertsUrban: 41176,
     childrenUnder5NotInDesertsUrban: 75405,
-    textBox: 'Text about Michigan'
+    textBox: 'Text about Michigan',
+    abbr: 'MI'
   },
   Minnesota: {
     state: 'Minnesota',
@@ -238,7 +250,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 612991,
     childrenUnder5InDesertsUrban: 68185,
     childrenUnder5NotInDesertsUrban: 107684,
-    textBox: 'Text about Minnesota'
+    textBox: 'Text about Minnesota',
+    abbr: 'MN'
   },
   Missouri: {
     state: 'Missouri',
@@ -252,7 +265,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 512113,
     childrenUnder5InDesertsUrban: 48395,
     childrenUnder5NotInDesertsUrban: 59218,
-    textBox: 'Text about Missouri'
+    textBox: 'Text about Missouri',
+    abbr: 'MO'
   },
   Mississippi: {
     state: 'Mississippi',
@@ -266,7 +280,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 463243,
     childrenUnder5InDesertsUrban: 32107,
     childrenUnder5NotInDesertsUrban: 146552,
-    textBox: 'Text about Mississippi'
+    textBox: 'Text about Mississippi',
+    abbr: 'MS'
   },
   'New Jersey': {
     state: 'New Jersey',
@@ -280,7 +295,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 293666,
     childrenUnder5InDesertsUrban: 30018,
     childrenUnder5NotInDesertsUrban: 126701,
-    textBox: 'Text about New Jersey'
+    textBox: 'Text about New Jersey',
+    abbr: 'NJ'
   },
   'New York': {
     state: 'New York',
@@ -294,7 +310,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 402989,
     childrenUnder5InDesertsUrban: 44185,
     childrenUnder5NotInDesertsUrban: 142336,
-    textBox: 'Text about New York'
+    textBox: 'Text about New York',
+    abbr: 'NY'
   },
   Pennsylvania: {
     state: 'Pennsylvania',
@@ -308,7 +325,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 364484,
     childrenUnder5InDesertsUrban: 37381,
     childrenUnder5NotInDesertsUrban: 71615,
-    textBox: 'Text about Pennsylvania'
+    textBox: 'Text about Pennsylvania',
+    abbr: 'PA'
   },
   'Rhode Island': {
     state: 'Rhode Island',
@@ -322,7 +340,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 556368,
     childrenUnder5InDesertsUrban: 59354,
     childrenUnder5NotInDesertsUrban: 80711,
-    textBox: 'Text about Rhode Island'
+    textBox: 'Text about Rhode Island',
+    abbr: 'RI'
   },
   'South Carolina': {
     state: 'South Carolina',
@@ -336,7 +355,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 296063,
     childrenUnder5InDesertsUrban: 51959,
     childrenUnder5NotInDesertsUrban: 123661,
-    textBox: 'Text about South Carolina'
+    textBox: 'Text about South Carolina',
+    abbr: 'SC'
   },
   'South Dakota': {
     state: 'South Dakota',
@@ -350,7 +370,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 373853,
     childrenUnder5InDesertsUrban: 43646,
     childrenUnder5NotInDesertsUrban: 65226,
-    textBox: 'Text about South Dakota'
+    textBox: 'Text about South Dakota',
+    abbr: 'SD'
   },
   Texas: {
     state: 'Texas',
@@ -364,7 +385,8 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 354912,
     childrenUnder5InDesertsUrban: 52077,
     childrenUnder5NotInDesertsUrban: 131410,
-    textBox: 'Text about Texas'
+    textBox: 'Text about Texas',
+    abbr: 'TX'
   },
   Vermont: {
     state: 'Vermont',
@@ -378,6 +400,7 @@ export const stateData = {
     childrenUnder5NotInDesertsSuburban: 326465,
     childrenUnder5InDesertsUrban: 53088,
     childrenUnder5NotInDesertsUrban: 107070,
-    textBox: 'Text about Vermont'
+    textBox: 'Text about Vermont',
+    abbr: 'VT'
   }
 };

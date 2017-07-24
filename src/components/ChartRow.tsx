@@ -9,12 +9,12 @@ export type ChartsProps = Readonly<{
 export const ChartRow = (props: ChartsProps) =>
   <div className="columns">
     <div className="column col-4">
-      <EthnicityChart />
+      <EthnicityChart selectedState={props.selectedState} />
     </div>
     <div className="column col-4">
-      <UrbanicityChart />
+      <UrbanicityChart selectedState={props.selectedState} />
     </div>
     <div className="column col-4">
-      <IncomeChart />
+      <IncomeChart selectedState={props.selectedState} />
     </div>
   </div>;
