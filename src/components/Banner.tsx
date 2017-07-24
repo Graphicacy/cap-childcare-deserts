@@ -6,11 +6,6 @@ import { Title } from './Title';
 import { stateList, StateName, stateData } from '../states';
 import { format } from 'd3-format';
 
-export type BannerProps = Readonly<{
-  selectedState?: StateName;
-  onSelectState: (state: StateName | null) => void;
-}>;
-
 const percent = format('.0%');
 
 const bannerContainerClass = style({
@@ -35,16 +30,19 @@ const selectClass = style({
 
 const options = stateList.map(s => ({ value: s, label: s }));
 
-const getPercentInDeserts = (state?: StateName) =>
-  state
-    ? percent(stateData[state].percentInDesertsAll)
-    : percent(stateData['All states'].percentInDesertsAll);
+const getPercentInDeserts = (state: StateName = 'All states') =>
+  percent(stateData[state].percentInDesertsAll);
 
 const titleText = (state?: StateName) =>
   <Title>
     {getPercentInDeserts(state)} of children in {state || 'these states'} live
     in a child care desert.
   </Title>;
+
+export type BannerProps = Readonly<{
+  selectedState?: StateName;
+  onSelectState: (state: StateName | null) => void;
+}>;
 
 export const Banner = (props: BannerProps) =>
   <div className={`columns ${bannerContainerClass}`}>
@@ -62,7 +60,7 @@ export const Banner = (props: BannerProps) =>
           options={options}
           value={props.selectedState}
           onChange={(s: { value: StateName } | null) =>
-            props.onSelectState(s && s!.value)}
+            props.onSelectState(s && s.value)}
         />
       </div>
     </div>

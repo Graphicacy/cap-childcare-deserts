@@ -30,16 +30,11 @@ data.sort((a, b) => {
   return a.percent - b.percent;
 });
 
-/**
- * hacks around typings:
- *  - tickFormatter/viewBox cast to any
- *  - spread fill
- */
-export const StateBarChart = ({
-  selectedState
-}: {
+export type StateBarChartProps = Readonly<{
   selectedState?: StateName;
-}) =>
+}>;
+
+export const StateBarChart = ({ selectedState }: StateBarChartProps) =>
   <div className={barChartContainer}>
     <div className={barChartTitleClass}>
       Percent in a child care desert, by state

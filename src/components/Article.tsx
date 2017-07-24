@@ -15,7 +15,9 @@ const articleContainerClass = style({
   padding: 60
 });
 
-export const Article = ({ selectedState }: { selectedState?: StateName }) =>
+export type ArticleProps = Readonly<{ selectedState?: StateName }>;
+
+export const Article = ({ selectedState }: ArticleProps) =>
   <div className={`columns ${articleContainerClass}`}>
     <div className={`column col-12`}>
       <StateBarChart selectedState={selectedState} />
