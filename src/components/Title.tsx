@@ -9,7 +9,9 @@ const headerClass = style({
   marginBottom: 20
 });
 
-export const Title: React.StatelessComponent = ({ children }) =>
+const Title: React.StatelessComponent = ({ children }) =>
   <div className={headerClass}>
     {children}
   </div>;
+
+export default Title;

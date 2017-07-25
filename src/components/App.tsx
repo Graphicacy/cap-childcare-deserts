@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Header } from './Header';
-import { Article } from './Article';
-import { Map } from './Map';
-import { ChartRow } from './ChartRow';
-import { Banner } from './Banner';
+import Header from './Header';
+import Article from './Article';
+import Map from './Map';
+import ChartRow from './ChartRow';
+import Banner from './Banner';
 import { style } from 'typestyle';
 import { StateName } from '../states';
 
@@ -13,33 +13,15 @@ const contentClass = style({
   textAlign: 'center'
 });
 
-export type AppState = Readonly<{
-  selectedState?: StateName;
-}>;
+const App = () =>
+  <div>
+    <Header />
+    <Map />
+    <div className={contentClass}>
+      <Banner />
+      <ChartRow />
+      <Article />
+    </div>
+  </div>;
 
-export class App extends React.Component<{}, AppState> {
-  state: AppState = {};
-
-  selectState = (state: StateName | null) => {
-    this.setState({
-      selectedState: state || undefined
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <Header />
-        <Map />
-        <div className={contentClass}>
-          <Banner
-            selectedState={this.state.selectedState}
-            onSelectState={this.selectState}
-          />
-          <ChartRow selectedState={this.state.selectedState} />
-          <Article selectedState={this.state.selectedState} />
-        </div>
-      </div>
-    );
-  }
-}
+export default App;

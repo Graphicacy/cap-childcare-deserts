@@ -4,13 +4,9 @@ import { StateName, stateData, stateList } from '../../states';
 import { Colors } from '../../colors';
 import { format } from 'd3-format';
 import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+import ChartTitle from './ChartTitle';
 
 const percent = format('.0%');
-
-const barChartTitleClass = style({
-  fontWeight: 'bold',
-  fontSize: 14
-});
 
 const barChartContainer = style({
   margin: '0 auto',
@@ -30,19 +26,18 @@ data.sort((a, b) => {
   return a.percent - b.percent;
 });
 
-export type StateBarChartProps = Readonly<{
-  selectedState?: StateName;
+type StateBarChartProps = Readonly<{
+  selectedState: StateName | null;
 }>;
 
-export const StateBarChart = ({ selectedState }: StateBarChartProps) =>
+const StateBarChart = ({ selectedState }: StateBarChartProps) =>
   <div className={barChartContainer}>
-    <div className={barChartTitleClass}>
-      Percent in a child care desert, by state
-    </div>
+    <ChartTitle>Percent in a child care desert, by state</ChartTitle>
     <VictoryChart width={600} domainPadding={{ x: 20 }}>
       <VictoryBar
         y="percent"
         x="abbr"
+        style={{ data: { width: 15 } }}
         data={data.map(x => ({
           ...x,
           fill:
@@ -51,7 +46,9 @@ export const StateBarChart = ({ selectedState }: StateBarChartProps) =>
               : Colors.GRAY
         }))}
       />
-      <VictoryAxis dependentAxis tickFormat={percent} />
+      <VictoryAxis dependentAxis tickFormat={percent} tickCount={7} />
       <VictoryAxis />
     </VictoryChart>
   </div>;
+
+export default StateBarChart;

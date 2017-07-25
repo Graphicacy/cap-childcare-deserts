@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { style } from 'typestyle';
-import { Title } from './Title';
+import { connect } from 'react-redux';
+import Title from './Title';
 import { StateBarChart } from './charts/';
 import { StateName } from '../states';
+import { State } from '../reducers';
 
 const articleClass = style({
   textAlign: 'left',
@@ -15,9 +17,9 @@ const articleContainerClass = style({
   padding: 60
 });
 
-export type ArticleProps = Readonly<{ selectedState?: StateName }>;
+type ArticleProps = Readonly<{ selectedState: StateName | null }>;
 
-export const Article = ({ selectedState }: ArticleProps) =>
+const Article = ({ selectedState }: ArticleProps) =>
   <div className={`columns ${articleContainerClass}`}>
     <div className={`column col-12`}>
       <StateBarChart selectedState={selectedState} />
@@ -52,3 +54,7 @@ export const Article = ({ selectedState }: ArticleProps) =>
       </p>
     </div>
   </div>;
+
+export default connect((state: State) => ({
+  selectedState: state.selectedState
+}))(Article);

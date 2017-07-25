@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { StateName, stateData } from '../../states';
 
-export const EthnicityChart = ({
+const EthnicityChart = ({
   selectedState
 }: {
-  selectedState?: StateName;
+  selectedState: StateName | null;
 }) => <div />;
+
+export default EthnicityChart;

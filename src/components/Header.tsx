@@ -40,7 +40,7 @@ const socialClass = style({
   marginTop: 10
 });
 
-export const Header = () =>
+const Header = () =>
   <div className="columns col-gapless">
     <div className={`column col-12 ${headerClass}`}>
       <img src="images/cap-logo-fullcolor.png" className={logoClass} />
@@ -59,3 +59,5 @@ export const Header = () =>
       </div>
     </div>
   </div>;
+
+export default Header;

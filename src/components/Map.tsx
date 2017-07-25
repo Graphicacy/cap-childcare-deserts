@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { style } from 'typestyle';
+import { connect } from 'react-redux';
+import { StateName } from '../states';
+import { State } from '../reducers';
 import { Map as ReactMapboxGl, Layer, Feature } from 'react-mapbox-gl';
 
 declare const __ACCESS_TOKEN__: string;
@@ -11,11 +14,11 @@ const mapContainerClass = style({
   marginTop: -10
 });
 
-export const Map = () =>
+const Map = ({ selectedState }: { selectedState: StateName | null }) =>
   <div className={`columns ${mapContainerClass}`}>
     <div className="column col-12">
       <MapBoxMap
-        style="mapbox://styles/mapbox/streets-v9"
+        style="mapbox://styles/bsouthga/cj5ci49b504wq2todg2cjvw7w"
         containerStyle={{
           height: '400px',
           width: '100vw'
@@ -27,3 +30,7 @@ export const Map = () =>
       </MapBoxMap>
     </div>
   </div>;
+
+export default connect((state: State) => ({
+  selectedState: state.selectedState
+}))(Map);
