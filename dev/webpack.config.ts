@@ -40,7 +40,7 @@ const config: webpack.Configuration = {
         options: {
           compilerOptions: {
             module: 'es2015',
-            target: 'es3'
+            target: 'es5'
           }
         }
       },
@@ -66,11 +66,11 @@ const config: webpack.Configuration = {
     new webpack.DefinePlugin({
       __ACCESS_TOKEN__: JSON.stringify(require('../keys.json').accessToken)
     }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new HTMLPlugin({
       filename: 'index.html',
       templateContent
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin()
+    })
   ]
 };
 

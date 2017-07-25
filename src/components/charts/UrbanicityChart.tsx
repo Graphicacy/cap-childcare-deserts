@@ -63,14 +63,21 @@ function getData(name: StateName | null) {
 
 const colorScale = [Colors.ORANGE, Colors.GRAY];
 
+const urbanicityChartContainer = style({
+  margin: '0 auto',
+  textAlign: 'center',
+  maxWidth: 700,
+  width: '100%'
+});
+
 const UrbanicityChart = ({
   selectedState
 }: {
   selectedState: StateName | null;
 }) =>
-  <div>
+  <div className={urbanicityChartContainer}>
     <ChartTitle>Children in a child care desert, by ubanicity</ChartTitle>
-    <VictoryChart domainPadding={{ y: 30 }} height={250}>
+    <VictoryChart domainPadding={{ y: 30 }} width={600}>
       <VictoryStack horizontal colorScale={colorScale}>
         <VictoryBar x="type" y="value" data={getData(selectedState).desert} />
         <VictoryBar
