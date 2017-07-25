@@ -31,11 +31,7 @@ export default function(env: any = {}) {
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
       extensions: ['.ts', '.tsx', '.js', '.json'],
-      mainFields: ['module', 'jsnext:main', 'browser', 'main'],
-      alias: {
-        react: 'preact-compat',
-        'react-dom': 'preact-compat'
-      }
+      mainFields: ['module', 'jsnext:main', 'browser', 'main']
     },
 
     module: {
