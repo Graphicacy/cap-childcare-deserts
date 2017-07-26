@@ -2,6 +2,8 @@ import * as React from 'react';
 import { style, media } from 'typestyle';
 import { Facebook, Twitter, Mail, Info } from './Icons';
 
+const img: string = require('../../images/cap-logo-small.png');
+
 const headerHeight = 64;
 
 const headerClass = style({
@@ -43,7 +45,7 @@ const socialClass = style({
 const Header = () =>
   <div className="columns col-gapless">
     <div className={`column col-12 ${headerClass}`}>
-      <img src="images/cap-logo-fullcolor.png" className={logoClass} />
+      <img src={img} className={logoClass} />
       <div className={socialClass}>
         <Twitter />
         <Facebook />

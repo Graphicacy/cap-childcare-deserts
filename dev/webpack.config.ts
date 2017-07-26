@@ -56,6 +56,13 @@ export default function(env: any = {}) {
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader']
+        },
+        {
+          /**
+           * inline + minimize logo
+           */
+          test: /cap-logo-.*\.png$/i,
+          use: ['url-loader', 'img-loader']
         }
       ]
     },

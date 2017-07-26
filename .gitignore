@@ -1,8 +1,6 @@
 dist
 node_modules
 data
-public/bundles
-public/index.html
-public/data
+public
 **/*.DS_Store
 keys.json
