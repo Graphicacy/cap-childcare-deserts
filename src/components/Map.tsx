@@ -7,8 +7,7 @@ import { Map as ReactMapboxGl, Layer, Feature } from 'react-mapbox-gl';
 
 declare const __ACCESS_TOKEN__: string;
 
-const accessToken = __ACCESS_TOKEN__;
-const MapBoxMap = ReactMapboxGl({ accessToken });
+const MapBoxMap = ReactMapboxGl({ accessToken: __ACCESS_TOKEN__ });
 
 const mapContainerClass = style({
   marginTop: -10

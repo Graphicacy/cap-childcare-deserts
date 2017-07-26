@@ -3,6 +3,7 @@ import * as HTMLPlugin from 'html-webpack-plugin';
 import * as path from 'path';
 
 const AnalyzePlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const templateContent = `
 <!DOCTYPE html>
@@ -11,9 +12,7 @@ const templateContent = `
     <meta charset="UTF-8">
     <title>Childcare Deserts</title>
   </head>
-  <body>
-    <div id="root"></div>
-  </body>
+  <body><div id="root"></div></body>
 </html>
 `.trim();
 
@@ -67,16 +66,29 @@ export default function(env: any = {}) {
 
     plugins: [
       new webpack.DefinePlugin({
-        __ACCESS_TOKEN__: JSON.stringify(require('../keys.json').accessToken)
+        __ACCESS_TOKEN__: JSON.stringify(require('../keys.json').accessToken),
+        ...env.prod
+          ? {
+              'process.env.NODE_ENV': '"production"'
+            }
+          : {}
       }),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new HTMLPlugin({
         filename: 'index.html',
-        templateContent
+        templateContent,
+        ...env.prod ? { inlineSource: '.(js|css)$' } : {}
       }),
       ...(env.analyze ? [new AnalyzePlugin()] : [])
     ]
   };
+
+  if (env.prod) {
+    config!.plugins!.push(
+      new webpack.optimize.UglifyJsPlugin(),
+      new HtmlWebpackInlineSourcePlugin()
+    );
+  }
 
   return config;
 }
