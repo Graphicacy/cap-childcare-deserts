@@ -92,7 +92,14 @@ export default function(env: any = {}) {
 
   if (env.prod) {
     config!.plugins!.push(
-      new webpack.optimize.UglifyJsPlugin(),
+      new webpack.optimize.UglifyJsPlugin(
+        {
+          compress: {
+            warnings: false,
+            comparisons: false
+          }
+        } as any
+      ),
       new HtmlWebpackInlineSourcePlugin()
     );
   }
