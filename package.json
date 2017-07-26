@@ -8,7 +8,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./dev/webpack.config.ts",
     "build:dev": "webpack --config ./dev/webpack.config.ts",
-    "build": "rm -rf ./public/bundles && npm run build:dev",
+    "build": "rm -rf ./public/bundles && npm run build:dev -- --env.prod",
     "prettier": "prettier --single-quote --write './src/**/*.{ts,tsx}'",
     "dev": "ts-node ./dev/data.ts",
     "deploy": "npm run build && gh-pages -d ./public"
