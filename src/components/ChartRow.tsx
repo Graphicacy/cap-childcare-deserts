@@ -19,13 +19,13 @@ export const ChartRow = (props: ChartsProps) =>
   <div className="container">
     <div className={`columns ${rowContainerClass}`}>
       <div className="column col-lg-4 col-md-12">
-        <UrbanicityChart selectedState={props.selectedState} />
+        <EthnicityChart selectedState={props.selectedState} />
       </div>
       <div className="column col-lg-4 col-md-12">
         <UrbanicityChart selectedState={props.selectedState} />
       </div>
       <div className="column col-lg-4 col-md-12">
-        <UrbanicityChart selectedState={props.selectedState} />
+        <IncomeChart selectedState={props.selectedState} />
       </div>
     </div>
   </div>;
