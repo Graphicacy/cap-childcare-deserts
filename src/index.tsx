@@ -1,4 +1,5 @@
 import 'spectre.css/dist/spectre.css';
+import 'es6-promise/auto';
 import * as React from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';

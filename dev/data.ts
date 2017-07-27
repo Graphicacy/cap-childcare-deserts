@@ -2,10 +2,12 @@ import * as csv from 'csv-parse';
 import * as commander from 'commander';
 import * as fs from 'fs';
 import * as path from 'path';
-import { promisify } from 'bluebird';
 import { format } from 'prettier';
 
-const read = promisify(fs.readFile);
+const read = (filename: string) =>
+  new Promise((res, rej) => {
+    fs.readFile(filename, (e, d) => (e ? rej(e) : res(d)));
+  });
 
 if (require.main === module) run().catch(console.error);
 

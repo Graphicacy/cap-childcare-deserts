@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "strict": true,
+    "importHelpers": true,
+    "outDir": "dist",
+    "lib": ["es5", "es2015.promise", "dom"],
+    "jsx": "react",
+    "moduleResolution": "node"
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
+}

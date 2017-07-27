@@ -50,10 +50,7 @@ export default function(env: any = {}) {
           test: /\.tsx?$/,
           loader: 'ts-loader',
           options: {
-            compilerOptions: {
-              module: 'es2015',
-              target: 'es5'
-            }
+            configFileName: '../src/tsconfig.json'
           }
         },
         {
