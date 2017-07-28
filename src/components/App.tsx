@@ -2,11 +2,8 @@ import { createElement } from 'react';
 import { style } from 'typestyle';
 import { fillParent, vertical, content, height, flex } from 'csstips';
 
-import Header from './Header';
-import Article from './Article';
-import { Map } from '../Map/';
-import ChartRow from './ChartRow';
-import Banner from './Banner';
+import { Header, Banner, ChartRow, Article } from './layout';
+import { Map } from './map/';
 
 const contentClass = style(content);
 
