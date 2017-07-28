@@ -62,10 +62,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/d3-format@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@types/d3-format/-/d3-format-1.2.0.tgz#3e128efc9e6dd09df8fd21f1d981ab68e140a8a2"
-
 "@types/geojson@*":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-1.0.2.tgz#b02d10ab028e2928ac592a051aaa4981a1941d03"
@@ -1217,6 +1213,10 @@ csso@~2.3.1:
     clap "^1.0.9"
     source-map "^0.5.3"
 
+csstips@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/csstips/-/csstips-0.2.2.tgz#b8e0a5194aa43abe160ae66ecb291362838df683"
+
 csv-parse@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-1.2.1.tgz#9199c23f2490d98c4d9ab2a0167b06927498c9df"
@@ -1243,7 +1243,7 @@ d3-ease@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/d3-ease/-/d3-ease-1.0.3.tgz#68bfbc349338a380c44d8acc4fbc3304aa2d8c0e"
 
-d3-format@1, d3-format@^1.2.0:
+d3-format@1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/d3-format/-/d3-format-1.2.0.tgz#6b480baa886885d4651dc248a8f4ac9da16db07a"
 
@@ -4935,10 +4935,6 @@ spdy@^3.4.1:
     safe-buffer "^5.0.1"
     select-hose "^2.0.0"
     spdy-transport "^2.0.18"
-
-spectre.css@^0.2.14:
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/spectre.css/-/spectre.css-0.2.14.tgz#4a3f9afd289e8bafcd3e96b13999e08d9e2ebffd"
 
 sprintf-js@~1.0.2:
   version "1.0.3"

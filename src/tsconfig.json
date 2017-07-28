@@ -7,6 +7,7 @@
     "outDir": "dist",
     "lib": ["es5", "es2015.promise", "dom"],
     "jsx": "react",
+    "jsxFactory": "createElement",
     "moduleResolution": "node"
   },
   "include": ["."],

@@ -1,9 +1,8 @@
-import * as React from 'react';
+import { createElement } from 'react';
 import { VictoryPie, VictoryLabel } from 'victory';
-import { format } from 'd3-format';
-import { Colors } from '../../colors';
 
-const percent = format('.0%');
+import { Colors } from '../../colors';
+import { percent } from '../../utils';
 
 export type DonutProps = Readonly<{
   n: number;

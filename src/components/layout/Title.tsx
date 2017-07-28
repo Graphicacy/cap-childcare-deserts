@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { createElement } from 'react';
 import { style } from 'typestyle';
 
-const headerClass = style({
+const titleClass = style({
   fontWeight: 'bold',
   textAlign: 'center',
   width: '100%',
@@ -10,7 +10,7 @@ const headerClass = style({
 });
 
 const Title: React.StatelessComponent = ({ children }) =>
-  <div className={headerClass}>
+  <div className={titleClass}>
     {children}
   </div>;
 

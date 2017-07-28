@@ -1,15 +1,10 @@
-import * as React from 'react';
+import { createElement } from 'react';
 import { style } from 'typestyle';
-import { StateName, stateData } from '../../states';
-import ChartTitle from './ChartTitle';
-import Donut from './Donut';
+import { flex, horizontal } from 'csstips';
 
-const incomeChartContainer = style({
-  margin: '0 auto',
-  textAlign: 'center',
-  maxWidth: 700,
-  width: '100%'
-});
+import { StateName, stateData } from '../../states';
+import ChartContainer from './ChartContainer';
+import Donut from './Donut';
 
 function data(state: StateName | null) {
   const name = state || 'All states';
@@ -17,24 +12,21 @@ function data(state: StateName | null) {
 }
 
 const IncomeChart = ({ selectedState }: { selectedState: StateName | null }) =>
-  <div className={incomeChartContainer}>
-    <ChartTitle>Children in a child care desert, by income</ChartTitle>
-    <div className="container">
-      <div className="columns col-gapless">
-        <div className="column col-xs-6">
-          <Donut
-            n={data(selectedState).percentInDesertsBlack}
-            title="BELOW AVG. INCOME"
-          />
-        </div>
-        <div className="column col-xs-6">
-          <Donut
-            n={data(selectedState).percentInDesertsWhite}
-            title="ABOVE AVG. INCOME"
-          />
-        </div>
+  <ChartContainer title="Children in a child care desert, by income">
+    <div className={style(flex, horizontal)}>
+      <div className={style(flex)}>
+        <Donut
+          n={data(selectedState).percentInDesertsBlack}
+          title="BELOW AVG. INCOME"
+        />
+      </div>
+      <div className={style(flex)}>
+        <Donut
+          n={data(selectedState).percentInDesertsWhite}
+          title="ABOVE AVG. INCOME"
+        />
       </div>
     </div>
-  </div>;
+  </ChartContainer>;
 
 export default IncomeChart;

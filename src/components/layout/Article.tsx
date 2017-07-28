@@ -1,30 +1,38 @@
-import * as React from 'react';
-import { style } from 'typestyle';
+import { createElement } from 'react';
 import { connect } from 'react-redux';
-import Title from './Title';
-import { StateBarChart } from './charts/';
-import { StateName } from '../states';
-import { State } from '../reducers';
+import { style } from 'typestyle';
+import { content, flex } from 'csstips';
 
-const articleClass = style({
+import Title from './Title';
+import { StateBarChart } from '../charts/';
+import { StateName } from '../../states';
+import { State } from '../../reducers';
+
+const articleClass = style(content, {
   textAlign: 'left',
   maxWidth: 900,
   margin: '0 auto'
 });
 
-const articleContainerClass = style({
+const articleContainerClass = style(flex, {
   borderTop: '1px solid #ccc',
   padding: 60
+});
+
+const stateBarChartClass = style(content, {
+  maxWidth: 600,
+  margin: '0 auto',
+  textAlign: 'center'
 });
 
 type ArticleProps = Readonly<{ selectedState: StateName | null }>;
 
 const Article = ({ selectedState }: ArticleProps) =>
-  <div className={`columns ${articleContainerClass}`}>
-    <div className={`column col-12`}>
+  <div className={articleContainerClass}>
+    <div className={stateBarChartClass}>
       <StateBarChart selectedState={selectedState} />
     </div>
-    <div className={`column col-12 ${articleClass}`}>
+    <div className={articleClass}>
       <Title> About the Study </Title>
       <p>
         Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin reris

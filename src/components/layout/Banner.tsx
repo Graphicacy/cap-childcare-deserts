@@ -1,20 +1,17 @@
-import 'react-select/dist/react-select.css';
-import * as React from 'react';
-import * as Select from 'react-select';
+import { createElement } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { style } from 'typestyle';
+import { content } from 'csstips';
+
 import Title from './Title';
-import { stateList, StateName, stateData } from '../states';
-import { format } from 'd3-format';
-import { setSelectedState } from '../actions';
-import { State } from '../reducers';
+import { stateList, StateName, stateData } from '../../states';
+import { setSelectedState } from '../../actions';
+import { State } from '../../reducers';
+import { percent } from '../../utils';
 
-const percent = format('.0%');
-
-const bannerContainerClass = style({
-  paddingLeft: 60,
-  paddingRight: 60
+const bannerContainerClass = style(content, {
+  padding: 40
 });
 
 const bannerClassName = style({
@@ -28,11 +25,8 @@ const selectContainerClass = style({
 
 const selectClass = style({
   maxWidth: 300,
-  width: '100%',
   margin: '0 auto'
 });
-
-const options = stateList.map(s => ({ value: s, label: s }));
 
 const getPercentInDeserts = (state: StateName | null) =>
   percent(stateData[state || 'All states'].percentInDesertsAll);
@@ -45,12 +39,12 @@ const titleText = (state: StateName | null) =>
 
 type BannerProps = Readonly<{
   selectedState: StateName | null;
-  onSelectState: (state: StateName | null) => void;
+  onSelectState: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }>;
 
 const Banner = (props: BannerProps) =>
-  <div className={`columns ${bannerContainerClass}`}>
-    <div className={`column col-12 ${bannerClassName}`}>
+  <div className={bannerContainerClass}>
+    <div className={bannerClassName}>
       {titleText(props.selectedState)}
       <p>
         A child care desert is any ZIP code with more than 30 children under age
@@ -59,13 +53,16 @@ const Banner = (props: BannerProps) =>
         centers.
       </p>
       <div className={selectContainerClass}>
-        <Select
-          className={selectClass}
-          options={options}
+        <select
           value={props.selectedState || undefined}
-          onChange={(s: { value: StateName } | null) =>
-            props.onSelectState(s && s.value)}
-        />
+          onChange={props.onSelectState}
+        >
+          {stateList.map(s =>
+            <option value={s}>
+              {s}
+            </option>
+          )}
+        </select>
       </div>
     </div>
   </div>;
@@ -81,8 +78,8 @@ const mapStatesToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  onSelectState(stateName: StateName) {
-    dispatch(setSelectedState(stateName));
+  onSelectState: (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setSelectedState(e.currentTarget.value as StateName));
   }
 });
 

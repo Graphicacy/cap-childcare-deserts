@@ -6,11 +6,9 @@ export enum ActionType {
 
 export type Action = SelectState;
 
-type SelectState = ActionObject<ActionType.SELECT_STATE, { name: StateName }>;
-
-type ActionObject<T extends ActionType, P> = {
-  type: T;
-  payload: P;
+type SelectState = {
+  type: ActionType.SELECT_STATE;
+  payload: { name: StateName };
 };
 
 export const setSelectedState = (name?: StateName) => ({

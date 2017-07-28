@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { createElement } from 'react';
 import { style } from 'typestyle';
 
 const socialIconClass = style({
