@@ -17,13 +17,21 @@ const IncomeChart = ({ selectedState }: { selectedState: StateName | null }) =>
       <div className={style(flex)}>
         <Donut
           n={data(selectedState).percentInDesertsBlack}
-          title="BELOW AVG. INCOME"
+          title={
+            <span>
+              {' '}BELOW AVG.<br /> INCOME{' '}
+            </span>
+          }
         />
       </div>
       <div className={style(flex)}>
         <Donut
           n={data(selectedState).percentInDesertsWhite}
-          title="ABOVE AVG. INCOME"
+          title={
+            <span>
+              {' '}ABOVE AVG.<br /> INCOME{' '}
+            </span>
+          }
         />
       </div>
     </div>

@@ -1,53 +1,44 @@
-import { createElement } from 'react';
+import { createElement, ReactNode } from 'react';
 import { VictoryPie, VictoryLabel } from 'victory';
+import { style } from 'typestyle';
 
 import { Colors } from '../../colors';
 import { percent } from '../../utils';
 
+const donutTitleClass = style({
+  textAlign: 'center',
+  width: '100%'
+});
+
 export type DonutProps = Readonly<{
   n: number;
   size?: number;
-  title?: string;
+  title?: string | ReactNode;
 }>;
 
-const padding = {
-  top: 10,
-  right: 10,
-  left: 10,
-  bottom: 30
-};
-
 const Donut = ({ n, title = 'Title', size = 130 }: DonutProps) =>
-  <svg
-    viewBox={`0 0 ${size} ${size}`}
-    preserveAspectRatio="xMidYMid meet"
-    style={{ width: '100%' }}
-  >
-    <VictoryPie
-      padding={padding}
-      width={size}
-      height={size}
-      innerRadius={30}
-      labels={x => ''}
-      data={[{ y: n, fill: Colors.ORANGE }, { y: 1 - n, fill: Colors.GRAY }]}
-      standalone={false}
-    />
-    <text
-      x="50%"
-      y={(size - padding.bottom - 5) / 2}
-      alignmentBaseline="middle"
-      textAnchor="middle"
+  <div>
+    <svg
+      viewBox={`0 0 ${size} ${size}`}
+      preserveAspectRatio="xMidYMid meet"
+      style={{ width: '100%' }}
     >
-      {percent(n)}
-    </text>
-    <text
-      x="50%"
-      y={size - padding.bottom + 15}
-      alignmentBaseline="middle"
-      textAnchor="middle"
-    >
+      <VictoryPie
+        padding={10}
+        width={size}
+        height={size}
+        innerRadius={35}
+        labels={x => ''}
+        data={[{ y: n, fill: Colors.ORANGE }, { y: 1 - n, fill: Colors.GRAY }]}
+        standalone={false}
+      />
+      <text x="50%" y="50%" alignmentBaseline="middle" textAnchor="middle">
+        {percent(n)}
+      </text>
+    </svg>
+    <div className={donutTitleClass}>
       {title}
-    </text>
-  </svg>;
+    </div>
+  </div>;
 
 export default Donut;
