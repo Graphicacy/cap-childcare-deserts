@@ -2,8 +2,8 @@ import { createElement, ReactNode } from 'react';
 import { VictoryPie, VictoryLabel } from 'victory';
 import { style } from 'typestyle';
 
-import { Colors } from '../../colors';
-import { percent } from '../../utils';
+import { Colors } from '../colors';
+import { percent } from './format';
 
 const donutTitleClass = style({
   textAlign: 'center',
@@ -29,7 +29,10 @@ const Donut = ({ n, title = 'Title', size = 130 }: DonutProps) =>
         height={size}
         innerRadius={35}
         labels={x => ''}
-        data={[{ y: n, fill: Colors.ORANGE }, { y: 1 - n, fill: Colors.GRAY }]}
+        data={[
+          { y: n, fill: Colors.ORANGE, stroke: 'white', strokeWidth: 2 },
+          { y: 1 - n, fill: Colors.GRAY, stroke: 'white', strokeWidth: 2 }
+        ]}
         standalone={false}
       />
       <text x="50%" y="50%" alignmentBaseline="middle" textAnchor="middle">

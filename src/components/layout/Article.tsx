@@ -5,8 +5,8 @@ import { content, flex } from 'csstips';
 
 import Title from './Title';
 import { StateBarChart } from '../charts/';
-import { StateName } from '../../states';
-import { State } from '../../reducers';
+import { StateName } from '../../data';
+import { State } from '../../store/';
 
 const articleClass = style(content, {
   textAlign: 'left',

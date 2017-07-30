@@ -81,8 +81,8 @@ export async function run() {
       { singleQuote: true }
     );
 
-    console.log(`writing ./src/states.ts...`);
-    fs.writeFileSync(path.join(__dirname, '../src/states.ts'), code);
+    console.log(`writing ./src/data/states.ts...`);
+    fs.writeFileSync(path.join(__dirname, '../src/data/states.ts'), code);
   }
   process.exit(0);
 }

@@ -4,8 +4,8 @@ import { Map as ReactMapboxGl, Layer, Feature } from 'react-mapbox-gl';
 import { style } from 'typestyle';
 import { content, height } from 'csstips';
 
-import { StateName } from '../../states';
-import { State } from '../../reducers';
+import { StateName } from '../../data';
+import { State } from '../../store';
 
 declare const __ACCESS_TOKEN__: string;
 

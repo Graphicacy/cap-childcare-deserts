@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { StateName } from './states';
+import { StateName } from '../data';
 import { Action, ActionType } from './actions';
 
 /**

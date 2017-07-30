@@ -5,10 +5,10 @@ import { style } from 'typestyle';
 import { content } from 'csstips';
 
 import Title from './Title';
-import { stateList, StateName, stateData } from '../../states';
-import { setSelectedState } from '../../actions';
-import { State } from '../../reducers';
-import { percent } from '../../utils';
+import { Colors } from '../colors';
+import { stateList, StateName, stateData } from '../../data';
+import { setSelectedState, State } from '../../store';
+import { percent } from '../charts/format';
 
 const bannerContainerClass = style(content, {
   padding: 40
@@ -28,13 +28,18 @@ const selectClass = style({
   margin: '0 auto'
 });
 
+const desertPercentClass = style({
+  color: Colors.ORANGE,
+  marginRight: 5
+});
+
 const getPercentInDeserts = (state: StateName | null) =>
   percent(stateData[state || 'All states'].percentInDesertsAll);
 
 const titleText = (state: StateName | null) =>
   <Title>
-    {getPercentInDeserts(state)} of children in {state || 'these states'} live
-    in a child care desert.
+    <span className={desertPercentClass}>{getPercentInDeserts(state)}</span>
+    of children in {state || 'these states'} live in a child care desert.
   </Title>;
 
 type BannerProps = Readonly<{

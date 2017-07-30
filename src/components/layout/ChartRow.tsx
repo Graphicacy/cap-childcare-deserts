@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { style, media } from 'typestyle';
 import { flex, horizontal, vertical } from 'csstips';
 
-import { StateName } from '../../states';
-import { State } from '../../reducers';
+import { StateName } from '../../data';
+import { State } from '../../store/';
 import { EthnicityChart, IncomeChart, UrbanicityChart } from '../charts/';
 
 /**

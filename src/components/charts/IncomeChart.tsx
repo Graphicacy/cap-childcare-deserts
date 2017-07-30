@@ -2,19 +2,34 @@ import { createElement } from 'react';
 import { style } from 'typestyle';
 import { flex, horizontal } from 'csstips';
 
-import { StateName, stateData } from '../../states';
+import { StateName, stateData } from '../../data';
 import ChartContainer from './ChartContainer';
 import Donut from './Donut';
 
-function data(state: StateName | null) {
+const flexClass = style(flex);
+
+const containerClass = style(flex, horizontal, {
+  $nest: {
+    '>:first-child': {
+      paddingLeft: '11.11%',
+      paddingRight: '5.55%'
+    },
+    '>:last-child': {
+      paddingRight: '11.11%',
+      paddingLeft: '5.55%'
+    }
+  }
+});
+
+const data = (state: StateName | null) => {
   const name = state || 'All states';
   return stateData[name];
-}
+};
 
 const IncomeChart = ({ selectedState }: { selectedState: StateName | null }) =>
   <ChartContainer title="Children in a child care desert, by income">
-    <div className={style(flex, horizontal)}>
-      <div className={style(flex)}>
+    <div className={containerClass}>
+      <div className={flexClass}>
         <Donut
           n={data(selectedState).percentInDesertsBlack}
           title={
@@ -24,7 +39,7 @@ const IncomeChart = ({ selectedState }: { selectedState: StateName | null }) =>
           }
         />
       </div>
-      <div className={style(flex)}>
+      <div className={flexClass}>
         <Donut
           n={data(selectedState).percentInDesertsWhite}
           title={

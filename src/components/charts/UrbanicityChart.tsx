@@ -2,10 +2,10 @@ import { createElement } from 'react';
 import { style } from 'typestyle';
 import { VictoryChart, VictoryBar, VictoryStack, VictoryAxis } from 'victory';
 
-import { Colors } from '../../colors';
-import { StateName, stateData } from '../../states';
+import { Colors } from '../colors';
+import { StateName, stateData } from '../../data';
 import ChartContainer from './ChartContainer';
-import { niceNumber } from '../../utils';
+import { niceNumber } from './format';
 
 type DataArray = { type: string; value: number }[];
 
@@ -19,14 +19,36 @@ const cache: {
 
 const colorScale = [Colors.ORANGE, Colors.GRAY];
 
+const strokeStyle = {
+  data: {
+    strokeWidth: 2,
+    stroke: 'white'
+  }
+};
+
 const UrbanicityChart = ({ selectedState }: UrbanicityChartProps) =>
   <ChartContainer title="Children in a child care desert, by ubanicity">
-    <VictoryChart domainPadding={{ y: 30 }} width={600}>
+    <VictoryChart
+      domainPadding={{ y: 30 }}
+      padding={{
+        top: 0,
+        left: 30,
+        right: 30,
+        bottom: 50
+      }}
+      height={300}
+    >
       <VictoryStack horizontal colorScale={colorScale}>
-        <VictoryBar x="type" y="value" data={getData(selectedState).desert} />
         <VictoryBar
           x="type"
           y="value"
+          style={strokeStyle}
+          data={getData(selectedState).desert}
+        />
+        <VictoryBar
+          x="type"
+          y="value"
+          style={strokeStyle}
           data={getData(selectedState).nonDesert}
         />
       </VictoryStack>

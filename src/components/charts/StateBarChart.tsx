@@ -1,11 +1,11 @@
 import { createElement } from 'react';
 import { style } from 'typestyle';
 
-import { StateName, stateData, stateList } from '../../states';
-import { Colors } from '../../colors';
+import { StateName, stateData, stateList } from '../../data';
+import { Colors } from '../colors';
 import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
 import ChartContainer from './ChartContainer';
-import { percent } from '../../utils';
+import { percent } from './format';
 
 const data = stateList.filter(s => s !== 'All states').map(s => ({
   percent: stateData[s].percentInDesertsAll,
@@ -29,7 +29,9 @@ const StateBarChart = ({ selectedState }: StateBarChartProps) =>
         data={data.map(x => ({
           ...x,
           fill:
-            !selectedState || x.state === selectedState
+            !selectedState ||
+            selectedState === 'All states' ||
+            x.state === selectedState
               ? Colors.ORANGE
               : Colors.GRAY
         }))}

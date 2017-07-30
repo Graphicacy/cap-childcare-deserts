@@ -1,4 +1,4 @@
-import { StateName } from './states';
+import { StateName } from '../data';
 
 export enum ActionType {
   SELECT_STATE = 'SELECT_STATE'
