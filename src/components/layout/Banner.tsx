@@ -16,7 +16,8 @@ const bannerContainerClass = style(content, {
 
 const bannerClassName = style({
   margin: '0 auto',
-  maxWidth: 800
+  maxWidth: 800,
+  textAlign: 'center'
 });
 
 const selectContainerClass = style({
@@ -25,6 +26,8 @@ const selectContainerClass = style({
 
 const selectClass = style({
   maxWidth: 300,
+  width: '100%',
+  display: 'block',
   margin: '0 auto'
 });
 
@@ -59,6 +62,7 @@ const Banner = (props: BannerProps) =>
       </p>
       <div className={selectContainerClass}>
         <select
+          className={selectClass}
           value={props.selectedState || undefined}
           onChange={props.onSelectState}
         >

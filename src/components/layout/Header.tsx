@@ -9,6 +9,8 @@ const img: string = require('../../../images/cap-logo-small.png');
 const headerHeight = 64;
 
 const headerClass = style(content, {
+  position: 'fixed',
+  width: '100%',
   height: headerHeight,
   backgroundColor: 'white',
   boxShadow: '0 4px 2px 0px #ccc;',

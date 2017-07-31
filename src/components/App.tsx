@@ -6,11 +6,12 @@ import { Header, Banner, ChartRow, Article } from './layout';
 import { Map } from './map/';
 
 const contentClass = style(content);
+const containerClass = style(fillParent, vertical);
 
 const App = () =>
-  <div className={style(fillParent, vertical)}>
+  <div>
     <Header />
-    <div className={style(flex, vertical)}>
+    <div className={containerClass}>
       <div className={contentClass}>
         <Map />
       </div>
