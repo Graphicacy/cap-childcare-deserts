@@ -8,16 +8,18 @@ import { StateBarChart } from '../charts/';
 import { StateName } from '../../data';
 import { State } from '../../store/';
 
+const ARTICLE_MAX_WIDTH = 900;
+
 const articleClass = style(content, {
   textAlign: 'left',
-  maxWidth: 900,
+  maxWidth: ARTICLE_MAX_WIDTH,
   margin: '0 auto',
   lineHeight: '2em'
 });
 
 const articleContainerClass = style(flex, {
-  borderTop: '1px solid #ccc',
-  padding: 60
+  padding: 60,
+  paddingTop: 0
 });
 
 const stateBarChartClass = style(content, {
@@ -26,10 +28,18 @@ const stateBarChartClass = style(content, {
   textAlign: 'center'
 });
 
+const ruleClass = style({
+  width: '100%',
+  maxWidth: ARTICLE_MAX_WIDTH - 60,
+  margin: '0 auto',
+  marginBottom: 40
+});
+
 type ArticleProps = Readonly<{ selectedState: StateName | null }>;
 
 const Article = ({ selectedState }: ArticleProps) =>
   <div className={articleContainerClass}>
+    <hr className={ruleClass} />
     <div className={stateBarChartClass}>
       <StateBarChart selectedState={selectedState} />
     </div>

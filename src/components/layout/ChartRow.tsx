@@ -14,7 +14,13 @@ const responsiveRowClass = style(
   flex,
   { padding: 40, maxWidth: 1200, margin: '0 auto' },
   media({ minWidth: 780 }, horizontal),
-  media({ maxWidth: 780 }, vertical)
+  media({ maxWidth: 780 }, vertical, {
+    $nest: {
+      '& div': {
+        marginBottom: 10
+      }
+    }
+  })
 );
 
 const flexClass = style(flex);
