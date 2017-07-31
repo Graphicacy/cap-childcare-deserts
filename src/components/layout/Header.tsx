@@ -15,7 +15,7 @@ const headerClass = style(content, {
   backgroundColor: 'white',
   boxShadow: '0 4px 2px 0px #ccc;',
   padding: '10px 20px 10px 20px',
-  zIndex: 2
+  zIndex: 3
 });
 
 const logoClass = style({

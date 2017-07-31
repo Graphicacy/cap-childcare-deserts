@@ -6,7 +6,10 @@ import { Header, Banner, ChartRow, Article } from './layout';
 import { Map } from './map/';
 
 const contentClass = style(content);
-const containerClass = style(fillParent, vertical);
+const containerClass = style(fillParent, vertical, {
+  fontFamily: 'Open Sans',
+  fontSize: 14
+});
 
 const App = () =>
   <div>
@@ -14,8 +17,6 @@ const App = () =>
     <div className={containerClass}>
       <div className={contentClass}>
         <Map />
-      </div>
-      <div className={contentClass}>
         <Banner />
       </div>
       <div className={contentClass}>

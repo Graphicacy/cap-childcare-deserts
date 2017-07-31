@@ -11,7 +11,8 @@ import { State } from '../../store/';
 const articleClass = style(content, {
   textAlign: 'left',
   maxWidth: 900,
-  margin: '0 auto'
+  margin: '0 auto',
+  lineHeight: '2em'
 });
 
 const articleContainerClass = style(flex, {
@@ -33,6 +34,25 @@ const Article = ({ selectedState }: ArticleProps) =>
       <StateBarChart selectedState={selectedState} />
     </div>
     <div className={articleClass}>
+      <Title> Child Care Access in Georgia </Title>
+      <p>
+        {' '}Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin reris
+        etur? Re am consed que dolut lam erum quate velenisti dolora nimporiti o
+        ctiis et ipid quis nissinciae cum verem dit, nobitatecto o cid ullaut
+        occab ipsaper spe- rum nobitatemqui dolestisi desequam aut es eostiae
+        caboreritas minvers perenient eturepuda ipisimus ut lab il et eaqui
+        oUllector esequi rem aliquae nis dolorist volupta ectiunt quo mi,
+        consectio blaceste aliquos eaque et, o c to- tatus citibus sandisini
+        autem fuga. Ur, voluptatur accuptusdant occuptur rem etustis. Re am
+        consed que dolut lam erum quate velenisti dolora nimporiti o ctiis et
+        ipid quis nissinciae cum verem dit, nobitatecto o cid ullaut occab
+        ipsaper sperum nobitatemqui dolestisi desequam aut es eostiae
+        caboreritas minvers perenient eturepuda ipisimus ut lab il et eaqui
+        oUllector esequi rem aliquae nis dolorist volupta ectiunt quo mi,
+        consectio blaceste aliquos eaque et, o c totatus citibus sandisini autem
+        fuga. Ur, voluptatur accuptusdant occuptur rem etustis.{' '}
+      </p>
+
       <Title> About the Study </Title>
       <p>
         Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin reris

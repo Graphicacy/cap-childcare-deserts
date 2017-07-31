@@ -11,7 +11,8 @@ import { setSelectedState, State } from '../../store';
 import { percent } from '../charts/format';
 
 const bannerContainerClass = style(content, {
-  padding: 40
+  padding: 40,
+  paddingTop: 0
 });
 
 const bannerClassName = style({
