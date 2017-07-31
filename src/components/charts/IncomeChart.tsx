@@ -11,12 +11,10 @@ const flexClass = style(flex);
 const containerClass = style(flex, horizontal, {
   $nest: {
     '>:first-child': {
-      paddingLeft: '11.11%',
-      paddingRight: '5.55%'
+      paddingLeft: '16.66%'
     },
     '>:last-child': {
-      paddingRight: '11.11%',
-      paddingLeft: '5.55%'
+      paddingRight: '16.66%'
     }
   }
 });

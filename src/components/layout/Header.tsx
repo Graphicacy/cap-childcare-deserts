@@ -34,9 +34,11 @@ const anchorClass = style(
     color: 'black',
     $nest: {
       '&:hover': {
-        color: 'black'
+        color: 'black',
+        textDecoration: 'underline'
       }
-    }
+    },
+    textDecoration: 'none'
   },
   media({ maxWidth: 772 }, { display: 'none' })
 );

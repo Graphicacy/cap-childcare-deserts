@@ -16,6 +16,8 @@ export type DonutProps = Readonly<{
   title?: string | ReactNode;
 }>;
 
+const noLabel = (x: any) => '';
+
 const Donut = ({ n, title = 'Title', size = 130 }: DonutProps) =>
   <div>
     <svg
@@ -27,8 +29,8 @@ const Donut = ({ n, title = 'Title', size = 130 }: DonutProps) =>
         padding={10}
         width={size}
         height={size}
-        innerRadius={35}
-        labels={x => ''}
+        innerRadius={38}
+        labels={noLabel}
         data={[
           { y: n, fill: Colors.ORANGE, stroke: 'white', strokeWidth: 2 },
           { y: 1 - n, fill: Colors.GRAY, stroke: 'white', strokeWidth: 2 }

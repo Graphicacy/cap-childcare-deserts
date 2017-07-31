@@ -1,6 +1,12 @@
 import { createElement } from 'react';
 import { style } from 'typestyle';
-import { VictoryChart, VictoryBar, VictoryStack, VictoryAxis } from 'victory';
+import {
+  VictoryChart,
+  VictoryBar,
+  VictoryStack,
+  VictoryAxis,
+  VictoryLabel
+} from 'victory';
 
 import { Colors } from '../colors';
 import { StateName, stateData } from '../../data';
@@ -32,13 +38,18 @@ const UrbanicityChart = ({ selectedState }: UrbanicityChartProps) =>
       domainPadding={{ y: 30 }}
       padding={{
         top: 0,
-        left: 30,
+        left: 100,
         right: 30,
         bottom: 50
       }}
-      height={300}
+      height={200}
     >
-      <VictoryStack horizontal colorScale={colorScale}>
+      <VictoryStack
+        horizontal
+        colorScale={colorScale}
+        labels={datum => datum.type}
+        labelComponent={<VictoryLabel x={90} textAnchor="end" />}
+      >
         <VictoryBar
           x="type"
           y="value"
