@@ -1,6 +1,7 @@
 dist
 node_modules
 data
+!src/data
 public
 **/*.DS_Store
 keys.json
