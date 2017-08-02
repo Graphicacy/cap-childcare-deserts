@@ -63,7 +63,7 @@ const UrbanicityChart = ({ selectedState }: UrbanicityChartProps) =>
           data={getData(selectedState).nonDesert}
         />
       </VictoryStack>
-      <VictoryAxis tickFormat={niceNumber} />
+      <VictoryAxis tickFormat={niceNumber} tickCount={4} />
     </VictoryChart>
   </ChartContainer>;
 

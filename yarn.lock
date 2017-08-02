@@ -6,6 +6,15 @@
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@mapbox/gl-matrix/-/gl-matrix-0.0.1.tgz#e5126aab4d64c36b81c7a97d0ae0dddde5773d2b"
 
+"@mapbox/mapbox-gl-geocoder@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/mapbox-gl-geocoder/-/mapbox-gl-geocoder-2.1.0.tgz#4545853f1ebe8f88cf1b50de9060741f4de49d52"
+  dependencies:
+    lodash.debounce "^4.0.6"
+    mapbox "1.0.0-beta5"
+    suggestions "^1.3.1"
+    xtend "^4.0.1"
+
 "@mapbox/point-geometry@0.1.0", "@mapbox/point-geometry@~0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@mapbox/point-geometry/-/point-geometry-0.1.0.tgz#8a83f9335c7860effa2eeeca254332aa0aeed8f2"
@@ -28,15 +37,39 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@mapbox/whoots-js/-/whoots-js-3.0.0.tgz#c1de4293081424da3ac30c23afa850af1019bb54"
 
+"@turf/bbox-polygon@^4.3.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@turf/bbox-polygon/-/bbox-polygon-4.6.0.tgz#6ec2178aa0920daa61e981ec82b58e5849a3fb59"
+  dependencies:
+    "@turf/helpers" "^4.6.0"
+
+"@turf/bbox@^3.10.5":
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-3.14.0.tgz#cee5f396dde78aca9cede05e1122db18bc504635"
+  dependencies:
+    "@turf/meta" "^3.14.0"
+
 "@turf/bbox@^4.4.0":
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-4.5.2.tgz#1a6c6e7d0ea03b26cbc14d46e6df408ae3ddf87a"
   dependencies:
     "@turf/meta" "^4.5.2"
 
+"@turf/helpers@^3.10.5":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-3.13.0.tgz#d06078a1464cf56cdb7ea624ea1e13a71b88b806"
+
 "@turf/helpers@^4.4.0":
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-4.5.2.tgz#6fc6772a7b301f277b49732925c354c7fb85d1df"
+
+"@turf/helpers@^4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-4.6.0.tgz#12398733b8ae28420df6166fa44c7ee8ffd6414c"
+
+"@turf/meta@^3.10.5", "@turf/meta@^3.14.0":
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/@turf/meta/-/meta-3.14.0.tgz#8d3050c1a0f44bf406a633b6bd28c510f7bcee27"
 
 "@turf/meta@^4.5.2":
   version "4.5.2"
@@ -129,9 +162,9 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-select@^1.0.48":
-  version "1.0.48"
-  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-1.0.48.tgz#5016665a6b1394c2f7ad8dde0bb528b27c891db2"
+"@types/react-select@^1.0.49":
+  version "1.0.49"
+  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-1.0.49.tgz#e45ae7a124af37fdfcd5abbf3703ede364472a36"
   dependencies:
     "@types/react" "*"
 
@@ -847,6 +880,10 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
+classnames@^2.2.4:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+
 clean-css@4.1.x:
   version "4.1.7"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.7.tgz#b9aea4f85679889cf3eae8b40349ec4ebdfdd032"
@@ -1080,6 +1117,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+create-react-class@^15.5.2:
+  version "15.6.0"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 cross-spawn@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -1208,10 +1253,6 @@ csstips@^0.2.2:
 csv-parse@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-1.2.1.tgz#9199c23f2490d98c4d9ab2a0167b06927498c9df"
-
-csx@^8.4.0:
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/csx/-/csx-8.4.0.tgz#46df8d2a5174a0fa6c6a7b172965411c370cc0df"
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -2164,6 +2205,10 @@ function-bind@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
 
+fuzzy@^0.1.1:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/fuzzy/-/fuzzy-0.1.3.tgz#4c76ec2ff0ac1a36a9dccf9a00df8623078d4ed8"
+
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"
@@ -2182,6 +2227,16 @@ geojson-area@0.1.0:
   resolved "https://registry.yarnpkg.com/geojson-area/-/geojson-area-0.1.0.tgz#d48d807082cfadf4a78df1349be50f38bf1894ae"
   dependencies:
     wgs84 "0.0.0"
+
+geojson-rbush@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/geojson-rbush/-/geojson-rbush-1.1.1.tgz#bab1c3babb27efa0921b6c05d23902131e70b01c"
+  dependencies:
+    "@turf/bbox" "^3.10.5"
+    "@turf/bbox-polygon" "^4.3.0"
+    "@turf/helpers" "^3.10.5"
+    "@turf/meta" "^3.10.5"
+    rbush "^2.0.1"
 
 geojson-rewind@^0.1.0:
   version "0.1.0"
@@ -3165,6 +3220,10 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
 
+lodash.debounce@^4.0.6:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+
 lodash.escape@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/lodash.escape/-/lodash.escape-3.2.0.tgz#995ee0dc18c1b48cc92effae71a10aab5b487698"
@@ -3335,6 +3394,12 @@ mapbox-gl@0.38.0:
     vector-tile "^1.3.0"
     vt-pbf "^2.0.2"
     webworkify "^1.4.0"
+
+mapbox@1.0.0-beta5:
+  version "1.0.0-beta5"
+  resolved "https://registry.yarnpkg.com/mapbox/-/mapbox-1.0.0-beta5.tgz#6342f98df74464fdca007bf19e58ec24133f0d66"
+  dependencies:
+    rest "^2.0.0"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
@@ -3653,7 +3718,7 @@ object-assign@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
 
-object-assign@^4.0.0, object-assign@^4.0.1, object-assign@^4.1.0:
+object-assign@^4.0.0, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
@@ -4401,6 +4466,12 @@ range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
+rbush@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/rbush/-/rbush-2.0.1.tgz#4cfaca28c3064bc0ee75431a1b79990e875eefa9"
+  dependencies:
+    quickselect "^1.0.0"
+
 rc@^1.1.2, rc@^1.1.7:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.1.tgz#2e03e8e42ee450b8cb3dce65be1bf8974e1dfd95"
@@ -4410,6 +4481,13 @@ rc@^1.1.2, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-input-autosize@^1.1.3:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-1.1.4.tgz#cbc45072d4084ddc57806db8e3b34e644b8366ac"
+  dependencies:
+    create-react-class "^15.5.2"
+    prop-types "^15.5.8"
+
 react-mapbox-gl@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-mapbox-gl/-/react-mapbox-gl-2.1.0.tgz#415937900f90f36dfa58a6873c84c7e1e3783c07"
@@ -4418,6 +4496,15 @@ react-mapbox-gl@^2.1.0:
     "@turf/helpers" "^4.4.0"
     deep-equal "^1.0.1"
     supercluster "^2.3.0"
+
+react-select@^1.0.0-rc.5:
+  version "1.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-rc.5.tgz#9d316f252b1adc372ddb5cdf1f119c6b7cfdb5d6"
+  dependencies:
+    classnames "^2.2.4"
+    create-react-class "^15.5.2"
+    prop-types "^15.5.8"
+    react-input-autosize "^1.1.3"
 
 read-all-stream@^3.0.0:
   version "3.1.0"
@@ -4644,6 +4731,10 @@ resolve@^1.1.5:
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.3.3.tgz#655907c3469a8680dc2de3a275a8fdd69691f0e5"
   dependencies:
     path-parse "^1.0.5"
+
+rest@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/rest/-/rest-2.0.0.tgz#6dfadf66a405c49cfbd5b4bd25b59fd29cd861bc"
 
 right-align@^0.1.1:
   version "0.1.3"
@@ -5099,6 +5190,13 @@ style-loader@^0.18.2:
   dependencies:
     loader-utils "^1.0.2"
     schema-utils "^0.3.0"
+
+suggestions@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/suggestions/-/suggestions-1.3.1.tgz#20903db5c31b5ccfcb4f55877750d9715eef4e56"
+  dependencies:
+    fuzzy "^0.1.1"
+    xtend "^4.0.0"
 
 sum-up@^1.0.1:
   version "1.0.3"
@@ -5879,7 +5977,7 @@ xml-char-classes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/xml-char-classes/-/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
 
-"xtend@>=4.0.0 <4.1.0-0", xtend@^4.0.0, xtend@~4.0.0, xtend@~4.0.1:
+"xtend@>=4.0.0 <4.1.0-0", xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.0, xtend@~4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 

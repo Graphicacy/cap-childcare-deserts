@@ -12,10 +12,10 @@ import { StateName } from '../../data';
 import { State } from '../../store';
 import Controls from './Controls';
 import StateSelect from '../_shared/StateSelect';
+import Geocoder from './Geocoder';
+import { accessToken } from './token';
 
-declare const __ACCESS_TOKEN__: string;
-
-const MapBoxMap = ReactMapboxGl({ accessToken: __ACCESS_TOKEN__ });
+const MapBoxMap = ReactMapboxGl({ accessToken });
 
 const mapContainerClass = style({
   position: 'relative',
@@ -68,11 +68,14 @@ const Map = (props: MapProps) =>
         <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
       </Layer>
       <ZoomControl style={zoomStyles(props.embed)} />
+      <Geocoder
+        onResult={({ result }) => console.log(result.geometry.coordinates)}
+      />
     </MapBoxMap>
     <Controls />
     {props.embed
       ? <div className={stateSelectClass}>
-          <StateSelect />
+          <StateSelect above />
         </div>
       : <div className={`fade-out ${fadeClass}`} />}
   </div>;
