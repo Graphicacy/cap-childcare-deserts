@@ -1,6 +1,11 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import { Map as ReactMapboxGl, Layer, Feature } from 'react-mapbox-gl';
+import {
+  Map as ReactMapboxGl,
+  Layer,
+  Feature,
+  ZoomControl
+} from 'react-mapbox-gl';
 import { style, cssRaw } from 'typestyle';
 
 import { StateName } from '../../data';
@@ -37,6 +42,14 @@ const stateSelectClass = style({
   marginLeft: -(selectWidth / 2)
 });
 
+const zoomStyles = (embed: boolean) => {
+  return {
+    left: 10,
+    top: embed ? 10 : 80,
+    right: 'auto'
+  };
+};
+
 type MapProps = Readonly<{
   selectedState: StateName;
   embed: boolean;
@@ -54,6 +67,7 @@ const Map = (props: MapProps) =>
       <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
         <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
       </Layer>
+      <ZoomControl style={zoomStyles(props.embed)} />
     </MapBoxMap>
     <Controls />
     {props.embed

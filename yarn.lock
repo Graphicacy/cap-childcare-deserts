@@ -847,10 +847,6 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
-classnames@^2.2.4:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
-
 clean-css@4.1.x:
   version "4.1.7"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.7.tgz#b9aea4f85679889cf3eae8b40349ec4ebdfdd032"
@@ -1084,14 +1080,6 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.2:
-  version "15.6.0"
-  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.3.1"
-    object-assign "^4.1.1"
-
 cross-spawn@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -1220,6 +1208,10 @@ csstips@^0.2.2:
 csv-parse@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-1.2.1.tgz#9199c23f2490d98c4d9ab2a0167b06927498c9df"
+
+csx@^8.4.0:
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/csx/-/csx-8.4.0.tgz#46df8d2a5174a0fa6c6a7b172965411c370cc0df"
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -3661,7 +3653,7 @@ object-assign@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
 
-object-assign@^4.0.0, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
+object-assign@^4.0.0, object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
@@ -4418,13 +4410,6 @@ rc@^1.1.2, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-input-autosize@^1.1.3:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-1.1.4.tgz#cbc45072d4084ddc57806db8e3b34e644b8366ac"
-  dependencies:
-    create-react-class "^15.5.2"
-    prop-types "^15.5.8"
-
 react-mapbox-gl@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-mapbox-gl/-/react-mapbox-gl-2.1.0.tgz#415937900f90f36dfa58a6873c84c7e1e3783c07"
@@ -4433,15 +4418,6 @@ react-mapbox-gl@^2.1.0:
     "@turf/helpers" "^4.4.0"
     deep-equal "^1.0.1"
     supercluster "^2.3.0"
-
-react-select@^1.0.0-rc.5:
-  version "1.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-rc.5.tgz#9d316f252b1adc372ddb5cdf1f119c6b7cfdb5d6"
-  dependencies:
-    classnames "^2.2.4"
-    create-react-class "^15.5.2"
-    prop-types "^15.5.8"
-    react-input-autosize "^1.1.3"
 
 read-all-stream@^3.0.0:
   version "3.1.0"
