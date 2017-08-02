@@ -5,6 +5,7 @@ import { style } from 'typestyle';
 import { content } from 'csstips';
 
 import Title from './Title';
+import StateSelect from '../_shared/StateSelect';
 import { Colors } from '../colors';
 import { stateList, StateName, stateData } from '../../data';
 import { setSelectedState, State } from '../../store';
@@ -25,13 +26,6 @@ const selectContainerClass = style({
   width: '100%'
 });
 
-const selectClass = style({
-  maxWidth: 300,
-  width: '100%',
-  display: 'block',
-  margin: '0 auto'
-});
-
 const desertPercentClass = style({
   color: Colors.ORANGE,
   marginRight: 5
@@ -48,7 +42,6 @@ const titleText = (state: StateName | null) =>
 
 type BannerProps = Readonly<{
   selectedState: StateName | null;
-  onSelectState: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }>;
 
 const Banner = (props: BannerProps) =>
@@ -62,17 +55,7 @@ const Banner = (props: BannerProps) =>
         centers.
       </p>
       <div className={selectContainerClass}>
-        <select
-          className={selectClass}
-          value={props.selectedState || undefined}
-          onChange={props.onSelectState}
-        >
-          {stateList.map(s =>
-            <option value={s}>
-              {s}
-            </option>
-          )}
-        </select>
+        <StateSelect />
       </div>
     </div>
   </div>;
@@ -87,10 +70,4 @@ const mapStatesToProps = (state: State) => ({
   selectedState: state.selectedState
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  onSelectState: (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setSelectedState(e.currentTarget.value as StateName));
-  }
-});
-
-export default connect(mapStatesToProps, mapDispatchToProps)(Banner);
+export default connect(mapStatesToProps)(Banner);

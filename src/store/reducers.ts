@@ -6,7 +6,8 @@ import { Action, ActionType } from './actions';
  * type describing the entire app state
  */
 export type State = Readonly<{
-  selectedState: StateName | null;
+  selectedState: StateName;
+  embed: boolean;
 }>;
 
 /**
@@ -15,7 +16,7 @@ export type State = Readonly<{
  * @param state previous app state
  * @param action redux action
  */
-function selectedState(state: string | null = null, action: Action) {
+function selectedState(state: string = 'All states', action: Action) {
   switch (action.type) {
     case ActionType.SELECT_STATE: {
       return action.payload.name;
@@ -25,9 +26,14 @@ function selectedState(state: string | null = null, action: Action) {
   }
 }
 
+function embed(state: boolean = false, action: Action) {
+  return state;
+}
+
 /**
  * combine reducers into state properties
  */
 export default combineReducers({
-  selectedState
+  selectedState,
+  embed
 });

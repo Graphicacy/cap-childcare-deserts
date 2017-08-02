@@ -5,6 +5,8 @@ import { style, cssRaw } from 'typestyle';
 
 import { StateName } from '../../data';
 import { State } from '../../store';
+import Controls from './Controls';
+import StateSelect from '../_shared/StateSelect';
 
 declare const __ACCESS_TOKEN__: string;
 
@@ -25,6 +27,47 @@ const fadeClass = style({
   width: '100vw'
 });
 
+const selectWidth = 250;
+
+const stateSelectClass = style({
+  position: 'absolute',
+  bottom: 20,
+  width: selectWidth,
+  left: '50%',
+  marginLeft: -(selectWidth / 2)
+});
+
+type MapProps = Readonly<{
+  selectedState: StateName;
+  embed: boolean;
+}>;
+
+const Map = (props: MapProps) =>
+  <div className={mapContainerClass}>
+    <MapBoxMap
+      style="mapbox://styles/bsouthga/cj5ci49b504wq2todg2cjvw7w"
+      containerStyle={{
+        height: props.embed ? '100vh' : 500,
+        width: '100vw'
+      }}
+    >
+      <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+        <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
+      </Layer>
+    </MapBoxMap>
+    <Controls />
+    {props.embed
+      ? <div className={stateSelectClass}>
+          <StateSelect />
+        </div>
+      : <div className={`fade-out ${fadeClass}`} />}
+  </div>;
+
+export default connect((state: State) => ({
+  selectedState: state.selectedState,
+  embed: state.embed
+}))(Map);
+
 cssRaw(`
 .fade-out {
   background: url(data:image/svg+xml;base64,alotofcodehere);
@@ -36,23 +79,3 @@ cssRaw(`
   background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 70%);
 }
 `);
-
-const Map = ({ selectedState }: { selectedState: StateName | null }) =>
-  <div className={mapContainerClass}>
-    <MapBoxMap
-      style="mapbox://styles/bsouthga/cj5ci49b504wq2todg2cjvw7w"
-      containerStyle={{
-        height: 500,
-        width: '100vw'
-      }}
-    >
-      <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-        <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
-      </Layer>
-    </MapBoxMap>
-    <div className={`fade-out ${fadeClass}`} />
-  </div>;
-
-export default connect((state: State) => ({
-  selectedState: state.selectedState
-}))(Map);
