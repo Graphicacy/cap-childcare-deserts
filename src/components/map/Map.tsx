@@ -45,9 +45,9 @@ const stateSelectClass = style({
 const geocoderStyles = (embed: boolean) =>
   ({
     position: 'absolute',
-    left: embed ? 'auto' : 50,
+    left: 50,
     top: embed ? 10 : 87,
-    right: embed ? 10 : 'auto'
+    right: 'auto'
   } as React.CSSProperties);
 
 const zoomStyles = (embed: boolean) => {

@@ -99,6 +99,13 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-1.0.2.tgz#b02d10ab028e2928ac592a051aaa4981a1941d03"
 
+"@types/glob@^5.0.30":
+  version "5.0.30"
+  resolved "https://registry.yarnpkg.com/@types/glob/-/glob-5.0.30.tgz#1026409c5625a8689074602808d082b2867b8a51"
+  dependencies:
+    "@types/minimatch" "*"
+    "@types/node" "*"
+
 "@types/history@*":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.6.0.tgz#093d67ed780d889c9543f6dca24ebee0b6b9fc45"
@@ -123,6 +130,10 @@
   resolved "https://registry.yarnpkg.com/@types/mapbox-gl/-/mapbox-gl-0.39.2.tgz#f21f04a9c8f08b279fa0ea862a1d5122aadd7d4b"
   dependencies:
     "@types/geojson" "*"
+
+"@types/minimatch@*":
+  version "2.0.29"
+  resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-2.0.29.tgz#5002e14f75e2d71e564281df0431c8c1b4a2a36a"
 
 "@types/node@*":
   version "8.0.16"
@@ -358,6 +369,10 @@ array-flatten@1.1.1:
 array-flatten@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-2.1.1.tgz#426bb9da84090c1838d812c8150af20a8331e296"
+
+array-source@0.0:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/array-source/-/array-source-0.0.3.tgz#6ee635763c4fb4cd9990f876321cb29e6d7dded1"
 
 array-union@^1.0.1:
   version "1.0.2"
@@ -978,7 +993,7 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2.11.x, commander@^2.11.0, commander@^2.9.0, commander@~2.11.0:
+commander@2, commander@2.11.x, commander@^2.11.0, commander@^2.9.0, commander@~2.11.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
 
@@ -2040,6 +2055,12 @@ file-loader@^1.0.0-rc.0:
   dependencies:
     loader-utils "^1.0.2"
 
+file-source@0.6:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/file-source/-/file-source-0.6.1.tgz#ae189d4993766b865a77f83adcf9b9a504cd37dc"
+  dependencies:
+    stream-source "0.3"
+
 file-type@^3.1.0:
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/file-type/-/file-type-3.9.0.tgz#257a078384d1db8087bc449d107d52a52672b9e9"
@@ -2337,7 +2358,7 @@ glob@^5.0.3:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^7.0.3, glob@^7.0.5:
+glob@^7.0.3, glob@^7.0.5, glob@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
@@ -3952,6 +3973,13 @@ path-parse@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
 
+path-source@0.1:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/path-source/-/path-source-0.1.2.tgz#c5a26c44fb92cd32b930e8e49b1fe5750f2ca70b"
+  dependencies:
+    array-source "0.0"
+    file-source "0.6"
+
 path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
@@ -4872,6 +4900,17 @@ shallow-copy@~0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/shallow-copy/-/shallow-copy-0.0.1.tgz#415f42702d73d810330292cc5ee86eae1a11a170"
 
+shapefile@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/shapefile/-/shapefile-0.6.4.tgz#f4957dfde78721fcb809f1a30f28eb5cc4b6dff5"
+  dependencies:
+    array-source "0.0"
+    commander "2"
+    path-source "0.1"
+    slice-source "0.4"
+    stream-source "0.3"
+    text-encoding "^0.6.4"
+
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
@@ -4889,6 +4928,10 @@ signal-exit@^3.0.0:
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
+
+slice-source@0.4:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/slice-source/-/slice-source-0.4.1.tgz#40a57ac03c6668b5da200e05378e000bf2a61d79"
 
 sntp@1.x.x:
   version "1.0.9"
@@ -5090,6 +5133,10 @@ stream-http@^2.3.1:
 stream-shift@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
+
+stream-source@0.3:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/stream-source/-/stream-source-0.3.4.tgz#0427c1fb128b0bd2d884d868dcc894208f9bda3b"
 
 strict-uri-encode@^1.0.0:
   version "1.1.0"
@@ -5293,6 +5340,10 @@ tempfile@^2.0.0:
   dependencies:
     temp-dir "^1.0.0"
     uuid "^3.0.1"
+
+text-encoding@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/text-encoding/-/text-encoding-0.6.4.tgz#e399a982257a276dae428bb92845cb71bdc26d19"
 
 through2-filter@^2.0.0:
   version "2.0.0"
