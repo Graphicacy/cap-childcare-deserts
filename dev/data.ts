@@ -7,9 +7,7 @@ import * as glob from 'glob';
 import * as shapefile from 'shapefile';
 import { exec, ExecOptions } from 'child_process';
 
-if (require.main === module) run().catch(console.error);
-
-interface StateDataResult {
+type StateDataResult = {
   State: string;
   'Percent in deserts - All': number;
   'Percent in deserts - Black': number;
@@ -22,7 +20,25 @@ interface StateDataResult {
   'Children under 5  in deserts- urban': number;
   'Children under 5 not in deserts- urban': number;
   'Text box': string;
-}
+};
+
+type TractDataResult = {
+  state: string;
+  tract: number;
+  ccdesert: number;
+  per_latino: number;
+  per_white: number;
+  per_black: number;
+  per_aian: number;
+  per_asian: number;
+  per_nhpi: number;
+  per_twomore: number;
+  urbanicity: string;
+  noproviders: number;
+  state_fips: number;
+};
+
+if (require.main === module) run().catch(console.error);
 
 function camelcase(p: string) {
   return p
@@ -58,22 +74,6 @@ async function run() {
 
   process.exit(0);
 }
-
-type TractDataResult = {
-  state: string;
-  tract: number;
-  ccdesert: number;
-  per_latino: number;
-  per_white: number;
-  per_black: number;
-  per_aian: number;
-  per_asian: number;
-  per_nhpi: number;
-  per_twomore: number;
-  urbanicity: string;
-  noproviders: number;
-  state_fips: number;
-};
 
 function mkdirp(dir: string) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
