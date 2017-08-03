@@ -71,10 +71,8 @@ const Map = (props: MapProps) =>
         height: props.embed ? '100vh' : 500,
         width: '100vw'
       }}
+      center={[-122.41, 37.77]}
     >
-      <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-        <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
-      </Layer>
       <ZoomControl style={zoomStyles(props.embed)} />
       <Geocoder
         onResult={({ result }) => console.log(result.geometry.coordinates)}
