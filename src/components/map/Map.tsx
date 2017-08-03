@@ -1,4 +1,4 @@
-import { createElement } from 'react';
+import { createElement, Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Map as ReactMapboxGl,
@@ -6,13 +6,15 @@ import {
   Feature,
   ZoomControl
 } from 'react-mapbox-gl';
+import { Map as MapboxMap } from 'mapbox-gl';
 import { style, cssRaw } from 'typestyle';
 
 import { StateName } from '../../data';
-import { State } from '../../store';
+import { State, Dispatch, setZoomLevel } from '../../store';
 import Controls from './Controls';
 import StateSelect from '../_shared/StateSelect';
 import Geocoder from './Geocoder';
+import Legend from './Legend';
 import { accessToken } from './token';
 
 const MapBoxMap = ReactMapboxGl({ accessToken });
@@ -58,39 +60,71 @@ const zoomStyles = (embed: boolean) => {
   };
 };
 
+const legendStyles = (embed: boolean, zoom: number) =>
+  ({
+    display: zoom < 6 ? 'block' : 'none',
+    position: 'absolute',
+    top: embed ? 10 : 87,
+    right: 40,
+    zIndex: 3
+  } as React.CSSProperties);
+
 type MapProps = Readonly<{
   selectedState: StateName;
   embed: boolean;
+  zoom: [number];
+  setZoom: (zoom: [number]) => void;
 }>;
 
-const Map = (props: MapProps) =>
-  <div className={mapContainerClass}>
-    <MapBoxMap
-      style="mapbox://styles/bsouthga/cj5vvqe531xrr2stlbkoqrtmr"
-      containerStyle={{
-        height: props.embed ? '100vh' : 500,
-        width: '100vw'
-      }}
-      center={[-122.41, 37.77]}
-    >
-      <ZoomControl style={zoomStyles(props.embed)} />
-      <Geocoder
-        onResult={({ result }) => console.log(result.geometry.coordinates)}
-        style={geocoderStyles(props.embed)}
-      />
-    </MapBoxMap>
-    <Controls />
-    {props.embed
-      ? <div className={stateSelectClass}>
-          <StateSelect above />
-        </div>
-      : <div className={`fade-out ${fadeClass}`} />}
-  </div>;
+const startZoom = [3];
+const startCenter = [-100.343107, 38.424848];
 
-export default connect((state: State) => ({
+class Map extends Component<MapProps> {
+  render() {
+    const props = this.props;
+    return (
+      <div className={mapContainerClass}>
+        <MapBoxMap
+          style="mapbox://styles/bsouthga/cj5vvqe531xrr2stlbkoqrtmr"
+          containerStyle={{
+            height: props.embed ? '100vh' : 500,
+            width: '100vw'
+          }}
+          center={startCenter}
+          zoom={startZoom}
+          onZoom={(map: MapboxMap) => props.setZoom([(map as any).style.z])}
+        >
+          <ZoomControl style={zoomStyles(props.embed)} />
+          <Geocoder
+            onResult={({ result }) => console.log(result.geometry.coordinates)}
+            style={geocoderStyles(props.embed)}
+          />
+          <Legend style={legendStyles(props.embed, props.zoom[0])} />
+        </MapBoxMap>
+        <Controls />
+        {props.embed
+          ? <div className={stateSelectClass}>
+              <StateSelect above />
+            </div>
+          : <div className={`fade-out ${fadeClass}`} />}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state: State) => ({
   selectedState: state.selectedState,
-  embed: state.embed
-}))(Map);
+  embed: state.embed,
+  zoom: state.zoom
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setZoom(zoom: [number]) {
+    dispatch(setZoomLevel(zoom));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
 
 cssRaw(`${''
 /**

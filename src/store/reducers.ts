@@ -8,6 +8,8 @@ import { Action, ActionType } from './actions';
 export type State = Readonly<{
   selectedState: StateName;
   embed: boolean;
+  zoom: [number];
+  center: [number, number];
 }>;
 
 /**
@@ -30,10 +32,37 @@ function embed(state: boolean = false, action: Action) {
   return state;
 }
 
+function center(
+  state: [number, number] = [-100.343107, 38.424848],
+  action: Action
+) {
+  switch (action.type) {
+    case ActionType.SET_CENTER: {
+      return action.payload.center;
+    }
+
+    default:
+      return state;
+  }
+}
+
+function zoom(state: [number] = [3], action: Action) {
+  switch (action.type) {
+    case ActionType.SET_ZOOM: {
+      return action.payload.zoom;
+    }
+
+    default:
+      return state;
+  }
+}
+
 /**
  * combine reducers into state properties
  */
 export default combineReducers({
   selectedState,
-  embed
+  embed,
+  zoom,
+  center
 });

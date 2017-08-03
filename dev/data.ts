@@ -7,6 +7,8 @@ import * as glob from 'glob';
 import * as shapefile from 'shapefile';
 import { exec, ExecOptions } from 'child_process';
 
+const { merge } = require('@mapbox/geojson-merge');
+
 type StateDataResult = {
   State: string;
   'Percent in deserts - All': number;
@@ -20,6 +22,7 @@ type StateDataResult = {
   'Children under 5  in deserts- urban': number;
   'Children under 5 not in deserts- urban': number;
   'Text box': string;
+  'Abbr': string;
 };
 
 type TractDataResult = {
@@ -55,7 +58,8 @@ function camelcase(p: string) {
 async function run() {
   const program = commander
     .option('-s, --state-data <csvfile>', 'parse state data file')
-    .option('-t, --tiles <glob>', 'generate mapbox tiles')
+    .option('-j, --state-tiles <glob>', 'generate state mapbox tiles')
+    .option('-t, --census-tiles <glob>', 'generate census mapbox tiles')
     .parse(process.argv);
 
   switch (true) {
@@ -63,8 +67,12 @@ async function run() {
       await prepStateData(program.stateData);
       break;
 
-    case !!program.tiles:
-      await prepShapefiles(program.tiles);
+    case !!program.censusTiles:
+      await prepShapefiles(program.censusTiles);
+      break;
+
+    case !!program.stateTiles:
+      await prepStateJson(program.stateTiles);
       break;
 
     default: {
@@ -77,6 +85,58 @@ async function run() {
 
 function mkdirp(dir: string) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+}
+
+async function prepStateJson(globString: string) {
+  const files = glob.sync(globString);
+  const tmp = path.join(__dirname, '../data/tmp');
+  const json = path.join(__dirname, '../data/tmp/state-json');
+
+  mkdirp(tmp);
+  mkdirp(json);
+
+  const result = await readCsv<StateDataResult>('./data/state-data.csv');
+  const reduced = result.reduce((out, d) => {
+    out[d.Abbr] = d;
+    return out;
+  }, {} as { [key: string]: StateDataResult });
+
+  const exclude = new Set(['AK', 'HI']);
+
+  const mapped = await Promise.all(
+    files.map(async file => {
+      const buffer = await fs.readFile(file);
+      const state = JSON.parse(buffer.toString());
+      const feature = state.features[0];
+      const id = feature.id.replace('USA-', '');
+      feature.properties.id = id;
+      if (!exclude.has(id)) {
+        const data = reduced[id];
+        if (data) {
+          Object.keys(data).forEach((k: keyof StateDataResult) => {
+            feature.properties[camelcase(k)] = data[k];
+          });
+        }
+      }
+
+      return { feature, id };
+    })
+  );
+
+  const merged = merge(
+    mapped.filter(({ id }) => !exclude.has(id)).map(({ feature }) => feature)
+  );
+
+  await fs.writeFile(
+    path.join(json, `all-states.json`),
+    JSON.stringify(merged)
+  );
+
+  await prun(
+    `tippecanoe -o ./data/tmp/all-states.mbtiles -Z 2 -zg ./data/tmp/state-json/all-states.json`
+  );
+
+  console.log(`finished!`);
 }
 
 async function prepShapefiles(globString: string) {

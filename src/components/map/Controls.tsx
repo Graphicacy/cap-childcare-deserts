@@ -12,8 +12,7 @@ type ControlProps = Readonly<{
   embed?: boolean;
 }>;
 
-const Controls = (props: ControlProps) =>
-  <div className={controlClass}>TEST</div>;
+const Controls = (props: ControlProps) => <div className={controlClass}> </div>;
 
 const mapStateToProps = (state: State) => {
   return {

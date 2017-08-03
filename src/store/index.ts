@@ -3,14 +3,12 @@ import { Action, ActionType, setSelectedState, Dispatch } from './actions';
 import { createStore } from 'redux';
 import queryString from './query-string';
 
-export { State, Action, ActionType, setSelectedState, Dispatch };
+export * from './actions';
+export * from './reducers';
 
-export function initStore(
-  initialState: State = { selectedState: 'All states', embed: false }
-) {
+export function initStore() {
   const query = queryString();
   const store = createStore(reducer, {
-    ...initialState,
     embed: query.embed
   });
 

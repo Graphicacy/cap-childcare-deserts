@@ -14,6 +14,7 @@
     "deploy": "npm run build && gh-pages -d ./public"
   },
   "devDependencies": {
+    "@mapbox/geojson-merge": "^1.0.2",
     "@mapbox/mapbox-gl-geocoder": "^2.1.0",
     "@types/commander": "^2.9.1",
     "@types/csv-parse": "^1.1.9",
