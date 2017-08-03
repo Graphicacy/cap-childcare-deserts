@@ -1,6 +1,7 @@
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import { createElement, Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import { Map } from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { accessToken } from './token';
@@ -13,6 +14,8 @@ export default class Geocoder extends Component {
   props: {
     onResult?: (result: GeocoderResult) => void;
     onError?: (error: any) => void;
+    style?: React.CSSProperties;
+    className?: string;
   };
 
   geocoder = new MapboxGeocoder({
@@ -25,15 +28,17 @@ export default class Geocoder extends Component {
     const { map } = this.context;
     const { onResult, onError } = this.props;
     const geocoder = this.geocoder;
+    const node = findDOMNode(this);
 
     if (onResult) geocoder.on('result', onResult);
     if (onError) geocoder.on('error', onError);
 
-    map.addControl(geocoder);
+    node.appendChild(geocoder.onAdd(map));
   }
 
   render() {
-    return null;
+    const { className, style } = this.props;
+    return <div className={className} style={style} />;
   }
 }
 

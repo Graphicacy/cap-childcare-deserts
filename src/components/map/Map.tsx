@@ -42,6 +42,14 @@ const stateSelectClass = style({
   marginLeft: -(selectWidth / 2)
 });
 
+const geocoderStyles = (embed: boolean) =>
+  ({
+    position: 'absolute',
+    left: embed ? 'auto' : 50,
+    top: embed ? 10 : 87,
+    right: embed ? 10 : 'auto'
+  } as React.CSSProperties);
+
 const zoomStyles = (embed: boolean) => {
   return {
     left: 10,
@@ -70,6 +78,7 @@ const Map = (props: MapProps) =>
       <ZoomControl style={zoomStyles(props.embed)} />
       <Geocoder
         onResult={({ result }) => console.log(result.geometry.coordinates)}
+        style={geocoderStyles(props.embed)}
       />
     </MapBoxMap>
     <Controls />
@@ -85,7 +94,11 @@ export default connect((state: State) => ({
   embed: state.embed
 }))(Map);
 
-cssRaw(`
+cssRaw(`${''
+/**
+ * gradient above banner
+ */
+}
 .fade-out {
   background: url(data:image/svg+xml;base64,alotofcodehere);
   background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 70%);
