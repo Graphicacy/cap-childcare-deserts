@@ -117,12 +117,12 @@ async function prepShapefiles(globString: string) {
         path.join(json, `${name}.json`),
         JSON.stringify(result)
       );
-
+      await prun(
+        `tippecanoe -o ./data/tmp/${name}.mbtiles -Z 2 -zg ./data/json/${name}.json`
+      );
       console.log(`Converted ${name}...`);
     })
   );
-
-  await prun(`tippecanoe -o ./data/tracts.mbtiles -Z 2 -zg ./data/json/*.json`);
 
   console.log(`finished!`);
 }
