@@ -66,7 +66,7 @@ type MapProps = Readonly<{
 const Map = (props: MapProps) =>
   <div className={mapContainerClass}>
     <MapBoxMap
-      style="mapbox://styles/bsouthga/cj5ci49b504wq2todg2cjvw7w"
+      style="mapbox://styles/bsouthga/cj5vvqe531xrr2stlbkoqrtmr"
       containerStyle={{
         height: props.embed ? '100vh' : 500,
         width: '100vw'

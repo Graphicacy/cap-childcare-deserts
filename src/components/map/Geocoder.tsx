@@ -19,9 +19,7 @@ export default class Geocoder extends Component {
   };
 
   geocoder = new MapboxGeocoder({
-    accessToken,
-    country: '1', // restrict to us
-    flyTo: false // don't automatically go to point
+    accessToken
   });
 
   componentDidMount() {
