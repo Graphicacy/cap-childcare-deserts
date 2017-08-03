@@ -1,15 +1,11 @@
 import * as csv from 'csv-parse';
 import * as commander from 'commander';
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import * as path from 'path';
 import { format } from 'prettier';
 import * as glob from 'glob';
+import * as shapefile from 'shapefile';
 import { exec, ExecOptions } from 'child_process';
-
-const read = (filename: string) =>
-  new Promise((res, rej) => {
-    fs.readFile(filename, (e, d) => (e ? rej(e) : res(d)));
-  });
 
 if (require.main === module) run().catch(console.error);
 
@@ -63,36 +59,88 @@ async function run() {
   process.exit(0);
 }
 
+type TractDataResult = {
+  state: string;
+  tract: number;
+  ccdesert: number;
+  per_latino: number;
+  per_white: number;
+  per_black: number;
+  per_aian: number;
+  per_asian: number;
+  per_nhpi: number;
+  per_twomore: number;
+  urbanicity: string;
+  noproviders: number;
+  state_fips: number;
+};
+
+function mkdirp(dir: string) {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+}
+
 async function prepShapefiles(globString: string) {
   const files = glob.sync(globString);
   const tmp = path.join(__dirname, '../data/tmp');
-  if (!fs.existsSync(tmp)) fs.mkdirSync(tmp);
+  const json = path.join(__dirname, '../data/json');
+
+  mkdirp(tmp);
+  mkdirp(json);
+
+  const data = await readCsv<TractDataResult>('./data/tract_data.csv');
+  const tractHash = data.reduce((out, d) => {
+    out[d.tract.toString()] = d;
+    return out;
+  }, {} as { [key: string]: TractDataResult });
 
   await Promise.all(
     files.map(async file => {
       const bits = file.split('/');
       const name = bits[bits.length - 1].replace('.shp', '');
-      await prun(`\`npm bin\`/shp2json -o ./data/tmp/${name}.json ${file}`);
-      await prun(
-        `tippecanoe -o ./data/tmp/${name}.mbtiles -Z 2 -zg ./data/tmp/${name}.json`
+
+      const result = await shapefile.read(file);
+      result.features.forEach((f: any) => {
+        const tract = Number(f.properties['GEOID']);
+        const tractData = tractHash[tract];
+        if (tractData) {
+          Object.keys(tractData).forEach((k: keyof TractDataResult) => {
+            if (k !== 'tract') {
+              f.properties[k] = tractData[k];
+            }
+          });
+        } else {
+          console.log(`No data for ${tract}...`);
+        }
+      });
+
+      await fs.writeFile(
+        path.join(json, `${name}.json`),
+        JSON.stringify(result)
       );
+
       console.log(`Converted ${name}...`);
     })
   );
 
+  await prun(`tippecanoe -o ./data/tracts.mbtiles -Z 2 -zg ./data/json/*.json`);
+
   console.log(`finished!`);
 }
 
-async function prepStateData(filename: string) {
-  const file = await read(path.join(process.cwd(), filename));
-  const result = await new Promise<StateDataResult[]>((res, rej) =>
+async function readCsv<T>(filename: string) {
+  const file = await fs.readFile(path.join(process.cwd(), filename));
+  const result = await new Promise<T[]>((res, rej) =>
     csv(
       file.toString(),
       { auto_parse: true, columns: true },
       (err: Error, d: any) => (err ? rej(err) : res(d))
     )
   );
+  return result;
+}
 
+async function prepStateData(filename: string) {
+  const result = await readCsv<StateDataResult>(filename);
   const states = result.map(r => r.State);
   const reduced = result.reduce((out, r: any) => {
     out[r.State] = Object.keys(r).reduce((d, k) => {

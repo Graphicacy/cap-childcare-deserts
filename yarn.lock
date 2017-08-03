@@ -37,39 +37,15 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@mapbox/whoots-js/-/whoots-js-3.0.0.tgz#c1de4293081424da3ac30c23afa850af1019bb54"
 
-"@turf/bbox-polygon@^4.3.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@turf/bbox-polygon/-/bbox-polygon-4.6.0.tgz#6ec2178aa0920daa61e981ec82b58e5849a3fb59"
-  dependencies:
-    "@turf/helpers" "^4.6.0"
-
-"@turf/bbox@^3.10.5":
-  version "3.14.0"
-  resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-3.14.0.tgz#cee5f396dde78aca9cede05e1122db18bc504635"
-  dependencies:
-    "@turf/meta" "^3.14.0"
-
 "@turf/bbox@^4.4.0":
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-4.5.2.tgz#1a6c6e7d0ea03b26cbc14d46e6df408ae3ddf87a"
   dependencies:
     "@turf/meta" "^4.5.2"
 
-"@turf/helpers@^3.10.5":
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-3.13.0.tgz#d06078a1464cf56cdb7ea624ea1e13a71b88b806"
-
 "@turf/helpers@^4.4.0":
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-4.5.2.tgz#6fc6772a7b301f277b49732925c354c7fb85d1df"
-
-"@turf/helpers@^4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-4.6.0.tgz#12398733b8ae28420df6166fa44c7ee8ffd6414c"
-
-"@turf/meta@^3.10.5", "@turf/meta@^3.14.0":
-  version "3.14.0"
-  resolved "https://registry.yarnpkg.com/@turf/meta/-/meta-3.14.0.tgz#8d3050c1a0f44bf406a633b6bd28c510f7bcee27"
 
 "@turf/meta@^4.5.2":
   version "4.5.2"
@@ -92,6 +68,12 @@
 "@types/csv-parse@^1.1.9":
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/@types/csv-parse/-/csv-parse-1.1.9.tgz#942761fe1b0a8626fb5e4235080ee75bab84122b"
+  dependencies:
+    "@types/node" "*"
+
+"@types/fs-extra@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-4.0.0.tgz#1dd742ad5c9bce308f7a52d02ebc01421bc9102f"
   dependencies:
     "@types/node" "*"
 
@@ -186,6 +168,12 @@
 "@types/relateurl@*":
   version "0.2.28"
   resolved "https://registry.yarnpkg.com/@types/relateurl/-/relateurl-0.2.28.tgz#6bda7db8653fa62643f5ee69e9f69c11a392e3a6"
+
+"@types/shapefile@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@types/shapefile/-/shapefile-0.5.1.tgz#30c7e2493285313a96fa9fa0e9ba9952bc6ed5a3"
+  dependencies:
+    "@types/geojson" "*"
 
 "@types/source-map@*":
   version "0.5.0"
@@ -2194,6 +2182,14 @@ fs-extra@^3.0.1:
     jsonfile "^3.0.0"
     universalify "^0.1.0"
 
+fs-extra@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.1.tgz#7fc0c6c8957f983f57f306a24e5b9ddd8d0dd880"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^3.0.0"
+    universalify "^0.1.0"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -2248,16 +2244,6 @@ geojson-area@0.1.0:
   resolved "https://registry.yarnpkg.com/geojson-area/-/geojson-area-0.1.0.tgz#d48d807082cfadf4a78df1349be50f38bf1894ae"
   dependencies:
     wgs84 "0.0.0"
-
-geojson-rbush@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/geojson-rbush/-/geojson-rbush-1.1.1.tgz#bab1c3babb27efa0921b6c05d23902131e70b01c"
-  dependencies:
-    "@turf/bbox" "^3.10.5"
-    "@turf/bbox-polygon" "^4.3.0"
-    "@turf/helpers" "^3.10.5"
-    "@turf/meta" "^3.10.5"
-    rbush "^2.0.1"
 
 geojson-rewind@^0.1.0:
   version "0.1.0"
@@ -4493,12 +4479,6 @@ randombytes@^2.0.0, randombytes@^2.0.1:
 range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
-
-rbush@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/rbush/-/rbush-2.0.1.tgz#4cfaca28c3064bc0ee75431a1b79990e875eefa9"
-  dependencies:
-    quickselect "^1.0.0"
 
 rc@^1.1.2, rc@^1.1.7:
   version "1.2.1"
