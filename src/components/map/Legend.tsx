@@ -1,5 +1,6 @@
 import { createElement } from 'react';
 import { style } from 'typestyle';
+import { Colors } from '../colors';
 
 const bins = [
   ['60%+', '#932506'],
@@ -46,24 +47,38 @@ type LegendProps = {
   style?: React.CSSProperties;
 };
 
+type LegendEntryProps = {
+  color: string;
+  range: string;
+  style?: React.CSSProperties;
+};
+
+const LegendEntry = ({ color, range, style }: LegendEntryProps) =>
+  <div className={legendItemClass} style={style}>
+    <span
+      className={legendSquareClass}
+      style={{
+        backgroundColor: color
+      }}
+    />
+    <span className={legendBinClass}>
+      {range}{' '}
+    </span>
+  </div>;
+
 const Legend = (props: LegendProps) =>
   <div className={legendClass} style={props.style}>
     <div className={legendTitleClass}>
       Percent living in a child care desert{' '}
     </div>
-    {bins.map(([range, color]) =>
-      <div className={legendItemClass}>
-        <span
-          className={legendSquareClass}
-          style={{
-            backgroundColor: color
-          }}
-        />
-        <span className={legendBinClass}>
-          {range}{' '}
-        </span>
-      </div>
-    )}
+    {bins.map(([range, color]) => <LegendEntry range={range} color={color} />)}
+    <LegendEntry
+      range={'(no data)'}
+      color={Colors.GRAY}
+      style={{
+        marginTop: 10
+      }}
+    />
   </div>;
 
 export default Legend;
