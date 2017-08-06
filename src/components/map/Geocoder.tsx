@@ -2,18 +2,20 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import { createElement, Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import { Map } from 'mapbox-gl';
+import { Map, MapBoxZoomEvent } from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import { accessToken } from './token';
+import { accessToken, dataLayers } from './constants';
 
 export default class Geocoder extends Component {
   context: {
     map: Map;
   };
 
+  state: {
+    selection?: GeocoderResultEvent;
+  };
+
   props: {
-    onResult?: (result: GeocoderResult) => void;
-    onError?: (error: any) => void;
     style?: React.CSSProperties;
     className?: string;
   };
@@ -24,12 +26,28 @@ export default class Geocoder extends Component {
 
   componentDidMount() {
     const { map } = this.context;
-    const { onResult, onError } = this.props;
     const geocoder = this.geocoder;
     const node = findDOMNode(this);
 
-    if (onResult) geocoder.on('result', onResult);
-    if (onError) geocoder.on('error', onError);
+    /**
+     * Add listener on second invocation of result event,
+     * deals with issue:
+     * https://github.com/mapbox/mapbox-gl-geocoder/issues/99
+     */
+    let cache = '';
+    geocoder.on('result', (e: GeocoderResultEvent) => {
+      const center = e.result.center.toString();
+      if (cache === center)
+        map.once('moveend', () => {
+          const point = map.project(e.result.center);
+          const results = map.queryRenderedFeatures(point, {
+            layers: dataLayers
+          });
+        });
+      cache = center;
+    });
+
+    geocoder.on('error', console.error);
 
     node.appendChild(geocoder.onAdd(map));
   }
@@ -70,6 +88,6 @@ export interface Result {
   context: Context[];
 }
 
-export interface GeocoderResult {
+export interface GeocoderResultEvent {
   result: Result;
 }

@@ -15,15 +15,20 @@ import Controls from './Controls';
 import StateSelect from '../_shared/StateSelect';
 import Geocoder from './Geocoder';
 import Legend from './Legend';
-import { accessToken } from './token';
-
-const startZoom = [3];
-const startCenter = [-100.343107, 38.424848];
+import Mouse from './Mouse';
+import {
+  accessToken,
+  mapboxStyle,
+  startZoom,
+  startCenter,
+  dataLayers
+} from './constants';
 
 const MapBoxMap = ReactMapboxGl({
   accessToken,
   minZoom: 3,
-  dragRotate: false
+  dragRotate: false,
+  logoPosition: 'top-left'
 });
 
 const mapContainerClass = style({
@@ -86,7 +91,7 @@ type MapProps = Readonly<{
 const Map = (props: MapProps) =>
   <div className={mapContainerClass}>
     <MapBoxMap
-      style="mapbox://styles/bsouthga/cj5vvqe531xrr2stlbkoqrtmr"
+      style={mapboxStyle}
       containerStyle={{
         height: props.embed ? '100vh' : 500,
         width: '100vw'
@@ -94,14 +99,17 @@ const Map = (props: MapProps) =>
       center={startCenter}
       zoom={startZoom}
       onZoom={(map: MapboxMap) => {
-        console.log(map);
         props.setZoom([(map as any).style.z]);
       }}
     >
       <ZoomControl style={zoomStyles(props.embed)} />
-      <Geocoder
-        onResult={({ result }) => console.log(result.geometry.coordinates)}
-        style={geocoderStyles(props.embed)}
+      <Geocoder style={geocoderStyles(props.embed)} />
+      <Mouse
+        onMouseMove={(e, map) => {
+          const features = map.queryRenderedFeatures(e.point, {
+            layers: dataLayers
+          });
+        }}
       />
       <Legend style={legendStyles(props.embed, props.zoom[0])} />
     </MapBoxMap>
