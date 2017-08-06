@@ -1,22 +1,28 @@
 import { createElement, Component } from 'react';
-import { Map, MapMouseEvent } from 'mapbox-gl';
+import { MapMouseEvent } from 'mapbox-gl';
+import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
 
 type MouseProps = Readonly<{
-  onMouseMove?(e: MapMouseEvent, map: Map): void;
-  onClick?(e: MapMouseEvent, map: Map): void;
+  onMouseMove?(feature: FeatureQueryResult): void;
+  onClick?(feature: FeatureQueryResult): void;
 }>;
 
-class Mouse extends Component<MouseProps> {
-  context: {
-    map: Map;
-  };
-
+class Mouse extends FeatureQuery<MouseProps> {
   componentDidMount() {
     const { map } = this.context;
-    const { onMouseMove, onClick } = this.props;
-    onMouseMove &&
-      map.on('mousemove', (e: MapMouseEvent) => onMouseMove(e, map));
-    onClick && map.on('click', (e: MapMouseEvent) => onClick(e, map));
+    const { onMouseMove, onClick, zoom } = this.props;
+
+    if (onMouseMove) {
+      map.on('mousemove', (e: MapMouseEvent) => {
+        this.queryFeatures(e.point);
+      });
+    }
+
+    if (onClick) {
+      map.on('click', (e: MapMouseEvent) => {
+        this.queryFeatures(e.point);
+      });
+    }
   }
 }
 

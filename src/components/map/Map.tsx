@@ -21,7 +21,7 @@ import {
   mapboxStyle,
   startZoom,
   startCenter,
-  dataLayers
+  getDataLayers
 } from './constants';
 
 const MapBoxMap = ReactMapboxGl({
@@ -103,12 +103,11 @@ const Map = (props: MapProps) =>
       }}
     >
       <ZoomControl style={zoomStyles(props.embed)} />
-      <Geocoder style={geocoderStyles(props.embed)} />
+      <Geocoder zoom={props.zoom} style={geocoderStyles(props.embed)} />
       <Mouse
-        onMouseMove={(e, map) => {
-          const features = map.queryRenderedFeatures(e.point, {
-            layers: dataLayers
-          });
+        zoom={props.zoom}
+        onMouseMove={feature => {
+          console.log(feature);
         }}
       />
       <Legend style={legendStyles(props.embed, props.zoom[0])} />

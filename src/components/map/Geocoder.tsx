@@ -2,30 +2,32 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import { createElement, Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import { Map, MapBoxZoomEvent } from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import { accessToken, dataLayers } from './constants';
 
-export default class Geocoder extends Component {
-  context: {
-    map: Map;
-  };
+import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
 
-  state: {
-    selection?: GeocoderResultEvent;
-  };
+import { accessToken } from './constants';
 
-  props: {
-    style?: React.CSSProperties;
-    className?: string;
-  };
+type GeocoderProps = Readonly<{
+  style?: React.CSSProperties;
+  className?: string;
+}>;
 
+type GeocoderState = Readonly<{
+  selection?: GeocoderResultEvent;
+}>;
+
+export default class Geocoder extends FeatureQuery<
+  GeocoderProps,
+  GeocoderState
+> {
   geocoder = new MapboxGeocoder({
     accessToken
   });
 
   componentDidMount() {
     const { map } = this.context;
+    const { zoom } = this.props;
     const geocoder = this.geocoder;
     const node = findDOMNode(this);
 
@@ -40,9 +42,7 @@ export default class Geocoder extends Component {
       if (cache === center)
         map.once('moveend', () => {
           const point = map.project(e.result.center);
-          const results = map.queryRenderedFeatures(point, {
-            layers: dataLayers
-          });
+          this.queryFeatures(point);
         });
       cache = center;
     });
