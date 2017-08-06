@@ -67,6 +67,17 @@ function tooltip(state: TooltipState = { show: false }, action: Action) {
   }
 }
 
+function mouse(state = { x: 0, y: 0 }, action: Action) {
+  switch (action.type) {
+    case ActionType.MOUSE_MOVE: {
+      return action.payload;
+    }
+
+    default:
+      return state;
+  }
+}
+
 /**
  * combine reducers into state properties
  */
@@ -75,5 +86,6 @@ export default combineReducers({
   embed,
   zoom,
   center,
-  tooltip
+  tooltip,
+  mouse
 });

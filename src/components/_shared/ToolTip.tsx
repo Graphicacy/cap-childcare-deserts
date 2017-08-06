@@ -21,18 +21,26 @@ const toolTipClass = style({
 
 type ToolTipProps = Readonly<{
   state: TooltipState;
+  x: number;
+  y: number;
 }>;
 
-export const ToolTip = ({ state }: ToolTipProps) =>
-  !state.show
-    ? <div style={{ display: 'none' }} />
-    : <div className={toolTipClass} style={{ left: state.x, top: state.y }}>
-        {getTooltipContent(state.data)}
-      </div>;
+export const ToolTip = ({ state, x, y }: ToolTipProps) =>
+  <div className={toolTipClass} style={{ left: x, top: y }}>
+    x = {x} y = {y}
+  </div>;
+// !state.show
+//   ? <div style={{ display: 'none' }} />
+//   : <div className={toolTipClass} style={{ left: x, top: y }}>
+//       {getTooltipContent(state.data)}
+//     </div>;
 
-export default connect((state: State) => ({
-  state: state.tooltip
-}))(ToolTip);
+export default connect((state: State) => {
+  return {
+    ...state.mouse,
+    state: state.tooltip
+  };
+})(ToolTip);
 
 const StateTooltip = (props: StateToolTip) => <div>State</div>;
 const TractTooltip = (props: TractToolTip) => <div>Tract</div>;

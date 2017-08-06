@@ -6,7 +6,8 @@ export enum ActionType {
   SET_ZOOM = 'SET_ZOOM',
   SET_CENTER = 'SET_CENTER',
   SHOW_TOOLTIP = 'SHOW_TOOLTIP',
-  HIDE_TOOLTIP = 'HIDE_TOOLTIP'
+  HIDE_TOOLTIP = 'HIDE_TOOLTIP',
+  MOUSE_MOVE = 'MOUSE_MOVE'
 }
 
 export type Action =
@@ -14,9 +15,24 @@ export type Action =
   | SetZoomLevel
   | SetCenter
   | ShowTooltipAction
-  | HideTooltipAction;
+  | HideTooltipAction
+  | MouseMoveAction;
 
 export type Dispatch = (action: Action) => void;
+
+type MouseMoveAction = {
+  type: ActionType.MOUSE_MOVE;
+  payload: {
+    x: number;
+    y: number;
+  };
+};
+
+export const setMousePosition = (x: number, y: number) =>
+  ({
+    type: ActionType.MOUSE_MOVE,
+    payload: { x, y }
+  } as MouseMoveAction);
 
 type SelectState = {
   type: ActionType.SELECT_STATE;

@@ -1,5 +1,5 @@
 import { createElement, ReactNode } from 'react';
-import { VictoryPie, VictoryLabel } from 'victory';
+import { VictoryPie, VictoryLabel, EventPropTypeInterface } from 'victory';
 import { style } from 'typestyle';
 
 import { Colors } from '../colors';
@@ -18,6 +18,32 @@ export type DonutProps = Readonly<{
 
 const noLabel = (x: any) => '';
 
+const events = [
+  {
+    target: 'data' as 'data',
+    eventHandlers: {
+      onMouseOver() {
+        return {
+          target: 'data' as 'data',
+          mutation(props: any) {
+            console.log(props);
+            return props;
+          }
+        };
+      },
+      onMouseOut() {
+        return {
+          target: 'data' as 'data',
+          mutation(props: any) {
+            console.log(props);
+            return props;
+          }
+        };
+      }
+    }
+  }
+];
+
 const Donut = ({ n, title = 'Title', size = 130 }: DonutProps) =>
   <div>
     <svg
@@ -35,6 +61,7 @@ const Donut = ({ n, title = 'Title', size = 130 }: DonutProps) =>
           { y: n, fill: Colors.ORANGE, stroke: 'white', strokeWidth: 2 },
           { y: 1 - n, fill: Colors.GRAY, stroke: 'white', strokeWidth: 2 }
         ]}
+        events={events}
         standalone={false}
       />
       <text x="50%" y="50%" alignmentBaseline="middle" textAnchor="middle">

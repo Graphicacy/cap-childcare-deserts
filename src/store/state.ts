@@ -9,6 +9,10 @@ export type State = Readonly<{
   zoom: [number];
   center: [number, number];
   tooltip: TooltipState;
+  mouse: {
+    x: number;
+    y: number;
+  };
 }>;
 
 export type TooltipState = TooltipHideState | TooltipShowState;
@@ -18,8 +22,6 @@ export type TooltipHideState = {
 };
 
 export type TooltipShowState = {
-  x: number;
-  y: number;
   data: ToolTipData;
   show: true;
 };
