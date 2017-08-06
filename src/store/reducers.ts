@@ -1,16 +1,6 @@
 import { combineReducers } from 'redux';
-import { StateName } from '../data';
 import { Action, ActionType } from './actions';
-
-/**
- * type describing the entire app state
- */
-export type State = Readonly<{
-  selectedState: StateName;
-  embed: boolean;
-  zoom: [number];
-  center: [number, number];
-}>;
+import { TooltipState } from './state';
 
 /**
  * State name selection reducer
@@ -57,6 +47,26 @@ function zoom(state: [number] = [3], action: Action) {
   }
 }
 
+function tooltip(state: TooltipState = { show: false }, action: Action) {
+  switch (action.type) {
+    case ActionType.SHOW_TOOLTIP: {
+      return {
+        ...state,
+        ...action.payload
+      };
+    }
+
+    case ActionType.HIDE_TOOLTIP: {
+      return {
+        show: false
+      };
+    }
+
+    default:
+      return state;
+  }
+}
+
 /**
  * combine reducers into state properties
  */
@@ -64,5 +74,6 @@ export default combineReducers({
   selectedState,
   embed,
   zoom,
-  center
+  center,
+  tooltip
 });

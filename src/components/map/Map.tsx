@@ -16,13 +16,7 @@ import StateSelect from '../_shared/StateSelect';
 import Geocoder from './Geocoder';
 import Legend from './Legend';
 import Mouse from './Mouse';
-import {
-  accessToken,
-  mapboxStyle,
-  startZoom,
-  startCenter,
-  getDataLayers
-} from './constants';
+import { accessToken, mapboxStyle, startZoom, startCenter } from './constants';
 
 const MapBoxMap = ReactMapboxGl({
   accessToken,
@@ -103,7 +97,13 @@ const Map = (props: MapProps) =>
       }}
     >
       <ZoomControl style={zoomStyles(props.embed)} />
-      <Geocoder zoom={props.zoom} style={geocoderStyles(props.embed)} />
+      <Geocoder
+        zoom={props.zoom}
+        style={geocoderStyles(props.embed)}
+        onResult={result => {
+          console.log(result);
+        }}
+      />
       <Mouse
         zoom={props.zoom}
         onMouseMove={feature => {

@@ -1,11 +1,11 @@
 import { createElement, Component } from 'react';
-import { Map, Point } from 'mapbox-gl';
-import { getDataLayers } from './constants';
+import { Map, Point, Layer } from 'mapbox-gl';
 
 export type FeatureQueryResult = TractFeature | StateFeature;
 
 export type TractFeature = {
   kind: 'tract';
+  feature: FeatureLayer;
   properties: {
     id: string;
   };
@@ -13,14 +13,17 @@ export type TractFeature = {
 
 export type StateFeature = {
   kind: 'state';
+  feature: FeatureLayer;
   properties: {
     abbr: string;
   };
 };
 
-export type FeatureQueryProps = {
+type FeatureQueryProps = {
   zoom: number[];
 };
+
+type FeatureLayer = GeoJSON.Feature<GeoJSON.GeometryObject> & { layer: Layer };
 
 export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
   FeatureQueryProps & P,
@@ -33,8 +36,11 @@ export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
   queryFeatures(p: Point) {
     const { map } = this.context;
     const layers = getDataLayers(this.getZoom());
-    const features = map.queryRenderedFeatures(p, { layers });
-    console.log(features);
+    const features = map.queryRenderedFeatures(p, { layers }) as FeatureLayer[];
+    if (features.length) {
+      const [feature] = features;
+      return normalizeFeature(feature);
+    }
   }
 
   /**
@@ -43,5 +49,37 @@ export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
    */
   getZoom() {
     return this.props.zoom;
+  }
+}
+
+export function getDataLayers(zoom: number[]) {
+  return zoom[0] > 6 ? ['tl-2016-06-tract'] : ['allstates'];
+}
+
+export function normalizeFeature(
+  feature: FeatureLayer
+): FeatureQueryResult | void {
+  switch (feature.layer.id) {
+    /**
+       * state-level data
+       */
+    case 'allstates': {
+      return {
+        kind: 'state',
+        feature,
+        properties: feature.properties as any
+      };
+    }
+
+    /**
+       * individual tract features
+       */
+    case 'tl-2016-06-tract': {
+      return {
+        kind: 'tract',
+        feature,
+        properties: feature.properties as any
+      };
+    }
   }
 }

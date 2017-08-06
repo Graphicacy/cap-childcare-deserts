@@ -1,12 +1,21 @@
 import { StateName } from '../data';
+import { TooltipShowState } from './state';
 
 export enum ActionType {
   SELECT_STATE = 'SELECT_STATE',
   SET_ZOOM = 'SET_ZOOM',
-  SET_CENTER = 'SET_CENTER'
+  SET_CENTER = 'SET_CENTER',
+  SHOW_TOOLTIP = 'SHOW_TOOLTIP',
+  HIDE_TOOLTIP = 'HIDE_TOOLTIP'
 }
 
-export type Action = SelectState | SetZoomLevel | SetCenter;
+export type Action =
+  | SelectState
+  | SetZoomLevel
+  | SetCenter
+  | ShowTooltipAction
+  | HideTooltipAction;
+
 export type Dispatch = (action: Action) => void;
 
 type SelectState = {
@@ -51,3 +60,21 @@ export const setCenter = (center: [number, number]) =>
       center
     }
   } as SetCenter);
+
+type ShowTooltipAction = {
+  type: ActionType.SHOW_TOOLTIP;
+  payload: TooltipShowState;
+};
+
+export const showTooltip = (payload: TooltipShowState) =>
+  ({
+    type: ActionType.SHOW_TOOLTIP,
+    payload
+  } as ShowTooltipAction);
+
+type HideTooltipAction = {
+  type: ActionType.HIDE_TOOLTIP;
+};
+
+export const hideTooltip = () =>
+  ({ type: ActionType.HIDE_TOOLTIP } as HideTooltipAction);

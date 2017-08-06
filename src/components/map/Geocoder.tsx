@@ -11,6 +11,7 @@ import { accessToken } from './constants';
 type GeocoderProps = Readonly<{
   style?: React.CSSProperties;
   className?: string;
+  onResult(result: FeatureQueryResult | void): void;
 }>;
 
 type GeocoderState = Readonly<{
@@ -27,9 +28,11 @@ export default class Geocoder extends FeatureQuery<
 
   componentDidMount() {
     const { map } = this.context;
-    const { zoom } = this.props;
     const geocoder = this.geocoder;
+    const { onResult } = this.props;
+
     const node = findDOMNode(this);
+    node.appendChild(geocoder.onAdd(map));
 
     /**
      * Add listener on second invocation of result event,
@@ -37,19 +40,17 @@ export default class Geocoder extends FeatureQuery<
      * https://github.com/mapbox/mapbox-gl-geocoder/issues/99
      */
     let cache = '';
-    geocoder.on('result', (e: GeocoderResultEvent) => {
-      const center = e.result.center.toString();
-      if (cache === center)
-        map.once('moveend', () => {
-          const point = map.project(e.result.center);
-          this.queryFeatures(point);
-        });
-      cache = center;
-    });
-
-    geocoder.on('error', console.error);
-
-    node.appendChild(geocoder.onAdd(map));
+    geocoder
+      .on('error', console.error)
+      .on('result', (e: GeocoderResultEvent) => {
+        const center = e.result.center.toString();
+        if (cache === center)
+          map.once('moveend', () => {
+            const point = map.project(e.result.center);
+            onResult(this.queryFeatures(point));
+          });
+        cache = center;
+      });
   }
 
   render() {

@@ -1,8 +1,9 @@
-import { default as reducer, State } from './reducers';
+import { default as reducer } from './reducers';
 import { Action, ActionType, setSelectedState, Dispatch } from './actions';
 import { createStore } from 'redux';
 import queryString from './query-string';
 
+export * from './state';
 export * from './actions';
 export * from './reducers';
 

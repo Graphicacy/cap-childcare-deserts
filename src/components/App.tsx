@@ -6,6 +6,7 @@ import { fillParent, vertical, content, height, flex } from 'csstips';
 import { Header, Banner, ChartRow, Article } from './layout';
 import { Map } from './map/';
 import { State } from '../store/';
+import ToolTip from './_shared/ToolTip';
 
 const contentClass = style(content);
 const contentContainerClass = style(fillParent, vertical, {
@@ -38,6 +39,7 @@ const Full = () =>
         <Article />
       </div>
     </div>
+    <ToolTip />
   </div>;
 
 const App = (props: AppProps) => (props.embed ? <Map /> : <Full />);
