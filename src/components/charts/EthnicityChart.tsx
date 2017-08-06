@@ -11,21 +11,39 @@ function data(state: StateName | null) {
   return stateData[name];
 }
 
+type EthnicityChartProps = Readonly<{
+  selectedState: StateName;
+  onMouseOver(value: string, label: string): void;
+  onMouseOut(): void;
+}>;
+
 const EthnicityChart = ({
-  selectedState
-}: {
-  selectedState: StateName | null;
-}) =>
+  selectedState,
+  onMouseOut,
+  onMouseOver
+}: EthnicityChartProps) =>
   <ChartContainer title="Children in a child care desert, by race">
     <div className={style(flex, horizontal)}>
       <div className={style(flex)}>
-        <Donut n={data(selectedState).percentInDesertsWhite} title="WHITE" />
-      </div>
-      <div className={style(flex)}>
-        <Donut n={data(selectedState).percentInDesertsBlack} title="BLACK" />
+        <Donut
+          onMouseOver={onMouseOver}
+          onMouseOut={onMouseOut}
+          n={data(selectedState).percentInDesertsWhite}
+          title="WHITE"
+        />
       </div>
       <div className={style(flex)}>
         <Donut
+          onMouseOver={onMouseOver}
+          onMouseOut={onMouseOut}
+          n={data(selectedState).percentInDesertsBlack}
+          title="BLACK"
+        />
+      </div>
+      <div className={style(flex)}>
+        <Donut
+          onMouseOver={onMouseOver}
+          onMouseOut={onMouseOut}
           n={data(selectedState).percentInDesertsHispanic}
           title="HISPANIC"
         />

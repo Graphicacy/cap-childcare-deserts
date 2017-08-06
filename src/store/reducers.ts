@@ -51,8 +51,8 @@ function tooltip(state: TooltipState = { show: false }, action: Action) {
   switch (action.type) {
     case ActionType.SHOW_TOOLTIP: {
       return {
-        ...state,
-        ...action.payload
+        data: action.payload,
+        show: true
       };
     }
 

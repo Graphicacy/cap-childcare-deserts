@@ -1,5 +1,5 @@
 import { StateName } from '../data';
-import { TooltipShowState } from './state';
+import { ToolTipData } from './state';
 
 export enum ActionType {
   SELECT_STATE = 'SELECT_STATE',
@@ -79,10 +79,10 @@ export const setCenter = (center: [number, number]) =>
 
 type ShowTooltipAction = {
   type: ActionType.SHOW_TOOLTIP;
-  payload: TooltipShowState;
+  payload: ToolTipData;
 };
 
-export const showTooltip = (payload: TooltipShowState) =>
+export const showTooltip = (payload: ToolTipData) =>
   ({
     type: ActionType.SHOW_TOOLTIP,
     payload

@@ -4,19 +4,21 @@ import {
   State,
   TooltipState,
   ToolTipData,
-  StateToolTip,
-  TractToolTip,
-  ChartToolTip
+  StateToolTipData,
+  TractToolTipData,
+  ChartToolTipData
 } from '../../store';
 import { style } from 'typestyle';
+import { Colors } from '../colors';
 
 const toolTipClass = style({
   position: 'fixed',
-  backgroundColor: 'rgba(255,255,255,0.8)',
-  width: 150,
+  display: 'block',
+  backgroundColor: Colors.INFO_BACKGROUND,
   padding: 15,
   borderRadius: 5,
-  border: '1px solid #ccc'
+  border: '1px solid #ccc',
+  transform: 'translate(-50%, -100%)'
 });
 
 type ToolTipProps = Readonly<{
@@ -26,14 +28,11 @@ type ToolTipProps = Readonly<{
 }>;
 
 export const ToolTip = ({ state, x, y }: ToolTipProps) =>
-  <div className={toolTipClass} style={{ left: x, top: y }}>
-    x = {x} y = {y}
-  </div>;
-// !state.show
-//   ? <div style={{ display: 'none' }} />
-//   : <div className={toolTipClass} style={{ left: x, top: y }}>
-//       {getTooltipContent(state.data)}
-//     </div>;
+  !state.show
+    ? <div style={{ display: 'none' }} />
+    : <div className={toolTipClass} style={{ left: x, top: y - 10 }}>
+        {getTooltipContent(state.data)}
+      </div>;
 
 export default connect((state: State) => {
   return {
@@ -42,9 +41,12 @@ export default connect((state: State) => {
   };
 })(ToolTip);
 
-const StateTooltip = (props: StateToolTip) => <div>State</div>;
-const TractTooltip = (props: TractToolTip) => <div>Tract</div>;
-const ChartTooltip = (props: ChartToolTip) => <div>Chart</div>;
+const StateTooltip = ({ properties }: StateToolTipData) => <div>State</div>;
+const TractTooltip = ({ properties }: TractToolTipData) => <div>Tract</div>;
+const ChartTooltip = ({ properties }: ChartToolTipData) =>
+  <div>
+    {properties.label}: <b>{properties.value}</b>
+  </div>;
 
 function getTooltipContent(data: ToolTipData): JSX.Element {
   switch (data.kind) {

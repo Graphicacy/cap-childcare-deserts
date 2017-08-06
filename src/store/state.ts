@@ -26,19 +26,25 @@ export type TooltipShowState = {
   show: true;
 };
 
-export type ToolTipData = TractToolTip | StateToolTip | ChartToolTip;
+export type ToolTipData =
+  | TractToolTipData
+  | StateToolTipData
+  | ChartToolTipData;
 
-export type ChartToolTip = {
+export type ChartToolTipData = {
   kind: 'chart';
-  properties: {};
+  properties: {
+    label: string;
+    value: string;
+  };
 };
 
-export type TractToolTip = {
+export type TractToolTipData = {
   kind: 'tract';
   properties: {};
 };
 
-export type StateToolTip = {
+export type StateToolTipData = {
   kind: 'state';
   properties: {
     abbr: string;

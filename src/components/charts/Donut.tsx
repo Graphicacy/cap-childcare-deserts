@@ -1,5 +1,12 @@
 import { createElement, ReactNode } from 'react';
-import { VictoryPie, VictoryLabel, EventPropTypeInterface } from 'victory';
+
+import {
+  VictoryPie,
+  VictoryLabel,
+  EventPropTypeInterface,
+  StringOrNumberOrCallback
+} from 'victory';
+
 import { style } from 'typestyle';
 
 import { Colors } from '../colors';
@@ -14,37 +21,19 @@ export type DonutProps = Readonly<{
   n: number;
   size?: number;
   title?: string | ReactNode;
+  onMouseOver(value: string, label: string): void;
+  onMouseOut(): void;
 }>;
 
 const noLabel = (x: any) => '';
 
-const events = [
-  {
-    target: 'data' as 'data',
-    eventHandlers: {
-      onMouseOver() {
-        return {
-          target: 'data' as 'data',
-          mutation(props: any) {
-            console.log(props);
-            return props;
-          }
-        };
-      },
-      onMouseOut() {
-        return {
-          target: 'data' as 'data',
-          mutation(props: any) {
-            console.log(props);
-            return props;
-          }
-        };
-      }
-    }
-  }
-];
-
-const Donut = ({ n, title = 'Title', size = 130 }: DonutProps) =>
+const Donut = ({
+  n,
+  title = 'Title',
+  size = 130,
+  onMouseOut,
+  onMouseOver
+}: DonutProps) =>
   <div>
     <svg
       viewBox={`0 0 ${size} ${size}`}
@@ -61,7 +50,37 @@ const Donut = ({ n, title = 'Title', size = 130 }: DonutProps) =>
           { y: n, fill: Colors.ORANGE, stroke: 'white', strokeWidth: 2 },
           { y: 1 - n, fill: Colors.GRAY, stroke: 'white', strokeWidth: 2 }
         ]}
-        events={events}
+        events={[
+          {
+            target: 'data',
+            eventHandlers: {
+              onMouseOver() {
+                return {
+                  target: 'data',
+                  mutation(props) {
+                    const { datum: { fill, y } } = props;
+                    const inDesert = fill === Colors.ORANGE;
+
+                    onMouseOver(
+                      percent(y),
+                      `${inDesert ? '' : 'not '}in desert`
+                    );
+                    return props;
+                  }
+                };
+              },
+              onMouseOut() {
+                return {
+                  target: 'data',
+                  mutation(props) {
+                    onMouseOut();
+                    return props;
+                  }
+                };
+              }
+            }
+          }
+        ]}
         standalone={false}
       />
       <text x="50%" y="50%" alignmentBaseline="middle" textAnchor="middle">

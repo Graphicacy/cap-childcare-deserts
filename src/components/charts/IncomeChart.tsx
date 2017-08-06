@@ -24,11 +24,23 @@ const data = (state: StateName | null) => {
   return stateData[name];
 };
 
-const IncomeChart = ({ selectedState }: { selectedState: StateName | null }) =>
+type IncomeChartProps = Readonly<{
+  onMouseOver(value: string, label: string): void;
+  onMouseOut(): void;
+  selectedState: StateName;
+}>;
+
+const IncomeChart = ({
+  selectedState,
+  onMouseOut,
+  onMouseOver
+}: IncomeChartProps) =>
   <ChartContainer title="Children in a child care desert, by income">
     <div className={containerClass}>
       <div className={flexClass}>
         <Donut
+          onMouseOut={onMouseOut}
+          onMouseOver={onMouseOver}
           n={data(selectedState).percentInDesertsBlack}
           title={
             <span>
@@ -39,6 +51,8 @@ const IncomeChart = ({ selectedState }: { selectedState: StateName | null }) =>
       </div>
       <div className={flexClass}>
         <Donut
+          onMouseOut={onMouseOut}
+          onMouseOver={onMouseOver}
           n={data(selectedState).percentInDesertsWhite}
           title={
             <span>

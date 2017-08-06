@@ -7,6 +7,8 @@ import {
   VictoryAxis,
   VictoryLabel
 } from 'victory';
+import { connect } from 'react-redux';
+import { State, Dispatch, showTooltip, hideTooltip } from '../../store';
 
 import { Colors } from '../colors';
 import { StateName, stateData } from '../../data';
@@ -16,7 +18,9 @@ import { niceNumber } from './format';
 type DataArray = { type: string; value: number }[];
 
 type UrbanicityChartProps = {
-  selectedState: StateName | null;
+  selectedState: StateName;
+  onMouseOver(value: string, label: string): void;
+  onMouseOut(): void;
 };
 
 const cache: {
@@ -32,7 +36,7 @@ const strokeStyle = {
   }
 };
 
-const UrbanicityChart = ({ selectedState }: UrbanicityChartProps) =>
+const UrbanicityChart = (props: UrbanicityChartProps) =>
   <ChartContainer title="Children in a child care desert, by ubanicity">
     <VictoryChart
       domainPadding={{ y: 30 }}
@@ -54,13 +58,15 @@ const UrbanicityChart = ({ selectedState }: UrbanicityChartProps) =>
           x="type"
           y="value"
           style={strokeStyle}
-          data={getData(selectedState).desert}
+          events={createEvents(props, false)}
+          data={getData(props.selectedState).nonDesert}
         />
         <VictoryBar
           x="type"
           y="value"
           style={strokeStyle}
-          data={getData(selectedState).nonDesert}
+          events={createEvents(props, true)}
+          data={getData(props.selectedState).desert}
         />
       </VictoryStack>
       <VictoryAxis tickFormat={niceNumber} tickCount={4} />
@@ -68,6 +74,41 @@ const UrbanicityChart = ({ selectedState }: UrbanicityChartProps) =>
   </ChartContainer>;
 
 export default UrbanicityChart;
+
+/**
+ * create event handlers for chart
+ */
+function createEvents(props: UrbanicityChartProps, inDesert: boolean) {
+  const { onMouseOut, onMouseOver } = props;
+  return [
+    {
+      target: 'data' as 'data',
+      eventHandlers: {
+        onMouseOver() {
+          return {
+            target: 'data' as 'data',
+            mutation(props: any) {
+              const value = niceNumber(props.datum.value);
+              const type = props.datum.type;
+              const label = `${!inDesert ? 'not ' : ''}in desert (${type})`;
+              onMouseOver(value, label);
+              return props;
+            }
+          };
+        },
+        onMouseOut() {
+          return {
+            target: 'data' as 'data',
+            mutation(props: any) {
+              onMouseOut();
+              return props;
+            }
+          };
+        }
+      }
+    }
+  ];
+}
 
 /**
  * memoized function to get state data
@@ -103,7 +144,7 @@ function getData(name: StateName | null) {
     },
     {
       type: 'SUBURBAN',
-      value: data.childrenUnder5InDesertsSuburban
+      value: data.childrenUnder5NotInDesertsSuburban
     },
     {
       type: 'URBAN',
