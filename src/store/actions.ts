@@ -1,5 +1,6 @@
-import { StateName } from '../data';
+import { StateName, stateData } from '../data';
 import { ToolTipData } from './state';
+import { startZoom, startCenter } from './constants';
 
 export enum ActionType {
   SELECT_STATE = 'SELECT_STATE',
@@ -7,7 +8,9 @@ export enum ActionType {
   SET_CENTER = 'SET_CENTER',
   SHOW_TOOLTIP = 'SHOW_TOOLTIP',
   HIDE_TOOLTIP = 'HIDE_TOOLTIP',
-  MOUSE_MOVE = 'MOUSE_MOVE'
+  MOUSE_MOVE = 'MOUSE_MOVE',
+  SHOW_LEGEND = 'SHOW_LEGEND',
+  HIDE_LEGEND = 'HIDE_LEGEND'
 }
 
 export type Action =
@@ -16,9 +19,11 @@ export type Action =
   | SetCenter
   | ShowTooltipAction
   | HideTooltipAction
-  | MouseMoveAction;
+  | MouseMoveAction
+  | ShowLegendAction
+  | HideLegendAction;
 
-export type Dispatch = (action: Action) => void;
+export type Dispatch = (action: Action | Dispatch) => void;
 
 type MouseMoveAction = {
   type: ActionType.MOUSE_MOVE;
@@ -39,13 +44,28 @@ type SelectState = {
   payload: { name: StateName };
 };
 
-export const setSelectedState = (name: StateName) =>
-  ({
-    type: ActionType.SELECT_STATE,
-    payload: {
-      name
-    }
-  } as SelectState);
+const stateZoom = [5.5] as [number];
+export const zoomToState = (name: StateName) => (dispatch: Dispatch) => {
+  if (name !== 'All states') {
+    dispatch(setCenter(stateData[name].center as [number, number]));
+    dispatch(setZoomLevel(stateZoom));
+  } else {
+    dispatch(setCenter(startCenter as [number, number]));
+    dispatch(setZoomLevel(startZoom as [number]));
+  }
+};
+
+export const setSelectedState = (name: StateName) => (dispatch: Dispatch) => {
+  dispatch(zoomToState(name));
+  dispatch(
+    {
+      type: ActionType.SELECT_STATE,
+      payload: {
+        name
+      }
+    } as SelectState
+  );
+};
 
 type SetZoomLevel = {
   type: ActionType.SET_ZOOM;
@@ -94,3 +114,21 @@ type HideTooltipAction = {
 
 export const hideTooltip = () =>
   ({ type: ActionType.HIDE_TOOLTIP } as HideTooltipAction);
+
+type ShowLegendAction = {
+  type: ActionType.SHOW_LEGEND;
+};
+
+export const showLegend = () =>
+  ({
+    type: ActionType.SHOW_LEGEND
+  } as ShowLegendAction);
+
+type HideLegendAction = {
+  type: ActionType.HIDE_LEGEND;
+};
+
+export const hideLegend = () =>
+  ({
+    type: ActionType.HIDE_LEGEND
+  } as HideLegendAction);

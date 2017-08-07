@@ -13,7 +13,8 @@ import { StateName, stateData } from '../../data';
 import {
   State,
   Dispatch,
-  setZoomLevel,
+  showLegend,
+  hideLegend,
   setSelectedState,
   showTooltip,
   hideTooltip
@@ -23,7 +24,7 @@ import StateSelect from '../_shared/StateSelect';
 import Geocoder from './Geocoder';
 import Legend from './Legend';
 import Mouse from './Mouse';
-import { accessToken, mapboxStyle, startZoom, startCenter } from './constants';
+import { accessToken, mapboxStyle } from './constants';
 import { FeatureQueryResult } from './FeatureQuery';
 
 const MapBoxMap = ReactMapboxGl({
@@ -74,9 +75,9 @@ const zoomStyles = (embed: boolean) => {
   };
 };
 
-const legendStyles = (embed: boolean, zoom: number) =>
+const legendStyles = (embed: boolean, showLegend: boolean) =>
   ({
-    display: zoom < 6 ? 'block' : 'none',
+    display: showLegend ? 'block' : 'none',
     position: 'absolute',
     top: embed ? 10 : 87,
     right: 40,
@@ -87,7 +88,9 @@ type MapProps = Readonly<{
   selectedState: StateName;
   embed: boolean;
   zoom: [number];
-  setZoom: (zoom: [number]) => void;
+  center: [number, number];
+  showLegend: boolean;
+  onZoom: (zoom: [number]) => void;
   onMouseMove(feature?: FeatureQueryResult): void;
   onClick(feature?: FeatureQueryResult): void;
   onResult(feature?: FeatureQueryResult): void;
@@ -101,10 +104,10 @@ const Map = (props: MapProps) =>
         height: props.embed ? '100vh' : 500,
         width: '100vw'
       }}
-      center={startCenter}
-      zoom={startZoom}
+      center={props.center}
+      zoom={props.zoom}
       onZoom={(map: MapboxMap) => {
-        props.setZoom([(map as any).style.z]);
+        props.onZoom([(map as any).style.z]);
       }}
     >
       <ZoomControl style={zoomStyles(props.embed)} />
@@ -118,7 +121,7 @@ const Map = (props: MapProps) =>
         onMouseMove={props.onMouseMove}
         onClick={props.onClick}
       />
-      <Legend style={legendStyles(props.embed, props.zoom[0])} />
+      <Legend style={legendStyles(props.embed, props.showLegend)} />
     </MapBoxMap>
     <Controls />
     {props.embed
@@ -131,12 +134,14 @@ const Map = (props: MapProps) =>
 const mapStateToProps = (state: State) => ({
   selectedState: state.selectedState,
   embed: state.embed,
-  zoom: state.zoom
+  zoom: state.zoom,
+  center: state.center,
+  showLegend: state.showLegend
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setZoom(zoom: [number]) {
-    dispatch(setZoomLevel(zoom));
+  onZoom(zoom: [number]) {
+    dispatch(zoom[0] <= 6 ? showLegend() : hideLegend());
   },
   onMouseMove(feature?: FeatureQueryResult) {
     if (!feature) return dispatch(hideTooltip());

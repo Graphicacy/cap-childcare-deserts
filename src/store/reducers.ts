@@ -1,6 +1,20 @@
 import { combineReducers } from 'redux';
 import { Action, ActionType } from './actions';
 import { TooltipState } from './state';
+import { startZoom, startCenter } from './constants';
+
+/**
+ * combine reducers into state properties
+ */
+export default combineReducers({
+  selectedState,
+  embed,
+  zoom,
+  center,
+  tooltip,
+  mouse,
+  showLegend
+});
 
 /**
  * State name selection reducer
@@ -23,7 +37,7 @@ function embed(state: boolean = false, action: Action) {
 }
 
 function center(
-  state: [number, number] = [-100.343107, 38.424848],
+  state: [number, number] = startCenter as [number, number],
   action: Action
 ) {
   switch (action.type) {
@@ -36,7 +50,7 @@ function center(
   }
 }
 
-function zoom(state: [number] = [3], action: Action) {
+function zoom(state: [number] = startZoom as [number], action: Action) {
   switch (action.type) {
     case ActionType.SET_ZOOM: {
       return action.payload.zoom;
@@ -78,14 +92,13 @@ function mouse(state = { x: 0, y: 0 }, action: Action) {
   }
 }
 
-/**
- * combine reducers into state properties
- */
-export default combineReducers({
-  selectedState,
-  embed,
-  zoom,
-  center,
-  tooltip,
-  mouse
-});
+function showLegend(state = true, action: Action) {
+  switch (action.type) {
+    case ActionType.SHOW_LEGEND:
+      return true;
+    case ActionType.HIDE_LEGEND:
+      return false;
+    default:
+      return state;
+  }
+}
