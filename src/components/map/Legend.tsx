@@ -11,7 +11,7 @@ const bins = [
 ];
 
 const legendClass = style({
-  backgroundColor: 'rgba(255,255,255,0.8)',
+  backgroundColor: Colors.INFO_BACKGROUND,
   width: 150,
   padding: 15,
   borderRadius: 5,

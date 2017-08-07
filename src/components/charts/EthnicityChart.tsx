@@ -6,7 +6,7 @@ import { StateName, stateData } from '../../data/';
 import ChartContainer from './ChartContainer';
 import Donut from './Donut';
 
-function data(state: StateName | null) {
+function data(state: StateName) {
   const name = state || 'All states';
   return stateData[name];
 }

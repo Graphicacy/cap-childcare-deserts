@@ -92,16 +92,14 @@ function createEvents(props: UrbanicityChartProps, inDesert: boolean) {
               const type = props.datum.type;
               const label = `${!inDesert ? 'not ' : ''}in desert (${type})`;
               onMouseOver(value, label);
-              return props;
             }
           };
         },
         onMouseOut() {
           return {
             target: 'data' as 'data',
-            mutation(props: any) {
+            mutation() {
               onMouseOut();
-              return props;
             }
           };
         }
@@ -115,7 +113,7 @@ function createEvents(props: UrbanicityChartProps, inDesert: boolean) {
  *
  * @param name state name
  */
-function getData(name: StateName | null) {
+function getData(name: StateName) {
   const stateName: StateName = name || 'All states';
 
   if (stateName in cache) return cache[stateName]!;

@@ -65,7 +65,6 @@ const Donut = ({
                       percent(y),
                       `${inDesert ? '' : 'not '}in desert`
                     );
-                    return props;
                   }
                 };
               },
@@ -74,7 +73,6 @@ const Donut = ({
                   target: 'data',
                   mutation(props) {
                     onMouseOut();
-                    return props;
                   }
                 };
               }

@@ -31,17 +31,17 @@ const desertPercentClass = style({
   marginRight: 5
 });
 
-const getPercentInDeserts = (state: StateName | null) =>
+const getPercentInDeserts = (state: StateName) =>
   percent(stateData[state || 'All states'].percentInDesertsAll);
 
-const titleText = (state: StateName | null) =>
+const titleText = (state: StateName) =>
   <Title>
     <span className={desertPercentClass}>{getPercentInDeserts(state)}</span>
     of children in {state || 'these states'} live in a child care desert.
   </Title>;
 
 type BannerProps = Readonly<{
-  selectedState: StateName | null;
+  selectedState: StateName;
 }>;
 
 const Banner = (props: BannerProps) =>

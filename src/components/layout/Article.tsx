@@ -35,7 +35,7 @@ const ruleClass = style({
   marginBottom: 40
 });
 
-type ArticleProps = Readonly<{ selectedState: StateName | null }>;
+type ArticleProps = Readonly<{ selectedState: StateName }>;
 
 const Article = ({ selectedState }: ArticleProps) =>
   <div className={articleContainerClass}>
@@ -44,7 +44,9 @@ const Article = ({ selectedState }: ArticleProps) =>
       <StateBarChart selectedState={selectedState} />
     </div>
     <div className={articleClass}>
-      <Title> Child Care Access in Georgia </Title>
+      <Title>
+        {' '}Child Care Access in {selectedState}{' '}
+      </Title>
       <p>
         {' '}Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin reris
         etur? Re am consed que dolut lam erum quate velenisti dolora nimporiti o

@@ -24,6 +24,10 @@ class Mouse extends FeatureQuery<MouseProps> {
       });
     }
   }
+
+  render() {
+    return null;
+  }
 }
 
 export default Mouse;

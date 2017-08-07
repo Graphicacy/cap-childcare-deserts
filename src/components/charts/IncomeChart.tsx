@@ -19,7 +19,7 @@ const containerClass = style(flex, horizontal, {
   }
 });
 
-const data = (state: StateName | null) => {
+const data = (state: StateName) => {
   const name = state || 'All states';
   return stateData[name];
 };
