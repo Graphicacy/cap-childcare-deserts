@@ -41,12 +41,15 @@ export type ChartToolTipData = {
 
 export type TractToolTipData = {
   kind: 'tract';
-  properties: {};
+  properties: {
+    // TODO: type
+    data: any;
+  };
 };
 
 export type StateToolTipData = {
   kind: 'state';
   properties: {
-    abbr: string;
+    state: StateName;
   };
 };

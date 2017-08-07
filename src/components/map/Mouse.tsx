@@ -3,8 +3,8 @@ import { MapMouseEvent } from 'mapbox-gl';
 import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
 
 type MouseProps = Readonly<{
-  onMouseMove?(feature: FeatureQueryResult | void): void;
-  onClick?(feature: FeatureQueryResult | void): void;
+  onMouseMove?(feature?: FeatureQueryResult | void): void;
+  onClick?(feature?: FeatureQueryResult | void): void;
 }>;
 
 class Mouse extends FeatureQuery<MouseProps> {
@@ -16,6 +16,7 @@ class Mouse extends FeatureQuery<MouseProps> {
       map.on('mousemove', (e: MapMouseEvent) => {
         onMouseMove(this.queryFeatures(e.point));
       });
+      map.on('mouseout', () => onMouseMove());
     }
 
     if (onClick) {

@@ -8,17 +8,20 @@ import {
   TractToolTipData,
   ChartToolTipData
 } from '../../store';
+import { stateData } from '../../data';
 import { style } from 'typestyle';
 import { Colors } from '../colors';
+import { percent } from '../charts/format';
 
 const toolTipClass = style({
   position: 'fixed',
   display: 'block',
   backgroundColor: Colors.INFO_BACKGROUND,
-  padding: 15,
+  padding: 10,
   borderRadius: 5,
   border: '1px solid #ccc',
-  transform: 'translate(-50%, -100%)'
+  transform: 'translate(-50%, -100%)',
+  zIndex: 10
 });
 
 type ToolTipProps = Readonly<{
@@ -41,7 +44,18 @@ export default connect((state: State) => {
   };
 })(ToolTip);
 
-const StateTooltip = ({ properties }: StateToolTipData) => <div>State</div>;
+const StateTooltip = ({ properties }: StateToolTipData) => {
+  const state = properties.state;
+  const data = stateData[state];
+
+  return (
+    <div>
+      {percent(data.percentInDesertsAll)} of people in {state} live in a
+      childcare desert.
+    </div>
+  );
+};
+
 const TractTooltip = ({ properties }: TractToolTipData) => <div>Tract</div>;
 const ChartTooltip = ({ properties }: ChartToolTipData) =>
   <div>

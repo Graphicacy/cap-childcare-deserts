@@ -9,14 +9,22 @@ import {
 import { Map as MapboxMap } from 'mapbox-gl';
 import { style, cssRaw } from 'typestyle';
 
-import { StateName } from '../../data';
-import { State, Dispatch, setZoomLevel } from '../../store';
+import { StateName, stateData } from '../../data';
+import {
+  State,
+  Dispatch,
+  setZoomLevel,
+  setSelectedState,
+  showTooltip,
+  hideTooltip
+} from '../../store';
 import Controls from './Controls';
 import StateSelect from '../_shared/StateSelect';
 import Geocoder from './Geocoder';
 import Legend from './Legend';
 import Mouse from './Mouse';
 import { accessToken, mapboxStyle, startZoom, startCenter } from './constants';
+import { FeatureQueryResult } from './FeatureQuery';
 
 const MapBoxMap = ReactMapboxGl({
   accessToken,
@@ -80,6 +88,9 @@ type MapProps = Readonly<{
   embed: boolean;
   zoom: [number];
   setZoom: (zoom: [number]) => void;
+  onMouseMove(feature?: FeatureQueryResult): void;
+  onClick(feature?: FeatureQueryResult): void;
+  onResult(feature?: FeatureQueryResult): void;
 }>;
 
 const Map = (props: MapProps) =>
@@ -100,15 +111,12 @@ const Map = (props: MapProps) =>
       <Geocoder
         zoom={props.zoom}
         style={geocoderStyles(props.embed)}
-        onResult={result => {
-          console.log(result);
-        }}
+        onResult={props.onResult}
       />
       <Mouse
         zoom={props.zoom}
-        onMouseMove={feature => {
-          console.log(feature);
-        }}
+        onMouseMove={props.onMouseMove}
+        onClick={props.onClick}
       />
       <Legend style={legendStyles(props.embed, props.zoom[0])} />
     </MapBoxMap>
@@ -129,6 +137,34 @@ const mapStateToProps = (state: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setZoom(zoom: [number]) {
     dispatch(setZoomLevel(zoom));
+  },
+  onMouseMove(feature?: FeatureQueryResult) {
+    if (!feature) return dispatch(hideTooltip());
+    switch (feature.kind) {
+      case 'state': {
+        const state = feature.properties.name;
+        if (!(state in stateData)) return dispatch(hideTooltip());
+        return dispatch(
+          showTooltip({
+            kind: 'state',
+            properties: { state }
+          })
+        );
+      }
+      case 'tract': {
+      }
+    }
+  },
+  onClick(feature?: FeatureQueryResult) {
+    if (!feature) return;
+    if (feature.kind === 'state') {
+      const state = feature.properties.name;
+      if (!(state in stateData)) return;
+      dispatch(setSelectedState(state));
+    }
+  },
+  onResult(feature?: FeatureQueryResult) {
+    console.log(feature);
   }
 });
 

@@ -1,5 +1,6 @@
 import { createElement, Component } from 'react';
 import { Map, Point, Layer } from 'mapbox-gl';
+import { StateName } from '../../data';
 
 export type FeatureQueryResult = TractFeature | StateFeature;
 
@@ -15,7 +16,7 @@ export type StateFeature = {
   kind: 'state';
   feature: FeatureLayer;
   properties: {
-    abbr: string;
+    name: StateName;
   };
 };
 
