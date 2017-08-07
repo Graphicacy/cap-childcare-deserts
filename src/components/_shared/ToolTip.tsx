@@ -50,8 +50,13 @@ const StateTooltip = ({ properties }: StateToolTipData) => {
 
   return (
     <div>
-      {percent(data.percentInDesertsAll)} of people in {state} live in a
-      childcare desert.
+      <div>
+        <b>{percent(data.percentInDesertsAll)}</b> of people in {state} live in
+        a childcare desert.
+      </div>
+      <div style={{ fontStyle: 'italic', marginTop: 5, opacity: 0.8 }}>
+        Click for detail
+      </div>
     </div>
   );
 };

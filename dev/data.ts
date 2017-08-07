@@ -201,12 +201,31 @@ async function readCsv<T>(filename: string) {
 
 async function prepStateData(filename: string) {
   const result = await readCsv<StateDataResult>(filename);
+
+  // https://gist.github.com/mishari/5ecfccd219925c04ac32
+  const bounds = require('../data/bounds.json').bounds;
+
+  const boundsByState = bounds.reduce((out: any, bounds: any) => {
+    const data = bounds[0];
+    const state = data.display_name.split(',')[0].trim();
+    out[state] = data;
+    return out;
+  }, {});
+
   const states = result.map(r => r.State);
+
   const reduced = result.reduce((out, r: any) => {
     out[r.State] = Object.keys(r).reduce((d, k) => {
       d[camelcase(k)] = r[k];
       return d;
     }, {} as any);
+
+    if (r.State in boundsByState) {
+      const { boundingbox, lat, lon } = boundsByState[r.State];
+      out[r.State].bounds = boundingbox.map(Number);
+      out[r.State].center = [Number(lon), Number(lat)];
+    }
+
     return out;
   }, {} as any);
 
