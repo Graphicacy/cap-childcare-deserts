@@ -78,30 +78,18 @@ export default UrbanicityChart;
 /**
  * create event handlers for chart
  */
-function createEvents(props: UrbanicityChartProps, inDesert: boolean) {
+function createEvents(props: UrbanicityChartProps, inDesert: boolean): any {
   const { onMouseOut, onMouseOver } = props;
   return [
     {
       target: 'data' as 'data',
       eventHandlers: {
-        onMouseOver() {
-          return {
-            target: 'data' as 'data',
-            mutation(props: any) {
-              const value = niceNumber(props.datum.value);
-              const type = props.datum.type;
-              const label = `${!inDesert ? 'not ' : ''}in desert (${type})`;
-              onMouseOver(value, label);
-            }
-          };
-        },
-        onMouseOut() {
-          return {
-            target: 'data' as 'data',
-            mutation() {
-              onMouseOut();
-            }
-          };
+        onMouseOut,
+        onMouseOver(event: any, props: any) {
+          const value = niceNumber(props.datum.value);
+          const type = props.datum.type;
+          const label = `${!inDesert ? 'not ' : ''}in desert (${type})`;
+          onMouseOver(value, label);
         }
       }
     }

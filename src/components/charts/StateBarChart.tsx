@@ -51,39 +51,24 @@ const StateBarChart = ({
               ? Colors.ORANGE
               : Colors.GRAY
         }))}
-        events={[
-          {
-            target: 'data' as 'data',
-            eventHandlers: {
-              onMouseOver() {
-                return {
-                  target: 'data' as 'data',
-                  mutation(props: any) {
-                    const { state, percent: value } = props.datum;
-                    onMouseOver(percent(value), state);
-                  }
-                };
-              },
-              onMouseOut() {
-                return {
-                  target: 'data' as 'data',
-                  mutation() {
-                    onMouseOut();
-                  }
-                };
-              },
-              onClick() {
-                return {
-                  target: 'data',
-                  mutation(props) {
-                    const { state } = props.datum;
-                    onClick(state);
-                  }
-                };
+        events={
+          [
+            {
+              target: 'data' as 'data',
+              eventHandlers: {
+                onMouseOut,
+                onMouseOver(event: any, props: any) {
+                  const { state, percent: value } = props.datum;
+                  onMouseOver(percent(value), state);
+                },
+                onClick(event: any, props: any) {
+                  const { state } = props.datum;
+                  onClick(state);
+                }
               }
             }
-          }
-        ]}
+          ] as any // hack for typings
+        }
       />
       <VictoryAxis dependentAxis tickFormat={percent} tickCount={7} />
       <VictoryAxis />

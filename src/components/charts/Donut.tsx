@@ -50,35 +50,22 @@ const Donut = ({
           { y: n, fill: Colors.ORANGE, stroke: 'white', strokeWidth: 2 },
           { y: 1 - n, fill: Colors.GRAY, stroke: 'white', strokeWidth: 2 }
         ]}
-        events={[
-          {
-            target: 'data',
-            eventHandlers: {
-              onMouseOver() {
-                return {
-                  target: 'data',
-                  mutation(props) {
-                    const { datum: { fill, y } } = props;
-                    const inDesert = fill === Colors.ORANGE;
+        events={
+          [
+            {
+              target: 'data',
+              eventHandlers: {
+                onMouseOut,
+                onMouseOver(event: any, props: any) {
+                  const { datum: { fill, y } } = props;
+                  const inDesert = fill === Colors.ORANGE;
 
-                    onMouseOver(
-                      percent(y),
-                      `${inDesert ? '' : 'not '}in desert`
-                    );
-                  }
-                };
-              },
-              onMouseOut() {
-                return {
-                  target: 'data',
-                  mutation(props) {
-                    onMouseOut();
-                  }
-                };
+                  onMouseOver(percent(y), `${inDesert ? '' : 'not '}in desert`);
+                }
               }
             }
-          }
-        ]}
+          ] as any // hack for typings
+        }
         standalone={false}
       />
       <text x="50%" y="50%" alignmentBaseline="middle" textAnchor="middle">
