@@ -15,7 +15,7 @@ const legendClass = style({
   width: 150,
   padding: 15,
   borderRadius: 5,
-  border: '1px solid #ccc'
+  lineHeight: '1em'
 });
 
 const legendItemClass = style({
