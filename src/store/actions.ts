@@ -44,7 +44,7 @@ type SelectState = {
   payload: { name: StateName };
 };
 
-const stateZoom = [5.5] as [number];
+const stateZoom = [6.5] as [number];
 export const zoomToState = (name: StateName) => (dispatch: Dispatch) => {
   if (name !== 'All states') {
     dispatch(setCenter(stateData[name].center as [number, number]));
