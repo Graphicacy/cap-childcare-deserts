@@ -85,11 +85,10 @@ export default function(env: any = {}) {
     plugins: [
       new webpack.DefinePlugin({
         __ACCESS_TOKEN__: JSON.stringify(require('../keys.json').accessToken),
-        ...env.prod
-          ? {
-              'process.env.NODE_ENV': '"production"'
-            }
-          : {}
+        __DEV__: JSON.stringify(!env.prod),
+        'process.env.NODE_ENV': JSON.stringify(
+          env.prod ? 'production' : 'development'
+        )
       }),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new HTMLPlugin({

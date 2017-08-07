@@ -7,9 +7,7 @@ export type FeatureQueryResult = TractFeature | StateFeature;
 export type TractFeature = {
   kind: 'tract';
   feature: FeatureLayer;
-  properties: {
-    id: string;
-  };
+  properties: any;
 };
 
 export type StateFeature = {

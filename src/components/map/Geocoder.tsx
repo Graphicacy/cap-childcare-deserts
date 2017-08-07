@@ -23,7 +23,8 @@ export default class Geocoder extends FeatureQuery<
   GeocoderState
 > {
   geocoder = new MapboxGeocoder({
-    accessToken
+    accessToken,
+    placeholder: 'Search for an address, zipcode, or city'
   });
 
   componentDidMount() {

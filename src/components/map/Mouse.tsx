@@ -14,7 +14,8 @@ class Mouse extends FeatureQuery<MouseProps> {
 
     if (onMouseMove) {
       map.on('mousemove', (e: MapMouseEvent) => {
-        onMouseMove(this.queryFeatures(e.point));
+        const feature = this.queryFeatures(e.point);
+        onMouseMove(feature);
       });
       map.on('mouseout', () => onMouseMove());
     }

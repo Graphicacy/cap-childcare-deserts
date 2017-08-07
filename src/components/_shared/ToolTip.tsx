@@ -15,12 +15,11 @@ import { percent } from '../charts/format';
 
 const toolTipClass = style({
   position: 'fixed',
+  minWidth: 250,
   display: 'block',
   backgroundColor: Colors.INFO_BACKGROUND,
-  padding: 10,
-  borderRadius: 5,
+  padding: 15,
   border: '1px solid #ccc',
-  transform: 'translate(-50%, -100%)',
   zIndex: 10
 });
 
@@ -30,10 +29,19 @@ type ToolTipProps = Readonly<{
   y: number;
 }>;
 
+function getToolTipPosition({ state, x, y }: ToolTipProps) {
+  // tract is fixed in corner
+  if (state.show === true && state.data.kind === 'tract')
+    return { right: 10, top: 90 };
+
+  // otherwise render above mouse
+  return { left: x, top: y - 10, transform: 'translate(-50%, -100%)' };
+}
+
 export const ToolTip = ({ state, x, y }: ToolTipProps) =>
   !state.show
     ? <div style={{ display: 'none' }} />
-    : <div className={toolTipClass} style={{ left: x, top: y - 10 }}>
+    : <div className={toolTipClass} style={getToolTipPosition({ state, x, y })}>
         {getTooltipContent(state.data)}
       </div>;
 
@@ -61,7 +69,36 @@ const StateTooltip = ({ properties }: StateToolTipData) => {
   );
 };
 
-const TractTooltip = ({ properties }: TractToolTipData) => <div>Tract</div>;
+const tractRowClass = style({
+  marginTop: 10
+});
+
+const TractTooltip = ({ properties }: TractToolTipData) =>
+  <div>
+    <span style={{ fontWeight: 'bold' }}>
+      Census Tract {Number(properties.GEOID)}
+      {properties.ccdesert
+        ? <div style={{ fontStyle: 'italic' }}>Child Care Desert </div>
+        : <div> &nbsp; </div>}
+    </span>
+    <div className={tractRowClass}>
+      Licensed child care providers: {properties.noproviders} <br />
+      Total child care capacity: XX
+    </div>
+    <div className={tractRowClass}>
+      Population (total): XXX <br />
+      Population (under 5): XXX
+    </div>
+    <div className={tractRowClass}>
+      Median family income: $XX,XXX <br />
+      Maternal labor force participation: XX%
+    </div>
+    <div className={tractRowClass}>
+      Percent White: {percent(properties.per_white)} <br />
+      Percent Black: {percent(properties.per_black)} <br />
+      Percent Hispanic: {percent(properties.per_latino)}
+    </div>
+  </div>;
 const ChartTooltip = ({ properties }: ChartToolTipData) =>
   <div>
     {properties.label}: <b>{properties.value}</b>

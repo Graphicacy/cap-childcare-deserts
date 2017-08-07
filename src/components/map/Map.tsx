@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import {
   Map as ReactMapboxGl,
   Layer,
-  Feature,
-  ZoomControl
+  ZoomControl,
+  Source
 } from 'react-mapbox-gl';
 import { Map as MapboxMap } from 'mapbox-gl';
 import { style, cssRaw } from 'typestyle';
@@ -17,7 +17,8 @@ import {
   hideLegend,
   setSelectedState,
   showTooltip,
-  hideTooltip
+  hideTooltip,
+  TractProperties
 } from '../../store';
 import Controls from './Controls';
 import StateSelect from '../_shared/StateSelect';
@@ -111,11 +112,13 @@ const Map = (props: MapProps) =>
       }}
     >
       <ZoomControl style={zoomStyles(props.embed)} />
-      <Geocoder
-        zoom={props.zoom}
-        style={geocoderStyles(props.embed)}
-        onResult={props.onResult}
-      />
+      {props.showLegend
+        ? null
+        : <Geocoder
+            zoom={props.zoom}
+            style={geocoderStyles(props.embed)}
+            onResult={props.onResult}
+          />}
       <Mouse
         zoom={props.zoom}
         onMouseMove={props.onMouseMove}
@@ -157,6 +160,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         );
       }
       case 'tract': {
+        return dispatch(
+          showTooltip({
+            kind: 'tract',
+            properties: feature.properties as TractProperties
+          })
+        );
       }
     }
   },

@@ -42,10 +42,7 @@ export type ChartToolTipData = {
 
 export type TractToolTipData = {
   kind: 'tract';
-  properties: {
-    // TODO: type
-    data: any;
-  };
+  properties: TractProperties;
 };
 
 export type StateToolTipData = {
@@ -54,3 +51,30 @@ export type StateToolTipData = {
     state: StateName;
   };
 };
+
+export interface TractProperties {
+  STATEFP: string;
+  COUNTYFP: string;
+  TRACTCE: string;
+  GEOID: string;
+  NAME: string;
+  NAMELSAD: string;
+  MTFCC: string;
+  FUNCSTAT: string;
+  ALAND: number;
+  AWATER: number;
+  INTPTLAT: string;
+  INTPTLON: string;
+  state: string;
+  ccdesert: number;
+  per_latino: number;
+  per_white: number;
+  per_black: number;
+  per_aian: number;
+  per_asian: number;
+  per_nhpi: number;
+  per_twomore: number;
+  urbanicity: string;
+  noproviders: number;
+  state_fips: number;
+}
