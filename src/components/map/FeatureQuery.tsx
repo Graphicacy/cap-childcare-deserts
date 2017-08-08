@@ -19,7 +19,7 @@ export type StateFeature = {
 };
 
 type FeatureQueryProps = {
-  zoom: number[];
+  tractMode: boolean;
 };
 
 type FeatureLayer = GeoJSON.Feature<GeoJSON.GeometryObject> & { layer: Layer };
@@ -34,7 +34,7 @@ export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
 
   queryFeatures(p: Point) {
     const { map } = this.context;
-    const layers = getDataLayers(this.getZoom());
+    const layers = getDataLayers(this.getMode());
     const features = map.queryRenderedFeatures(p, { layers }) as FeatureLayer[];
     if (features.length) {
       const [feature] = features;
@@ -46,13 +46,13 @@ export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
    * query current zoom property, so we don't close
    * over zoom in callbacks to events
    */
-  getZoom() {
-    return this.props.zoom;
+  getMode() {
+    return this.props.tractMode;
   }
 }
 
-export function getDataLayers(zoom: number[]) {
-  return zoom[0] > 6 ? ['tl-2016-06-tract'] : ['allstates'];
+export function getDataLayers(tractMode: boolean) {
+  return tractMode ? ['tl-2016-06-tract'] : ['allstates'];
 }
 
 export function normalizeFeature(

@@ -25,6 +25,7 @@ import StateSelect from '../_shared/StateSelect';
 import Geocoder from './Geocoder';
 import Legend from './Legend';
 import Mouse from './Mouse';
+import LayerToggle from './LayerToggle';
 import { accessToken, mapboxStyle } from './constants';
 import { FeatureQueryResult } from './FeatureQuery';
 
@@ -76,9 +77,9 @@ const zoomStyles = (embed: boolean) => {
   };
 };
 
-const legendStyles = (embed: boolean, showLegend: boolean) =>
+const legendStyles = (embed: boolean, stateMode: boolean) =>
   ({
-    display: showLegend ? 'block' : 'none',
+    display: stateMode ? 'block' : 'none',
     position: 'absolute',
     top: embed ? 10 : 87,
     right: 40,
@@ -88,10 +89,10 @@ const legendStyles = (embed: boolean, showLegend: boolean) =>
 type MapProps = Readonly<{
   selectedState: StateName;
   embed: boolean;
-  zoom: [number];
-  center: [number, number];
-  showLegend: boolean;
-  onZoom: (zoom: [number]) => void;
+  zoom: [number] | null;
+  center: [number, number] | null;
+  bounds: number[][] | null;
+  tractMode: boolean;
   onMouseMove(feature?: FeatureQueryResult): void;
   onClick(feature?: FeatureQueryResult): void;
   onResult(feature?: FeatureQueryResult): void;
@@ -105,26 +106,28 @@ const Map = (props: MapProps) =>
         height: props.embed ? '100vh' : 500,
         width: '100vw'
       }}
-      center={props.center}
+      scrollZoom={props.tractMode}
+      dragPan={props.tractMode}
       zoom={props.zoom}
-      onZoom={(map: MapboxMap) => {
-        props.onZoom([(map as any).style.z]);
-      }}
+      center={props.center}
     >
-      <ZoomControl style={zoomStyles(props.embed)} />
-      {props.showLegend
+      {!props.tractMode
+        ? null
+        : <ZoomControl style={zoomStyles(props.embed)} />}
+      {!props.tractMode
         ? null
         : <Geocoder
-            zoom={props.zoom}
+            tractMode={props.tractMode}
             style={geocoderStyles(props.embed)}
             onResult={props.onResult}
           />}
       <Mouse
-        zoom={props.zoom}
+        tractMode={props.tractMode}
         onMouseMove={props.onMouseMove}
         onClick={props.onClick}
       />
-      <Legend style={legendStyles(props.embed, props.showLegend)} />
+      <Legend style={legendStyles(props.embed, !props.tractMode)} />
+      <LayerToggle tractMode={props.tractMode} />
     </MapBoxMap>
     <Controls />
     {props.embed
@@ -134,18 +137,18 @@ const Map = (props: MapProps) =>
       : <div className={`fade-out ${fadeClass}`} />}
   </div>;
 
-const mapStateToProps = (state: State) => ({
-  selectedState: state.selectedState,
-  embed: state.embed,
-  zoom: state.zoom,
-  center: state.center,
-  showLegend: state.showLegend
-});
+const mapStateToProps = (state: State) => {
+  return {
+    selectedState: state.selectedState,
+    embed: state.embed,
+    zoom: state.zoom,
+    center: state.center,
+    bounds: state.bounds,
+    tractMode: state.selectedState !== 'All states'
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onZoom(zoom: [number]) {
-    dispatch(zoom[0] <= 6 ? showLegend() : hideLegend());
-  },
   onMouseMove(feature?: FeatureQueryResult) {
     if (!feature) return dispatch(hideTooltip());
     switch (feature.kind) {

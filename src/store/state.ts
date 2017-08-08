@@ -8,6 +8,7 @@ export type State = Readonly<{
   embed: boolean;
   zoom: [number];
   center: [number, number];
+  bounds: number[][] | null;
   tooltip: TooltipState;
   showLegend: boolean;
   mouse: {

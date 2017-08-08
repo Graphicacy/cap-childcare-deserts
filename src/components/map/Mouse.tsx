@@ -10,7 +10,7 @@ type MouseProps = Readonly<{
 class Mouse extends FeatureQuery<MouseProps> {
   componentDidMount() {
     const { map } = this.context;
-    const { onMouseMove, onClick, zoom } = this.props;
+    const { onMouseMove, onClick } = this.props;
 
     if (onMouseMove) {
       map.on('mousemove', (e: MapMouseEvent) => {

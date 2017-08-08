@@ -15,7 +15,7 @@ import { percent } from '../charts/format';
 
 const toolTipClass = style({
   position: 'fixed',
-  minWidth: 250,
+  width: 250,
   display: 'block',
   backgroundColor: Colors.INFO_BACKGROUND,
   padding: 15,

@@ -10,13 +10,15 @@ export enum ActionType {
   HIDE_TOOLTIP = 'HIDE_TOOLTIP',
   MOUSE_MOVE = 'MOUSE_MOVE',
   SHOW_LEGEND = 'SHOW_LEGEND',
-  HIDE_LEGEND = 'HIDE_LEGEND'
+  HIDE_LEGEND = 'HIDE_LEGEND',
+  SET_BOUNDS = 'SET_BOUNDS'
 }
 
 export type Action =
-  | SelectState
-  | SetZoomLevel
-  | SetCenter
+  | SelectStateAction
+  | SetZoomLevelAction
+  | SetCenterAction
+  | SetBoundsAction
   | ShowTooltipAction
   | HideTooltipAction
   | MouseMoveAction
@@ -39,7 +41,7 @@ export const setMousePosition = (x: number, y: number) =>
     payload: { x, y }
   } as MouseMoveAction);
 
-type SelectState = {
+type SelectStateAction = {
   type: ActionType.SELECT_STATE;
   payload: { name: StateName };
 };
@@ -47,6 +49,8 @@ type SelectState = {
 const stateZoom = [6.5] as [number];
 export const zoomToState = (name: StateName) => (dispatch: Dispatch) => {
   if (name !== 'All states') {
+    // const [lon1, lon2, lat1, lat2] = stateData[name].bounds;
+    // dispatch(setBounds([[lat1, lon1], [lat2, lon2]]));
     dispatch(setCenter(stateData[name].center as [number, number]));
     dispatch(setZoomLevel(stateZoom));
   } else {
@@ -63,11 +67,11 @@ export const setSelectedState = (name: StateName) => (dispatch: Dispatch) => {
       payload: {
         name
       }
-    } as SelectState
+    } as SelectStateAction
   );
 };
 
-type SetZoomLevel = {
+type SetZoomLevelAction = {
   type: ActionType.SET_ZOOM;
   payload: {
     zoom: [number];
@@ -80,9 +84,9 @@ export const setZoomLevel = (zoom: [number]) =>
     payload: {
       zoom
     }
-  } as SetZoomLevel);
+  } as SetZoomLevelAction);
 
-type SetCenter = {
+type SetCenterAction = {
   type: ActionType.SET_CENTER;
   payload: {
     center: [number, number];
@@ -95,7 +99,7 @@ export const setCenter = (center: [number, number]) =>
     payload: {
       center
     }
-  } as SetCenter);
+  } as SetCenterAction);
 
 type ShowTooltipAction = {
   type: ActionType.SHOW_TOOLTIP;
@@ -132,3 +136,16 @@ export const hideLegend = () =>
   ({
     type: ActionType.HIDE_LEGEND
   } as HideLegendAction);
+
+type SetBoundsAction = {
+  type: ActionType.SET_BOUNDS;
+  payload: {
+    bounds: number[][];
+  };
+};
+
+export const setBounds = (bounds: number[][] | null) =>
+  ({
+    type: ActionType.SET_BOUNDS,
+    payload: { bounds }
+  } as SetBoundsAction);

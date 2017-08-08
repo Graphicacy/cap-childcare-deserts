@@ -18,7 +18,7 @@ type GeocoderState = Readonly<{
   selection?: GeocoderResultEvent;
 }>;
 
-export default class Geocoder extends FeatureQuery<
+export default class sGeocoder extends FeatureQuery<
   GeocoderProps,
   GeocoderState
 > {

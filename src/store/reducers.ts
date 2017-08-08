@@ -13,7 +13,8 @@ export default combineReducers({
   center,
   tooltip,
   mouse,
-  showLegend
+  showLegend,
+  bounds
 });
 
 /**
@@ -98,6 +99,17 @@ function showLegend(state = true, action: Action) {
       return true;
     case ActionType.HIDE_LEGEND:
       return false;
+    default:
+      return state;
+  }
+}
+
+function bounds(state = null, action: Action) {
+  switch (action.type) {
+    case ActionType.SET_BOUNDS: {
+      return action.payload.bounds;
+    }
+
     default:
       return state;
   }
