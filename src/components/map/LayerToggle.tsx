@@ -1,9 +1,11 @@
 import { createElement, Component } from 'react';
 import { Map } from 'mapbox-gl';
 import { stateModeLayers } from './constants';
+import { StateName } from '../../data';
 
 type LayerToggleProps = {
   tractMode: boolean;
+  selectedState: StateName;
 };
 
 type MapInteraction =
@@ -26,6 +28,10 @@ class LayerToggle extends Component<LayerToggleProps> {
     const { tractMode } = this.props;
     this.toggleStateLayers(!tractMode);
     this.toggleInteraction(tractMode);
+  }
+
+  toggleStateDots(state: StateName) {
+    const { map } = this.context;
   }
 
   toggleStateLayers(visible: boolean) {

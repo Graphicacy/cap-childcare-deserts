@@ -127,7 +127,10 @@ const Map = (props: MapProps) =>
         onClick={props.onClick}
       />
       <Legend style={legendStyles(props.embed, !props.tractMode)} />
-      <LayerToggle tractMode={props.tractMode} />
+      <LayerToggle
+        selectedState={props.selectedState}
+        tractMode={props.tractMode}
+      />
     </MapBoxMap>
     {!props.tractMode ? null : <Controls />}
     {props.embed
