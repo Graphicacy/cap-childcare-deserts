@@ -26,6 +26,7 @@ type StateSelectProps = Readonly<{
 const StateSelect = (props: StateSelectProps) =>
   <Select
     className={selectClass + ' select-up'}
+    clearable={false}
     value={props.selectedState}
     options={options}
     onChange={props.onSelectState}
