@@ -1,6 +1,7 @@
 import { createElement, Component } from 'react';
 import { MapMouseEvent } from 'mapbox-gl';
 import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
+import { tractLayers } from './constants';
 
 type MouseProps = Readonly<{
   onMouseMove?(feature?: FeatureQueryResult | void): void;
@@ -11,13 +12,29 @@ class Mouse extends FeatureQuery<MouseProps> {
   componentDidMount() {
     const { map } = this.context;
     const { onMouseMove, onClick } = this.props;
+    // this.highlightTract();
+    // this.higlightState();
 
     if (onMouseMove) {
       map.on('mousemove', (e: MapMouseEvent) => {
         const feature = this.queryFeatures(e.point);
+        // if (feature) {
+        //   switch (feature.kind) {
+        //     case 'state':
+        //       this.higlightState(feature.properties.id);
+        //       break;
+        //     case 'tract':
+        //       this.highlightTract(feature.properties.GEOID);
+        //       break;
+        //   }
+        // }
         onMouseMove(feature);
       });
-      map.on('mouseout', () => onMouseMove());
+      map.on('mouseout', () => {
+        // this.higlightState();
+        // this.highlightTract();
+        onMouseMove();
+      });
     }
 
     if (onClick) {
@@ -25,6 +42,18 @@ class Mouse extends FeatureQuery<MouseProps> {
         onClick(this.queryFeatures(e.point));
       });
     }
+  }
+
+  higlightState(stateId = '') {
+    const { map } = this.context;
+    map.setFilter('allstates-stroke-hover', ['==', 'id', stateId]);
+  }
+
+  highlightTract(tractId = '') {
+    const { map } = this.context;
+    tractLayers.forEach(layer => {
+      map.setFilter(`${layer}-hover`, ['==', 'GEOID', tractId]);
+    });
   }
 
   render() {
