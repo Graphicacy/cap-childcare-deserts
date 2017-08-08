@@ -11,7 +11,8 @@ export enum ActionType {
   MOUSE_MOVE = 'MOUSE_MOVE',
   SHOW_LEGEND = 'SHOW_LEGEND',
   HIDE_LEGEND = 'HIDE_LEGEND',
-  SET_BOUNDS = 'SET_BOUNDS'
+  SET_BOUNDS = 'SET_BOUNDS',
+  SET_URBAN_FILTER = 'SET_URBAN_FILTER'
 }
 
 export type Action =
@@ -23,7 +24,8 @@ export type Action =
   | HideTooltipAction
   | MouseMoveAction
   | ShowLegendAction
-  | HideLegendAction;
+  | HideLegendAction
+  | SetUrbanFilterAction;
 
 export type Dispatch = (action: Action | Dispatch) => void;
 
@@ -149,3 +151,21 @@ export const setBounds = (bounds: number[][] | null) =>
     type: ActionType.SET_BOUNDS,
     payload: { bounds }
   } as SetBoundsAction);
+
+export enum UrbanicityFilter {
+  ALL = 'ALL',
+  RURAL = 'RURAL',
+  SUBURBAN = 'SUBURBAN',
+  URBAN = 'URBAN'
+}
+
+export type SetUrbanFilterAction = {
+  type: ActionType.SET_URBAN_FILTER;
+  payload: UrbanicityFilter;
+};
+
+export const setUrbanFilter = (filter: UrbanicityFilter) =>
+  ({
+    type: ActionType.SET_URBAN_FILTER,
+    payload: filter
+  } as SetUrbanFilterAction);

@@ -47,7 +47,7 @@ const Article = ({ selectedState }: ArticleProps) =>
       <Title>
         {' '}Child Care Access in {selectedState}{' '}
       </Title>
-      <p>
+      <p style={{ marginTop: 0 }}>
         {' '}Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin reris
         etur? Re am consed que dolut lam erum quate velenisti dolora nimporiti o
         ctiis et ipid quis nissinciae cum verem dit, nobitatecto o cid ullaut
@@ -66,7 +66,7 @@ const Article = ({ selectedState }: ArticleProps) =>
       </p>
 
       <Title> About the Study </Title>
-      <p>
+      <p style={{ marginTop: 0 }}>
         Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin reris
         etur? Re am consed que dolut lam erum quate velenisti dolora nimporiti o
         ctiis et ipid quis nissinciae cum verem dit, nobitatecto o cid ullaut

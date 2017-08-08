@@ -1,5 +1,5 @@
 import { StateName } from '../data';
-
+import { UrbanicityFilter } from './actions';
 /**
  * type describing the entire app state
  */
@@ -11,6 +11,7 @@ export type State = Readonly<{
   bounds: number[][] | null;
   tooltip: TooltipState;
   showLegend: boolean;
+  urbanicityFilter: UrbanicityFilter;
   mouse: {
     x: number;
     y: number;

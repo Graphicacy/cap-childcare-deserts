@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { Action, ActionType } from './actions';
+import { Action, ActionType, UrbanicityFilter } from './actions';
 import { TooltipState } from './state';
 import { startZoom, startCenter } from './constants';
 
@@ -14,7 +14,8 @@ export default combineReducers({
   tooltip,
   mouse,
   showLegend,
-  bounds
+  bounds,
+  urbanicityFilter
 });
 
 /**
@@ -108,6 +109,17 @@ function bounds(state = null, action: Action) {
   switch (action.type) {
     case ActionType.SET_BOUNDS: {
       return action.payload.bounds;
+    }
+
+    default:
+      return state;
+  }
+}
+
+function urbanicityFilter(state = UrbanicityFilter.ALL, action: Action) {
+  switch (action.type) {
+    case ActionType.SET_URBAN_FILTER: {
+      return action.payload;
     }
 
     default:

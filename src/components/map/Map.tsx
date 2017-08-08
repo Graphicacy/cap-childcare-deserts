@@ -26,7 +26,7 @@ import Geocoder from './Geocoder';
 import Legend from './Legend';
 import Mouse from './Mouse';
 import LayerToggle from './LayerToggle';
-import { accessToken, mapboxStyle } from './constants';
+import { accessToken, mapboxStyle, TRACT_CONTROL_INDENT } from './constants';
 import { FeatureQueryResult } from './FeatureQuery';
 
 const MapBoxMap = ReactMapboxGl({
@@ -64,14 +64,14 @@ const stateSelectClass = style({
 const geocoderStyles = (embed: boolean) =>
   ({
     position: 'absolute',
-    left: 50,
+    left: TRACT_CONTROL_INDENT + 40,
     top: embed ? 10 : 87,
     right: 'auto'
   } as React.CSSProperties);
 
 const zoomStyles = (embed: boolean) => {
   return {
-    left: 10,
+    left: TRACT_CONTROL_INDENT,
     top: embed ? 10 : 80,
     right: 'auto'
   };
@@ -82,7 +82,7 @@ const legendStyles = (embed: boolean, stateMode: boolean) =>
     display: stateMode ? 'block' : 'none',
     position: 'absolute',
     top: embed ? 10 : 87,
-    right: 40,
+    right: TRACT_CONTROL_INDENT,
     zIndex: 3
   } as React.CSSProperties);
 
@@ -129,7 +129,7 @@ const Map = (props: MapProps) =>
       <Legend style={legendStyles(props.embed, !props.tractMode)} />
       <LayerToggle tractMode={props.tractMode} />
     </MapBoxMap>
-    <Controls />
+    {!props.tractMode ? null : <Controls />}
     {props.embed
       ? <div className={stateSelectClass}>
           <StateSelect above />

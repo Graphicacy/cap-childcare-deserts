@@ -5,8 +5,7 @@ const titleClass = style({
   fontWeight: 'bold',
   textAlign: 'center',
   width: '100%',
-  fontSize: 24,
-  marginBottom: 5
+  fontSize: 24
 });
 
 const Title: React.StatelessComponent = ({ children }) =>
