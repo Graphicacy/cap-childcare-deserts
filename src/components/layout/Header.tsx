@@ -4,8 +4,7 @@ import { content } from 'csstips';
 
 import { Colors } from '../colors';
 import { Facebook, Twitter, Mail, Info } from './Icons';
-
-const img: string = require('../../../images/cap-logo-small.png');
+import { Logo } from './Logo';
 
 export const headerHeight = 64;
 
@@ -20,7 +19,9 @@ const headerClass = style(content, {
 });
 
 const logoClass = style({
-  height: '100%'
+  display: 'inline-block',
+  marginLeft: 20,
+  marginTop: -5
 });
 
 const textLinkClass = style({
@@ -51,7 +52,9 @@ const socialClass = style({
 
 const Header = () =>
   <div className={headerClass}>
-    <img src={img} className={logoClass} />
+    <div className={logoClass}>
+      <Logo />
+    </div>
     <div className={socialClass}>
       <Twitter />
       <Facebook />
