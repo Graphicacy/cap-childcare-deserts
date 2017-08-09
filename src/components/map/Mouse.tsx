@@ -13,25 +13,25 @@ class Mouse extends FeatureQuery<MouseProps> {
     const { map } = this.context;
     const { onMouseMove, onClick } = this.props;
     // this.highlightTract();
-    this.higlightState();
+    // this.higlightState();
 
     if (onMouseMove) {
       map.on('mousemove', (e: MapMouseEvent) => {
         const feature = this.queryFeatures(e.point);
-        if (feature) {
-          switch (feature.kind) {
-            case 'state':
-              this.higlightState(feature.properties.id);
-              break;
-            // case 'tract':
-            //   this.highlightTract(feature.properties.GEOID);
-            //   break;
-          }
-        }
+        // if (feature) {
+        //   switch (feature.kind) {
+        //     case 'state':
+        //       this.higlightState(feature.properties.id);
+        //       break;
+        //     // case 'tract':
+        //     //   this.highlightTract(feature.properties.GEOID);
+        //     //   break;
+        //   }
+        // }
         onMouseMove(feature);
       });
       map.on('mouseout', () => {
-        this.higlightState();
+        // this.higlightState();
         // this.highlightTract();
         onMouseMove();
       });

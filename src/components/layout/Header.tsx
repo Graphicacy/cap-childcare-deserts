@@ -7,7 +7,7 @@ import { Facebook, Twitter, Mail, Info } from './Icons';
 
 const img: string = require('../../../images/cap-logo-small.png');
 
-const headerHeight = 64;
+export const headerHeight = 64;
 
 const headerClass = style(content, {
   position: 'fixed',

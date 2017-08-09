@@ -20,6 +20,8 @@ import {
   hideTooltip,
   TractProperties
 } from '../../store';
+
+import { headerHeight } from '../layout/Header';
 import Controls from './Controls';
 import StateSelect from '../_shared/StateSelect';
 import Geocoder from './Geocoder';
@@ -65,14 +67,14 @@ const geocoderStyles = (embed: boolean) =>
   ({
     position: 'absolute',
     left: TRACT_CONTROL_INDENT + 40,
-    top: embed ? 10 : 87,
+    top: 37,
     right: 'auto'
   } as React.CSSProperties);
 
 const zoomStyles = (embed: boolean) => {
   return {
     left: TRACT_CONTROL_INDENT,
-    top: embed ? 10 : 80,
+    top: 30,
     right: 'auto'
   };
 };
@@ -103,8 +105,9 @@ const Map = (props: MapProps) =>
     <MapBoxMap
       style={mapboxStyle}
       containerStyle={{
-        height: props.embed ? '100vh' : 500,
-        width: '100vw'
+        height: props.embed ? '100vh' : 475,
+        width: '100vw',
+        marginTop: props.embed ? 0 : headerHeight
       }}
       scrollZoom={props.tractMode}
       dragPan={props.tractMode}
@@ -131,8 +134,8 @@ const Map = (props: MapProps) =>
         selectedState={props.selectedState}
         tractMode={props.tractMode}
       />
+      {!props.tractMode ? null : <Controls />}
     </MapBoxMap>
-    {!props.tractMode ? null : <Controls />}
     {props.embed
       ? <div className={stateSelectClass}>
           <StateSelect above />

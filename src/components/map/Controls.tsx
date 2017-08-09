@@ -7,7 +7,7 @@ import { TRACT_CONTROL_INDENT } from './constants';
 
 const controlClass = style({
   position: 'absolute',
-  top: 150,
+  top: 110,
   left: TRACT_CONTROL_INDENT,
   zIndex: 10
 });
@@ -19,7 +19,8 @@ const buttonClass = style({
   textAlign: 'center',
   paddingTop: 7,
   paddingBottom: 7,
-  cursor: 'pointer'
+  cursor: 'pointer',
+  fontSize: 14
 });
 
 type ControlProps = Readonly<{
@@ -44,26 +45,40 @@ const Button = (props: { onClick?(): void; text: string; active?: boolean }) =>
 
 const Controls = (props: ControlProps) =>
   <div className={controlClass}>
-    <Button
-      text="all"
-      active={props.isActive(UrbanicityFilter.ALL)}
-      onClick={props.handler(UrbanicityFilter.ALL)}
-    />
-    <Button
-      text="rural"
-      active={props.isActive(UrbanicityFilter.RURAL)}
-      onClick={props.handler(UrbanicityFilter.RURAL)}
-    />
-    <Button
-      text="suburban"
-      active={props.isActive(UrbanicityFilter.SUBURBAN)}
-      onClick={props.handler(UrbanicityFilter.SUBURBAN)}
-    />
-    <Button
-      text="urban"
-      active={props.isActive(UrbanicityFilter.URBAN)}
-      onClick={props.handler(UrbanicityFilter.URBAN)}
-    />
+    <div style={{ marginBottom: 15 }}>
+      <Button
+        text="deserts"
+        active={props.isActive(UrbanicityFilter.ALL)}
+        onClick={props.handler(UrbanicityFilter.ALL)}
+      />
+      <Button
+        text="centers"
+        active={props.isActive(UrbanicityFilter.RURAL)}
+        onClick={props.handler(UrbanicityFilter.RURAL)}
+      />
+    </div>
+    <div>
+      <Button
+        text="all"
+        active={props.isActive(UrbanicityFilter.ALL)}
+        onClick={props.handler(UrbanicityFilter.ALL)}
+      />
+      <Button
+        text="rural"
+        active={props.isActive(UrbanicityFilter.RURAL)}
+        onClick={props.handler(UrbanicityFilter.RURAL)}
+      />
+      <Button
+        text="suburban"
+        active={props.isActive(UrbanicityFilter.SUBURBAN)}
+        onClick={props.handler(UrbanicityFilter.SUBURBAN)}
+      />
+      <Button
+        text="urban"
+        active={props.isActive(UrbanicityFilter.URBAN)}
+        onClick={props.handler(UrbanicityFilter.URBAN)}
+      />
+    </div>
   </div>;
 
 const mapStateToProps = (state: State) => {
