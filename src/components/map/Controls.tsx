@@ -45,40 +45,26 @@ const Button = (props: { onClick?(): void; text: string; active?: boolean }) =>
 
 const Controls = (props: ControlProps) =>
   <div className={controlClass}>
-    <div style={{ marginBottom: 15 }}>
-      <Button
-        text="deserts"
-        active={props.isActive(UrbanicityFilter.ALL)}
-        onClick={props.handler(UrbanicityFilter.ALL)}
-      />
-      <Button
-        text="centers"
-        active={props.isActive(UrbanicityFilter.RURAL)}
-        onClick={props.handler(UrbanicityFilter.RURAL)}
-      />
-    </div>
-    <div>
-      <Button
-        text="all"
-        active={props.isActive(UrbanicityFilter.ALL)}
-        onClick={props.handler(UrbanicityFilter.ALL)}
-      />
-      <Button
-        text="rural"
-        active={props.isActive(UrbanicityFilter.RURAL)}
-        onClick={props.handler(UrbanicityFilter.RURAL)}
-      />
-      <Button
-        text="suburban"
-        active={props.isActive(UrbanicityFilter.SUBURBAN)}
-        onClick={props.handler(UrbanicityFilter.SUBURBAN)}
-      />
-      <Button
-        text="urban"
-        active={props.isActive(UrbanicityFilter.URBAN)}
-        onClick={props.handler(UrbanicityFilter.URBAN)}
-      />
-    </div>
+    <Button
+      text="all"
+      active={props.isActive(UrbanicityFilter.ALL)}
+      onClick={props.handler(UrbanicityFilter.ALL)}
+    />
+    <Button
+      text="rural"
+      active={props.isActive(UrbanicityFilter.RURAL)}
+      onClick={props.handler(UrbanicityFilter.RURAL)}
+    />
+    <Button
+      text="suburban"
+      active={props.isActive(UrbanicityFilter.SUBURBAN)}
+      onClick={props.handler(UrbanicityFilter.SUBURBAN)}
+    />
+    <Button
+      text="urban"
+      active={props.isActive(UrbanicityFilter.URBAN)}
+      onClick={props.handler(UrbanicityFilter.URBAN)}
+    />
   </div>;
 
 const mapStateToProps = (state: State) => {
