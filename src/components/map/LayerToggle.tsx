@@ -22,16 +22,19 @@ class LayerToggle extends Component<LayerToggleProps> {
 
   componentDidMount() {
     this.toggleInteraction(false);
+    this.toggleStateDots('');
   }
 
   componentDidUpdate() {
-    const { tractMode } = this.props;
+    const { tractMode, selectedState } = this.props;
     this.toggleStateLayers(!tractMode);
     this.toggleInteraction(tractMode);
+    this.toggleStateDots(selectedState === 'All states' ? '' : selectedState);
   }
 
-  toggleStateDots(state: StateName) {
+  toggleStateDots(state: StateName | '') {
     const { map } = this.context;
+    map.setFilter('locations-with-state', ['==', 'state', state]);
   }
 
   toggleStateLayers(visible: boolean) {
