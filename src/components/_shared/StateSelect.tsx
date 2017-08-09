@@ -6,13 +6,19 @@ import { style, cssRaw } from 'typestyle';
 import * as Select from 'react-select';
 import { Dispatch, State, setSelectedState } from '../../store';
 import { stateList, StateName, stateData } from '../../data';
+import { Colors } from '../colors';
 
 const selectClass = style({
-  maxWidth: 300,
+  maxWidth: 200,
   width: '100%',
   display: 'block',
   margin: '0 auto',
-  textAlignLast: 'center'
+  textAlignLast: 'center',
+  $nest: {
+    '.Select-control': {
+      backgroundColor: Colors.SELECT_BAKGROUND
+    }
+  }
 });
 
 const options = stateList.map(s => ({ label: s, value: s }));
