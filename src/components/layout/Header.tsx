@@ -2,6 +2,7 @@ import { createElement } from 'react';
 import { style, media } from 'typestyle';
 import { content } from 'csstips';
 
+import { Colors } from '../colors';
 import { Facebook, Twitter, Mail, Info } from './Icons';
 
 const img: string = require('../../../images/cap-logo-small.png');
@@ -31,10 +32,10 @@ const textLinkClass = style({
 const anchorClass = style(
   {
     marginRight: 10,
-    color: 'black',
+    color: Colors.HEADER_GRAY,
     $nest: {
       '&:hover': {
-        color: 'black',
+        color: Colors.HEADER_GRAY,
         textDecoration: 'underline'
       }
     },

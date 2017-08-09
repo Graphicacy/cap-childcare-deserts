@@ -19,7 +19,13 @@ const bannerContainerClass = style(content, {
 const bannerClassName = style({
   margin: '0 auto',
   maxWidth: 800,
-  textAlign: 'center'
+  textAlign: 'center',
+  $nest: {
+    '& p': {
+      lineHeight: '24px',
+      fontSize: 14
+    }
+  }
 });
 
 const selectContainerClass = style({

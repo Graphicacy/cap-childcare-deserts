@@ -1,9 +1,15 @@
 import { createElement } from 'react';
 import { style } from 'typestyle';
+import { Colors } from '../colors';
 
 const socialIconClass = style({
   marginRight: 10,
-  display: 'inline-block'
+  display: 'inline-block',
+  $nest: {
+    '& svg': {
+      fill: Colors.HEADER_GRAY
+    }
+  }
 });
 
 export const Mail = () =>

@@ -14,7 +14,13 @@ const articleClass = style(content, {
   textAlign: 'left',
   maxWidth: ARTICLE_MAX_WIDTH,
   margin: '0 auto',
-  lineHeight: '2em'
+  lineHeight: '2em',
+  $nest: {
+    '& p': {
+      lineHeight: '24px',
+      fontSize: '14px'
+    }
+  }
 });
 
 const articleContainerClass = style(flex, {
