@@ -28,6 +28,7 @@ import Geocoder from './Geocoder';
 import Legend from './Legend';
 import Mouse from './Mouse';
 import LayerToggle from './LayerToggle';
+import TractLegend from './TractLegend';
 import { accessToken, mapboxStyle, TRACT_CONTROL_INDENT } from './constants';
 import { FeatureQueryResult } from './FeatureQuery';
 
@@ -134,13 +135,14 @@ const Map = (props: MapProps) =>
         selectedState={props.selectedState}
         tractMode={props.tractMode}
       />
-      {!props.tractMode ? null : <Controls />}
+      {props.tractMode ? <Controls /> : null}
+      {props.tractMode ? <TractLegend /> : null}
     </MapBoxMap>
     {props.embed
       ? <div className={stateSelectClass}>
           <StateSelect above />
         </div>
-      : <div className={`fade-out ${fadeClass}`} />}
+      : null /* <div className={`fade-out ${fadeClass}`} /> */}
   </div>;
 
 const mapStateToProps = (state: State) => {
