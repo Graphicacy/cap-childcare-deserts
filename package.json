@@ -11,7 +11,7 @@
     "build": "npm run build:dev -- --env.prod && rm -rf ./public/bundles",
     "prettier": "prettier --single-quote --write './src/**/*.{ts,tsx}'",
     "data": "ts-node ./dev/data.ts",
-    "deploy": "npm run build && cp ./images/favicon-* ./public/ && gh-pages -d ./public"
+    "deploy": "npm run build && cp ./images/favicon.ico ./public/ && gh-pages -d ./public"
   },
   "devDependencies": {
     "@mapbox/geojson-merge": "^1.0.2",

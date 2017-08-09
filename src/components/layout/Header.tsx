@@ -13,7 +13,7 @@ const headerClass = style(content, {
   width: '100%',
   height: headerHeight,
   backgroundColor: 'white',
-  boxShadow: '0 4px 2px 0px #ccc;',
+  boxShadow: '0 3px 2px 0px #888;',
   padding: '10px 20px 10px 20px',
   zIndex: 3
 });
