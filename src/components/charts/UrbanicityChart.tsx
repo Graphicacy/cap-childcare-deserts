@@ -59,6 +59,9 @@ const UrbanicityChart = (props: UrbanicityChartProps) =>
           y="value"
           style={strokeStyle}
           events={createEvents(props, false)}
+          animate={{
+            duration: 500
+          }}
           data={getData(props.selectedState).nonDesert}
         />
         <VictoryBar
@@ -66,6 +69,9 @@ const UrbanicityChart = (props: UrbanicityChartProps) =>
           y="value"
           style={strokeStyle}
           events={createEvents(props, true)}
+          animate={{
+            duration: 500
+          }}
           data={getData(props.selectedState).desert}
         />
       </VictoryStack>

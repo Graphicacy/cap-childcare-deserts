@@ -1329,7 +1329,7 @@ d3-scale@^1.0.0:
     d3-time "1"
     d3-time-format "2"
 
-d3-shape@^1.0.0:
+d3-shape@^1.0.0, d3-shape@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/d3-shape/-/d3-shape-1.2.0.tgz#45d01538f064bafd05ea3d6d2cb748fd8c41f777"
   dependencies:
@@ -5836,6 +5836,17 @@ victory-core@^17.0.0:
     d3-interpolate "^1.1.1"
     d3-scale "^1.0.0"
     d3-shape "^1.0.0"
+    d3-timer "^1.0.0"
+    lodash "^4.17.4"
+
+victory-core@^17.2.2:
+  version "17.2.2"
+  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-17.2.2.tgz#bcff96bb5747a7f23da25a52f6aa3c40201be8c4"
+  dependencies:
+    d3-ease "^1.0.0"
+    d3-interpolate "^1.1.1"
+    d3-scale "^1.0.0"
+    d3-shape "^1.2.0"
     d3-timer "^1.0.0"
     lodash "^4.17.4"
 

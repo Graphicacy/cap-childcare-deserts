@@ -46,6 +46,9 @@ const Donut = ({
         height={size}
         innerRadius={38}
         labels={noLabel}
+        animate={{
+          duration: 500
+        }}
         data={[
           { y: n, fill: Colors.ORANGE, stroke: 'white', strokeWidth: 2 },
           { y: 1 - n, fill: Colors.GRAY, stroke: 'white', strokeWidth: 2 }

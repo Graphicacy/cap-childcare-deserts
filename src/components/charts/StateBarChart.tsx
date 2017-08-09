@@ -41,6 +41,9 @@ const StateBarChart = ({
       <VictoryBar
         y="percent"
         x="abbr"
+        animate={{
+          duration: 500
+        }}
         style={{ data: { width: 15, cursor: 'pointer' } }}
         data={data.map(x => ({
           ...x,
