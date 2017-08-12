@@ -54,7 +54,9 @@ const socialClass = style({
 const Header = () =>
   <div className={headerClass}>
     <div className={logoClass}>
-      <Logo />
+      <a href="https://www.americanprogress.org/" target="__blank">
+        <Logo />
+      </a>
     </div>
     <div className={socialClass}>
       <Twitter />
