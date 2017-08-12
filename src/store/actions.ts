@@ -1,6 +1,6 @@
 import { StateName, stateData } from '../data';
 import { ToolTipData } from './state';
-import { startZoom, startCenter } from './constants';
+import { startZoom, startCenter, stateZoom } from './constants';
 
 export enum ActionType {
   SELECT_STATE = 'SELECT_STATE',
@@ -48,13 +48,12 @@ type SelectStateAction = {
   payload: { name: StateName };
 };
 
-const stateZoom = [6.5] as [number];
 export const zoomToState = (name: StateName) => (dispatch: Dispatch) => {
   if (name !== 'All states') {
     // const [lon1, lon2, lat1, lat2] = stateData[name].bounds;
     // dispatch(setBounds([[lat1, lon1], [lat2, lon2]]));
     dispatch(setCenter(stateData[name].center as [number, number]));
-    dispatch(setZoomLevel(stateZoom));
+    dispatch(setZoomLevel(stateZoom.slice() as [number]));
   } else {
     dispatch(setCenter(startCenter as [number, number]));
     dispatch(setZoomLevel(startZoom as [number]));
