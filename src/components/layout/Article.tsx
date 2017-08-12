@@ -8,7 +8,7 @@ import { StateBarChart } from '../charts/';
 import { StateName } from '../../data';
 import { State } from '../../store/';
 
-const ARTICLE_MAX_WIDTH = 900;
+const ARTICLE_MAX_WIDTH = 750;
 
 const articleClass = style(content, {
   textAlign: 'left',
