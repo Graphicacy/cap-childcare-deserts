@@ -37,7 +37,11 @@ const StateBarChart = ({
   onMouseOver
 }: StateBarChartProps) =>
   <ChartContainer title="Percent in a child care desert, by state">
-    <VictoryChart width={600} domainPadding={{ x: 20 }}>
+    <VictoryChart
+      padding={{ top: 0, left: 50, bottom: 50 }}
+      width={600}
+      domainPadding={{ x: 20 }}
+    >
       <VictoryBar
         y="percent"
         x="abbr"
