@@ -33,6 +33,7 @@ const textLinkClass = style({
 const anchorClass = style(
   {
     marginRight: 10,
+    fontSize: '14px',
     color: Colors.HEADER_GRAY,
     $nest: {
       '&:hover': {
