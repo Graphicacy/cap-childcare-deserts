@@ -1,6 +1,7 @@
 export enum Colors {
   ORANGE = '#fa9730',
   GRAY = '#dcdcdc',
+  FONT_GRAY = '#111111',
   HEADER_GRAY = '#555555',
   ACTIVE_CONTROL = '#333333',
   BLUE = '#083E77',

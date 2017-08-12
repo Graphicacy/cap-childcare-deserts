@@ -6,6 +6,7 @@ import Banner from './Banner';
 import ChartRow from './ChartRow';
 import Article from './Article';
 import { Map } from '../map';
+import { Colors } from '../colors';
 
 const contentClass = style(content);
 const contentContainerClass = style(fillParent, vertical, {
@@ -16,7 +17,8 @@ const contentContainerClass = style(fillParent, vertical, {
 const containerClass = style({
   width: '100%',
   height: '100%',
-  overflowX: 'hidden'
+  overflowX: 'hidden',
+  color: Colors.FONT_GRAY
 });
 
 const Container = () =>
