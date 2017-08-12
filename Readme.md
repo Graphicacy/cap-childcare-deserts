@@ -2,7 +2,7 @@
 
 ### Getting started
 
-1) [Install nodejs version 6 or greater](https://nodejs.org/en/)
+1) [Install nodejs version 8 or greater](https://nodejs.org/en/)
 2) Install the dependencies by running the following command in your terminal.
 
     ```shell

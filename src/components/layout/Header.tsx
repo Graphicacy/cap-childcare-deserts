@@ -21,7 +21,7 @@ const headerClass = style(content, {
 const logoClass = style({
   display: 'inline-block',
   marginLeft: 20,
-  marginTop: -5
+  marginTop: -10
 });
 
 const textLinkClass = style({

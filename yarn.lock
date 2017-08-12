@@ -4373,9 +4373,9 @@ postcss@^6.0.1:
     source-map "^0.5.6"
     supports-color "^4.2.0"
 
-preact-compat@^3.16.0:
-  version "3.16.0"
-  resolved "https://registry.yarnpkg.com/preact-compat/-/preact-compat-3.16.0.tgz#cf2bc1b2f8fca14900d68094f9e10b8b329cc41e"
+preact-compat@^3.17.0:
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/preact-compat/-/preact-compat-3.17.0.tgz#528cfdfc301190c1a0f47567336be1f4be0266b3"
   dependencies:
     immutability-helper "^2.1.2"
     preact-render-to-string "^3.6.0"
@@ -5820,13 +5820,13 @@ verror@1.3.6:
   dependencies:
     extsprintf "1.0.2"
 
-victory-chart@^21.4.0:
-  version "21.4.0"
-  resolved "https://registry.yarnpkg.com/victory-chart/-/victory-chart-21.4.0.tgz#d7f735a4888db23850d26aa2848c174ebd8cafcb"
+victory-chart@^21.6.0:
+  version "21.6.1"
+  resolved "https://registry.yarnpkg.com/victory-chart/-/victory-chart-21.6.1.tgz#afe5c4957d7542dc10db6354b416a51a0f176199"
   dependencies:
     d3-voronoi "^1.1.2"
     lodash "^4.17.4"
-    victory-core "^17.0.0"
+    victory-core "^17.1.0"
 
 victory-core@^17.0.0:
   version "17.0.0"
@@ -5839,9 +5839,9 @@ victory-core@^17.0.0:
     d3-timer "^1.0.0"
     lodash "^4.17.4"
 
-victory-core@^17.2.2:
-  version "17.2.2"
-  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-17.2.2.tgz#bcff96bb5747a7f23da25a52f6aa3c40201be8c4"
+victory-core@^17.1.0, victory-core@^17.2.1:
+  version "17.2.3"
+  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-17.2.3.tgz#3a4524575abe8aab37185aa77e5478433c5bbcbb"
   dependencies:
     d3-ease "^1.0.0"
     d3-interpolate "^1.1.1"
@@ -5850,21 +5850,21 @@ victory-core@^17.2.2:
     d3-timer "^1.0.0"
     lodash "^4.17.4"
 
-victory-pie@^11.4.0:
-  version "11.4.0"
-  resolved "https://registry.yarnpkg.com/victory-pie/-/victory-pie-11.4.0.tgz#9fb6dd84f68b27b8c4382cc792abc5a2ad6949d7"
+victory-pie@^11.4.1:
+  version "11.4.1"
+  resolved "https://registry.yarnpkg.com/victory-pie/-/victory-pie-11.4.1.tgz#d597573771355e16e7a0ceae45ea2f13172b72d8"
   dependencies:
     d3-shape "^1.0.0"
     lodash "^4.17.4"
     victory-core "^17.0.0"
 
-victory@^0.21.2:
-  version "0.21.3"
-  resolved "https://registry.yarnpkg.com/victory/-/victory-0.21.3.tgz#9111a1a1c80baa957c183832519138013673ba78"
+victory@^0.21.4:
+  version "0.21.4"
+  resolved "https://registry.yarnpkg.com/victory/-/victory-0.21.4.tgz#2f1cfbc48d33c9b5f68f1655babbd102e7ce20ce"
   dependencies:
-    victory-chart "^21.4.0"
-    victory-core "^17.0.0"
-    victory-pie "^11.4.0"
+    victory-chart "^21.6.0"
+    victory-core "^17.2.1"
+    victory-pie "^11.4.1"
 
 vinyl-assign@^1.0.1:
   version "1.2.1"
@@ -6015,9 +6015,9 @@ webpack-sources@^1.0.1:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
 
-webpack@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.4.1.tgz#4c3f4f3fb318155a4db0cb6a36ff05c5697418f4"
+webpack@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.5.4.tgz#5583eb263ed27b78b5bd17bfdfb0eb1b1cd1bf81"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
