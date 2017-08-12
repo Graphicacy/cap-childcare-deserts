@@ -23,7 +23,8 @@ const bannerClassName = style({
   $nest: {
     '& p': {
       lineHeight: '24px',
-      fontSize: 14
+      fontSize: 14,
+      margin: '12px 0px'
     }
   }
 });
