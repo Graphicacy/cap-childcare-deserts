@@ -12,6 +12,7 @@ import { stateData } from '../../data';
 import { style } from 'typestyle';
 import { Colors } from '../colors';
 import { percent } from '../charts/format';
+import { headerHeight } from '../layout/Header';
 
 const toolTipClass = style({
   position: 'fixed',
@@ -24,30 +25,32 @@ const toolTipClass = style({
 
 type ToolTipProps = Readonly<{
   state: TooltipState;
+  embed: boolean;
   x: number;
   y: number;
 }>;
 
-function getToolTipPosition({ state, x, y }: ToolTipProps) {
+function getToolTipPosition({ state, x, y, embed }: ToolTipProps) {
   // tract is fixed in corner
   if (state.show === true && state.data.kind === 'tract')
-    return { right: 10, top: 90 };
+    return { right: 40, top: (embed ? 0 : headerHeight) + 30 };
 
   // otherwise render above mouse
   return { left: x, top: y - 10, transform: 'translate(-50%, -100%)' };
 }
 
-export const ToolTip = ({ state, x, y }: ToolTipProps) =>
-  !state.show
+export const ToolTip = (props: ToolTipProps) =>
+  !props.state.show
     ? <div style={{ display: 'none' }} />
-    : <div className={toolTipClass} style={getToolTipPosition({ state, x, y })}>
-        {getTooltipContent(state.data)}
+    : <div className={toolTipClass} style={getToolTipPosition(props)}>
+        {getTooltipContent(props.state.data)}
       </div>;
 
 export default connect((state: State) => {
   return {
     ...state.mouse,
-    state: state.tooltip
+    state: state.tooltip,
+    embed: state.embed
   };
 })(ToolTip);
 
