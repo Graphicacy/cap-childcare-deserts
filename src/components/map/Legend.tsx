@@ -13,14 +13,10 @@ const bins = [
 
 const legendClass = style({
   backgroundColor: Colors.INFO_BACKGROUND,
-  width: 150,
   padding: 15,
   borderRadius: 5,
   lineHeight: '1em',
   display: 'block',
-  position: 'absolute',
-  bottom: 100,
-  right: TRACT_CONTROL_INDENT,
   zIndex: 3
 });
 
@@ -49,7 +45,9 @@ const legendTitleClass = style({
   marginBottom: 10
 });
 
-type LegendProps = {};
+type LegendProps = {
+  style?: React.CSSProperties;
+};
 
 type LegendEntryProps = {
   color: string;
@@ -71,18 +69,22 @@ const LegendEntry = ({ color, range, style }: LegendEntryProps) =>
   </div>;
 
 const Legend = (props: LegendProps) =>
-  <div className={legendClass}>
+  <div className={legendClass} style={props.style}>
     <div className={legendTitleClass}>
       Percent living in a child care desert{' '}
     </div>
-    {bins.map(([range, color]) => <LegendEntry range={range} color={color} />)}
-    <LegendEntry
-      range={'(no data)'}
-      color={Colors.GRAY}
-      style={{
-        marginTop: 10
-      }}
-    />
+    <div>
+      {bins.map(([range, color]) =>
+        <LegendEntry range={range} color={color} />
+      )}
+      <LegendEntry
+        range={'(no data)'}
+        color={Colors.GRAY}
+        style={{
+          marginTop: 10
+        }}
+      />
+    </div>
   </div>;
 
 export default Legend;

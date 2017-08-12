@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { style } from 'typestyle';
+import { style, media } from 'typestyle';
 import { connect } from 'react-redux';
 import { State, Dispatch, setUrbanFilter, UrbanicityFilter } from '../../store';
 import { Colors } from '../colors';
@@ -9,19 +9,28 @@ const controlClass = style({
   position: 'absolute',
   top: 110,
   left: TRACT_CONTROL_INDENT,
-  zIndex: 10
+  zIndex: 2
 });
 
-const buttonClass = style({
-  display: 'inline-block',
-  textTransform: 'uppercase',
-  width: 90,
-  textAlign: 'center',
-  cursor: 'pointer',
-  fontSize: 12,
-  height: '26px',
-  lineHeight: '26px'
-});
+const buttonClass = style(
+  {
+    display: 'inline-block',
+    textTransform: 'uppercase',
+    width: 90,
+    textAlign: 'center',
+    cursor: 'pointer',
+    fontSize: 12,
+    height: '26px',
+    lineHeight: '26px'
+  },
+  media(
+    { maxWidth: 768 },
+    {
+      fontSize: 10,
+      width: 70
+    }
+  )
+);
 
 type ControlProps = Readonly<{
   embed?: boolean;

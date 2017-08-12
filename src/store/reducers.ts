@@ -1,7 +1,15 @@
 import { combineReducers } from 'redux';
 import { Action, ActionType, UrbanicityFilter } from './actions';
 import { TooltipState } from './state';
-import { startZoom, startCenter } from './constants';
+import { startZoom, startCenter, mobileStartZoom } from './constants';
+
+const INITIAL_WINDOW_SIZE =
+  typeof window !== 'undefined' ? window.innerWidth : 0;
+
+const INITIAL_ZOOM =
+  INITIAL_WINDOW_SIZE <= 768
+    ? mobileStartZoom as [number]
+    : startZoom as [number];
 
 /**
  * combine reducers into state properties
@@ -15,7 +23,8 @@ export default combineReducers({
   mouse,
   showLegend,
   bounds,
-  urbanicityFilter
+  urbanicityFilter,
+  screenSize
 });
 
 /**
@@ -52,7 +61,7 @@ function center(
   }
 }
 
-function zoom(state: [number] = startZoom as [number], action: Action) {
+function zoom(state: [number] = INITIAL_ZOOM, action: Action) {
   switch (action.type) {
     case ActionType.SET_ZOOM: {
       return action.payload.zoom;
@@ -120,6 +129,17 @@ function urbanicityFilter(state = UrbanicityFilter.ALL, action: Action) {
   switch (action.type) {
     case ActionType.SET_URBAN_FILTER: {
       return action.payload;
+    }
+
+    default:
+      return state;
+  }
+}
+
+function screenSize(state = INITIAL_WINDOW_SIZE, action: Action) {
+  switch (action.type) {
+    case ActionType.SCREEN_RESIZE: {
+      return action.payload.size;
     }
 
     default:

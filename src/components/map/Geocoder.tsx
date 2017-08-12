@@ -23,6 +23,9 @@ const geocoderClass = style({
   top: 40,
   right: 'auto',
   $nest: {
+    '& .mapboxgl-ctrl-geocoder': {
+      zIndex: 3
+    },
     '& .mapboxgl-ctrl-geocoder input': {
       height: 35,
       padding: '7.5px 10px 7.5px 40px'

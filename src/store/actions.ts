@@ -1,6 +1,12 @@
 import { StateName, stateData } from '../data';
 import { ToolTipData } from './state';
-import { startZoom, startCenter, stateZoom } from './constants';
+import {
+  startZoom,
+  startCenter,
+  stateZoom,
+  mobileStartZoom
+} from './constants';
+import { State } from './state';
 
 export enum ActionType {
   SELECT_STATE = 'SELECT_STATE',
@@ -12,7 +18,8 @@ export enum ActionType {
   SHOW_LEGEND = 'SHOW_LEGEND',
   HIDE_LEGEND = 'HIDE_LEGEND',
   SET_BOUNDS = 'SET_BOUNDS',
-  SET_URBAN_FILTER = 'SET_URBAN_FILTER'
+  SET_URBAN_FILTER = 'SET_URBAN_FILTER',
+  SCREEN_RESIZE = 'SCREEN_RESIZE'
 }
 
 export type Action =
@@ -25,9 +32,12 @@ export type Action =
   | MouseMoveAction
   | ShowLegendAction
   | HideLegendAction
-  | SetUrbanFilterAction;
+  | SetUrbanFilterAction
+  | ScreenResizeAction;
 
-export type Dispatch = (action: Action | Dispatch) => void;
+export type Dispatch = (
+  action: Action | ((dispatch: Dispatch, getState: () => State) => void)
+) => void;
 
 type MouseMoveAction = {
   type: ActionType.MOUSE_MOVE;
@@ -48,20 +58,26 @@ type SelectStateAction = {
   payload: { name: StateName };
 };
 
-export const zoomToState = (name: StateName) => (dispatch: Dispatch) => {
+export const zoomToState = (name: StateName) => (
+  dispatch: Dispatch,
+  getState: () => State
+) => {
   if (name !== 'All states') {
     // const [lon1, lon2, lat1, lat2] = stateData[name].bounds;
     // dispatch(setBounds([[lat1, lon1], [lat2, lon2]]));
-    dispatch(setCenter(stateData[name].center as [number, number]));
+    dispatch(setCenter(stateData[name].center.slice() as [number, number]));
     dispatch(setZoomLevel(stateZoom.slice() as [number]));
   } else {
-    dispatch(setCenter(startCenter as [number, number]));
-    dispatch(setZoomLevel(startZoom as [number]));
+    const { screenSize } = getState();
+    const mobile = screenSize <= 768;
+    dispatch(setCenter(startCenter.slice() as [number, number]));
+    dispatch(setZoomLevel((mobile ? mobileStartZoom : startZoom) as [number]));
   }
 };
 
 export const setSelectedState = (name: StateName) => (dispatch: Dispatch) => {
   dispatch(zoomToState(name));
+  dispatch(hideTooltip());
   dispatch(
     {
       type: ActionType.SELECT_STATE,
@@ -168,3 +184,19 @@ export const setUrbanFilter = (filter: UrbanicityFilter) =>
     type: ActionType.SET_URBAN_FILTER,
     payload: filter
   } as SetUrbanFilterAction);
+
+export type ScreenResizeAction = {
+  type: ActionType.SCREEN_RESIZE;
+  payload: {
+    size: number;
+  };
+};
+
+export const setScreenSize = (size: number) => {
+  return {
+    type: ActionType.SCREEN_RESIZE,
+    payload: {
+      size
+    }
+  } as ScreenResizeAction;
+};

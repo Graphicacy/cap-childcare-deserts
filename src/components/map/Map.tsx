@@ -34,7 +34,6 @@ import { FeatureQueryResult } from './FeatureQuery';
 
 const MapBoxMap = ReactMapboxGl({
   accessToken,
-  minZoom: 3,
   dragRotate: false,
   logoPosition: 'top-left'
 });
@@ -67,6 +66,7 @@ type MapProps = Readonly<{
   center: [number, number] | null;
   bounds: number[][] | null;
   tractMode: boolean;
+  mobile: boolean;
   onMouseMove(feature?: FeatureQueryResult): void;
   onClick(feature?: FeatureQueryResult): void;
 }>;
@@ -76,7 +76,7 @@ const Map = (props: MapProps) =>
     <MapBoxMap
       style={mapboxStyle}
       containerStyle={{
-        height: props.embed ? '100vh' : 475,
+        height: props.embed ? '100vh' : props.mobile ? 300 : 475,
         width: '100vw',
         marginTop: props.embed ? 0 : headerHeight
       }}
@@ -94,7 +94,16 @@ const Map = (props: MapProps) =>
         selectedState={props.selectedState}
         tractMode={props.tractMode}
       />
-      {props.tractMode ? null : <Legend />}
+      {props.mobile || props.tractMode
+        ? null
+        : <Legend
+            style={{
+              position: 'absolute',
+              bottom: 100,
+              right: TRACT_CONTROL_INDENT,
+              width: 150
+            }}
+          />}
       {props.tractMode ? <ZoomControl style={zoomStyles} /> : null}
       {props.tractMode ? <Controls /> : null}
       {props.tractMode ? <TractLegend /> : null}
@@ -105,10 +114,14 @@ const Map = (props: MapProps) =>
           <StateSelect above />
         </div>
       : null}
+    {props.mobile ? <Legend style={{ margin: '0 auto', width: 300 }} /> : null}
   </div>;
 
 const mapStateToProps = (state: State) => {
+  const mobile = state.screenSize <= 768;
+
   return {
+    mobile,
     selectedState: state.selectedState,
     embed: state.embed,
     zoom: state.zoom,
