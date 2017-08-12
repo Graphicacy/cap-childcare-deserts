@@ -19,7 +19,7 @@ const legendClass = style({
   lineHeight: '1em',
   display: 'block',
   position: 'absolute',
-  top: 87,
+  bottom: 100,
   right: TRACT_CONTROL_INDENT,
   zIndex: 3
 });
@@ -39,7 +39,7 @@ const legendBinClass = style({
   marginLeft: 10,
   position: 'relative',
   top: '50%',
-  transform: 'translateY(-80%)',
+  transform: 'translateY(-130%)',
   display: 'inline-block'
 });
 
