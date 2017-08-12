@@ -5,7 +5,7 @@ export const Logo = () =>
     version="1.1"
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"
-    width="350px"
+    width="300px"
     x="0px"
     y="0px"
     viewBox="0 0 572.3 100.2"

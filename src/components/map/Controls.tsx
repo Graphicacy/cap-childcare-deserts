@@ -17,10 +17,10 @@ const buttonClass = style({
   textTransform: 'uppercase',
   width: 90,
   textAlign: 'center',
-  paddingTop: 7,
-  paddingBottom: 7,
   cursor: 'pointer',
-  fontSize: 14
+  fontSize: 12,
+  height: '26px',
+  lineHeight: '26px'
 });
 
 type ControlProps = Readonly<{
