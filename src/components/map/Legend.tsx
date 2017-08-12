@@ -1,6 +1,7 @@
 import { createElement } from 'react';
 import { style } from 'typestyle';
 import { Colors } from '../colors';
+import { TRACT_CONTROL_INDENT } from './constants';
 
 const bins = [
   ['60%+', '#932506'],
@@ -15,7 +16,12 @@ const legendClass = style({
   width: 150,
   padding: 15,
   borderRadius: 5,
-  lineHeight: '1em'
+  lineHeight: '1em',
+  display: 'block',
+  position: 'absolute',
+  top: 87,
+  right: TRACT_CONTROL_INDENT,
+  zIndex: 3
 });
 
 const legendItemClass = style({
@@ -43,9 +49,7 @@ const legendTitleClass = style({
   marginBottom: 10
 });
 
-type LegendProps = {
-  style?: React.CSSProperties;
-};
+type LegendProps = {};
 
 type LegendEntryProps = {
   color: string;
@@ -67,7 +71,7 @@ const LegendEntry = ({ color, range, style }: LegendEntryProps) =>
   </div>;
 
 const Legend = (props: LegendProps) =>
-  <div className={legendClass} style={props.style}>
+  <div className={legendClass}>
     <div className={legendTitleClass}>
       Percent living in a child care desert{' '}
     </div>

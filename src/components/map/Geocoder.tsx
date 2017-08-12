@@ -10,7 +10,7 @@ import { accessToken, TRACT_CONTROL_INDENT } from './constants';
 
 type GeocoderProps = Readonly<{
   style?: React.CSSProperties;
-  onResult(result: FeatureQueryResult | void): void;
+  onResult?(result: FeatureQueryResult | void): void;
 }>;
 
 type GeocoderState = Readonly<{
@@ -60,7 +60,7 @@ export default class sGeocoder extends FeatureQuery<
       .on('error', console.error)
       .on('result', (e: GeocoderResultEvent) => {
         const center = e.result.center.toString();
-        if (cache === center)
+        if (cache === center && onResult)
           map.once('moveend', () => {
             const point = map.project(e.result.center);
             onResult(this.queryFeatures(point));

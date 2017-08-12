@@ -44,42 +44,21 @@ const mapContainerClass = style({
   zIndex: 1
 });
 
-const fadeClass = style({
-  position: 'absolute',
-  display: 'block',
-  zIndex: 2,
-  bottom: 0,
-  height: 100,
-  marginTop: -100,
-  width: '100vw'
-});
-
 const selectWidth = 250;
 
 const stateSelectClass = style({
   position: 'absolute',
-  bottom: 20,
+  bottom: 40,
   width: selectWidth,
   left: '50%',
   marginLeft: -(selectWidth / 2)
 });
 
-const zoomStyles = (embed: boolean) => {
-  return {
-    left: TRACT_CONTROL_INDENT,
-    top: 30,
-    right: 'auto'
-  };
+const zoomStyles = {
+  left: TRACT_CONTROL_INDENT,
+  top: 30,
+  right: 'auto'
 };
-
-const legendStyles = (embed: boolean, stateMode: boolean) =>
-  ({
-    display: stateMode ? 'block' : 'none',
-    position: 'absolute',
-    top: embed ? 10 : 87,
-    right: TRACT_CONTROL_INDENT,
-    zIndex: 3
-  } as React.CSSProperties);
 
 type MapProps = Readonly<{
   selectedState: StateName;
@@ -90,7 +69,6 @@ type MapProps = Readonly<{
   tractMode: boolean;
   onMouseMove(feature?: FeatureQueryResult): void;
   onClick(feature?: FeatureQueryResult): void;
-  onResult(feature?: FeatureQueryResult): void;
 }>;
 
 const Map = (props: MapProps) =>
@@ -107,30 +85,26 @@ const Map = (props: MapProps) =>
       zoom={props.zoom}
       center={props.center}
     >
-      {!props.tractMode
-        ? null
-        : <ZoomControl style={zoomStyles(props.embed)} />}
-      {!props.tractMode
-        ? null
-        : <Geocoder tractMode={props.tractMode} onResult={props.onResult} />}
       <Mouse
         tractMode={props.tractMode}
         onMouseMove={props.onMouseMove}
         onClick={props.onClick}
       />
-      <Legend style={legendStyles(props.embed, !props.tractMode)} />
       <LayerToggle
         selectedState={props.selectedState}
         tractMode={props.tractMode}
       />
+      {props.tractMode ? null : <Legend />}
+      {props.tractMode ? <ZoomControl style={zoomStyles} /> : null}
       {props.tractMode ? <Controls /> : null}
       {props.tractMode ? <TractLegend /> : null}
+      {props.tractMode ? <Geocoder tractMode={props.tractMode} /> : null}
     </MapBoxMap>
     {props.embed
       ? <div className={stateSelectClass}>
           <StateSelect above />
         </div>
-      : null /* <div className={`fade-out ${fadeClass}`} /> */}
+      : null}
   </div>;
 
 const mapStateToProps = (state: State) => {
@@ -175,23 +149,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       if (!(state in stateData)) return;
       dispatch(setSelectedState(state));
     }
-  },
-  onResult(feature?: FeatureQueryResult) {
-    console.log(feature);
   }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);
-
-cssRaw(`${''
-/**
- * gradient above banner
- */
-}
-.fade-out {
-  background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-}
-`);
