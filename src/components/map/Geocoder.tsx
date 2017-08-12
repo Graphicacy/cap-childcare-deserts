@@ -3,20 +3,35 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { createElement, Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import { style } from 'typestyle';
 
 import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
-
-import { accessToken } from './constants';
+import { accessToken, TRACT_CONTROL_INDENT } from './constants';
 
 type GeocoderProps = Readonly<{
   style?: React.CSSProperties;
-  className?: string;
   onResult(result: FeatureQueryResult | void): void;
 }>;
 
 type GeocoderState = Readonly<{
   selection?: GeocoderResultEvent;
 }>;
+
+const geocoderClass = style({
+  position: 'absolute',
+  left: TRACT_CONTROL_INDENT + 40,
+  top: 40,
+  right: 'auto',
+  $nest: {
+    '& .mapboxgl-ctrl-geocoder input': {
+      height: 35,
+      padding: '7.5px 10px 7.5px 40px'
+    },
+    '& .mapboxgl-ctrl-geocoder .geocoder-icon-search': {
+      top: '7.5px'
+    }
+  }
+});
 
 export default class sGeocoder extends FeatureQuery<
   GeocoderProps,
@@ -55,8 +70,8 @@ export default class sGeocoder extends FeatureQuery<
   }
 
   render() {
-    const { className, style } = this.props;
-    return <div className={className} style={style} />;
+    const { style } = this.props;
+    return <div className={geocoderClass} style={style} />;
   }
 }
 

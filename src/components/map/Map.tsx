@@ -64,14 +64,6 @@ const stateSelectClass = style({
   marginLeft: -(selectWidth / 2)
 });
 
-const geocoderStyles = (embed: boolean) =>
-  ({
-    position: 'absolute',
-    left: TRACT_CONTROL_INDENT + 40,
-    top: 37,
-    right: 'auto'
-  } as React.CSSProperties);
-
 const zoomStyles = (embed: boolean) => {
   return {
     left: TRACT_CONTROL_INDENT,
@@ -120,11 +112,7 @@ const Map = (props: MapProps) =>
         : <ZoomControl style={zoomStyles(props.embed)} />}
       {!props.tractMode
         ? null
-        : <Geocoder
-            tractMode={props.tractMode}
-            style={geocoderStyles(props.embed)}
-            onResult={props.onResult}
-          />}
+        : <Geocoder tractMode={props.tractMode} onResult={props.onResult} />}
       <Mouse
         tractMode={props.tractMode}
         onMouseMove={props.onMouseMove}
