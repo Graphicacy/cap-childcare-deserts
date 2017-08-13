@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import { style } from 'typestyle';
+import { style, media } from 'typestyle';
 import { content, flex } from 'csstips';
 
 import Title from './Title';
@@ -23,10 +23,19 @@ const articleClass = style(content, {
   }
 });
 
-const articleContainerClass = style(flex, {
-  padding: 60,
-  paddingTop: 0
-});
+const articleContainerClass = style(
+  flex,
+  {
+    padding: 60,
+    paddingTop: 0
+  },
+  media(
+    { maxWidth: 768 },
+    {
+      padding: 30
+    }
+  )
+);
 
 const stateBarChartClass = style(content, {
   maxWidth: 600,

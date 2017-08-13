@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { style } from 'typestyle';
+import { style, media } from 'typestyle';
 import { fillParent, vertical, content, height, flex } from 'csstips';
 import Header from './Header';
 import Banner from './Banner';
