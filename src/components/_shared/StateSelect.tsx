@@ -11,7 +11,7 @@ const selectClass = style({
   display: 'block',
   margin: '0 auto',
   textAlignLast: 'center',
-  backgroundColor: Colors.SELECT_BAKGROUND,
+  background: Colors.SELECT_BAKGROUND,
   border: 'none',
   cursor: 'pointer',
   fontSize: 14,
