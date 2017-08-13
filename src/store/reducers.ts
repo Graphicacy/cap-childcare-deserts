@@ -22,7 +22,8 @@ export default combineReducers({
   showLegend,
   bounds,
   urbanicityFilter,
-  mobile
+  mobile,
+  mapReady
 });
 
 /**
@@ -138,6 +139,17 @@ function mobile(state = INITIAL_WINDOW_SIZE, action: Action) {
   switch (action.type) {
     case ActionType.SCREEN_RESIZE: {
       return action.payload.mobile;
+    }
+
+    default:
+      return state;
+  }
+}
+
+function mapReady(state = false, action: Action) {
+  switch (action.type) {
+    case ActionType.MAP_READY: {
+      return true;
     }
 
     default:

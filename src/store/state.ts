@@ -5,6 +5,7 @@ import { UrbanicityFilter } from './actions';
  */
 export type State = Readonly<{
   selectedState: StateName;
+  mapReady: boolean;
   embed: boolean;
   zoom: [number];
   center: [number, number];

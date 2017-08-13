@@ -1,11 +1,13 @@
 import { createElement, Component } from 'react';
 import { connect } from 'react-redux';
+
 import {
   Map as ReactMapboxGl,
   Layer,
   ZoomControl,
   Source
 } from 'react-mapbox-gl';
+
 import { Map as MapboxMap } from 'mapbox-gl';
 import { style, media } from 'typestyle';
 
@@ -18,7 +20,8 @@ import {
   setSelectedState,
   showTooltip,
   hideTooltip,
-  TractProperties
+  TractProperties,
+  mapReady
 } from '../../store';
 
 import { headerHeight } from '../layout/Header';
@@ -29,6 +32,7 @@ import Legend from './Legend';
 import Mouse from './Mouse';
 import LayerToggle from './LayerToggle';
 import TractLegend from './TractLegend';
+import Loading from './Loading';
 import { accessToken, mapboxStyle, TRACT_CONTROL_INDENT } from './constants';
 import { FeatureQueryResult } from './FeatureQuery';
 
@@ -72,6 +76,21 @@ const mobileLegendStyles: React.CSSProperties = {
   width: 300
 };
 
+const loadingContainerClass = style({
+  position: 'absolute',
+  top: 0,
+  width: '100%',
+  zIndex: 10,
+  backgroundColor: 'white',
+  marginTop: headerHeight
+});
+
+const embededLoadingClass = style({
+  width: '100vw',
+  height: '100vh',
+  marginTop: 0
+});
+
 const mapClass = style(
   {
     height: 475
@@ -105,12 +124,19 @@ type MapProps = Readonly<{
   bounds: number[][] | null;
   tractMode: boolean;
   mobile: boolean;
+  loaded: boolean;
   onMouseMove(feature?: FeatureQueryResult): void;
   onClick(feature?: FeatureQueryResult): void;
+  onReady(): void;
 }>;
 
 const Map = (props: MapProps) =>
   <div className={mapContainerClass}>
+    {props.loaded
+      ? null
+      : <div className={loadingContainerClass + ' ' + mapClass}>
+          <Loading />
+        </div>}
     <MapBoxMap
       style={mapboxStyle}
       containerStyle={getMapStyles(props)}
@@ -119,8 +145,11 @@ const Map = (props: MapProps) =>
       zoom={props.zoom}
       center={props.center}
       className={mapClass}
-      // hack for https://github.com/alex3165/react-mapbox-gl/issues/130
-      onStyleLoad={(map: MapboxMap) => map.resize()}
+      onStyleLoad={(map: MapboxMap) => {
+        // hack for https://github.com/alex3165/react-mapbox-gl/issues/130
+        map.resize();
+        props.onReady();
+      }}
     >
       <Mouse
         tractMode={props.tractMode}
@@ -142,10 +171,16 @@ const Map = (props: MapProps) =>
     </MapBoxMap>
     {props.embed ? <StateSelect above className={stateSelectClass} /> : null}
     {props.mobile ? <Legend style={mobileLegendStyles} /> : null}
+    {props.embed && !props.loaded
+      ? <div className={loadingContainerClass + ' ' + embededLoadingClass}>
+          <Loading />
+        </div>
+      : null}
   </div>;
 
 const mapStateToProps = (state: State) => {
   return {
+    loaded: state.mapReady,
     mobile: state.mobile,
     selectedState: state.selectedState,
     embed: state.embed,
@@ -187,6 +222,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       if (!(state in stateData)) return;
       dispatch(setSelectedState(state));
     }
+  },
+  onReady() {
+    dispatch(mapReady());
   }
 });
 

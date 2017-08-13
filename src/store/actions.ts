@@ -19,7 +19,8 @@ export enum ActionType {
   HIDE_LEGEND = 'HIDE_LEGEND',
   SET_BOUNDS = 'SET_BOUNDS',
   SET_URBAN_FILTER = 'SET_URBAN_FILTER',
-  SCREEN_RESIZE = 'SCREEN_RESIZE'
+  SCREEN_RESIZE = 'SCREEN_RESIZE',
+  MAP_READY = 'MAP_READY'
 }
 
 export type Action =
@@ -33,7 +34,8 @@ export type Action =
   | ShowLegendAction
   | HideLegendAction
   | SetUrbanFilterAction
-  | ScreenResizeAction;
+  | ScreenResizeAction
+  | MapReadyAction;
 
 export type Dispatch = (
   action: Action | ((dispatch: Dispatch, getState: () => State) => void)
@@ -201,3 +203,10 @@ export const setScreenSize = (mobile: boolean) => {
     }
   } as ScreenResizeAction;
 };
+
+type MapReadyAction = {
+  type: ActionType.MAP_READY;
+};
+
+export const mapReady = () =>
+  ({ type: ActionType.MAP_READY } as MapReadyAction);
