@@ -53,7 +53,6 @@ class LayerToggle extends Component<LayerToggleProps> {
     const toggle = enable ? 'enable' : 'disable';
 
     const methods: MapInteraction[] = [
-      'scrollZoom',
       'boxZoom',
       'dragRotate',
       'dragPan',
