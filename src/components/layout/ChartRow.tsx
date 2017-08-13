@@ -12,7 +12,7 @@ import { EthnicityChart, IncomeChart, UrbanicityChart } from '../charts/';
  */
 const responsiveRowClass = style(
   flex,
-  { padding: 40, maxWidth: 1200, margin: '0 auto' },
+  { padding: 40, paddingTop: 0, maxWidth: 1200, margin: '0 auto' },
   media({ minWidth: 780 }, horizontal),
   media({ maxWidth: 780 }, vertical, {
     $nest: {

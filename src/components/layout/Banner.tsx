@@ -13,7 +13,8 @@ import { percent } from '../charts/format';
 
 const bannerContainerClass = style(content, {
   padding: 40,
-  paddingTop: 20
+  paddingTop: 20,
+  paddingBottom: 35
 });
 
 const bannerClassName = style({
