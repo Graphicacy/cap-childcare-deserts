@@ -68,10 +68,11 @@ export const zoomToState = (name: StateName) => (
     dispatch(setCenter(stateData[name].center.slice() as [number, number]));
     dispatch(setZoomLevel(stateZoom.slice() as [number]));
   } else {
-    const { screenSize } = getState();
-    const mobile = screenSize <= 768;
+    const { mobile } = getState();
     dispatch(setCenter(startCenter.slice() as [number, number]));
-    dispatch(setZoomLevel((mobile ? mobileStartZoom : startZoom) as [number]));
+    dispatch(
+      setZoomLevel((mobile ? mobileStartZoom : startZoom).slice() as [number])
+    );
   }
 };
 
@@ -188,15 +189,15 @@ export const setUrbanFilter = (filter: UrbanicityFilter) =>
 export type ScreenResizeAction = {
   type: ActionType.SCREEN_RESIZE;
   payload: {
-    size: number;
+    mobile: boolean;
   };
 };
 
-export const setScreenSize = (size: number) => {
+export const setScreenSize = (mobile: boolean) => {
   return {
     type: ActionType.SCREEN_RESIZE,
     payload: {
-      size
+      mobile
     }
   } as ScreenResizeAction;
 };

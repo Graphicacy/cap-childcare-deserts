@@ -4,7 +4,8 @@ import {
   ActionType,
   setSelectedState,
   Dispatch,
-  setScreenSize
+  setScreenSize,
+  setZoomLevel
 } from './actions';
 import { startZoom, mobileStartZoom } from './constants';
 import { State } from './state';
@@ -38,16 +39,20 @@ export function initStore() {
     composeEnhancers(applyMiddleware(...middleware))
   );
 
+  let resizeTimeout: any;
   window.addEventListener('resize', () => {
-    const size = window.innerWidth;
-    const mobile = size <= 768;
-    const { selectedState, screenSize } = store.getState() as State;
-    const previouslyMobile = screenSize <= 768;
-
-    store.dispatch(setScreenSize(size));
-    if (selectedState === 'All states' && previouslyMobile !== mobile) {
+    // debounce
+    clearInterval(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const size = window.innerWidth;
+      const mobile = size <= 768;
+      const {
+        selectedState,
+        mobile: previouslyMobile
+      } = store.getState() as State;
+      store.dispatch(setScreenSize(mobile));
       store.dispatch(setSelectedState(selectedState));
-    }
+    }, 500);
   });
 
   return store;

@@ -3,13 +3,11 @@ import { Action, ActionType, UrbanicityFilter } from './actions';
 import { TooltipState } from './state';
 import { startZoom, startCenter, mobileStartZoom } from './constants';
 
-const INITIAL_WINDOW_SIZE =
-  typeof window !== 'undefined' ? window.innerWidth : 0;
+const INITIAL_WINDOW_SIZE = window.innerWidth <= 768;
 
-const INITIAL_ZOOM =
-  INITIAL_WINDOW_SIZE <= 768
-    ? mobileStartZoom as [number]
-    : startZoom as [number];
+const INITIAL_ZOOM = INITIAL_WINDOW_SIZE
+  ? mobileStartZoom as [number]
+  : startZoom as [number];
 
 /**
  * combine reducers into state properties
@@ -24,7 +22,7 @@ export default combineReducers({
   showLegend,
   bounds,
   urbanicityFilter,
-  screenSize
+  mobile
 });
 
 /**
@@ -136,10 +134,10 @@ function urbanicityFilter(state = UrbanicityFilter.ALL, action: Action) {
   }
 }
 
-function screenSize(state = INITIAL_WINDOW_SIZE, action: Action) {
+function mobile(state = INITIAL_WINDOW_SIZE, action: Action) {
   switch (action.type) {
     case ActionType.SCREEN_RESIZE: {
-      return action.payload.size;
+      return action.payload.mobile;
     }
 
     default:

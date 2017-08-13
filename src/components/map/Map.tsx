@@ -59,6 +59,24 @@ const zoomStyles = {
   right: 'auto'
 };
 
+const desktopLegendStyles: React.CSSProperties = {
+  position: 'absolute',
+  bottom: 100,
+  right: TRACT_CONTROL_INDENT,
+  width: 150
+};
+
+const mobileLegendStyles: React.CSSProperties = {
+  margin: '0 auto',
+  width: 300
+};
+
+const getMapStyles = (props: MapProps) => ({
+  height: props.embed ? '100vh' : 475,
+  width: '100vw',
+  marginTop: props.embed ? 0 : headerHeight
+});
+
 type MapProps = Readonly<{
   selectedState: StateName;
   embed: boolean;
@@ -75,11 +93,7 @@ const Map = (props: MapProps) =>
   <div className={mapContainerClass}>
     <MapBoxMap
       style={mapboxStyle}
-      containerStyle={{
-        height: props.embed ? '100vh' : props.mobile ? 300 : 475,
-        width: '100vw',
-        marginTop: props.embed ? 0 : headerHeight
-      }}
+      containerStyle={getMapStyles(props)}
       scrollZoom={props.tractMode}
       dragPan={props.tractMode}
       zoom={props.zoom}
@@ -94,34 +108,22 @@ const Map = (props: MapProps) =>
         selectedState={props.selectedState}
         tractMode={props.tractMode}
       />
-      {props.mobile || props.tractMode
-        ? null
-        : <Legend
-            style={{
-              position: 'absolute',
-              bottom: 100,
-              right: TRACT_CONTROL_INDENT,
-              width: 150
-            }}
-          />}
-      {props.tractMode ? <ZoomControl style={zoomStyles} /> : null}
-      {props.tractMode ? <Controls /> : null}
-      {props.tractMode ? <TractLegend /> : null}
-      {props.tractMode ? <Geocoder tractMode={props.tractMode} /> : null}
+      {props.tractMode
+        ? [
+            <Controls />,
+            <TractLegend />,
+            <ZoomControl style={zoomStyles} />,
+            <Geocoder tractMode={props.tractMode} />
+          ]
+        : [!props.mobile && <Legend style={desktopLegendStyles} />]}
     </MapBoxMap>
-    {props.embed
-      ? <div className={stateSelectClass}>
-          <StateSelect above />
-        </div>
-      : null}
-    {props.mobile ? <Legend style={{ margin: '0 auto', width: 300 }} /> : null}
+    {props.embed ? <StateSelect above className={stateSelectClass} /> : null}
+    {props.mobile ? <Legend style={mobileLegendStyles} /> : null}
   </div>;
 
 const mapStateToProps = (state: State) => {
-  const mobile = state.screenSize <= 768;
-
   return {
-    mobile,
+    mobile: state.mobile,
     selectedState: state.selectedState,
     embed: state.embed,
     zoom: state.zoom,

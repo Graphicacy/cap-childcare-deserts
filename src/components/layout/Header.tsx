@@ -43,7 +43,7 @@ const anchorClass = style(
     },
     textDecoration: 'none'
   },
-  media({ maxWidth: 772 }, { display: 'none' })
+  media({ maxWidth: 835 }, { display: 'none' })
 );
 
 const socialClass = style({

@@ -12,7 +12,7 @@ export type State = Readonly<{
   tooltip: TooltipState;
   showLegend: boolean;
   urbanicityFilter: UrbanicityFilter;
-  screenSize: number;
+  mobile: boolean;
   mouse: {
     x: number;
     y: number;

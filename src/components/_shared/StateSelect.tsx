@@ -25,20 +25,24 @@ const options = stateList.map(s => ({ label: s, value: s }));
 
 type StateSelectProps = Readonly<{
   above?: boolean;
+  className?: string;
   selectedState: StateName;
   onSelectState: (o: Select.Option<StateName>) => void;
 }>;
 
 const StateSelect = (props: StateSelectProps) =>
   <Select
-    className={selectClass + ' select-up'}
+    className={selectClass + ' select-up ' + (props.className || '')}
     clearable={false}
     value={props.selectedState}
     options={options}
     onChange={props.onSelectState}
   />;
 
-const mapStatesToProps = (state: State, ownProps: { above?: boolean }) => ({
+const mapStatesToProps = (
+  state: State,
+  ownProps: { above?: boolean; className?: string }
+) => ({
   selectedState: state.selectedState,
   ...ownProps
 });
