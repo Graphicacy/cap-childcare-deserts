@@ -44,7 +44,7 @@ const IncomeChart = ({
           n={data(selectedState).percentInDesertsBlack}
           title={
             <span>
-              {' '}BELOW AVG.<br /> INCOME{' '}
+              {' '}Below Avg.<br /> Income{' '}
             </span>
           }
         />
@@ -56,7 +56,7 @@ const IncomeChart = ({
           n={data(selectedState).percentInDesertsWhite}
           title={
             <span>
-              {' '}ABOVE AVG.<br /> INCOME{' '}
+              {' '}Above Avg.<br /> Income{' '}
             </span>
           }
         />

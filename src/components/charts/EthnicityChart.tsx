@@ -29,7 +29,7 @@ const EthnicityChart = ({
           onMouseOver={onMouseOver}
           onMouseOut={onMouseOut}
           n={data(selectedState).percentInDesertsWhite}
-          title="WHITE"
+          title="White"
         />
       </div>
       <div className={style(flex)}>
@@ -37,7 +37,7 @@ const EthnicityChart = ({
           onMouseOver={onMouseOver}
           onMouseOut={onMouseOut}
           n={data(selectedState).percentInDesertsBlack}
-          title="BLACK"
+          title="Black"
         />
       </div>
       <div className={style(flex)}>
@@ -45,7 +45,7 @@ const EthnicityChart = ({
           onMouseOver={onMouseOver}
           onMouseOut={onMouseOut}
           n={data(selectedState).percentInDesertsHispanic}
-          title="HISPANIC"
+          title="Hispanic"
         />
       </div>
     </div>

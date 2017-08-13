@@ -36,6 +36,9 @@ const strokeStyle = {
   }
 };
 
+const labelStyles = { fontFamily: 'Open Sans' };
+const tickStyles = { tickLabels: labelStyles };
+
 const UrbanicityChart = (props: UrbanicityChartProps) =>
   <ChartContainer title="Children in a child care desert, by ubanicity">
     <VictoryChart
@@ -52,7 +55,9 @@ const UrbanicityChart = (props: UrbanicityChartProps) =>
         horizontal
         colorScale={colorScale}
         labels={datum => datum.type}
-        labelComponent={<VictoryLabel x={90} textAnchor="end" />}
+        labelComponent={
+          <VictoryLabel style={labelStyles} x={90} textAnchor="end" />
+        }
       >
         <VictoryBar
           x="type"
@@ -75,7 +80,7 @@ const UrbanicityChart = (props: UrbanicityChartProps) =>
           data={getData(props.selectedState).desert}
         />
       </VictoryStack>
-      <VictoryAxis tickFormat={niceNumber} tickCount={4} />
+      <VictoryAxis style={tickStyles} tickFormat={niceNumber} tickCount={3} />
     </VictoryChart>
   </ChartContainer>;
 
@@ -116,30 +121,30 @@ function getData(name: StateName) {
 
   const desert = [
     {
-      type: 'RURAL',
+      type: 'Rural',
       value: data.chidrenUnder5InDesertsRural
     },
     {
-      type: 'SUBURBAN',
+      type: 'Suburban',
       value: data.childrenUnder5InDesertsSuburban
     },
     {
-      type: 'URBAN',
+      type: 'Urban',
       value: data.childrenUnder5InDesertsUrban
     }
   ];
 
   const nonDesert = [
     {
-      type: 'RURAL',
+      type: 'Rural',
       value: data.childrenUnder5NotInDesertsRural
     },
     {
-      type: 'SUBURBAN',
+      type: 'Suburban',
       value: data.childrenUnder5NotInDesertsSuburban
     },
     {
-      type: 'URBAN',
+      type: 'Urban',
       value: data.childrenUnder5NotInDesertsUrban
     }
   ];

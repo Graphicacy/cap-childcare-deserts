@@ -17,6 +17,10 @@ const donutTitleClass = style({
   width: '100%'
 });
 
+const percentClass = style({
+  fontFamily: 'Open Sans'
+});
+
 export type DonutProps = Readonly<{
   n: number;
   size?: number;
@@ -71,7 +75,13 @@ const Donut = ({
         }
         standalone={false}
       />
-      <text x="50%" y="50%" alignmentBaseline="middle" textAnchor="middle">
+      <text
+        className={percentClass}
+        x="50%"
+        y="50%"
+        alignmentBaseline="middle"
+        textAnchor="middle"
+      >
         {percent(n)}
       </text>
     </svg>
