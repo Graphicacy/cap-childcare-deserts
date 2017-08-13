@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import { style, cssRaw } from 'typestyle';
+import { style } from 'typestyle';
 import { Dispatch, State, setSelectedState } from '../../store';
 import { stateList, StateName, stateData } from '../../data';
 import { Colors } from '../colors';
