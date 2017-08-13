@@ -7,7 +7,7 @@ import {
   Source
 } from 'react-mapbox-gl';
 import { Map as MapboxMap } from 'mapbox-gl';
-import { style, cssRaw } from 'typestyle';
+import { style, media } from 'typestyle';
 
 import { StateName, stateData } from '../../data';
 import {
@@ -71,11 +71,30 @@ const mobileLegendStyles: React.CSSProperties = {
   width: 300
 };
 
-const getMapStyles = (props: MapProps) => ({
-  height: props.embed ? '100vh' : 475,
-  width: '100vw',
-  marginTop: props.embed ? 0 : headerHeight
-});
+const mapClass = style(
+  {
+    height: 475
+  },
+  media(
+    { maxWidth: 768 },
+    {
+      height: 300
+    }
+  )
+);
+
+const getMapStyles = (props: MapProps) => {
+  const out: React.CSSProperties = {
+    width: '100vw',
+    marginTop: props.embed ? 0 : headerHeight
+  };
+
+  if (props.embed) {
+    out.height = '100vh';
+  }
+
+  return out;
+};
 
 type MapProps = Readonly<{
   selectedState: StateName;
@@ -98,6 +117,7 @@ const Map = (props: MapProps) =>
       dragPan={props.tractMode}
       zoom={props.zoom}
       center={props.center}
+      className={mapClass}
     >
       <Mouse
         tractMode={props.tractMode}
