@@ -7,6 +7,8 @@ import Title from './Title';
 import { StateBarChart } from '../charts/';
 import { StateName } from '../../data';
 import { State } from '../../store/';
+import { Info } from './Icons';
+import { Colors } from '../colors';
 
 const ARTICLE_MAX_WIDTH = 750;
 
@@ -22,6 +24,22 @@ const articleClass = style(content, {
     }
   }
 });
+
+const anchorClass = style(
+  {
+    width: '100%',
+    display: 'block',
+    textAlign: 'center',
+    fontSize: '14px',
+    color: Colors.HEADER_GRAY
+  },
+  media(
+    { minWidth: 789 },
+    {
+      display: 'none'
+    }
+  )
+);
 
 const articleContainerClass = style(
   flex,
@@ -107,6 +125,9 @@ const Article = ({ selectedState }: ArticleProps) =>
         conet, sunt et faccatur si occati nimpore henihit pra anda volum eum sum
         ipis erectiat laniatem rentet fugiatiam dio veniend eliberia
       </p>
+      <a className={anchorClass} href="#" target="_blank">
+        download the report <Info />
+      </a>
     </div>
   </div>;
 
