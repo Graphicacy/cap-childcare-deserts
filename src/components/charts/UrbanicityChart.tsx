@@ -107,6 +107,13 @@ function createEvents(props: UrbanicityChartProps, inDesert: boolean): any {
   ];
 }
 
+function addWidth(x: { type: string; value: number }) {
+  return {
+    ...x,
+    width: 35
+  };
+}
+
 /**
  * memoized function to get state data
  *
@@ -132,7 +139,7 @@ function getData(name: StateName) {
       type: 'Urban',
       value: data.childrenUnder5InDesertsUrban
     }
-  ];
+  ].map(addWidth);
 
   const nonDesert = [
     {
@@ -147,7 +154,7 @@ function getData(name: StateName) {
       type: 'Urban',
       value: data.childrenUnder5NotInDesertsUrban
     }
-  ];
+  ].map(addWidth);
 
   const result = { nonDesert, desert };
 
