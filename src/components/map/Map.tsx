@@ -35,7 +35,8 @@ import { FeatureQueryResult } from './FeatureQuery';
 const MapBoxMap = ReactMapboxGl({
   accessToken,
   dragRotate: false,
-  logoPosition: 'top-left'
+  logoPosition: 'top-left',
+  scrollZoom: false
 });
 
 const mapContainerClass = style({
@@ -118,6 +119,8 @@ const Map = (props: MapProps) =>
       zoom={props.zoom}
       center={props.center}
       className={mapClass}
+      // hack for https://github.com/alex3165/react-mapbox-gl/issues/130
+      onStyleLoad={(map: MapboxMap) => map.resize()}
     >
       <Mouse
         tractMode={props.tractMode}
