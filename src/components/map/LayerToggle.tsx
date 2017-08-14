@@ -38,7 +38,6 @@ class LayerToggle extends Component<LayerToggleProps> {
 
   toggleTractUrbanicity(urbanicity: UrbanicityFilter) {
     const { map } = this.context;
-    console.log(urbanicity);
     tractLayers.forEach(layer => {
       map.setFilter(
         layer,
