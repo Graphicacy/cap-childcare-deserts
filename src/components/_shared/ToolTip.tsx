@@ -20,7 +20,8 @@ const toolTipClass = style({
   backgroundColor: Colors.INFO_BACKGROUND,
   padding: 15,
   border: '1px solid #ccc',
-  zIndex: 10
+  zIndex: 10,
+  fontFamily: 'Open Sans'
 });
 
 type ToolTipProps = Readonly<{
