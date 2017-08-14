@@ -30,6 +30,8 @@ type StateBarChartProps = Readonly<{
   onClick(state: StateName): void;
 }>;
 
+const tickStyles = { tickLabels: { fontFamily: 'Open Sans' } };
+
 const StateBarChart = ({
   selectedState,
   onClick,
@@ -77,8 +79,13 @@ const StateBarChart = ({
           ] as any // hack for typings
         }
       />
-      <VictoryAxis dependentAxis tickFormat={percent} tickCount={7} />
-      <VictoryAxis />
+      <VictoryAxis
+        style={tickStyles}
+        dependentAxis
+        tickFormat={percent}
+        tickCount={7}
+      />
+      <VictoryAxis style={tickStyles} />
     </VictoryChart>
   </ChartContainer>;
 

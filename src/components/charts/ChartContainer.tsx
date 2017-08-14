@@ -10,11 +10,13 @@ const barChartTitleClass = style({
   marginBottom: 20
 });
 
+const chartContainerClass = style(content);
+
 const ChartContainer: StatelessComponent<{ title: string }> = ({
   children,
   title
 }) =>
-  <div className={style(content)}>
+  <div className={chartContainerClass}>
     <div className={barChartTitleClass}>
       {title}
     </div>
