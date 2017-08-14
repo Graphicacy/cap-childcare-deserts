@@ -103,6 +103,7 @@ const TractTooltip = ({ properties }: TractToolTipData) =>
       Percent Hispanic: {percent(properties.per_latino)}
     </div>
   </div>;
+
 const ChartTooltip = ({ properties }: ChartToolTipData) =>
   <div>
     {properties.label}: <b>{properties.value}</b>

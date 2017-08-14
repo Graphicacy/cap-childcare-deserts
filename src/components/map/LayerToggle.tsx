@@ -2,10 +2,13 @@ import { createElement, Component } from 'react';
 import { Map } from 'mapbox-gl';
 import { stateModeLayers } from './constants';
 import { StateName } from '../../data';
+import { UrbanicityFilter } from '../../store';
+import { tractLayers } from './tracts';
 
 type LayerToggleProps = {
   tractMode: boolean;
   selectedState: StateName;
+  urbanicityFilter: UrbanicityFilter;
 };
 
 type MapInteraction =
@@ -26,10 +29,22 @@ class LayerToggle extends Component<LayerToggleProps> {
   }
 
   componentDidUpdate() {
-    const { tractMode, selectedState } = this.props;
+    const { tractMode, selectedState, urbanicityFilter } = this.props;
     this.toggleStateLayers(!tractMode);
     this.toggleInteraction(tractMode);
+    this.toggleTractUrbanicity(urbanicityFilter);
     this.toggleStateDots(selectedState === 'All states' ? '' : selectedState);
+  }
+
+  toggleTractUrbanicity(urbanicity: UrbanicityFilter) {
+    const { map } = this.context;
+    console.log(urbanicity);
+    tractLayers.forEach(layer => {
+      map.setFilter(
+        layer,
+        urbanicity === 'All' ? ['all'] : ['==', 'urbanicity', urbanicity]
+      );
+    });
   }
 
   toggleStateDots(state: StateName | '') {

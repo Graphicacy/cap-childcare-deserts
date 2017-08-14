@@ -171,10 +171,10 @@ export const setBounds = (bounds: number[][] | null) =>
   } as SetBoundsAction);
 
 export enum UrbanicityFilter {
-  ALL = 'ALL',
-  RURAL = 'RURAL',
-  SUBURBAN = 'SUBURBAN',
-  URBAN = 'URBAN'
+  ALL = 'All',
+  RURAL = 'Rural',
+  SUBURBAN = 'Suburban',
+  URBAN = 'Urban'
 }
 
 export type SetUrbanFilterAction = {

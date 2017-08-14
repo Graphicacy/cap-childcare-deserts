@@ -6,7 +6,8 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { style } from 'typestyle';
 
 import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
-import { accessToken, TRACT_CONTROL_INDENT } from './constants';
+import { accessToken } from './constants';
+import { TRACT_CONTROL_INDENT } from './tracts';
 
 type GeocoderProps = Readonly<{
   style?: React.CSSProperties;

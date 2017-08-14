@@ -21,7 +21,8 @@ import {
   showTooltip,
   hideTooltip,
   TractProperties,
-  mapReady
+  mapReady,
+  UrbanicityFilter
 } from '../../store';
 
 import { headerHeight } from '../layout/Header';
@@ -33,7 +34,8 @@ import Mouse from './Mouse';
 import LayerToggle from './LayerToggle';
 import TractLegend from './TractLegend';
 import Loading from './Loading';
-import { accessToken, mapboxStyle, TRACT_CONTROL_INDENT } from './constants';
+import { accessToken, mapboxStyle } from './constants';
+import { TRACT_CONTROL_INDENT } from './tracts';
 import { FeatureQueryResult } from './FeatureQuery';
 
 const MapBoxMap = ReactMapboxGl({
@@ -125,6 +127,7 @@ type MapProps = Readonly<{
   tractMode: boolean;
   mobile: boolean;
   loaded: boolean;
+  urbanicityFilter: UrbanicityFilter;
   onMouseMove(feature?: FeatureQueryResult): void;
   onClick(feature?: FeatureQueryResult): void;
   onReady(): void;
@@ -159,6 +162,7 @@ const Map = (props: MapProps) =>
       <LayerToggle
         selectedState={props.selectedState}
         tractMode={props.tractMode}
+        urbanicityFilter={props.urbanicityFilter}
       />
       {props.tractMode
         ? [
@@ -180,6 +184,7 @@ const Map = (props: MapProps) =>
 
 const mapStateToProps = (state: State) => {
   return {
+    urbanicityFilter: state.urbanicityFilter,
     loaded: state.mapReady,
     mobile: state.mobile,
     selectedState: state.selectedState,

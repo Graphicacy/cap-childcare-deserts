@@ -1,7 +1,7 @@
 import { createElement, Component } from 'react';
 import { MapMouseEvent } from 'mapbox-gl';
 import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
-import { tractLayers } from './constants';
+import { getTractLayerForState } from './tracts';
 
 type MouseProps = Readonly<{
   onMouseMove?(feature?: FeatureQueryResult | void): void;
@@ -49,12 +49,11 @@ class Mouse extends FeatureQuery<MouseProps> {
     map.setFilter('all-states-json-hover', ['==', 'id', stateId]);
   }
 
-  highlightTract(tractId = '') {
-    const { map } = this.context;
-    tractLayers.forEach(layer => {
-      map.setFilter(`${layer}-hover`, ['==', 'GEOID', tractId]);
-    });
-  }
+  // highlightTract(state: StateName, tractId = '') {
+  //   const { map } = this.context;
+  //   const layer = getTractLayerForState(state);
+  //   map.setFilter(`${layer}-hover`, ['==', 'GEOID', tractId]);
+  // }
 
   render() {
     return null;

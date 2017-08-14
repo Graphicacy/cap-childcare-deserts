@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { style } from 'typestyle';
 import { Colors } from '../colors';
-import { TRACT_CONTROL_INDENT } from './constants';
+import { TRACT_CONTROL_INDENT } from './tracts';
 
 const bins = [
   ['60%+', '#932506'],

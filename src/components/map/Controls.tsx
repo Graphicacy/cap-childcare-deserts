@@ -3,7 +3,7 @@ import { style, media } from 'typestyle';
 import { connect } from 'react-redux';
 import { State, Dispatch, setUrbanFilter, UrbanicityFilter } from '../../store';
 import { Colors } from '../colors';
-import { TRACT_CONTROL_INDENT } from './constants';
+import { TRACT_CONTROL_INDENT } from './tracts';
 
 const controlClass = style({
   position: 'absolute',
