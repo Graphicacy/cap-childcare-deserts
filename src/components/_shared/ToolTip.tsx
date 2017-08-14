@@ -21,7 +21,8 @@ const toolTipClass = style({
   padding: 15,
   border: '1px solid #ccc',
   zIndex: 10,
-  fontFamily: 'Open Sans'
+  fontFamily: 'Open Sans',
+  pointerEvents: 'none'
 });
 
 type ToolTipProps = Readonly<{
