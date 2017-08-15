@@ -34,7 +34,7 @@ import Mouse from './Mouse';
 import LayerToggle from './LayerToggle';
 import TractLegend from './TractLegend';
 import Loading from './Loading';
-import { accessToken, mapboxStyle } from './constants';
+import { accessToken, mapboxStyle, HoverSources } from './constants';
 import { TRACT_CONTROL_INDENT } from './tracts';
 import { FeatureQueryResult } from './FeatureQuery';
 
@@ -156,6 +156,7 @@ const Map = (props: MapProps) =>
     >
       <Mouse
         tractMode={props.tractMode}
+        selectedState={props.selectedState}
         onMouseMove={props.onMouseMove}
         onClick={props.onClick}
       />

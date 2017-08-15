@@ -7,3 +7,8 @@ export const stateModeLayers = [
   'allstates',
   'square'
 ];
+
+export enum HoverSources {
+  STATE = 'hover-states',
+  TRACT = 'hover-tracts'
+}

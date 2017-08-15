@@ -24,7 +24,9 @@ type FeatureQueryProps = {
   tractMode: boolean;
 };
 
-type FeatureLayer = GeoJSON.Feature<GeoJSON.GeometryObject> & { layer: Layer };
+export type FeatureLayer = GeoJSON.Feature<GeoJSON.GeometryObject> & {
+  layer: Layer;
+};
 
 export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
   FeatureQueryProps & P,
