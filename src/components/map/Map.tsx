@@ -134,13 +134,26 @@ type MapProps = Readonly<{
   onReady(): void;
 }>;
 
+const LoadingIndicator = ({
+  loaded,
+  embed
+}: {
+  loaded: boolean;
+  embed: boolean;
+}) =>
+  loaded
+    ? null
+    : <div
+        className={
+          loadingContainerClass + ' ' + (embed ? embededLoadingClass : mapClass)
+        }
+      >
+        <Loading />
+      </div>;
+
 const Map = (props: MapProps) =>
   <div className={mapContainerClass}>
-    {props.loaded
-      ? null
-      : <div className={loadingContainerClass + ' ' + mapClass}>
-          <Loading />
-        </div>}
+    <LoadingIndicator {...props} />
     <MapBoxMap
       style={mapboxStyle}
       containerStyle={getMapStyles(props)}
@@ -181,12 +194,7 @@ const Map = (props: MapProps) =>
         : [!props.mobile && <Legend style={desktopLegendStyles} />]}
     </MapBoxMap>
     {props.embed ? <StateSelect above className={stateSelectClass} /> : null}
-    {props.mobile ? <Legend style={mobileLegendStyles} /> : null}
-    {props.embed && !props.loaded
-      ? <div className={loadingContainerClass + ' ' + embededLoadingClass}>
-          <Loading />
-        </div>
-      : null}
+    {props.mobile ? <Legend horizontal style={mobileLegendStyles} /> : null}
   </div>;
 
 const mapStateToProps = (state: State) => {

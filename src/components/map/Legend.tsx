@@ -35,7 +35,6 @@ const legendBinClass = style({
   marginLeft: 10,
   position: 'relative',
   top: '50%',
-  transform: 'translateY(-130%)',
   display: 'inline-block'
 });
 
@@ -48,42 +47,70 @@ const legendTitleClass = style({
 
 type LegendProps = {
   style?: React.CSSProperties;
+  horizontal?: boolean;
 };
 
 type LegendEntryProps = {
   color: string;
   range: string;
+  horizontal?: boolean;
   style?: React.CSSProperties;
 };
 
-const LegendEntry = ({ color, range, style }: LegendEntryProps) =>
-  <div className={legendItemClass} style={style}>
+const LegendEntry = ({ color, range, style, horizontal }: LegendEntryProps) =>
+  <div
+    className={legendItemClass}
+    style={{
+      ...style,
+      display: horizontal ? 'inline-block' : 'block',
+      marginLeft: horizontal ? 10 : 0,
+      marginTop: horizontal ? 5 : 0
+    }}
+  >
     <span
       className={legendSquareClass}
       style={{
         backgroundColor: color
       }}
     />
-    <span className={legendBinClass}>
+    <span
+      className={legendBinClass}
+      style={{
+        transform: horizontal ? 'translateY(-100%)' : 'translateY(-130%)'
+      }}
+    >
       {range}{' '}
     </span>
   </div>;
 
 const Legend = (props: LegendProps) =>
-  <div className={legendClass} style={props.style}>
+  <div
+    className={legendClass}
+    style={{
+      ...props.style,
+      ...props.horizontal
+        ? {
+            width: '100%',
+            textAlign: 'center'
+          }
+        : {}
+    }}
+  >
     <div className={legendTitleClass}>
       Percent living in a child care desert{' '}
     </div>
     <div>
       {bins.map(([range, color]) =>
-        <LegendEntry range={range} color={color} />
+        <LegendEntry
+          range={range}
+          color={color}
+          horizontal={props.horizontal}
+        />
       )}
       <LegendEntry
         range={'(no data)'}
         color={Colors.GRAY}
-        style={{
-          marginTop: 10
-        }}
+        horizontal={props.horizontal}
       />
     </div>
   </div>;

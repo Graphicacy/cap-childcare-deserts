@@ -19,14 +19,7 @@ export * from './reducers';
 
 const middleware = [thunk];
 
-// if (__DEV__) {
-//   const { createLogger } = require('redux-logger');
-//   const logger = createLogger({ collapsed: true });
-//   middleware.push(logger);
-// }
-
 export function initStore() {
-  // TODO: put behind __DEV__ webpack flag
   const composeEnhancers =
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
