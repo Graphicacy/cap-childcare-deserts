@@ -25,7 +25,6 @@ const logoClass = style({
 });
 
 const textLinkClass = style({
-  textTransform: 'uppercase',
   float: 'right',
   marginTop: 10
 });
@@ -65,10 +64,10 @@ const Header = () =>
     </div>
     <div className={textLinkClass}>
       <a className={anchorClass} href="#" target="_blank">
-        download the report <Info />
+        Download the Report <Info />
       </a>
       <a className={anchorClass} href="#" target="_blank">
-        about the data <Info />
+        About the Data <Info />
       </a>
     </div>
   </div>;
