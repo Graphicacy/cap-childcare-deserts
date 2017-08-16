@@ -8,7 +8,7 @@ import { Logo } from './Logo';
 
 export const headerHeight = 64;
 
-const headerClass = style(content, {
+const headerClass = style({
   position: 'fixed',
   width: '100%',
   height: headerHeight,

@@ -13,6 +13,14 @@ const templateContent = `
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Childcare Deserts</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto+Slab:700" rel="stylesheet">
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+    </style>
   </head>
   <body><div id="root"></div></body>
 </html>
