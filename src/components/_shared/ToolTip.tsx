@@ -22,6 +22,7 @@ const toolTipClass = style({
   border: '1px solid #ccc',
   zIndex: 10,
   fontFamily: 'Open Sans',
+  fontSize: 14,
   pointerEvents: 'none'
 });
 

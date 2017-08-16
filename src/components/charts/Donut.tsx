@@ -54,8 +54,20 @@ const Donut = ({
           duration: 500
         }}
         data={[
-          { y: n, fill: Colors.ORANGE, stroke: 'white', strokeWidth: 2 },
-          { y: 1 - n, fill: Colors.GRAY, stroke: 'white', strokeWidth: 2 }
+          {
+            y: n,
+            fill: Colors.ORANGE,
+            inDesert: true,
+            stroke: 'white',
+            strokeWidth: 2
+          },
+          {
+            y: 1 - n,
+            fill: Colors.GRAY,
+            inDesert: false,
+            stroke: 'white',
+            strokeWidth: 2
+          }
         ]}
         events={
           [
@@ -64,9 +76,7 @@ const Donut = ({
               eventHandlers: {
                 onMouseOut,
                 onMouseOver(event: any, props: any) {
-                  const { datum: { fill, y } } = props;
-                  const inDesert = fill === Colors.ORANGE;
-
+                  const { datum: { inDesert, y } } = props;
                   onMouseOver(percent(y), `${inDesert ? '' : 'not '}in desert`);
                 }
               }
