@@ -42,7 +42,8 @@ const legendBinClass = style({
 const legendTitleClass = style({
   fontWeight: 'bold',
   fontSize: 14,
-  marginBottom: 10
+  marginBottom: 10,
+  lineHeight: '1.25em'
 });
 
 type LegendProps = {
