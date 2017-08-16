@@ -33,6 +33,7 @@ import Legend from './Legend';
 import Mouse from './Mouse';
 import LayerToggle from './LayerToggle';
 import TractLegend from './TractLegend';
+import Attribution from './Attribution';
 import Loading from './Loading';
 import { accessToken, mapboxStyle, HoverSources } from './constants';
 import { TRACT_CONTROL_INDENT } from './tracts';
@@ -41,8 +42,8 @@ import { FeatureQueryResult } from './FeatureQuery';
 const MapBoxMap = ReactMapboxGl({
   accessToken,
   dragRotate: false,
-  logoPosition: 'top-left',
-  scrollZoom: false
+  scrollZoom: false,
+  attributionControl: false
 });
 
 const mapContainerClass = style({
@@ -154,6 +155,11 @@ const Map = (props: MapProps) =>
         props.onReady();
       }}
     >
+      <Attribution
+        style={{
+          bottom: props.tractMode ? 30 : 0
+        }}
+      />
       <Mouse
         tractMode={props.tractMode}
         selectedState={props.selectedState}
