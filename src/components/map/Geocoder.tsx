@@ -43,7 +43,8 @@ export default class sGeocoder extends FeatureQuery<
 > {
   geocoder = new MapboxGeocoder({
     accessToken,
-    placeholder: 'Search for an address or city'
+    placeholder: 'Search for an address or city',
+    country: 'us'
   });
 
   componentDidMount() {
