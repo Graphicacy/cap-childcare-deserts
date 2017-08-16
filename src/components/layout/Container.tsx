@@ -7,6 +7,7 @@ import ChartRow from './ChartRow';
 import Article from './Article';
 import { Map } from '../map';
 import { Colors } from '../colors';
+import Footer from './Footer';
 
 const contentClass = style(content);
 const contentContainerClass = style(fillParent, vertical);
@@ -33,6 +34,9 @@ const Container = () =>
       </div>
       <div className={contentClass}>
         <Article />
+      </div>
+      <div className={contentClass}>
+        <Footer />
       </div>
     </div>
   </div>;

@@ -72,7 +72,7 @@ export default function(env: any = {}) {
           /**
            * inline + minimize logo
            */
-          test: /cap-logo-.*\.png$/i,
+          test: /\.png$/i,
           use: ['url-loader', 'img-loader']
         }
       ]
