@@ -6,7 +6,8 @@ const titleClass = style({
   textAlign: 'center',
   width: '100%',
   fontSize: 24,
-  fontFamily: 'Roboto Slab'
+  fontFamily: 'Roboto Slab',
+  lineHeight: '3em'
 });
 
 const Title: React.StatelessComponent = ({ children }) =>

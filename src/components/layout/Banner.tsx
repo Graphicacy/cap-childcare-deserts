@@ -42,7 +42,7 @@ const desertPercentClass = style({
 const getPercentInDeserts = (state: StateName) =>
   percent(stateData[state || 'All states'].percentInDesertsAll);
 
-const titleText = (state: StateName) =>
+const TitleText = ({ state }: { state: StateName }) =>
   <Title>
     <span className={desertPercentClass}>{getPercentInDeserts(state)}</span>
     of children in {state || 'these states'} live in a child care desert.
@@ -55,8 +55,8 @@ type BannerProps = Readonly<{
 const Banner = (props: BannerProps) =>
   <div className={bannerContainerClass}>
     <div className={bannerClassName}>
-      {titleText(props.selectedState)}
-      <p>
+      <TitleText state={props.selectedState} />
+      <p style={{ marginTop: 0 }}>
         A child care desert is any ZIP code with more than 30 children under age
         5 that contains either zero child care centers or so few centers that
         there are more than three times as many children as spaces in the
