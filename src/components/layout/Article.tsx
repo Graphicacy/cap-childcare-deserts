@@ -63,7 +63,8 @@ const stateBarChartClass = style(content, {
 
 const ruleClass = style({
   width: '100%',
-  maxWidth: ARTICLE_MAX_WIDTH - 60,
+  maxWidth: ARTICLE_MAX_WIDTH,
+  padding: 0,
   margin: '0 auto',
   marginBottom: 40
 });
