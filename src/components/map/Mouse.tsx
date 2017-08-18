@@ -4,6 +4,7 @@ import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
 import { getTractLayerForState } from './tracts';
 import { HoverSources, mapboxStyle } from './constants';
 import { StateName } from '../../data';
+import { Colors } from '../colors';
 
 type MouseProps = Readonly<{
   selectedState: StateName;
@@ -89,7 +90,7 @@ class Mouse extends FeatureQuery<MouseProps> {
           source: hoverSourceName(state),
           'source-layer': sourceData.sourceLayer,
           paint: {
-            'line-color': 'black',
+            'line-color': Colors.HOVER_COLOR,
             'line-width': 2
           },
           filter: ['==', hoverId(state), '']

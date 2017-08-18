@@ -7,5 +7,6 @@ export enum Colors {
   BLUE = '#083E77',
   LIGHT_BLUE = '#62a9f4',
   INFO_BACKGROUND = 'rgba(255,255,255,0.8)',
-  SELECT_BACKGROUND = '#f2f2f2'
+  SELECT_BACKGROUND = '#f2f2f2',
+  HOVER_COLOR = '#737373'
 }
