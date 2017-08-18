@@ -27,7 +27,7 @@ type StateSelectProps = Readonly<{
 
 const StateSelect = (props: StateSelectProps) =>
   <select
-    className={selectClass}
+    className={selectClass + (props.className ? ' ' + props.className : '')}
     value={props.selectedState}
     onChange={props.onSelectState}
   >

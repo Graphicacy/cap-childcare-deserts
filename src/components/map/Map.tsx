@@ -191,10 +191,15 @@ const Map = (props: MapProps) =>
             <ZoomControl style={zoomStyles} />,
             <Geocoder tractMode={props.tractMode} />
           ]
-        : [!props.mobile && <Legend style={desktopLegendStyles} />]}
+        : [
+            (!props.mobile || props.embed) &&
+              <Legend style={desktopLegendStyles} />
+          ]}
     </MapBoxMap>
     {props.embed ? <StateSelect above className={stateSelectClass} /> : null}
-    {props.mobile ? <Legend horizontal style={mobileLegendStyles} /> : null}
+    {!props.embed && props.mobile
+      ? <Legend horizontal style={mobileLegendStyles} />
+      : null}
   </div>;
 
 const mapStateToProps = (state: State) => {
