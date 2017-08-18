@@ -9,57 +9,17 @@ import { exec, ExecOptions } from 'child_process';
 
 const { merge } = require('@mapbox/geojson-merge');
 
-type StateDataResult = {
-  State: string;
-  'Percent in deserts - All': number;
-  'Percent in deserts - Black': number;
-  'Percent in deserts - White': number;
-  'Percent in deserts - Hispanic': number;
-  'Chidren under 5 in deserts- rural': number;
-  'Children under 5 not in deserts- rural': number;
-  'Children under 5 in deserts- suburban': number;
-  'Children under 5 not in deserts- suburban': number;
-  'Children under 5  in deserts- urban': number;
-  'Children under 5 not in deserts- urban': number;
-  'Text box': string;
-  'Abbr': string;
-};
-
-type TractDataResult = {
-  state: string;
-  tract: number;
-  ccdesert: number;
-  per_latino: number;
-  per_white: number;
-  per_black: number;
-  per_aian: number;
-  per_asian: number;
-  per_nhpi: number;
-  per_twomore: number;
-  urbanicity: string;
-  noproviders: number;
-  state_fips: number;
-};
-
 if (require.main === module) run().catch(console.error);
-
-function camelcase(p: string) {
-  return p
-    .split(/[^\w\d]+/i)
-    .map(
-      (s, i) =>
-        i > 0
-          ? s.charAt(0).toUpperCase() + s.slice(1, s.length).toLowerCase()
-          : s.toLowerCase()
-    )
-    .join('');
-}
 
 async function run() {
   const program = commander
     .option('-s, --state-data <csvfile>', 'parse state data file')
     .option('-j, --state-tiles <glob>', 'generate state mapbox tiles')
     .option('-t, --census-tiles <glob>', 'generate census mapbox tiles')
+    .option(
+      '-l, --locations <locationfile>',
+      'generate formatted location file'
+    )
     .parse(process.argv);
 
   switch (true) {
@@ -75,6 +35,10 @@ async function run() {
       await prepStateJson(program.stateTiles);
       break;
 
+    case !!program.locations:
+      await prepLocationData(program.locations);
+      break;
+
     default: {
       program.outputHelp();
     }
@@ -83,8 +47,40 @@ async function run() {
   process.exit(0);
 }
 
-function mkdirp(dir: string) {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+async function prepLocationData(locations: string) {
+  const data = await readCsv<{
+    state: string;
+    latitude: number;
+    longitude: number;
+    center_type: number;
+  }>(locations);
+
+  const features = data.map(({ state, latitude, longitude, center_type }) => {
+    const abbr = getStateAbbr(state);
+
+    return {
+      type: 'Feature',
+      properties: { center_type, abbr },
+      geometry: {
+        type: 'Point',
+        coordinates: [longitude, latitude]
+      }
+    };
+  });
+
+  await fs.writeFile(
+    path.join(process.cwd(), './data/locations-formatted.json'),
+    JSON.stringify({
+      type: 'FeatureCollection',
+      features
+    })
+  );
+
+  await prun(
+    `tippecanoe -o ./data/tmp/locations.mbtiles -Z 2 -zg ./data/locations-formatted.json`
+  );
+
+  console.log(`finished!`);
 }
 
 async function prepStateJson(globString: string) {
@@ -393,3 +389,51 @@ function getStateAbbr(state: string) {
       throw new Error(`No abbreviation for ${state}`);
   }
 }
+
+function camelcase(p: string) {
+  return p
+    .split(/[^\w\d]+/i)
+    .map(
+      (s, i) =>
+        i > 0
+          ? s.charAt(0).toUpperCase() + s.slice(1, s.length).toLowerCase()
+          : s.toLowerCase()
+    )
+    .join('');
+}
+
+function mkdirp(dir: string) {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+}
+
+type StateDataResult = {
+  State: string;
+  'Percent in deserts - All': number;
+  'Percent in deserts - Black': number;
+  'Percent in deserts - White': number;
+  'Percent in deserts - Hispanic': number;
+  'Chidren under 5 in deserts- rural': number;
+  'Children under 5 not in deserts- rural': number;
+  'Children under 5 in deserts- suburban': number;
+  'Children under 5 not in deserts- suburban': number;
+  'Children under 5  in deserts- urban': number;
+  'Children under 5 not in deserts- urban': number;
+  'Text box': string;
+  'Abbr': string;
+};
+
+type TractDataResult = {
+  state: string;
+  tract: number;
+  ccdesert: number;
+  per_latino: number;
+  per_white: number;
+  per_black: number;
+  per_aian: number;
+  per_asian: number;
+  per_nhpi: number;
+  per_twomore: number;
+  urbanicity: string;
+  noproviders: number;
+  state_fips: number;
+};

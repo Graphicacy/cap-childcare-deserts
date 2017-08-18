@@ -30,3 +30,7 @@ To build the production version of the app, run
 ```shell
 npm run build
 ```
+
+### Data Prep
+
+Expects [`tippecanoe`](https://github.com/mapbox/tippecanoe) to be in your $PATH
