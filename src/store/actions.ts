@@ -20,7 +20,9 @@ export enum ActionType {
   SET_BOUNDS = 'SET_BOUNDS',
   SET_URBAN_FILTER = 'SET_URBAN_FILTER',
   SCREEN_RESIZE = 'SCREEN_RESIZE',
-  MAP_READY = 'MAP_READY'
+  MAP_READY = 'MAP_READY',
+  ARTICLE_FOCUS_REQUEST = 'ARTICLE_FOCUS_REQUEST',
+  ARTICLE_FOCUS_COMPLETE = 'ARTICLE_FOCUS_COMPLETE'
 }
 
 export type Action =
@@ -35,7 +37,9 @@ export type Action =
   | HideLegendAction
   | SetUrbanFilterAction
   | ScreenResizeAction
-  | MapReadyAction;
+  | MapReadyAction
+  | ArticleFocusAction
+  | ArticleFocusCompleteAction;
 
 export type Dispatch = (
   action: Action | ((dispatch: Dispatch, getState: () => State) => void)
@@ -210,3 +214,19 @@ type MapReadyAction = {
 
 export const mapReady = () =>
   ({ type: ActionType.MAP_READY } as MapReadyAction);
+
+type ArticleFocusAction = {
+  type: ActionType.ARTICLE_FOCUS_REQUEST;
+};
+
+export const focusArticle = (): ArticleFocusAction => ({
+  type: ActionType.ARTICLE_FOCUS_REQUEST
+});
+
+type ArticleFocusCompleteAction = {
+  type: ActionType.ARTICLE_FOCUS_COMPLETE;
+};
+
+export const focusArticleComplete = (): ArticleFocusCompleteAction => ({
+  type: ActionType.ARTICLE_FOCUS_COMPLETE
+});

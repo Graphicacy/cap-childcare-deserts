@@ -14,6 +14,7 @@ export type State = Readonly<{
   showLegend: boolean;
   urbanicityFilter: UrbanicityFilter;
   mobile: boolean;
+  articleFocus: boolean;
   mouse: {
     x: number;
     y: number;

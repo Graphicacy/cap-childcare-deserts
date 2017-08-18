@@ -1,10 +1,12 @@
 import { createElement } from 'react';
 import { style, media } from 'typestyle';
 import { content } from 'csstips';
+import { connect } from 'react-redux';
 
 import { Colors } from '../colors';
 import { Facebook, Twitter, Mail, Info } from './Icons';
 import { Logo } from './Logo';
+import ArticleFocusButton from './ArticleFocusButton';
 
 export const headerHeight = 64;
 
@@ -34,6 +36,7 @@ const anchorClass = style(
     marginRight: 10,
     fontSize: '14px',
     color: Colors.HEADER_GRAY,
+    cursor: 'pointer',
     $nest: {
       '&:hover': {
         color: Colors.HEADER_GRAY,
@@ -66,9 +69,7 @@ const Header = () =>
       <a className={anchorClass} href="#" target="_blank">
         Download the Report <Info />
       </a>
-      <a className={anchorClass} href="#" target="_blank">
-        About the Data <Info />
-      </a>
+      <ArticleFocusButton className={anchorClass} />
     </div>
   </div>;
 

@@ -7,7 +7,7 @@ import { content, flex } from 'csstips';
 import Title from './Title';
 import { StateBarChart } from '../charts/';
 import { StateName } from '../../data';
-import { State, Dispatch } from '../../store/';
+import { State, Dispatch, focusArticleComplete } from '../../store/';
 import { Info } from './Icons';
 import { Colors } from '../colors';
 
@@ -89,7 +89,8 @@ class Article extends Component<ArticleProps> {
     const { active, deactivate } = this.props;
     if (active) {
       const node = findDOMNode(this);
-      node.scrollIntoView();
+      node.scrollIntoView({ behavior: 'smooth' });
+      deactivate();
     }
   }
 
@@ -167,13 +168,13 @@ export default connect(
   (state: State) => {
     return {
       selectedState: state.selectedState,
-      active: false
+      active: state.articleFocus
     };
   },
   (dispatch: Dispatch) => {
     return {
       deactivate() {
-        // TODO: dispatch deactivate to stop scrolling
+        dispatch(focusArticleComplete());
       }
     };
   }

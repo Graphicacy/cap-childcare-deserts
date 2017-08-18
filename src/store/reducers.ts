@@ -23,7 +23,8 @@ export default combineReducers({
   bounds,
   urbanicityFilter,
   mobile,
-  mapReady
+  mapReady,
+  articleFocus
 });
 
 /**
@@ -149,6 +150,20 @@ function mobile(state = INITIAL_WINDOW_SIZE, action: Action) {
 function mapReady(state = false, action: Action) {
   switch (action.type) {
     case ActionType.MAP_READY: {
+      return true;
+    }
+
+    default:
+      return state;
+  }
+}
+
+function articleFocus(state = false, action: Action) {
+  switch (action.type) {
+    case ActionType.ARTICLE_FOCUS_COMPLETE: {
+      return false;
+    }
+    case ActionType.ARTICLE_FOCUS_REQUEST: {
       return true;
     }
 
