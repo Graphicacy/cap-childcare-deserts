@@ -4,11 +4,11 @@ import { Colors } from '../colors';
 import { TRACT_CONTROL_INDENT } from './tracts';
 
 const bins = [
-  ['60%+', '#932506'],
-  ['50-60%', '#D93E0E'],
-  ['40-50%', '#FA833D'],
-  ['30-40%', '#FDAF6D'],
-  ['-30%', '#FCD0B3']
+  ['60%+', Colors.STEP_60],
+  ['50-60%', Colors.STEP_50_60],
+  ['40-50%', Colors.STEP_40_50],
+  ['30-40%', Colors.STEP_30_40],
+  ['-30%', Colors.STEP_30]
 ];
 
 const legendClass = style({
@@ -109,7 +109,7 @@ const Legend = (props: LegendProps) =>
       )}
       <LegendEntry
         range={'(no data)'}
-        color={Colors.GRAY}
+        color={Colors.STEP_NO_DATA_COLOR}
         horizontal={props.horizontal}
       />
     </div>

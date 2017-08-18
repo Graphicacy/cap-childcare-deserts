@@ -8,5 +8,14 @@ export enum Colors {
   LIGHT_BLUE = '#62a9f4',
   INFO_BACKGROUND = 'rgba(255,255,255,0.8)',
   SELECT_BACKGROUND = '#f2f2f2',
-  HOVER_COLOR = '#737373'
+  HOVER_COLOR = '#737373',
+  /**
+   * choropleth steps
+   */
+  STEP_60 = '#932506',
+  STEP_50_60 = '#D93E0E',
+  STEP_40_50 = '#FA833D',
+  STEP_30_40 = '#FDAF6D',
+  STEP_30 = '#FCD0B3',
+  STEP_NO_DATA_COLOR = '#f2f2f0'
 }
