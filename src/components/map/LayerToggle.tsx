@@ -1,7 +1,7 @@
 import { createElement, Component } from 'react';
 import { Map } from 'mapbox-gl';
 import { stateModeLayers } from './constants';
-import { StateName } from '../../data';
+import { StateName, stateData } from '../../data';
 import { UrbanicityFilter } from '../../store';
 import { tractLayers } from './tracts';
 
@@ -38,6 +38,13 @@ class LayerToggle extends Component<LayerToggleProps> {
 
   toggleTractUrbanicity(urbanicity: UrbanicityFilter) {
     const { map } = this.context;
+
+    map.setPaintProperty(
+      'locations-with-state',
+      'circle-opacity',
+      urbanicity === 'All' ? 1 : 0.2
+    );
+
     tractLayers.forEach(layer => {
       map.setFilter(
         layer,
@@ -48,7 +55,11 @@ class LayerToggle extends Component<LayerToggleProps> {
 
   toggleStateDots(state: StateName | '') {
     const { map } = this.context;
-    map.setFilter('locations-with-state', ['==', 'state', state]);
+    map.setFilter('locations-with-state', [
+      '==',
+      'abbr',
+      state ? stateData[state].abbr : ''
+    ]);
   }
 
   toggleStateLayers(visible: boolean) {
