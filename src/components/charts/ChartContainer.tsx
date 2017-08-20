@@ -12,6 +12,9 @@ const barChartTitleClass = style({
 
 const chartContainerClass = style(content);
 
+/**
+ * Generic container for charts, with title + padding
+ */
 const ChartContainer: StatelessComponent<{
   title: string;
   style?: React.CSSProperties;

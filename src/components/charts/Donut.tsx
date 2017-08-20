@@ -32,6 +32,9 @@ export type DonutProps = Readonly<{
 const svgStyle = { width: '100%' };
 const animate = { duration: 500 };
 
+/**
+ * need to have empty string function to hide labels
+ */
 const noLabel = (x: any) => '';
 
 interface DonutDatum {
