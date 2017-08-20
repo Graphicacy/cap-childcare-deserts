@@ -108,8 +108,8 @@ const getMapStyles = (props: MapProps) => {
 type MapProps = Readonly<{
   selectedState: StateName;
   embed: boolean;
-  zoom: [number] | null;
-  center: [number, number] | null;
+  zoom: [number];
+  center: [number, number];
   tractMode: boolean;
   mobile: boolean;
   loaded: boolean;
