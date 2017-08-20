@@ -13,6 +13,7 @@ const attributionClass = style({
 
 type AttributionProps = {
   style?: React.CSSProperties;
+  tractMode?: boolean;
 };
 
 export default class Attribution extends Component<AttributionProps> {
@@ -32,6 +33,14 @@ export default class Attribution extends Component<AttributionProps> {
   }
 
   render() {
-    return <div className={attributionClass} style={this.props.style} />;
+    const { tractMode } = this.props;
+    return (
+      <div
+        className={attributionClass}
+        style={{
+          bottom: tractMode ? 30 : 0
+        }}
+      />
+    );
   }
 }

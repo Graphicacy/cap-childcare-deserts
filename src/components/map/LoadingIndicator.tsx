@@ -1,9 +1,42 @@
 import { createElement } from 'react';
-import { cssRaw } from 'typestyle';
+import { cssRaw, style } from 'typestyle';
+import { HEADER_HEIGHT } from '../layout/Header';
 
-const Loading = () => <div className="loader" />;
+const loadingContainerClass = style({
+  position: 'absolute',
+  top: 0,
+  width: '100%',
+  zIndex: 10,
+  backgroundColor: 'white',
+  marginTop: HEADER_HEIGHT
+});
 
-export default Loading;
+const embededLoadingClass = style({
+  width: '100vw',
+  height: '100vh',
+  marginTop: 0
+});
+
+const Loader = () => <div className="loader" />;
+
+const LoadingIndicator = ({
+  loaded,
+  embed
+}: {
+  loaded: boolean;
+  embed: boolean;
+}) =>
+  loaded
+    ? null
+    : <div
+        className={
+          loadingContainerClass + ' ' + (embed ? embededLoadingClass : mapClass)
+        }
+      >
+        <Loader />
+      </div>;
+
+export default LoadingIndicator;
 
 cssRaw(`
 .loader,

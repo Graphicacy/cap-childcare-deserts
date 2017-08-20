@@ -5,7 +5,7 @@
     "strict": true,
     "importHelpers": true,
     "outDir": "dist",
-    "lib": ["es5", "es2015.promise", "es2015.collection", "dom"],
+    "lib": ["es5", "es2015.promise", "dom"],
     "jsx": "react",
     "jsxFactory": "createElement",
     "moduleResolution": "node"

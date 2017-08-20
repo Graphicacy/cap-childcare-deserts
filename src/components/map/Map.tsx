@@ -35,7 +35,7 @@ import Mouse from './Mouse';
 import LayerToggle from './LayerToggle';
 import TractLegend from './TractLegend';
 import Attribution from './Attribution';
-import Loading from './Loading';
+import LoadingIndicator from './LoadingIndicator';
 import { accessToken, mapboxStyle, HoverSources } from './constants';
 import { TRACT_CONTROL_INDENT } from './tracts';
 import { FeatureQueryResult } from './FeatureQuery';
@@ -63,7 +63,7 @@ const stateSelectClass = style({
   marginLeft: -(selectWidth / 2)
 });
 
-const zoomStyles = {
+const zoomStyles: React.CSSProperties = {
   left: TRACT_CONTROL_INDENT,
   top: 30,
   right: 'auto'
@@ -80,21 +80,6 @@ const mobileLegendStyles: React.CSSProperties = {
   margin: '0 auto',
   width: 300
 };
-
-const loadingContainerClass = style({
-  position: 'absolute',
-  top: 0,
-  width: '100%',
-  zIndex: 10,
-  backgroundColor: 'white',
-  marginTop: HEADER_HEIGHT
-});
-
-const embededLoadingClass = style({
-  width: '100vw',
-  height: '100vh',
-  marginTop: 0
-});
 
 const mapClass = style(
   {
@@ -113,7 +98,11 @@ const statesByAbbr = Object.keys(stateData).reduce((out, state: StateName) => {
   return out;
 }, {} as { [key: string]: StateName });
 
+const mapStyleCache: { [key: string]: React.CSSProperties } = {};
 const getMapStyles = (props: MapProps) => {
+  const key = `${props.embed}`;
+  if (key in mapStyleCache) return mapStyleCache[key];
+
   const out: React.CSSProperties = {
     width: '100vw',
     marginTop: props.embed ? 0 : HEADER_HEIGHT
@@ -123,7 +112,7 @@ const getMapStyles = (props: MapProps) => {
     out.height = '100vh';
   }
 
-  return out;
+  return (mapStyleCache[key] = out);
 };
 
 type MapProps = Readonly<{
@@ -142,23 +131,6 @@ type MapProps = Readonly<{
   onGeocoderResult(feature?: FeatureQueryResult): void;
 }>;
 
-const LoadingIndicator = ({
-  loaded,
-  embed
-}: {
-  loaded: boolean;
-  embed: boolean;
-}) =>
-  loaded
-    ? null
-    : <div
-        className={
-          loadingContainerClass + ' ' + (embed ? embededLoadingClass : mapClass)
-        }
-      >
-        <Loading />
-      </div>;
-
 const Map = (props: MapProps) =>
   <div className={mapContainerClass}>
     <LoadingIndicator loaded={props.loaded} embed={props.embed} />
@@ -176,11 +148,7 @@ const Map = (props: MapProps) =>
         props.onReady();
       }}
     >
-      <Attribution
-        style={{
-          bottom: props.tractMode ? 30 : 0
-        }}
-      />
+      <Attribution tractMode={props.tractMode} />
       <Mouse
         tractMode={props.tractMode}
         selectedState={props.selectedState}

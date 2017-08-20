@@ -8,7 +8,6 @@ import {
 } from 'victory';
 
 import { style } from 'typestyle';
-
 import { Colors } from '../colors';
 import { percent } from './format';
 
