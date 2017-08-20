@@ -8,12 +8,12 @@ import { Facebook, Twitter, Mail, Info } from './Icons';
 import { Logo } from './Logo';
 import ArticleFocusButton from './ArticleFocusButton';
 
-export const headerHeight = 64;
+export const HEADER_HEIGHT = 64;
 
 const headerClass = style({
   position: 'fixed',
   width: '100%',
-  height: headerHeight,
+  height: HEADER_HEIGHT,
   backgroundColor: 'white',
   boxShadow: '0 3px 2px 0px #888;',
   padding: '10px 20px 10px 20px',

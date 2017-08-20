@@ -12,7 +12,7 @@ import { stateData } from '../../data';
 import { style } from 'typestyle';
 import { Colors } from '../colors';
 import { percent } from '../charts/format';
-import { headerHeight } from '../layout/Header';
+import { HEADER_HEIGHT } from '../layout/Header';
 
 const toolTipClass = style({
   position: 'fixed',
@@ -36,7 +36,7 @@ type ToolTipProps = Readonly<{
 function getToolTipPosition({ state, x, y, embed }: ToolTipProps) {
   // tract is fixed in corner
   if (state.show === true && state.data.kind === 'tract')
-    return { right: 40, top: (embed ? 0 : headerHeight) + 30 };
+    return { right: 40, top: (embed ? 0 : HEADER_HEIGHT) + 30 };
 
   // otherwise render above mouse
   return { left: x, top: y - 10, transform: 'translate(-50%, -100%)' };

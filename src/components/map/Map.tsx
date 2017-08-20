@@ -25,7 +25,7 @@ import {
   UrbanicityFilter
 } from '../../store';
 
-import { headerHeight } from '../layout/Header';
+import { HEADER_HEIGHT } from '../layout/Header';
 import Controls from './Controls';
 import StateSelect from '../_shared/StateSelect';
 import Geocoder from './Geocoder';
@@ -85,7 +85,7 @@ const loadingContainerClass = style({
   width: '100%',
   zIndex: 10,
   backgroundColor: 'white',
-  marginTop: headerHeight
+  marginTop: HEADER_HEIGHT
 });
 
 const embededLoadingClass = style({
@@ -109,7 +109,7 @@ const mapClass = style(
 const getMapStyles = (props: MapProps) => {
   const out: React.CSSProperties = {
     width: '100vw',
-    marginTop: props.embed ? 0 : headerHeight
+    marginTop: props.embed ? 0 : HEADER_HEIGHT
   };
 
   if (props.embed) {

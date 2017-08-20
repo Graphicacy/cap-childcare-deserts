@@ -1,5 +1,4 @@
-import 'es6-promise/auto';
-
+import './shims';
 import { createElement } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';

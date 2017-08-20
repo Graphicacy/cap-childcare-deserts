@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { style, media } from 'typestyle';
 import { content, flex } from 'csstips';
+import * as zenscroll from 'zenscroll';
 
 import Title from './Title';
 import { StateBarChart } from '../charts/';
@@ -10,6 +11,7 @@ import { StateName } from '../../data';
 import { State, Dispatch, focusArticleComplete } from '../../store/';
 import { Info } from './Icons';
 import { Colors } from '../colors';
+import { HEADER_HEIGHT } from './header';
 
 const ARTICLE_MAX_WIDTH = 750;
 
@@ -70,6 +72,10 @@ const ruleClass = style({
   marginBottom: 40
 });
 
+const paragraphClass = style({
+  marginTop: 0
+});
+
 type ArticleProps = Readonly<{
   selectedState: StateName;
   active: boolean;
@@ -77,6 +83,12 @@ type ArticleProps = Readonly<{
 }>;
 
 class Article extends Component<ArticleProps> {
+  componentDidMount() {
+    const defaultDuration = 500;
+    const edgeOffset = HEADER_HEIGHT;
+    zenscroll.setup(defaultDuration, edgeOffset);
+  }
+
   componentDidUpdate() {
     this.ensureVisible();
   }
@@ -89,7 +101,7 @@ class Article extends Component<ArticleProps> {
     const { active, deactivate } = this.props;
     if (active) {
       const node = findDOMNode(this);
-      node.scrollIntoView({ behavior: 'smooth' });
+      zenscroll.to(node);
       deactivate();
     }
   }
@@ -106,7 +118,7 @@ class Article extends Component<ArticleProps> {
           <Title>
             {' '}Child Care Access in {selectedState}{' '}
           </Title>
-          <p style={{ marginTop: 0 }}>
+          <p className={paragraphClass}>
             {' '}Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin
             reris etur? Re am consed que dolut lam erum quate velenisti dolora
             nimporiti o ctiis et ipid quis nissinciae cum verem dit, nobitatecto
@@ -126,7 +138,7 @@ class Article extends Component<ArticleProps> {
           </p>
 
           <Title> About the Study </Title>
-          <p style={{ marginTop: 0 }}>
+          <p className={paragraphClass}>
             Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin reris
             etur? Re am consed que dolut lam erum quate velenisti dolora
             nimporiti o ctiis et ipid quis nissinciae cum verem dit, nobitatecto
