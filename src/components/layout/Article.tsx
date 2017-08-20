@@ -12,6 +12,7 @@ import { State, Dispatch, focusArticleComplete } from '../../store/';
 import { Info } from './Icons';
 import { Colors } from '../colors';
 import { HEADER_HEIGHT } from './Header';
+import { VISUALS_SUPPORTED } from './SupportMessage';
 
 const ARTICLE_MAX_WIDTH = 750;
 
@@ -111,9 +112,11 @@ class Article extends Component<ArticleProps> {
     return (
       <div className={articleContainerClass}>
         <hr className={ruleClass} />
-        <div className={stateBarChartClass}>
-          <StateBarChart selectedState={selectedState} />
-        </div>
+        {VISUALS_SUPPORTED
+          ? <div className={stateBarChartClass}>
+              <StateBarChart selectedState={selectedState} />
+            </div>
+          : null}
         <div className={articleClass}>
           <Title>
             {' '}Child Care Access in {selectedState}{' '}

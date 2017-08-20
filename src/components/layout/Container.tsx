@@ -1,6 +1,7 @@
 import { createElement } from 'react';
 import { style, media } from 'typestyle';
 import { fillParent, vertical, content, height, flex } from 'csstips';
+
 import Header from './Header';
 import Banner from './Banner';
 import ChartRow from './ChartRow';
@@ -8,6 +9,7 @@ import Article from './Article';
 import { Map } from '../map';
 import { Colors } from '../colors';
 import Footer from './Footer';
+import { default as SupportMessage, VISUALS_SUPPORTED } from './SupportMessage';
 
 const contentClass = style(content);
 const contentContainerClass = style(fillParent, vertical);
@@ -26,11 +28,11 @@ const Container = () =>
     <Header />
     <div className={containerClass}>
       <div className={contentContainerClass}>
-        <Map />
+        {VISUALS_SUPPORTED ? <Map /> : <SupportMessage />}
         <Banner />
       </div>
       <div className={contentClass}>
-        <ChartRow />
+        {VISUALS_SUPPORTED ? <ChartRow /> : null}
       </div>
       <div className={contentClass}>
         <Article />

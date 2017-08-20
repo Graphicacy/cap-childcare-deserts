@@ -8,7 +8,7 @@ import {
   Source
 } from 'react-mapbox-gl';
 
-import { Map as MapboxMap, supported } from 'mapbox-gl';
+import { Map as MapboxMap } from 'mapbox-gl';
 import { style, media } from 'typestyle';
 
 import { StateName, stateData } from '../../data';
@@ -39,8 +39,6 @@ import { accessToken, mapboxStyle, HoverSources } from './constants';
 import { TRACT_CONTROL_INDENT } from './tracts';
 import { FeatureQueryResult } from './FeatureQuery';
 import { Colors } from '../colors';
-
-export const MAP_CAN_RENDER = supported();
 
 const MapBoxMap = ReactMapboxGl({
   accessToken,
@@ -109,15 +107,6 @@ const mapClass = style(
   )
 );
 
-const notSupportedClass = style({
-  fontSize: 20,
-  color: Colors.FONT_GRAY,
-  textAlign: 'center',
-  position: 'relative',
-  top: '50%',
-  transform: 'translateY(-50%)'
-});
-
 const getMapStyles = (props: MapProps) => {
   const out: React.CSSProperties = {
     width: '100vw',
@@ -164,67 +153,53 @@ const LoadingIndicator = ({
       </div>;
 
 const Map = (props: MapProps) =>
-  !MAP_CAN_RENDER
-    ? <div className={mapContainerClass}>
-        <div className={mapClass}>
-          <div className={notSupportedClass}>
-            Sorry, your browser unable to load this map.<br />
-            If possible, try{' '}
-            <a href="https://browser-update.org/update.html">
-              upgrading your browser
-            </a>.
-          </div>
-        </div>
-      </div>
-    : <div className={mapContainerClass}>
-        <LoadingIndicator loaded={props.loaded} embed={props.embed} />
-        <MapBoxMap
-          style={mapboxStyle}
-          containerStyle={getMapStyles(props)}
-          scrollZoom={props.tractMode}
-          dragPan={props.tractMode}
-          zoom={props.zoom}
-          center={props.center}
-          className={mapClass}
-          onStyleLoad={(map: MapboxMap) => {
-            // hack for https://github.com/alex3165/react-mapbox-gl/issues/130
-            map.resize();
-            props.onReady();
-          }}
-        >
-          <Attribution
-            style={{
-              bottom: props.tractMode ? 30 : 0
-            }}
-          />
-          <Mouse
-            tractMode={props.tractMode}
-            selectedState={props.selectedState}
-            onMouseMove={props.onMouseMove}
-            onClick={props.onClick}
-          />
-          <LayerToggle
-            selectedState={props.selectedState}
-            tractMode={props.tractMode}
-            urbanicityFilter={props.urbanicityFilter}
-          />
-          {props.tractMode
-            ? <span>
-                <Controls />
-                <TractLegend />
-                <ZoomControl style={zoomStyles} />
-                <Geocoder tractMode={props.tractMode} />
-              </span>
-            : (!props.mobile || props.embed) &&
-              <Legend style={desktopLegendStyles} />}
-        </MapBoxMap>
-        {props.embed
-          ? <StateSelect above className={stateSelectClass} />
-          : null}
-        {!props.embed && props.mobile
-          ? <Legend horizontal style={mobileLegendStyles} />
-          : null}
-      </div>;
+  <div className={mapContainerClass}>
+    <LoadingIndicator loaded={props.loaded} embed={props.embed} />
+    <MapBoxMap
+      style={mapboxStyle}
+      containerStyle={getMapStyles(props)}
+      scrollZoom={props.tractMode}
+      dragPan={props.tractMode}
+      zoom={props.zoom}
+      center={props.center}
+      className={mapClass}
+      onStyleLoad={(map: MapboxMap) => {
+        // hack for https://github.com/alex3165/react-mapbox-gl/issues/130
+        map.resize();
+        props.onReady();
+      }}
+    >
+      <Attribution
+        style={{
+          bottom: props.tractMode ? 30 : 0
+        }}
+      />
+      <Mouse
+        tractMode={props.tractMode}
+        selectedState={props.selectedState}
+        onMouseMove={props.onMouseMove}
+        onClick={props.onClick}
+      />
+      <LayerToggle
+        selectedState={props.selectedState}
+        tractMode={props.tractMode}
+        urbanicityFilter={props.urbanicityFilter}
+      />
+      {props.tractMode
+        ? <span>
+            <Controls />
+            <TractLegend />
+            <ZoomControl style={zoomStyles} />
+            <Geocoder tractMode={props.tractMode} />
+          </span>
+        : (!props.mobile || props.embed) &&
+          <Legend style={desktopLegendStyles} />}
+    </MapBoxMap>
+    {props.embed ? <StateSelect above className={stateSelectClass} /> : null}
+    {!props.embed && props.mobile
+      ? <Legend horizontal style={mobileLegendStyles} />
+      : null}
+  </div>;
 
 const mapStateToProps = (state: State) => {
   return {
