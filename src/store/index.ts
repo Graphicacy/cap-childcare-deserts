@@ -2,7 +2,7 @@ import { default as reducer } from './reducers';
 import {
   Action,
   ActionType,
-  setSelectedState,
+  selectStateAndCenter,
   Dispatch,
   setScreenSize
 } from './actions';
@@ -43,7 +43,7 @@ export function initStore() {
         mobile: previouslyMobile
       } = store.getState() as State;
       store.dispatch(setScreenSize(mobile));
-      store.dispatch(setSelectedState(selectedState));
+      store.dispatch(selectStateAndCenter(selectedState));
     }, 500);
   });
 

@@ -8,7 +8,7 @@ import Title from './Title';
 import StateSelect from '../_shared/StateSelect';
 import { Colors } from '../colors';
 import { stateList, StateName, stateData } from '../../data';
-import { setSelectedState, State } from '../../store';
+import { selectStateAndCenter, State } from '../../store';
 import { percent } from '../charts/format';
 
 const bannerContainerClass = style(content, {

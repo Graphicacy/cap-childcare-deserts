@@ -37,7 +37,7 @@ const geocoderClass = style({
   }
 });
 
-export default class sGeocoder extends FeatureQuery<
+export default class Geocoder extends FeatureQuery<
   GeocoderProps,
   GeocoderState
 > {

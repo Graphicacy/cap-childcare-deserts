@@ -17,12 +17,13 @@ import {
   Dispatch,
   showLegend,
   hideLegend,
-  setSelectedState,
+  selectStateAndCenter,
   showTooltip,
   hideTooltip,
   TractProperties,
   mapReady,
-  UrbanicityFilter
+  UrbanicityFilter,
+  selectState
 } from '../../store';
 
 import { HEADER_HEIGHT } from '../layout/Header';
@@ -107,6 +108,11 @@ const mapClass = style(
   )
 );
 
+const statesByAbbr = Object.keys(stateData).reduce((out, state: StateName) => {
+  out[stateData[state].abbr] = state;
+  return out;
+}, {} as { [key: string]: StateName });
+
 const getMapStyles = (props: MapProps) => {
   const out: React.CSSProperties = {
     width: '100vw',
@@ -133,6 +139,7 @@ type MapProps = Readonly<{
   onMouseMove(feature?: FeatureQueryResult): void;
   onClick(feature?: FeatureQueryResult): void;
   onReady(): void;
+  onGeocoderResult(feature?: FeatureQueryResult): void;
 }>;
 
 const LoadingIndicator = ({
@@ -190,7 +197,10 @@ const Map = (props: MapProps) =>
             <Controls />
             <TractLegend />
             <ZoomControl style={zoomStyles} />
-            <Geocoder tractMode={props.tractMode} />
+            <Geocoder
+              tractMode={props.tractMode}
+              onResult={props.onGeocoderResult}
+            />
           </span>
         : (!props.mobile || props.embed) &&
           <Legend style={desktopLegendStyles} />}
@@ -216,6 +226,18 @@ const mapStateToProps = (state: State) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onGeocoderResult(feature?: FeatureQueryResult) {
+    if (!feature || feature.kind !== 'tract') return;
+    const abbr = feature.properties.state;
+
+    // if the geocoder result is in a state we have data for,
+    // select that state -- otherwise back out to all states
+    if (abbr in statesByAbbr) {
+      dispatch(selectState(statesByAbbr[abbr]));
+    } else {
+      dispatch(selectStateAndCenter('All states'));
+    }
+  },
   onMouseMove(feature?: FeatureQueryResult) {
     if (!feature) return dispatch(hideTooltip());
     switch (feature.kind) {
@@ -244,7 +266,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     if (feature.kind === 'state') {
       const state = feature.properties.name;
       if (!(state in stateData)) return;
-      dispatch(setSelectedState(state));
+      dispatch(selectStateAndCenter(state));
     }
   },
   onReady() {

@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
 import { style } from 'typestyle';
-import { Dispatch, State, setSelectedState } from '../../store';
+import { Dispatch, State, selectStateAndCenter } from '../../store';
 import { stateList, StateName, stateData } from '../../data';
 import { Colors } from '../colors';
 
@@ -48,7 +48,7 @@ const mapStatesToProps = (
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSelectState: (e: React.ChangeEvent<{ value: string }>) => {
-    dispatch(setSelectedState(e.target.value as StateName));
+    dispatch(selectStateAndCenter(e.target.value as StateName));
   }
 });
 

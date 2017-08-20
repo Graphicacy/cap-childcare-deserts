@@ -6,7 +6,7 @@ import {
   Dispatch,
   showTooltip,
   hideTooltip,
-  setSelectedState
+  selectStateAndCenter
 } from '../../store';
 
 import { StateName, stateData, stateList } from '../../data';
@@ -100,7 +100,7 @@ export default connect(
         dispatch(hideTooltip());
       },
       onClick(state: StateName) {
-        dispatch(setSelectedState(state));
+        dispatch(selectStateAndCenter(state));
       }
     };
   }

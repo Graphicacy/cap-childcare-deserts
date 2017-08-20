@@ -44,7 +44,7 @@ const entryTextClass = style({
 const TractLegend = () =>
   <div className={legendClass}>
     {entries.map(entry =>
-      <span className={entryClass}>
+      <span key={entry.color} className={entryClass}>
         <span
           className={entry.circle ? entryCircleClass : entryBlockClass}
           style={{ backgroundColor: entry.color }}

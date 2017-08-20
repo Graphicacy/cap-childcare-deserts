@@ -57,11 +57,6 @@ export const setMousePosition = (x: number, y: number) =>
     payload: { x, y }
   } as MouseMoveAction);
 
-type SelectStateAction = {
-  type: ActionType.SELECT_STATE;
-  payload: { name: StateName };
-};
-
 export const zoomToState = (name: StateName) => (
   dispatch: Dispatch,
   getState: () => State
@@ -78,17 +73,24 @@ export const zoomToState = (name: StateName) => (
   }
 };
 
-export const setSelectedState = (name: StateName) => (dispatch: Dispatch) => {
+type SelectStateAction = {
+  type: ActionType.SELECT_STATE;
+  payload: { name: StateName };
+};
+
+export const selectState = (name: StateName): SelectStateAction => ({
+  type: ActionType.SELECT_STATE,
+  payload: {
+    name
+  }
+});
+
+export const selectStateAndCenter = (name: StateName) => (
+  dispatch: Dispatch
+) => {
   dispatch(zoomToState(name));
   dispatch(hideTooltip());
-  dispatch(
-    {
-      type: ActionType.SELECT_STATE,
-      payload: {
-        name
-      }
-    } as SelectStateAction
-  );
+  dispatch(selectState(name));
 };
 
 type SetMapTargetAction = {
