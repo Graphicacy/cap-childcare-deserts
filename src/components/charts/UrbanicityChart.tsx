@@ -24,7 +24,8 @@ type UrbanicityChartProps = {
   onMouseOut(): void;
 };
 
-const cache: {
+const eventCache: { [key: string]: any } = {};
+const dataCache: {
   [key in StateName]?: { desert: DataArray; nonDesert: DataArray }
 } = {};
 
@@ -39,26 +40,26 @@ const strokeStyle = {
 
 const labelStyles = { fontFamily: 'Open Sans' };
 const tickStyles = { tickLabels: labelStyles };
+const stackLabel = (datum: { type: string }) => datum.type;
+const animate = { duration: 500 };
+const domainPadding = { y: 30 };
+const padding = {
+  top: 0,
+  left: 100,
+  right: 30,
+  bottom: 50
+};
 
 const UrbanicityChart = (props: UrbanicityChartProps) =>
   <ChartContainer
     title="Children in a child care desert, by ubanicity"
     style={props.style}
   >
-    <VictoryChart
-      domainPadding={{ y: 30 }}
-      padding={{
-        top: 0,
-        left: 100,
-        right: 30,
-        bottom: 50
-      }}
-      height={200}
-    >
+    <VictoryChart domainPadding={domainPadding} padding={padding} height={200}>
       <VictoryStack
         horizontal
         colorScale={colorScale}
-        labels={datum => datum.type}
+        labels={stackLabel}
         labelComponent={
           <VictoryLabel style={labelStyles} x={90} textAnchor="end" />
         }
@@ -68,9 +69,7 @@ const UrbanicityChart = (props: UrbanicityChartProps) =>
           y="value"
           style={strokeStyle}
           events={createEvents(props, false)}
-          animate={{
-            duration: 500
-          }}
+          animate={animate}
           data={getData(props.selectedState).nonDesert}
         />
         <VictoryBar
@@ -78,9 +77,7 @@ const UrbanicityChart = (props: UrbanicityChartProps) =>
           y="value"
           style={strokeStyle}
           events={createEvents(props, true)}
-          animate={{
-            duration: 500
-          }}
+          animate={animate}
           data={getData(props.selectedState).desert}
         />
       </VictoryStack>
@@ -94,8 +91,11 @@ export default UrbanicityChart;
  * create event handlers for chart
  */
 function createEvents(props: UrbanicityChartProps, inDesert: boolean): any {
+  const key = inDesert.toString();
+  if (key in eventCache) return eventCache[key];
+
   const { onMouseOut, onMouseOver } = props;
-  return [
+  return (eventCache[key] = [
     {
       target: 'data' as 'data',
       eventHandlers: {
@@ -108,7 +108,7 @@ function createEvents(props: UrbanicityChartProps, inDesert: boolean): any {
         }
       }
     }
-  ];
+  ]);
 }
 
 function addWidth(x: { type: string; value: number }) {
@@ -126,7 +126,7 @@ function addWidth(x: { type: string; value: number }) {
 function getData(name: StateName) {
   const stateName: StateName = name || 'All states';
 
-  if (stateName in cache) return cache[stateName]!;
+  if (stateName in dataCache) return dataCache[stateName]!;
 
   const data = stateData[stateName];
 
@@ -162,5 +162,5 @@ function getData(name: StateName) {
 
   const result = { nonDesert, desert };
 
-  return (cache[stateName] = result);
+  return (dataCache[stateName] = result);
 }

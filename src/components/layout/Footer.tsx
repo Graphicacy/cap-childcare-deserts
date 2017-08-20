@@ -36,14 +36,14 @@ const imageClass = style(
   )
 );
 
+const linkContainerClass = style({ float: 'right', textAlign: 'right' });
+const imgSrc = require('../../../images/ho_CAPlogo.png');
+
 export const Footer = () =>
   <div className={footerClass}>
     <footer>
-      <img
-        src={require('../../../images/ho_CAPlogo.png')}
-        className={imageClass}
-      />
-      <div style={{ float: 'right', textAlign: 'right' }}>
+      <img src={imgSrc} className={imageClass} />
+      <div className={linkContainerClass}>
         <small>
           © 2017 Center for American Progress <br />
           <a href="https://www.americanprogress.org/about/contact-us/">

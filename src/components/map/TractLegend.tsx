@@ -41,19 +41,23 @@ const entryTextClass = style({
   marginLeft: 5
 });
 
+function makeEntry(entry: { color: string; text: string; circle: boolean }) {
+  return (
+    <span key={entry.color} className={entryClass}>
+      <span
+        className={entry.circle ? entryCircleClass : entryBlockClass}
+        style={{ backgroundColor: entry.color }}
+      />
+      <span className={entryTextClass}>
+        {entry.text}
+      </span>
+    </span>
+  );
+}
+
 const TractLegend = () =>
   <div className={legendClass}>
-    {entries.map(entry =>
-      <span key={entry.color} className={entryClass}>
-        <span
-          className={entry.circle ? entryCircleClass : entryBlockClass}
-          style={{ backgroundColor: entry.color }}
-        />
-        <span className={entryTextClass}>
-          {entry.text}
-        </span>
-      </span>
-    )}
+    {entries.map(makeEntry)}
   </div>;
 
 export default TractLegend;

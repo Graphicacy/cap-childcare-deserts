@@ -5,6 +5,8 @@ import { State, Dispatch, setUrbanFilter, UrbanicityFilter } from '../../store';
 import { Colors } from '../colors';
 import { TRACT_CONTROL_INDENT } from './tracts';
 
+const noop = () => {};
+
 const controlClass = style({
   position: 'absolute',
   top: 110,
@@ -47,7 +49,7 @@ const Button = (props: { onClick?(): void; text: string; active?: boolean }) =>
       border:
         '1px solid ' + (!props.active ? Colors.GRAY : Colors.ACTIVE_CONTROL)
     }}
-    onClick={props.onClick || (() => {})}
+    onClick={props.onClick || noop}
   >
     {props.text}
   </div>;
