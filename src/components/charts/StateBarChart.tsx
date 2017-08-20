@@ -61,12 +61,12 @@ const handlers = (
   ] as any); // hack for typings;
 };
 
-const StateBarChart = ({
+const StateBarChart: React.StatelessComponent<StateBarChartProps> = ({
   selectedState,
   onClick,
   onMouseOut,
   onMouseOver
-}: StateBarChartProps) =>
+}) =>
   <ChartContainer title="Percent in a child care desert, by state">
     <VictoryChart padding={padding} width={600} domainPadding={domainPadding}>
       <VictoryBar

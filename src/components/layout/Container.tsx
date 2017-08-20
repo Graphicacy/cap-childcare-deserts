@@ -23,7 +23,7 @@ const containerClass = style({
   fontSize: 14
 });
 
-const Container = () =>
+const Container: React.StatelessComponent<{}> = () =>
   <div>
     <Header />
     <div className={containerClass}>

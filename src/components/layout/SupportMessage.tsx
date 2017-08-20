@@ -25,7 +25,7 @@ const supportMessageClass = style({
   transform: 'translateY(-50%)'
 });
 
-const SupportMessage = () =>
+const SupportMessage: React.StatelessComponent<{}> = () =>
   <div className={supportMessageContainerClass}>
     <div className={supportMessageClass}>
       Sorry, your browser unable to load the graphics on this site.<br />

@@ -17,22 +17,22 @@ interface AttributionProps {
 }
 
 export default class Attribution extends Component<AttributionProps> {
-  static contextTypes = {
+  public static contextTypes = {
     map: PropTypes.object
   };
 
-  context: {
+  public context: {
     map: Map;
   };
 
-  componentDidMount() {
+  public componentDidMount() {
     const { map } = this.context;
     const control = new AttributionControl();
     const node = findDOMNode(this);
     node.appendChild((control as any).onAdd(map));
   }
 
-  render() {
+  public render() {
     const { tractMode } = this.props;
     return (
       <div

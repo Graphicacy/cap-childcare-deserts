@@ -48,7 +48,7 @@ export type ChartsProps = Readonly<{
   onMouseOver(value: string, label: string): void;
 }>;
 
-export const ChartRow = (props: ChartsProps) =>
+export const ChartRow: React.StatelessComponent<ChartsProps> = props =>
   <div className={chartContainerClass}>
     <div className={chartClass}>
       <EthnicityChart {...props} style={urbanicityStyle} />

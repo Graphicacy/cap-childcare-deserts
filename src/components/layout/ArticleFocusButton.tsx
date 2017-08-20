@@ -8,7 +8,9 @@ interface ArticleFocusButtonProps {
   scrollToArticle(): void;
 }
 
-const ArticleFocusButton = (props: ArticleFocusButtonProps) =>
+const ArticleFocusButton: React.StatelessComponent<
+  ArticleFocusButtonProps
+> = props =>
   <span className={props.className} onClick={props.scrollToArticle}>
     About the Data <Info />
   </span>;

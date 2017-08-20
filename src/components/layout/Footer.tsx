@@ -39,7 +39,7 @@ const imageClass = style(
 const linkContainerClass = style({ float: 'right', textAlign: 'right' });
 const imgSrc = require('../../../images/ho_CAPlogo.png'); // tslint:disable-line
 
-export const Footer = () =>
+export const Footer: React.StatelessComponent<{}> = () =>
   <div className={footerClass}>
     <footer>
       <img src={imgSrc} className={imageClass} />

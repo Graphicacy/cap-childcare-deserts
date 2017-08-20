@@ -53,7 +53,7 @@ const socialClass = style({
   marginTop: 10
 });
 
-const Header = () =>
+const Header: React.StatelessComponent<{}> = () =>
   <div className={headerClass}>
     <div className={logoClass}>
       <a href="https://www.americanprogress.org/" target="__blank">

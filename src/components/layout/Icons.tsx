@@ -12,7 +12,7 @@ const socialIconClass = style({
   }
 });
 
-export const Mail = () =>
+export const Mail: React.StatelessComponent<{}> = () =>
   <div className={socialIconClass}>
     <svg
       version="1.1"
@@ -25,7 +25,7 @@ export const Mail = () =>
     </svg>
   </div>;
 
-export const Twitter = () =>
+export const Twitter: React.StatelessComponent<{}> = () =>
   <div className={socialIconClass}>
     <svg
       version="1.1"
@@ -38,7 +38,7 @@ export const Twitter = () =>
     </svg>
   </div>;
 
-export const Facebook = () =>
+export const Facebook: React.StatelessComponent<{}> = () =>
   <div className={socialIconClass}>
     <svg
       version="1.1"
@@ -51,7 +51,7 @@ export const Facebook = () =>
     </svg>
   </div>;
 
-export const Info = () =>
+export const Info: React.StatelessComponent<{}> = () =>
   <div className={socialIconClass}>
     <svg
       version="1.1"

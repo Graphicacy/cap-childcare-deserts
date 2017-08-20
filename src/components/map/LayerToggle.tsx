@@ -22,20 +22,20 @@ type MapInteraction =
   | 'touchZoomRotate';
 
 class LayerToggle extends Component<LayerToggleProps> {
-  static contextTypes = {
+  public static contextTypes = {
     map: PropTypes.object
   };
 
-  context: {
+  public context: {
     map: Map;
   };
 
-  componentDidMount() {
+  public componentDidMount() {
     this.toggleInteraction(false);
     this.toggleStateDots('');
   }
 
-  componentDidUpdate() {
+  public componentDidUpdate() {
     const { tractMode, selectedState, urbanicityFilter } = this.props;
     this.toggleStateLayers(!tractMode);
     this.toggleInteraction(tractMode);
@@ -43,7 +43,7 @@ class LayerToggle extends Component<LayerToggleProps> {
     this.toggleStateDots(selectedState === 'All states' ? '' : selectedState);
   }
 
-  toggleTractUrbanicity(urbanicity: UrbanicityFilter) {
+  public toggleTractUrbanicity(urbanicity: UrbanicityFilter) {
     const { map } = this.context;
 
     map.setPaintProperty(
@@ -60,7 +60,7 @@ class LayerToggle extends Component<LayerToggleProps> {
     });
   }
 
-  toggleStateDots(state: StateName | '') {
+  public toggleStateDots(state: StateName | '') {
     const { map } = this.context;
     map.setFilter('locations-with-state', [
       '==',
@@ -69,7 +69,7 @@ class LayerToggle extends Component<LayerToggleProps> {
     ]);
   }
 
-  toggleStateLayers(visible: boolean) {
+  public toggleStateLayers(visible: boolean) {
     const { map } = this.context;
 
     /**
@@ -80,7 +80,7 @@ class LayerToggle extends Component<LayerToggleProps> {
     });
   }
 
-  toggleInteraction(enable: boolean) {
+  public toggleInteraction(enable: boolean) {
     const { map } = this.context;
     const toggle = enable ? 'enable' : 'disable';
 
@@ -101,7 +101,7 @@ class LayerToggle extends Component<LayerToggleProps> {
     });
   }
 
-  render() {
+  public render() {
     return null;
   }
 }

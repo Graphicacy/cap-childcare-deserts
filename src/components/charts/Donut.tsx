@@ -89,14 +89,14 @@ function getHoverHandlers(
   return (hoverHandlerCache[key] = handler);
 }
 
-const Donut = ({
+const Donut: React.StatelessComponent<DonutProps> = ({
   n,
   name,
   title = 'Title',
   size = 130,
   onMouseOut,
   onMouseOver
-}: DonutProps) =>
+}) =>
   <div>
     <svg
       viewBox={`0 0 ${size} ${size}`}

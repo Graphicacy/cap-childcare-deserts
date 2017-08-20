@@ -16,7 +16,7 @@ type EthnicityChartProps = Readonly<{
 const chartContainerClass = style(flex, horizontal);
 const chartClass = style(flex);
 
-const EthnicityChart = (props: EthnicityChartProps) =>
+const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
   <ChartContainer
     title="Children in a child care desert, by race"
     style={props.style}

@@ -120,7 +120,7 @@ type MapProps = Readonly<{
   onGeocoderResult(feature?: FeatureQueryResult): void;
 }>;
 
-const Map = (props: MapProps) =>
+const Map: React.StatelessComponent<MapProps> = props =>
   <div className={mapContainerClass}>
     <LoadingIndicator loaded={props.loaded} embed={props.embed} />
     <MapBoxMap

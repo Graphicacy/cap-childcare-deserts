@@ -29,15 +29,12 @@ const nonEmbedClass = style(
   )
 );
 
-const Loader = () => <div className="loader" />;
+const Loader: React.StatelessComponent<{}> = () => <div className="loader" />;
 
-const LoadingIndicator = ({
-  loaded,
-  embed
-}: {
+const LoadingIndicator: React.StatelessComponent<{
   loaded: boolean;
   embed: boolean;
-}) =>
+}> = ({ loaded, embed }) =>
   loaded
     ? null
     : <div

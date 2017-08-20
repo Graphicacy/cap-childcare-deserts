@@ -54,7 +54,7 @@ type BannerProps = Readonly<{
   selectedState: StateName;
 }>;
 
-const Banner = (props: BannerProps) =>
+const Banner: React.StatelessComponent<BannerProps> = props =>
   <div className={bannerContainerClass}>
     <div className={bannerClassName}>
       <TitleText state={props.selectedState} />

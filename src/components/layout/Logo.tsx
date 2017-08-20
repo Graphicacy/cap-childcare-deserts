@@ -15,7 +15,7 @@ const logoClass = style(
   )
 );
 
-export const Logo = () =>
+export const Logo: React.StatelessComponent<{}> = () =>
   <svg
     version="1.1"
     id="Layer_1"

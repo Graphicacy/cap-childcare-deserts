@@ -3,7 +3,6 @@
   "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
     "quotemark": ["single", "jsx-double"],
-    "member-access": false,
     "interface-name": false,
     "member-ordering": false,
     "jsdoc-format": false,

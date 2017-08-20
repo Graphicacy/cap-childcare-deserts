@@ -57,12 +57,12 @@ interface LegendEntryProps {
   style?: React.CSSProperties;
 }
 
-const LegendEntry = ({
+const LegendEntry: React.StatelessComponent<LegendEntryProps> = ({
   color,
   range,
   style: legendStyle,
   horizontal
-}: LegendEntryProps) =>
+}) =>
   <div
     className={legendItemClass}
     style={{
@@ -88,7 +88,7 @@ const LegendEntry = ({
     </span>
   </div>;
 
-const Legend = (props: LegendProps) =>
+const Legend: React.StatelessComponent<LegendProps> = props =>
   <div
     className={legendClass}
     style={{

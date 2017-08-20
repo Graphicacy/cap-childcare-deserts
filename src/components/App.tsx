@@ -11,7 +11,7 @@ type AppProps = Readonly<{
   onMouseMove<T>(e: React.MouseEvent<T>): void;
 }>;
 
-const App = (props: AppProps) =>
+const App: React.StatelessComponent<AppProps> = props =>
   <div onMouseMove={e => props.tooltipActive && props.onMouseMove(e)}>
     {props.embed ? <Map /> : <Container />}
     <ToolTip />

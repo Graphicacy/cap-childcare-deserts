@@ -52,7 +52,11 @@ const getButtonStyles = (active: boolean) => {
   });
 };
 
-const Button = (props: { onClick?(): void; text: string; active?: boolean }) =>
+const Button: React.StatelessComponent<{
+  onClick?(): void;
+  text: string;
+  active?: boolean;
+}> = props =>
   <div
     className={buttonClass}
     style={getButtonStyles(!!props.active)}
@@ -61,7 +65,7 @@ const Button = (props: { onClick?(): void; text: string; active?: boolean }) =>
     {props.text}
   </div>;
 
-const Controls = (props: ControlProps) =>
+const Controls: React.StatelessComponent<ControlProps> = props =>
   <div className={controlClass}>
     <Button
       text="all"

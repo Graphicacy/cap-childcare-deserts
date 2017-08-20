@@ -27,11 +27,11 @@ type IncomeChartProps = Readonly<{
   selectedState: StateName;
 }>;
 
-const IncomeChart = ({
+const IncomeChart: React.StatelessComponent<IncomeChartProps> = ({
   selectedState,
   onMouseOut,
   onMouseOver
-}: IncomeChartProps) =>
+}) =>
   <ChartContainer title="Children in a child care desert, by income">
     <div className={containerClass}>
       <div className={flexClass}>

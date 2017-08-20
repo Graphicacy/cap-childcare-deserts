@@ -12,7 +12,7 @@ const stateSelectClass = style({
   marginLeft: -(selectWidth / 2)
 });
 
-const MapStateSelect = (props: { embed?: boolean }) =>
+const MapStateSelect: React.StatelessComponent<{ embed?: boolean }> = props =>
   props.embed ? <StateSelect above className={stateSelectClass} /> : null;
 
 export default MapStateSelect;
