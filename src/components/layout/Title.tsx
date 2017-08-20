@@ -1,14 +1,23 @@
 import { createElement } from 'react';
-import { style } from 'typestyle';
+import { style, media } from 'typestyle';
 
-const titleClass = style({
-  fontWeight: 'bold',
-  textAlign: 'center',
-  width: '100%',
-  fontSize: 24,
-  fontFamily: 'Roboto Slab',
-  lineHeight: '3em'
-});
+const titleClass = style(
+  {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    width: '100%',
+    fontSize: 24,
+    fontFamily: 'Roboto Slab',
+    lineHeight: '3em'
+  },
+  media(
+    { maxWidth: 768 },
+    {
+      lineHeight: '1.5em',
+      marginBottom: 15
+    }
+  )
+);
 
 const Title: React.StatelessComponent = ({ children }) =>
   <div className={titleClass}>
