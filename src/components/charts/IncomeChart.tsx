@@ -9,6 +9,8 @@ import Donut from './Donut';
 const flexClass = style(flex);
 
 const containerClass = style(flex, horizontal, {
+  maxWidth: 370,
+  margin: '0 auto',
   $nest: {
     '>:first-child': {
       paddingLeft: '16.66%'

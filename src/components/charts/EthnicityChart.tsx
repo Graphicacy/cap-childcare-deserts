@@ -13,38 +13,38 @@ function data(state: StateName) {
 
 type EthnicityChartProps = Readonly<{
   selectedState: StateName;
+  style: React.CSSProperties;
   onMouseOver(value: string, label: string): void;
   onMouseOut(): void;
 }>;
 
-const EthnicityChart = ({
-  selectedState,
-  onMouseOut,
-  onMouseOver
-}: EthnicityChartProps) =>
-  <ChartContainer title="Children in a child care desert, by race">
+const EthnicityChart = (props: EthnicityChartProps) =>
+  <ChartContainer
+    title="Children in a child care desert, by race"
+    style={props.style}
+  >
     <div className={style(flex, horizontal)}>
       <div className={style(flex)}>
         <Donut
-          onMouseOver={onMouseOver}
-          onMouseOut={onMouseOut}
-          n={data(selectedState).percentInDesertsWhite}
+          onMouseOver={props.onMouseOver}
+          onMouseOut={props.onMouseOut}
+          n={data(props.selectedState).percentInDesertsWhite}
           title="White"
         />
       </div>
       <div className={style(flex)}>
         <Donut
-          onMouseOver={onMouseOver}
-          onMouseOut={onMouseOut}
-          n={data(selectedState).percentInDesertsBlack}
+          onMouseOver={props.onMouseOver}
+          onMouseOut={props.onMouseOut}
+          n={data(props.selectedState).percentInDesertsBlack}
           title="Black"
         />
       </div>
       <div className={style(flex)}>
         <Donut
-          onMouseOver={onMouseOver}
-          onMouseOut={onMouseOut}
-          n={data(selectedState).percentInDesertsHispanic}
+          onMouseOver={props.onMouseOver}
+          onMouseOut={props.onMouseOut}
+          n={data(props.selectedState).percentInDesertsHispanic}
           title="Hispanic"
         />
       </div>

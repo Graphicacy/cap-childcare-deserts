@@ -12,11 +12,11 @@ const barChartTitleClass = style({
 
 const chartContainerClass = style(content);
 
-const ChartContainer: StatelessComponent<{ title: string }> = ({
-  children,
-  title
-}) =>
-  <div className={chartContainerClass}>
+const ChartContainer: StatelessComponent<{
+  title: string;
+  style?: React.CSSProperties;
+}> = ({ children, title, style }) =>
+  <div className={chartContainerClass} style={style}>
     <div className={barChartTitleClass}>
       {title}
     </div>

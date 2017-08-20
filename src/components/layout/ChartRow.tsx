@@ -1,7 +1,6 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
 import { style, media } from 'typestyle';
-import { flex, horizontal, vertical } from 'csstips';
 
 import { StateName } from '../../data';
 import { State, Dispatch, showTooltip, hideTooltip } from '../../store/';
@@ -10,20 +9,38 @@ import { EthnicityChart, IncomeChart, UrbanicityChart } from '../charts/';
 /**
  * break between charts in columns and rows at 780px
  */
-const responsiveRowClass = style(
-  flex,
-  { padding: 40, paddingTop: 0, maxWidth: 1200, margin: '0 auto' },
-  media({ minWidth: 780 }, horizontal),
-  media({ maxWidth: 780 }, vertical, {
-    $nest: {
-      '& div': {
-        marginBottom: 10
+const chartContainerClass = style(
+  {
+    display: 'flex',
+    flexWrap: 'wrap',
+    padding: 40,
+    paddingTop: 0,
+    maxWidth: 1200,
+    margin: '0 auto'
+  },
+  media(
+    { maxWidth: 780 },
+    {
+      $nest: {
+        '& div': {
+          marginBottom: 10
+        }
       }
     }
-  })
+  )
 );
 
-const flexClass = style(flex);
+const chartClass = style({
+  flexGrow: 1,
+  // flexShrink: 0,
+  flexBasis: 370,
+  justifyContent: 'center'
+});
+
+const urbanicityStyle: React.CSSProperties = {
+  maxWidth: 370,
+  margin: '0 auto'
+};
 
 export type ChartsProps = Readonly<{
   selectedState: StateName;
@@ -32,14 +49,14 @@ export type ChartsProps = Readonly<{
 }>;
 
 export const ChartRow = (props: ChartsProps) =>
-  <div className={responsiveRowClass}>
-    <div className={flexClass}>
-      <EthnicityChart {...props} />
+  <div className={chartContainerClass}>
+    <div className={chartClass}>
+      <EthnicityChart {...props} style={urbanicityStyle} />
     </div>
-    <div className={flexClass}>
-      <UrbanicityChart {...props} />
+    <div className={chartClass}>
+      <UrbanicityChart {...props} style={urbanicityStyle} />
     </div>
-    <div className={flexClass}>
+    <div className={chartClass}>
       <IncomeChart {...props} />
     </div>
   </div>;

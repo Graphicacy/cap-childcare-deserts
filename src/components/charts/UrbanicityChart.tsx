@@ -18,6 +18,7 @@ import { niceNumber } from './format';
 type DataArray = { type: string; value: number }[];
 
 type UrbanicityChartProps = {
+  style: React.CSSProperties;
   selectedState: StateName;
   onMouseOver(value: string, label: string): void;
   onMouseOut(): void;
@@ -40,7 +41,10 @@ const labelStyles = { fontFamily: 'Open Sans' };
 const tickStyles = { tickLabels: labelStyles };
 
 const UrbanicityChart = (props: UrbanicityChartProps) =>
-  <ChartContainer title="Children in a child care desert, by ubanicity">
+  <ChartContainer
+    title="Children in a child care desert, by ubanicity"
+    style={props.style}
+  >
     <VictoryChart
       domainPadding={{ y: 30 }}
       padding={{
