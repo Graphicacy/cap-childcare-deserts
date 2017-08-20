@@ -11,7 +11,7 @@ import { StateName } from '../../data';
 import { State, Dispatch, focusArticleComplete } from '../../store/';
 import { Info } from './Icons';
 import { Colors } from '../colors';
-import { HEADER_HEIGHT } from './header';
+import { HEADER_HEIGHT } from './Header';
 
 const ARTICLE_MAX_WIDTH = 750;
 

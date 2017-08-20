@@ -3,7 +3,9 @@ import { style, media } from 'typestyle';
 
 const logoClass = style(
   {
-    width: 300
+    width: 300,
+    position: 'absolute',
+    top: 5
   },
   media(
     { maxWidth: 768 },
