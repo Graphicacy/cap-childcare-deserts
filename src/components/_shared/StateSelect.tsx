@@ -32,7 +32,7 @@ const StateSelect = (props: StateSelectProps) =>
     onChange={props.onSelectState}
   >
     {stateList.map(s =>
-      <option value={s}>
+      <option key={s} value={s}>
         {s}
       </option>
     )}

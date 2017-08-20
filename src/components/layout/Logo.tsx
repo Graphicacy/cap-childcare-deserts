@@ -23,7 +23,7 @@ export const Logo = () =>
     x="0px"
     y="0px"
     viewBox="0 0 572.3 100.2"
-    enable-background="new 0 0 572.3 100.2"
+    enableBackground="new 0 0 572.3 100.2"
     className={logoClass}
   >
     <g>

@@ -177,7 +177,7 @@ const Map = (props: MapProps) =>
         </div>
       </div>
     : <div className={mapContainerClass}>
-        <LoadingIndicator {...props} />
+        <LoadingIndicator loaded={props.loaded} embed={props.embed} />
         <MapBoxMap
           style={mapboxStyle}
           containerStyle={getMapStyles(props)}
@@ -209,16 +209,14 @@ const Map = (props: MapProps) =>
             urbanicityFilter={props.urbanicityFilter}
           />
           {props.tractMode
-            ? [
-                <Controls />,
-                <TractLegend />,
-                <ZoomControl style={zoomStyles} />,
+            ? <span>
+                <Controls />
+                <TractLegend />
+                <ZoomControl style={zoomStyles} />
                 <Geocoder tractMode={props.tractMode} />
-              ]
-            : [
-                (!props.mobile || props.embed) &&
-                  <Legend style={desktopLegendStyles} />
-              ]}
+              </span>
+            : (!props.mobile || props.embed) &&
+              <Legend style={desktopLegendStyles} />}
         </MapBoxMap>
         {props.embed
           ? <StateSelect above className={stateSelectClass} />
@@ -235,8 +233,8 @@ const mapStateToProps = (state: State) => {
     mobile: state.mobile,
     selectedState: state.selectedState,
     embed: state.embed,
-    zoom: state.zoom,
-    center: state.center,
+    zoom: state.mapTarget.zoom,
+    center: state.mapTarget.center,
     bounds: state.bounds,
     tractMode: state.selectedState !== 'All states'
   };

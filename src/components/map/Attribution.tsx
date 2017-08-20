@@ -2,6 +2,7 @@ import { createElement, Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { Map, AttributionControl } from 'mapbox-gl';
 import { style } from 'typestyle';
+import * as PropTypes from 'prop-types';
 
 const attributionClass = style({
   position: 'absolute',
@@ -15,6 +16,10 @@ type AttributionProps = {
 };
 
 export default class Attribution extends Component<AttributionProps> {
+  static contextTypes = {
+    map: PropTypes.object
+  };
+
   context: {
     map: Map;
   };
@@ -27,7 +32,6 @@ export default class Attribution extends Component<AttributionProps> {
   }
 
   render() {
-    const { style } = this.props;
-    return <div className={attributionClass} style={style} />;
+    return <div className={attributionClass} style={this.props.style} />;
   }
 }

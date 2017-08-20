@@ -102,6 +102,7 @@ const Legend = (props: LegendProps) =>
     <div>
       {bins.map(([range, color]) =>
         <LegendEntry
+          key={range}
           range={range}
           color={color}
           horizontal={props.horizontal}

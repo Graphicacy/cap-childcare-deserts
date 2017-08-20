@@ -1,5 +1,6 @@
 import { createElement, Component } from 'react';
 import { Map } from 'mapbox-gl';
+import * as PropTypes from 'prop-types';
 import { stateModeLayers } from './constants';
 import { StateName, stateData } from '../../data';
 import { UrbanicityFilter } from '../../store';
@@ -21,7 +22,13 @@ type MapInteraction =
   | 'touchZoomRotate';
 
 class LayerToggle extends Component<LayerToggleProps> {
-  context: { map: Map };
+  static contextTypes = {
+    map: PropTypes.object
+  };
+
+  context: {
+    map: Map;
+  };
 
   componentDidMount() {
     this.toggleInteraction(false);

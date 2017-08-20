@@ -7,14 +7,16 @@ export type State = Readonly<{
   selectedState: StateName;
   mapReady: boolean;
   embed: boolean;
-  zoom: [number];
-  center: [number, number];
   bounds: number[][] | null;
   tooltip: TooltipState;
   showLegend: boolean;
   urbanicityFilter: UrbanicityFilter;
   mobile: boolean;
   articleFocus: boolean;
+  mapTarget: {
+    zoom: [number];
+    center: [number, number];
+  };
   mouse: {
     x: number;
     y: number;

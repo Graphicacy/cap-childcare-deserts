@@ -1,5 +1,6 @@
 import { createElement, Component } from 'react';
 import { Map, Point, Layer } from 'mapbox-gl';
+import * as PropTypes from 'prop-types';
 import { TractProperties } from '../../store';
 import { StateName } from '../../data';
 
@@ -32,6 +33,10 @@ export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
   FeatureQueryProps & P,
   S
 > {
+  static contextTypes = {
+    map: PropTypes.object
+  };
+
   context: {
     map: Map;
   };

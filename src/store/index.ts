@@ -4,8 +4,7 @@ import {
   ActionType,
   setSelectedState,
   Dispatch,
-  setScreenSize,
-  setZoomLevel
+  setScreenSize
 } from './actions';
 import { startZoom, mobileStartZoom } from './constants';
 import { State } from './state';

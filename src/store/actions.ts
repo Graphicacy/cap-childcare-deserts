@@ -10,8 +10,7 @@ import { State } from './state';
 
 export enum ActionType {
   SELECT_STATE = 'SELECT_STATE',
-  SET_ZOOM = 'SET_ZOOM',
-  SET_CENTER = 'SET_CENTER',
+  SET_MAP_TARGET = 'SET_MAP_TARGET',
   SHOW_TOOLTIP = 'SHOW_TOOLTIP',
   HIDE_TOOLTIP = 'HIDE_TOOLTIP',
   MOUSE_MOVE = 'MOUSE_MOVE',
@@ -27,8 +26,7 @@ export enum ActionType {
 
 export type Action =
   | SelectStateAction
-  | SetZoomLevelAction
-  | SetCenterAction
+  | SetMapTargetAction
   | SetBoundsAction
   | ShowTooltipAction
   | HideTooltipAction
@@ -69,16 +67,14 @@ export const zoomToState = (name: StateName) => (
   getState: () => State
 ) => {
   if (name !== 'All states') {
-    // const [lon1, lon2, lat1, lat2] = stateData[name].bounds;
-    // dispatch(setBounds([[lat1, lon1], [lat2, lon2]]));
-    dispatch(setCenter(stateData[name].center.slice() as [number, number]));
-    dispatch(setZoomLevel(stateZoom.slice() as [number]));
+    const center = stateData[name].center.slice() as [number, number];
+    const zoom = stateZoom.slice() as [number];
+    dispatch(setMapTarget(zoom, center));
   } else {
     const { mobile } = getState();
-    dispatch(setCenter(startCenter.slice() as [number, number]));
-    dispatch(
-      setZoomLevel((mobile ? mobileStartZoom : startZoom).slice() as [number])
-    );
+    const zoom = (mobile ? mobileStartZoom : startZoom).slice() as [number];
+    const center = startCenter.slice() as [number, number];
+    dispatch(setMapTarget(zoom, center));
   }
 };
 
@@ -95,35 +91,24 @@ export const setSelectedState = (name: StateName) => (dispatch: Dispatch) => {
   );
 };
 
-type SetZoomLevelAction = {
-  type: ActionType.SET_ZOOM;
+type SetMapTargetAction = {
+  type: ActionType.SET_MAP_TARGET;
   payload: {
     zoom: [number];
-  };
-};
-
-export const setZoomLevel = (zoom: [number]) =>
-  ({
-    type: ActionType.SET_ZOOM,
-    payload: {
-      zoom
-    }
-  } as SetZoomLevelAction);
-
-type SetCenterAction = {
-  type: ActionType.SET_CENTER;
-  payload: {
     center: [number, number];
   };
 };
 
-export const setCenter = (center: [number, number]) =>
-  ({
-    type: ActionType.SET_CENTER,
-    payload: {
-      center
-    }
-  } as SetCenterAction);
+export const setMapTarget = (
+  zoom: [number],
+  center: [number, number]
+): SetMapTargetAction => ({
+  type: ActionType.SET_MAP_TARGET,
+  payload: {
+    center,
+    zoom
+  }
+});
 
 type ShowTooltipAction = {
   type: ActionType.SHOW_TOOLTIP;

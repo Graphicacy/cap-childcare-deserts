@@ -9,14 +9,14 @@ const INITIAL_ZOOM = INITIAL_WINDOW_SIZE
   ? mobileStartZoom as [number]
   : startZoom as [number];
 
+const INITIAL_CENTER = startCenter as [number, number];
+
 /**
  * combine reducers into state properties
  */
 export default combineReducers({
   selectedState,
   embed,
-  zoom,
-  center,
   tooltip,
   mouse,
   showLegend,
@@ -24,7 +24,8 @@ export default combineReducers({
   urbanicityFilter,
   mobile,
   mapReady,
-  articleFocus
+  articleFocus,
+  mapTarget
 });
 
 /**
@@ -45,31 +46,6 @@ function selectedState(state: string = 'All states', action: Action) {
 
 function embed(state: boolean = false, action: Action) {
   return state;
-}
-
-function center(
-  state: [number, number] = startCenter as [number, number],
-  action: Action
-) {
-  switch (action.type) {
-    case ActionType.SET_CENTER: {
-      return action.payload.center;
-    }
-
-    default:
-      return state;
-  }
-}
-
-function zoom(state: [number] = INITIAL_ZOOM, action: Action) {
-  switch (action.type) {
-    case ActionType.SET_ZOOM: {
-      return action.payload.zoom;
-    }
-
-    default:
-      return state;
-  }
 }
 
 function tooltip(state: TooltipState = { show: false }, action: Action) {
@@ -165,6 +141,23 @@ function articleFocus(state = false, action: Action) {
     }
     case ActionType.ARTICLE_FOCUS_REQUEST: {
       return true;
+    }
+
+    default:
+      return state;
+  }
+}
+
+function mapTarget(
+  state: { zoom: [number]; center: [number, number] } = {
+    zoom: INITIAL_ZOOM,
+    center: INITIAL_CENTER
+  },
+  action: Action
+) {
+  switch (action.type) {
+    case ActionType.SET_MAP_TARGET: {
+      return { ...action.payload };
     }
 
     default:
