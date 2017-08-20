@@ -55,9 +55,11 @@ function makeEntry(entry: { color: string; text: string; circle: boolean }) {
   );
 }
 
+const entryElements = entries.map(makeEntry);
+
 const TractLegend: React.StatelessComponent<{}> = () =>
   <div className={legendClass}>
-    {entries.map(makeEntry)}
+    {entryElements}
   </div>;
 
 export default TractLegend;
