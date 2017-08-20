@@ -6,11 +6,6 @@ import { StateName, stateData } from '../../data/';
 import ChartContainer from './ChartContainer';
 import Donut from './Donut';
 
-function data(state: StateName) {
-  const name = state || 'All states';
-  return stateData[name];
-}
-
 type EthnicityChartProps = Readonly<{
   selectedState: StateName;
   style: React.CSSProperties;
@@ -18,34 +13,40 @@ type EthnicityChartProps = Readonly<{
   onMouseOut(): void;
 }>;
 
+const chartContainerClass = style(flex, horizontal);
+const chartClass = style(flex);
+
 const EthnicityChart = (props: EthnicityChartProps) =>
   <ChartContainer
     title="Children in a child care desert, by race"
     style={props.style}
   >
-    <div className={style(flex, horizontal)}>
-      <div className={style(flex)}>
+    <div className={chartContainerClass}>
+      <div className={chartClass}>
         <Donut
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
-          n={data(props.selectedState).percentInDesertsWhite}
+          n={stateData[props.selectedState].percentInDesertsWhite}
           title="White"
+          name="white"
         />
       </div>
-      <div className={style(flex)}>
+      <div className={chartClass}>
         <Donut
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
-          n={data(props.selectedState).percentInDesertsBlack}
+          n={stateData[props.selectedState].percentInDesertsBlack}
           title="Black"
+          name="black"
         />
       </div>
-      <div className={style(flex)}>
+      <div className={chartClass}>
         <Donut
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
-          n={data(props.selectedState).percentInDesertsHispanic}
+          n={stateData[props.selectedState].percentInDesertsHispanic}
           title="Hispanic"
+          name="hispanic"
         />
       </div>
     </div>

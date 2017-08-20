@@ -21,11 +21,6 @@ const containerClass = style(flex, horizontal, {
   }
 });
 
-const data = (state: StateName) => {
-  const name = state || 'All states';
-  return stateData[name];
-};
-
 type IncomeChartProps = Readonly<{
   onMouseOver(value: string, label: string): void;
   onMouseOut(): void;
@@ -43,7 +38,8 @@ const IncomeChart = ({
         <Donut
           onMouseOut={onMouseOut}
           onMouseOver={onMouseOver}
-          n={data(selectedState).percentInDesertsBlack}
+          n={stateData[selectedState].percentInDesertsBlack}
+          name="belowavg"
           title={
             <span>
               {' '}Below Avg.<br /> Income{' '}
@@ -55,7 +51,8 @@ const IncomeChart = ({
         <Donut
           onMouseOut={onMouseOut}
           onMouseOver={onMouseOver}
-          n={data(selectedState).percentInDesertsWhite}
+          n={stateData[selectedState].percentInDesertsWhite}
+          name="aboveavg"
           title={
             <span>
               {' '}Above Avg.<br /> Income{' '}

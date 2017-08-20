@@ -23,16 +23,76 @@ const percentClass = style({
 
 export type DonutProps = Readonly<{
   n: number;
+  name: string;
   size?: number;
   title?: string | ReactNode;
   onMouseOver(value: string, label: string): void;
   onMouseOut(): void;
 }>;
 
+const svgStyle = { width: '100%' };
+const animate = { duration: 500 };
+
 const noLabel = (x: any) => '';
+
+type DonutDatum = {
+  y: number;
+  fill: Colors;
+  inDesert: boolean;
+  stroke: string;
+  strokeWidth: number;
+};
+
+const dataCache: { [key: string]: DonutDatum[] } = {};
+function generateData(n: number) {
+  const key = `donut-${n}`;
+  if (key in dataCache) return dataCache[key];
+
+  return (dataCache[key] = [
+    {
+      y: n,
+      fill: Colors.ORANGE,
+      inDesert: true,
+      stroke: 'white',
+      strokeWidth: 2
+    },
+    {
+      y: 1 - n,
+      fill: Colors.GRAY,
+      inDesert: false,
+      stroke: 'white',
+      strokeWidth: 2
+    }
+  ]);
+}
+
+const hoverHandlerCache: { [key: string]: any } = {};
+function getHoverHandlers(
+  key: string,
+  onMouseOver: Function,
+  onMouseOut: Function
+) {
+  if (key in hoverHandlerCache) return hoverHandlerCache[key];
+
+  const handler = [
+    {
+      target: 'data',
+      eventHandlers: {
+        onMouseOut,
+        onMouseOver(event: any, props: any) {
+          const { datum: { inDesert, y } } = props;
+          onMouseOver(percent(y), `${inDesert ? '' : 'not '}in desert`);
+        }
+      }
+    }
+  ]; // hack for typings;
+
+  return (hoverHandlerCache[key] = handler);
+}
 
 const Donut = ({
   n,
+  name,
   title = 'Title',
   size = 130,
   onMouseOut,
@@ -42,7 +102,7 @@ const Donut = ({
     <svg
       viewBox={`0 0 ${size} ${size}`}
       preserveAspectRatio="xMidYMid meet"
-      style={{ width: '100%' }}
+      style={svgStyle}
     >
       <VictoryPie
         padding={10}
@@ -50,39 +110,9 @@ const Donut = ({
         height={size}
         innerRadius={38}
         labels={noLabel}
-        animate={{
-          duration: 500
-        }}
-        data={[
-          {
-            y: n,
-            fill: Colors.ORANGE,
-            inDesert: true,
-            stroke: 'white',
-            strokeWidth: 2
-          },
-          {
-            y: 1 - n,
-            fill: Colors.GRAY,
-            inDesert: false,
-            stroke: 'white',
-            strokeWidth: 2
-          }
-        ]}
-        events={
-          [
-            {
-              target: 'data',
-              eventHandlers: {
-                onMouseOut,
-                onMouseOver(event: any, props: any) {
-                  const { datum: { inDesert, y } } = props;
-                  onMouseOver(percent(y), `${inDesert ? '' : 'not '}in desert`);
-                }
-              }
-            }
-          ] as any // hack for typings
-        }
+        animate={animate}
+        data={generateData(n)}
+        events={getHoverHandlers(name, onMouseOver, onMouseOut)}
         standalone={false}
       />
       <text

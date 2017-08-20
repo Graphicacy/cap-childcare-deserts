@@ -31,6 +31,35 @@ type StateBarChartProps = Readonly<{
 }>;
 
 const tickStyles = { tickLabels: { fontFamily: 'Open Sans' } };
+const barStyles = { data: { width: 15, cursor: 'pointer' } };
+const animate = { duration: 500 };
+const padding = { top: 0, left: 50, bottom: 50 };
+const domainPadding = { x: 20 };
+
+let handlerCache: any;
+const handlers = (
+  onMouseOut: Function,
+  onMouseOver: Function,
+  onClick: Function
+) => {
+  if (handlerCache) return handlerCache;
+  return (handlerCache = [
+    {
+      target: 'data' as 'data',
+      eventHandlers: {
+        onMouseOut,
+        onMouseOver(event: any, props: any) {
+          const { state, percent: value } = props.datum;
+          onMouseOver(percent(value), state);
+        },
+        onClick(event: any, props: any) {
+          const { state } = props.datum;
+          onClick(state);
+        }
+      }
+    }
+  ] as any); // hack for typings;
+};
 
 const StateBarChart = ({
   selectedState,
@@ -39,18 +68,12 @@ const StateBarChart = ({
   onMouseOver
 }: StateBarChartProps) =>
   <ChartContainer title="Percent in a child care desert, by state">
-    <VictoryChart
-      padding={{ top: 0, left: 50, bottom: 50 }}
-      width={600}
-      domainPadding={{ x: 20 }}
-    >
+    <VictoryChart padding={padding} width={600} domainPadding={domainPadding}>
       <VictoryBar
         y="percent"
         x="abbr"
-        animate={{
-          duration: 500
-        }}
-        style={{ data: { width: 15, cursor: 'pointer' } }}
+        animate={animate}
+        style={barStyles}
         data={data.map(x => ({
           ...x,
           fill:
@@ -60,24 +83,7 @@ const StateBarChart = ({
               ? Colors.ORANGE
               : Colors.GRAY
         }))}
-        events={
-          [
-            {
-              target: 'data' as 'data',
-              eventHandlers: {
-                onMouseOut,
-                onMouseOver(event: any, props: any) {
-                  const { state, percent: value } = props.datum;
-                  onMouseOver(percent(value), state);
-                },
-                onClick(event: any, props: any) {
-                  const { state } = props.datum;
-                  onClick(state);
-                }
-              }
-            }
-          ] as any // hack for typings
-        }
+        events={handlers(onMouseOut, onMouseOver, onClick)}
       />
       <VictoryAxis
         style={tickStyles}

@@ -78,12 +78,15 @@ const tractRowClass = style({
   marginTop: 10
 });
 
+const titleStyle: React.CSSProperties = { fontWeight: 'bold' };
+const italic: React.CSSProperties = { fontStyle: 'italic' };
+
 const TractTooltip = ({ properties }: TractToolTipData) =>
   <div>
-    <span style={{ fontWeight: 'bold' }}>
+    <span style={titleStyle}>
       Census Tract {Number(properties.GEOID)}
       {properties.ccdesert
-        ? <div style={{ fontStyle: 'italic' }}>Child Care Desert </div>
+        ? <div style={italic}>Child Care Desert </div>
         : <div> &nbsp; </div>}
     </span>
     <div className={tractRowClass}>
