@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config ./dev/webpack.config.ts",
-    "test": "npm run prettier && tslint --fix --format stylish -p ./src/",
+    "test": "npm run prettier && tslint --type-check --fix --format stylish -p ./src/",
     "build:dev": "rm -rf ./public && webpack --config ./dev/webpack.config.ts",
     "build": "npm run build:dev -- --env.prod && rm -rf ./public/bundles",
     "prettier": "prettier --single-quote --write './src/**/*.{ts,tsx}'",
