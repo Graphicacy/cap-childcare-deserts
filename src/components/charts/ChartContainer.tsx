@@ -1,6 +1,6 @@
+import { content } from 'csstips';
 import { createElement, StatelessComponent } from 'react';
 import { style } from 'typestyle';
-import { content } from 'csstips';
 
 const barChartTitleClass = style({
   fontWeight: 'bold',
@@ -15,12 +15,12 @@ const chartContainerClass = style(content);
 const ChartContainer: StatelessComponent<{
   title: string;
   style?: React.CSSProperties;
-}> = ({ children, title, style }) =>
-  <div className={chartContainerClass} style={style}>
+}> = props =>
+  <div className={chartContainerClass} style={props.style}>
     <div className={barChartTitleClass}>
-      {title}
+      {props.title}
     </div>
-    {children}
+    {props.children}
   </div>;
 
 export default ChartContainer;

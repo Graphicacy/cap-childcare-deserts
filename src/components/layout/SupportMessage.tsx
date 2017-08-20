@@ -1,6 +1,6 @@
+import { supported } from 'mapbox-gl';
 import { createElement } from 'react';
 import { style } from 'typestyle';
-import { supported } from 'mapbox-gl';
 
 import { Colors } from '../colors';
 

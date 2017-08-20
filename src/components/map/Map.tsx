@@ -1,45 +1,43 @@
-import { createElement, Component } from 'react';
+import { Component, createElement } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  Map as ReactMapboxGl,
   Layer,
-  ZoomControl,
-  Source
+  Map as ReactMapboxGl,
+  Source,
+  ZoomControl
 } from 'react-mapbox-gl';
 
 import { Map as MapboxMap } from 'mapbox-gl';
-import { style, media } from 'typestyle';
+import { media, style } from 'typestyle';
 
-import { StateName, stateData } from '../../data';
+import { stateData, StateName } from '../../data';
 import {
-  State,
   Dispatch,
-  showLegend,
-  hideLegend,
+  hideTooltip,
+  mapReady,
+  selectState,
   selectStateAndCenter,
   showTooltip,
-  hideTooltip,
+  State,
   TractProperties,
-  mapReady,
-  UrbanicityFilter,
-  selectState
+  UrbanicityFilter
 } from '../../store';
 
-import { HEADER_HEIGHT } from '../layout/Header';
-import Controls from './Controls';
-import StateSelect from '../_shared/StateSelect';
-import Geocoder from './Geocoder';
-import Legend from './Legend';
-import Mouse from './Mouse';
-import LayerToggle from './LayerToggle';
-import TractLegend from './TractLegend';
-import Attribution from './Attribution';
-import LoadingIndicator from './LoadingIndicator';
-import { accessToken, mapboxStyle, HoverSources } from './constants';
-import { TRACT_CONTROL_INDENT } from './tracts';
-import { FeatureQueryResult } from './FeatureQuery';
 import { Colors } from '../colors';
+import { HEADER_HEIGHT } from '../layout/Header';
+import Attribution from './Attribution';
+import { accessToken, HoverSources, mapboxStyle } from './constants';
+import Controls from './Controls';
+import { FeatureQueryResult } from './FeatureQuery';
+import Geocoder from './Geocoder';
+import LayerToggle from './LayerToggle';
+import Legend from './Legend';
+import LoadingIndicator from './LoadingIndicator';
+import MapStateSelect from './MapStateSelect';
+import Mouse from './Mouse';
+import TractLegend from './TractLegend';
+import { TRACT_CONTROL_INDENT } from './tracts';
 
 const MapBoxMap = ReactMapboxGl({
   accessToken,
@@ -51,16 +49,6 @@ const MapBoxMap = ReactMapboxGl({
 const mapContainerClass = style({
   position: 'relative',
   zIndex: 1
-});
-
-const selectWidth = 250;
-
-const stateSelectClass = style({
-  position: 'absolute',
-  bottom: 40,
-  width: selectWidth,
-  left: '50%',
-  marginLeft: -(selectWidth / 2)
 });
 
 const zoomStyles: React.CSSProperties = {
@@ -93,22 +81,24 @@ const mapClass = style(
   )
 );
 
+const statesByAbbrResult: { [key: string]: StateName } = {};
 const statesByAbbr = Object.keys(stateData).reduce((out, state: StateName) => {
   out[stateData[state].abbr] = state;
   return out;
-}, {} as { [key: string]: StateName });
+}, statesByAbbrResult);
 
 const mapStyleCache: { [key: string]: React.CSSProperties } = {};
 const getMapStyles = (props: MapProps) => {
-  const key = `${props.embed}`;
+  const { embed } = props;
+  const key = `${embed}`;
   if (key in mapStyleCache) return mapStyleCache[key];
 
   const out: React.CSSProperties = {
     width: '100vw',
-    marginTop: props.embed ? 0 : HEADER_HEIGHT
+    marginTop: embed ? 0 : HEADER_HEIGHT
   };
 
-  if (props.embed) {
+  if (embed) {
     out.height = '100vh';
   }
 
@@ -120,7 +110,6 @@ type MapProps = Readonly<{
   embed: boolean;
   zoom: [number] | null;
   center: [number, number] | null;
-  bounds: number[][] | null;
   tractMode: boolean;
   mobile: boolean;
   loaded: boolean;
@@ -173,7 +162,7 @@ const Map = (props: MapProps) =>
         : (!props.mobile || props.embed) &&
           <Legend style={desktopLegendStyles} />}
     </MapBoxMap>
-    {props.embed ? <StateSelect above className={stateSelectClass} /> : null}
+    <MapStateSelect embed={props.embed} />
     {!props.embed && props.mobile
       ? <Legend horizontal style={mobileLegendStyles} />
       : null}
@@ -188,7 +177,6 @@ const mapStateToProps = (state: State) => {
     embed: state.embed,
     zoom: state.mapTarget.zoom,
     center: state.mapTarget.center,
-    bounds: state.bounds,
     tractMode: state.selectedState !== 'All states'
   };
 };

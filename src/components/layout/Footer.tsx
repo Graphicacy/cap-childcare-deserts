@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { style, media } from 'typestyle';
+import { media, style } from 'typestyle';
 import { Colors } from '../colors';
 
 const FOOTER_HEIGHT = 50;
@@ -37,7 +37,7 @@ const imageClass = style(
 );
 
 const linkContainerClass = style({ float: 'right', textAlign: 'right' });
-const imgSrc = require('../../../images/ho_CAPlogo.png');
+const imgSrc = require('../../../images/ho_CAPlogo.png'); // tslint:disable-line
 
 export const Footer = () =>
   <div className={footerClass}>

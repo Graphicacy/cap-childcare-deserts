@@ -1,9 +1,9 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch, setMousePosition, State } from '../store/';
+import ToolTip from './_shared/ToolTip';
 import { Container } from './layout/';
 import { Map } from './map/';
-import { State, Dispatch, setMousePosition } from '../store/';
-import ToolTip from './_shared/ToolTip';
 
 type AppProps = Readonly<{
   embed: boolean;

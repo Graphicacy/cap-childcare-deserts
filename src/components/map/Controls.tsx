@@ -1,11 +1,11 @@
 import { createElement } from 'react';
-import { style, media } from 'typestyle';
 import { connect } from 'react-redux';
-import { State, Dispatch, setUrbanFilter, UrbanicityFilter } from '../../store';
+import { media, style } from 'typestyle';
+import { Dispatch, setUrbanFilter, State, UrbanicityFilter } from '../../store';
 import { Colors } from '../colors';
 import { TRACT_CONTROL_INDENT } from './tracts';
 
-const noop = () => {};
+const noop = () => {}; // tslint:disable-line
 
 const controlClass = style({
   position: 'absolute',
@@ -36,19 +36,26 @@ const buttonClass = style(
 
 type ControlProps = Readonly<{
   embed?: boolean;
+  filter: UrbanicityFilter;
   handler(filter: UrbanicityFilter): () => void;
-  isActive(filter: UrbanicityFilter): boolean;
 }>;
+
+const buttonStyleCache: { [key: string]: React.CSSProperties } = {};
+const getButtonStyles = (active: boolean) => {
+  const key = active.toString();
+  if (key in buttonStyleCache) return buttonStyleCache[key];
+
+  return (buttonStyleCache[key] = {
+    backgroundColor: active ? Colors.ACTIVE_CONTROL : 'white',
+    color: !active ? Colors.ACTIVE_CONTROL : 'white',
+    border: '1px solid ' + (!active ? Colors.GRAY : Colors.ACTIVE_CONTROL)
+  });
+};
 
 const Button = (props: { onClick?(): void; text: string; active?: boolean }) =>
   <div
     className={buttonClass}
-    style={{
-      backgroundColor: props.active ? Colors.ACTIVE_CONTROL : 'white',
-      color: !props.active ? Colors.ACTIVE_CONTROL : 'white',
-      border:
-        '1px solid ' + (!props.active ? Colors.GRAY : Colors.ACTIVE_CONTROL)
-    }}
+    style={getButtonStyles(!!props.active)}
     onClick={props.onClick || noop}
   >
     {props.text}
@@ -58,22 +65,22 @@ const Controls = (props: ControlProps) =>
   <div className={controlClass}>
     <Button
       text="all"
-      active={props.isActive(UrbanicityFilter.ALL)}
+      active={props.filter === UrbanicityFilter.ALL}
       onClick={props.handler(UrbanicityFilter.ALL)}
     />
     <Button
       text="rural"
-      active={props.isActive(UrbanicityFilter.RURAL)}
+      active={props.filter === UrbanicityFilter.RURAL}
       onClick={props.handler(UrbanicityFilter.RURAL)}
     />
     <Button
       text="suburban"
-      active={props.isActive(UrbanicityFilter.SUBURBAN)}
+      active={props.filter === UrbanicityFilter.SUBURBAN}
       onClick={props.handler(UrbanicityFilter.SUBURBAN)}
     />
     <Button
       text="urban"
-      active={props.isActive(UrbanicityFilter.URBAN)}
+      active={props.filter === UrbanicityFilter.URBAN}
       onClick={props.handler(UrbanicityFilter.URBAN)}
     />
   </div>;
@@ -81,9 +88,7 @@ const Controls = (props: ControlProps) =>
 const mapStateToProps = (state: State) => {
   return {
     embed: state.embed,
-    isActive(filter: UrbanicityFilter) {
-      return state.urbanicityFilter === filter;
-    }
+    filter: state.urbanicityFilter
   };
 };
 

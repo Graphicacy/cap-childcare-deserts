@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { style, media } from 'typestyle';
+import { media, style } from 'typestyle';
 
 const logoClass = style(
   {

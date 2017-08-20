@@ -1,12 +1,12 @@
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
-import { createElement, Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import { Component, createElement } from 'react';
+import { findDOMNode } from 'react-dom';
 import { style } from 'typestyle';
 
-import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
 import { accessToken } from './constants';
+import { FeatureQuery, FeatureQueryResult } from './FeatureQuery';
 import { TRACT_CONTROL_INDENT } from './tracts';
 
 type GeocoderProps = Readonly<{
@@ -41,13 +41,13 @@ export default class Geocoder extends FeatureQuery<
   GeocoderProps,
   GeocoderState
 > {
-  geocoder = new MapboxGeocoder({
+  public geocoder = new MapboxGeocoder({
     accessToken,
     placeholder: 'Search for an address or city',
     country: 'us'
   });
 
-  componentDidMount() {
+  public componentDidMount() {
     const { map } = this.context;
     const geocoder = this.geocoder;
     const { onResult } = this.props;
@@ -74,9 +74,8 @@ export default class Geocoder extends FeatureQuery<
       });
   }
 
-  render() {
-    const { style } = this.props;
-    return <div className={geocoderClass} style={style} />;
+  public render() {
+    return <div className={geocoderClass} style={this.props.style} />;
   }
 }
 

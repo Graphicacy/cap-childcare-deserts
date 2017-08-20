@@ -1,8 +1,8 @@
-import { createElement, Component } from 'react';
-import { findDOMNode } from 'react-dom';
-import { Map, AttributionControl } from 'mapbox-gl';
-import { style } from 'typestyle';
+import { AttributionControl, Map } from 'mapbox-gl';
 import * as PropTypes from 'prop-types';
+import { Component, createElement } from 'react';
+import { findDOMNode } from 'react-dom';
+import { style } from 'typestyle';
 
 const attributionClass = style({
   position: 'absolute',
@@ -11,10 +11,10 @@ const attributionClass = style({
   zIndex: 10
 });
 
-type AttributionProps = {
+interface AttributionProps {
   style?: React.CSSProperties;
   tractMode?: boolean;
-};
+}
 
 export default class Attribution extends Component<AttributionProps> {
   static contextTypes = {

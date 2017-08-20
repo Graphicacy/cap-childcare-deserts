@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { cssRaw, style } from 'typestyle';
+import { cssRaw, media, style } from 'typestyle';
 import { HEADER_HEIGHT } from '../layout/Header';
 
 const loadingContainerClass = style({
@@ -17,6 +17,18 @@ const embededLoadingClass = style({
   marginTop: 0
 });
 
+const nonEmbedClass = style(
+  {
+    height: 475
+  },
+  media(
+    { maxWidth: 768 },
+    {
+      height: 300
+    }
+  )
+);
+
 const Loader = () => <div className="loader" />;
 
 const LoadingIndicator = ({
@@ -30,7 +42,9 @@ const LoadingIndicator = ({
     ? null
     : <div
         className={
-          loadingContainerClass + ' ' + (embed ? embededLoadingClass : mapClass)
+          loadingContainerClass +
+          ' ' +
+          (embed ? embededLoadingClass : nonEmbedClass)
         }
       >
         <Loader />

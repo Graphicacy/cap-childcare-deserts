@@ -45,23 +45,28 @@ const legendTitleClass = style({
   lineHeight: '1.25em'
 });
 
-type LegendProps = {
+interface LegendProps {
   style?: React.CSSProperties;
   horizontal?: boolean;
-};
+}
 
-type LegendEntryProps = {
+interface LegendEntryProps {
   color: string;
   range: string;
   horizontal?: boolean;
   style?: React.CSSProperties;
-};
+}
 
-const LegendEntry = ({ color, range, style, horizontal }: LegendEntryProps) =>
+const LegendEntry = ({
+  color,
+  range,
+  style: legendStyle,
+  horizontal
+}: LegendEntryProps) =>
   <div
     className={legendItemClass}
     style={{
-      ...style,
+      ...legendStyle,
       display: horizontal ? 'inline-block' : 'block',
       marginLeft: horizontal ? 10 : 0,
       marginTop: horizontal ? 5 : 0

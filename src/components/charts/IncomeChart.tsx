@@ -1,8 +1,8 @@
+import { flex, horizontal } from 'csstips';
 import { createElement } from 'react';
 import { style } from 'typestyle';
-import { flex, horizontal } from 'csstips';
 
-import { StateName, stateData } from '../../data';
+import { stateData, StateName } from '../../data';
 import ChartContainer from './ChartContainer';
 import Donut from './Donut';
 

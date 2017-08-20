@@ -1,10 +1,10 @@
-import { createElement, Component } from 'react';
-import { MapMouseEvent, GeoJSONSource } from 'mapbox-gl';
-import { FeatureQueryResult, FeatureQuery } from './FeatureQuery';
-import { getTractLayerForState } from './tracts';
-import { HoverSources, mapboxStyle } from './constants';
+import { GeoJSONSource, MapMouseEvent } from 'mapbox-gl';
+import { Component, createElement } from 'react';
 import { StateName } from '../../data';
 import { Colors } from '../colors';
+import { HoverSources, mapboxStyle } from './constants';
+import { FeatureQuery, FeatureQueryResult } from './FeatureQuery';
+import { getTractLayerForState } from './tracts';
 
 type MouseProps = Readonly<{
   selectedState: StateName;
@@ -16,13 +16,13 @@ class Mouse extends FeatureQuery<MouseProps> {
   private hoverPolygonId = '';
   private hoverState: StateName = 'All states';
 
-  componentDidMount() {
+  public componentDidMount() {
     const { map } = this.context;
     this.registerHoverSources();
     this.registerEventHandlers();
   }
 
-  componentDidUpdate() {
+  public componentDidUpdate() {
     const { tractMode } = this.props;
     if (tractMode) {
       // remove state highlight if dropped to tract mode
@@ -30,7 +30,7 @@ class Mouse extends FeatureQuery<MouseProps> {
     }
   }
 
-  registerEventHandlers() {
+  public registerEventHandlers() {
     const { map } = this.context;
     const { onMouseMove, onClick } = this.props;
 
@@ -45,10 +45,11 @@ class Mouse extends FeatureQuery<MouseProps> {
         if (feature) {
           switch (feature.kind) {
             case 'state':
-              !tractMode && this.highlight('All states', feature.properties.id);
+              if (!tractMode)
+                this.highlight('All states', feature.properties.id);
               break;
             case 'tract':
-              tractMode &&
+              if (tractMode)
                 this.highlight(selectedState, feature.properties.GEOID);
               break;
           }
@@ -73,7 +74,7 @@ class Mouse extends FeatureQuery<MouseProps> {
   /**
    * add cached sources + layers for the hover effect
    */
-  registerHoverSources() {
+  public registerHoverSources() {
     const { map } = this.context;
 
     Object.keys(hoverSources).forEach((state: StateName) => {
@@ -99,7 +100,7 @@ class Mouse extends FeatureQuery<MouseProps> {
     });
   }
 
-  highlight(state: StateName, id = '') {
+  public highlight(state: StateName, id = '') {
     const { map } = this.context;
 
     if (this.hoverPolygonId !== id) {
@@ -109,17 +110,17 @@ class Mouse extends FeatureQuery<MouseProps> {
     }
   }
 
-  render() {
+  public render() {
     return null;
   }
 }
 
 export default Mouse;
 
-export type HoverSource = {
+export interface HoverSource {
   sourceLayer: string;
   source: string;
-};
+}
 
 export const hoverSources: { [key in StateName]?: HoverSource } = {
   'All states': {

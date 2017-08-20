@@ -1,29 +1,29 @@
-import { createElement, Component } from 'react';
-import { Map, Point, Layer } from 'mapbox-gl';
+import { Layer, Map, Point } from 'mapbox-gl';
 import * as PropTypes from 'prop-types';
-import { TractProperties } from '../../store';
+import { Component, createElement } from 'react';
 import { StateName } from '../../data';
+import { TractProperties } from '../../store';
 
 export type FeatureQueryResult = TractFeature | StateFeature;
 
-export type TractFeature = {
+export interface TractFeature {
   kind: 'tract';
   feature: FeatureLayer;
   properties: TractProperties;
-};
+}
 
-export type StateFeature = {
+export interface StateFeature {
   kind: 'state';
   feature: FeatureLayer;
   properties: {
     name: StateName;
     id: string;
   };
-};
+}
 
-type FeatureQueryProps = {
+interface FeatureQueryProps {
   tractMode: boolean;
-};
+}
 
 export type FeatureLayer = GeoJSON.Feature<GeoJSON.GeometryObject> & {
   layer: Layer;
@@ -33,15 +33,15 @@ export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
   FeatureQueryProps & P,
   S
 > {
-  static contextTypes = {
+  public static contextTypes = {
     map: PropTypes.object
   };
 
-  context: {
+  public context: {
     map: Map;
   };
 
-  queryFeatures(p: Point) {
+  public queryFeatures(p: Point) {
     const { map } = this.context;
     const layers = getDataLayers(this.getMode());
     const features = map.queryRenderedFeatures(p, { layers }) as FeatureLayer[];
@@ -55,7 +55,7 @@ export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
    * query current zoom property, so we don't close
    * over zoom in callbacks to events
    */
-  getMode() {
+  public getMode() {
     return this.props.tractMode;
   }
 }

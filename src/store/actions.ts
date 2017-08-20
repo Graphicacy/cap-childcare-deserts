@@ -1,21 +1,21 @@
-import { StateName, stateData } from '../data';
-import { ToolTipData } from './state';
+import { stateData, StateName } from '../data';
 import {
-  startZoom,
+  mobileStartZoom,
   startCenter,
-  stateZoom,
-  mobileStartZoom
+  startZoom,
+  stateZoom
 } from './constants';
-import { State } from './state';
+import { State, ToolTipData } from './state';
 
+/**
+ * enum of all redux action types
+ */
 export enum ActionType {
   SELECT_STATE = 'SELECT_STATE',
   SET_MAP_TARGET = 'SET_MAP_TARGET',
   SHOW_TOOLTIP = 'SHOW_TOOLTIP',
   HIDE_TOOLTIP = 'HIDE_TOOLTIP',
   MOUSE_MOVE = 'MOUSE_MOVE',
-  SHOW_LEGEND = 'SHOW_LEGEND',
-  HIDE_LEGEND = 'HIDE_LEGEND',
   SET_BOUNDS = 'SET_BOUNDS',
   SET_URBAN_FILTER = 'SET_URBAN_FILTER',
   SCREEN_RESIZE = 'SCREEN_RESIZE',
@@ -24,38 +24,52 @@ export enum ActionType {
   ARTICLE_FOCUS_COMPLETE = 'ARTICLE_FOCUS_COMPLETE'
 }
 
+/**
+ * union of all redux action types
+ */
 export type Action =
   | SelectStateAction
   | SetMapTargetAction
-  | SetBoundsAction
   | ShowTooltipAction
   | HideTooltipAction
   | MouseMoveAction
-  | ShowLegendAction
-  | HideLegendAction
   | SetUrbanFilterAction
   | ScreenResizeAction
   | MapReadyAction
   | ArticleFocusAction
   | ArticleFocusCompleteAction;
 
+/**
+ * custom dispatch, with thunk support to allow
+ * for typechecking of actions
+ */
 export type Dispatch = (
   action: Action | ((dispatch: Dispatch, getState: () => State) => void)
 ) => void;
 
-type MouseMoveAction = {
+/**
+ *
+ * mouse movement
+ *
+ */
+interface MouseMoveAction {
   type: ActionType.MOUSE_MOVE;
   payload: {
     x: number;
     y: number;
   };
-};
+}
 
-export const setMousePosition = (x: number, y: number) =>
-  ({
-    type: ActionType.MOUSE_MOVE,
-    payload: { x, y }
-  } as MouseMoveAction);
+export const setMousePosition = (x: number, y: number): MouseMoveAction => ({
+  type: ActionType.MOUSE_MOVE,
+  payload: { x, y }
+});
+
+/**
+ *
+ * state selection
+ *
+ */
 
 export const zoomToState = (name: StateName) => (
   dispatch: Dispatch,
@@ -73,10 +87,10 @@ export const zoomToState = (name: StateName) => (
   }
 };
 
-type SelectStateAction = {
+interface SelectStateAction {
   type: ActionType.SELECT_STATE;
   payload: { name: StateName };
-};
+}
 
 export const selectState = (name: StateName): SelectStateAction => ({
   type: ActionType.SELECT_STATE,
@@ -93,13 +107,18 @@ export const selectStateAndCenter = (name: StateName) => (
   dispatch(selectState(name));
 };
 
-type SetMapTargetAction = {
+/**
+ *
+ * map positioning
+ *
+ */
+interface SetMapTargetAction {
   type: ActionType.SET_MAP_TARGET;
   payload: {
     zoom: [number];
     center: [number, number];
   };
-};
+}
 
 export const setMapTarget = (
   zoom: [number],
@@ -112,55 +131,34 @@ export const setMapTarget = (
   }
 });
 
-type ShowTooltipAction = {
+/**
+ *
+ * tooltip hide/show + position
+ *
+ */
+interface ShowTooltipAction {
   type: ActionType.SHOW_TOOLTIP;
   payload: ToolTipData;
-};
+}
 
-export const showTooltip = (payload: ToolTipData) =>
-  ({
-    type: ActionType.SHOW_TOOLTIP,
-    payload
-  } as ShowTooltipAction);
+export const showTooltip = (payload: ToolTipData): ShowTooltipAction => ({
+  type: ActionType.SHOW_TOOLTIP,
+  payload
+});
 
-type HideTooltipAction = {
+interface HideTooltipAction {
   type: ActionType.HIDE_TOOLTIP;
-};
+}
 
-export const hideTooltip = () =>
-  ({ type: ActionType.HIDE_TOOLTIP } as HideTooltipAction);
+export const hideTooltip = (): HideTooltipAction => ({
+  type: ActionType.HIDE_TOOLTIP
+});
 
-type ShowLegendAction = {
-  type: ActionType.SHOW_LEGEND;
-};
-
-export const showLegend = () =>
-  ({
-    type: ActionType.SHOW_LEGEND
-  } as ShowLegendAction);
-
-type HideLegendAction = {
-  type: ActionType.HIDE_LEGEND;
-};
-
-export const hideLegend = () =>
-  ({
-    type: ActionType.HIDE_LEGEND
-  } as HideLegendAction);
-
-type SetBoundsAction = {
-  type: ActionType.SET_BOUNDS;
-  payload: {
-    bounds: number[][];
-  };
-};
-
-export const setBounds = (bounds: number[][] | null) =>
-  ({
-    type: ActionType.SET_BOUNDS,
-    payload: { bounds }
-  } as SetBoundsAction);
-
+/**
+ *
+ * urbanicity filter buttons (when state is selected)
+ *
+ */
 export enum UrbanicityFilter {
   ALL = 'All',
   RURAL = 'Rural',
@@ -168,51 +166,67 @@ export enum UrbanicityFilter {
   URBAN = 'Urban'
 }
 
-export type SetUrbanFilterAction = {
+export interface SetUrbanFilterAction {
   type: ActionType.SET_URBAN_FILTER;
   payload: UrbanicityFilter;
-};
+}
 
-export const setUrbanFilter = (filter: UrbanicityFilter) =>
-  ({
-    type: ActionType.SET_URBAN_FILTER,
-    payload: filter
-  } as SetUrbanFilterAction);
+export const setUrbanFilter = (
+  filter: UrbanicityFilter
+): SetUrbanFilterAction => ({
+  type: ActionType.SET_URBAN_FILTER,
+  payload: filter
+});
 
-export type ScreenResizeAction = {
+/**
+ *
+ * window size action (mobile/desktop)
+ *
+ */
+export interface ScreenResizeAction {
   type: ActionType.SCREEN_RESIZE;
   payload: {
     mobile: boolean;
   };
-};
+}
 
-export const setScreenSize = (mobile: boolean) => {
+export const setScreenSize = (mobile: boolean): ScreenResizeAction => {
   return {
     type: ActionType.SCREEN_RESIZE,
     payload: {
       mobile
     }
-  } as ScreenResizeAction;
+  };
 };
 
-type MapReadyAction = {
+/**
+ *
+ * mapbox load event
+ *
+ */
+
+interface MapReadyAction {
   type: ActionType.MAP_READY;
-};
+}
 
-export const mapReady = () =>
-  ({ type: ActionType.MAP_READY } as MapReadyAction);
+export const mapReady = (): MapReadyAction => ({ type: ActionType.MAP_READY });
 
-type ArticleFocusAction = {
+/**
+ *
+ * click "about the data" event
+ *
+ */
+interface ArticleFocusAction {
   type: ActionType.ARTICLE_FOCUS_REQUEST;
-};
+}
 
 export const focusArticle = (): ArticleFocusAction => ({
   type: ActionType.ARTICLE_FOCUS_REQUEST
 });
 
-type ArticleFocusCompleteAction = {
+interface ArticleFocusCompleteAction {
   type: ActionType.ARTICLE_FOCUS_COMPLETE;
-};
+}
 
 export const focusArticleComplete = (): ArticleFocusCompleteAction => ({
   type: ActionType.ARTICLE_FOCUS_COMPLETE

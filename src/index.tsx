@@ -1,11 +1,11 @@
-import './shims';
+import { normalize } from 'csstips';
 import { createElement } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { normalize } from 'csstips';
+import './shims';
 
-import { initStore } from './store/';
 import { App } from './components/';
+import { initStore } from './store/';
 
 const store = initStore();
 

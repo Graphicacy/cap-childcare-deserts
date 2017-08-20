@@ -1,17 +1,17 @@
 import { createElement } from 'react';
-import { style } from 'typestyle';
 import { connect } from 'react-redux';
+import { style } from 'typestyle';
 import {
-  State,
   Dispatch,
-  showTooltip,
   hideTooltip,
-  selectStateAndCenter
+  selectStateAndCenter,
+  showTooltip,
+  State
 } from '../../store';
 
-import { StateName, stateData, stateList } from '../../data';
+import { VictoryAxis, VictoryBar, VictoryChart } from 'victory';
+import { stateData, stateList, StateName } from '../../data';
 import { Colors } from '../colors';
-import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
 import ChartContainer from './ChartContainer';
 import { percent } from './format';
 
@@ -38,9 +38,9 @@ const domainPadding = { x: 20 };
 
 let handlerCache: any;
 const handlers = (
-  onMouseOut: Function,
-  onMouseOver: Function,
-  onClick: Function
+  onMouseOut: StateBarChartProps['onMouseOut'],
+  onMouseOver: StateBarChartProps['onMouseOver'],
+  onClick: StateBarChartProps['onClick']
 ) => {
   if (handlerCache) return handlerCache;
   return (handlerCache = [

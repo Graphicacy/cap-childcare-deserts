@@ -1,12 +1,12 @@
-import { createElement } from 'react';
-import { style, media } from 'typestyle';
 import { content } from 'csstips';
+import { createElement } from 'react';
 import { connect } from 'react-redux';
+import { media, style } from 'typestyle';
 
 import { Colors } from '../colors';
-import { Facebook, Twitter, Mail, Info } from './Icons';
-import { Logo } from './Logo';
 import ArticleFocusButton from './ArticleFocusButton';
+import { Facebook, Info, Mail, Twitter } from './Icons';
+import { Logo } from './Logo';
 
 export const HEADER_HEIGHT = 64;
 

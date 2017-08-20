@@ -1,16 +1,16 @@
-import { createElement, Component } from 'react';
 import { Map } from 'mapbox-gl';
 import * as PropTypes from 'prop-types';
-import { stateModeLayers } from './constants';
-import { StateName, stateData } from '../../data';
+import { Component, createElement } from 'react';
+import { stateData, StateName } from '../../data';
 import { UrbanicityFilter } from '../../store';
+import { stateModeLayers } from './constants';
 import { tractLayers } from './tracts';
 
-type LayerToggleProps = {
+interface LayerToggleProps {
   tractMode: boolean;
   selectedState: StateName;
   urbanicityFilter: UrbanicityFilter;
-};
+}
 
 type MapInteraction =
   | 'scrollZoom'

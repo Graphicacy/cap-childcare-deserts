@@ -1,14 +1,14 @@
+import { content, fillParent, flex, height, vertical } from 'csstips';
 import { createElement } from 'react';
-import { style, media } from 'typestyle';
-import { fillParent, vertical, content, height, flex } from 'csstips';
+import { media, style } from 'typestyle';
 
-import Header from './Header';
+import { Colors } from '../colors';
+import { Map } from '../map';
+import Article from './Article';
 import Banner from './Banner';
 import ChartRow from './ChartRow';
-import Article from './Article';
-import { Map } from '../map';
-import { Colors } from '../colors';
 import Footer from './Footer';
+import Header from './Header';
 import { default as SupportMessage, VISUALS_SUPPORTED } from './SupportMessage';
 
 const contentClass = style(content);

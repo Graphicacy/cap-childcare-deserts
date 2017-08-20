@@ -1,28 +1,28 @@
 import { createElement } from 'react';
+import { connect } from 'react-redux';
 import { style } from 'typestyle';
 import {
-  VictoryChart,
-  VictoryBar,
-  VictoryStack,
   VictoryAxis,
-  VictoryLabel
+  VictoryBar,
+  VictoryChart,
+  VictoryLabel,
+  VictoryStack
 } from 'victory';
-import { connect } from 'react-redux';
-import { State, Dispatch, showTooltip, hideTooltip } from '../../store';
+import { Dispatch, hideTooltip, showTooltip, State } from '../../store';
 
+import { stateData, StateName } from '../../data';
 import { Colors } from '../colors';
-import { StateName, stateData } from '../../data';
 import ChartContainer from './ChartContainer';
 import { niceNumber } from './format';
 
-type DataArray = { type: string; value: number }[];
+type DataArray = Array<{ type: string; value: number }>;
 
-type UrbanicityChartProps = {
+interface UrbanicityChartProps {
   style: React.CSSProperties;
   selectedState: StateName;
   onMouseOver(value: string, label: string): void;
   onMouseOut(): void;
-};
+}
 
 const eventCache: { [key: string]: any } = {};
 const dataCache: {
@@ -100,9 +100,9 @@ function createEvents(props: UrbanicityChartProps, inDesert: boolean): any {
       target: 'data' as 'data',
       eventHandlers: {
         onMouseOut,
-        onMouseOver(event: any, props: any) {
-          const value = niceNumber(props.datum.value);
-          const type = props.datum.type;
+        onMouseOver(event: any, { datum }: any) {
+          const value = niceNumber(datum.value);
+          const type = datum.type;
           const label = `${!inDesert ? 'not ' : ''}in desert (${type})`;
           onMouseOver(value, label);
         }

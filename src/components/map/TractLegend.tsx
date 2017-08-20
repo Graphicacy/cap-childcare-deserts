@@ -1,6 +1,6 @@
 import { createElement } from 'react';
-import { Colors } from '../colors';
 import { style } from 'typestyle';
+import { Colors } from '../colors';
 
 const entries = [
   { color: Colors.ORANGE, text: 'Child care desert', circle: false },

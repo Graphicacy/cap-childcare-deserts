@@ -1,10 +1,10 @@
 import { createElement, ReactNode } from 'react';
 
 import {
-  VictoryPie,
-  VictoryLabel,
   EventPropTypeInterface,
-  StringOrNumberOrCallback
+  StringOrNumberOrCallback,
+  VictoryLabel,
+  VictoryPie
 } from 'victory';
 
 import { style } from 'typestyle';
@@ -34,13 +34,13 @@ const animate = { duration: 500 };
 
 const noLabel = (x: any) => '';
 
-type DonutDatum = {
+interface DonutDatum {
   y: number;
   fill: Colors;
   inDesert: boolean;
   stroke: string;
   strokeWidth: number;
-};
+}
 
 const dataCache: { [key: string]: DonutDatum[] } = {};
 function generateData(n: number) {
@@ -68,8 +68,8 @@ function generateData(n: number) {
 const hoverHandlerCache: { [key: string]: any } = {};
 function getHoverHandlers(
   key: string,
-  onMouseOver: Function,
-  onMouseOut: Function
+  onMouseOver: DonutProps['onMouseOver'],
+  onMouseOut: DonutProps['onMouseOut']
 ) {
   if (key in hoverHandlerCache) return hoverHandlerCache[key];
 

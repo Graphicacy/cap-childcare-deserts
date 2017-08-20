@@ -1,17 +1,17 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import {
-  State,
-  TooltipState,
-  ToolTipData,
-  StateToolTipData,
-  TractToolTipData,
-  ChartToolTipData
-} from '../../store';
-import { stateData } from '../../data';
 import { style } from 'typestyle';
-import { Colors } from '../colors';
+import { stateData } from '../../data';
+import {
+  ChartToolTipData,
+  State,
+  StateToolTipData,
+  ToolTipData,
+  TooltipState,
+  TractToolTipData
+} from '../../store';
 import { percent } from '../charts/format';
+import { Colors } from '../colors';
 import { HEADER_HEIGHT } from '../layout/Header';
 
 const toolTipClass = style({

@@ -1,9 +1,9 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import { style, media } from 'typestyle';
+import { media, style } from 'typestyle';
 
 import { StateName } from '../../data';
-import { State, Dispatch, showTooltip, hideTooltip } from '../../store/';
+import { Dispatch, hideTooltip, showTooltip, State } from '../../store/';
 import { EthnicityChart, IncomeChart, UrbanicityChart } from '../charts/';
 
 /**

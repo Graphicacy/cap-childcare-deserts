@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { Action, ActionType, UrbanicityFilter } from './actions';
+import { mobileStartZoom, startCenter, startZoom } from './constants';
 import { TooltipState } from './state';
-import { startZoom, startCenter, mobileStartZoom } from './constants';
 
 const INITIAL_WINDOW_SIZE = window.innerWidth <= 768;
 
@@ -19,8 +19,6 @@ export default combineReducers({
   embed,
   tooltip,
   mouse,
-  showLegend,
-  bounds,
   urbanicityFilter,
   mobile,
   mapReady,
@@ -29,10 +27,10 @@ export default combineReducers({
 });
 
 /**
- * State name selection reducer
+ * set current selected US state with data, or 'All states'
  *
- * @param state previous app state
- * @param action redux action
+ * @param state state name
+ * @param action
  */
 function selectedState(state: string = 'All states', action: Action) {
   switch (action.type) {
@@ -44,10 +42,22 @@ function selectedState(state: string = 'All states', action: Action) {
   }
 }
 
+/**
+ * mark if the app should be in embed mode
+ *
+ * @param state
+ * @param action
+ */
 function embed(state: boolean = false, action: Action) {
   return state;
 }
 
+/**
+ * set state for chart/map tooltips
+ *
+ * @param state map position + show/hide state
+ * @param action
+ */
 function tooltip(state: TooltipState = { show: false }, action: Action) {
   switch (action.type) {
     case ActionType.SHOW_TOOLTIP: {
@@ -68,6 +78,12 @@ function tooltip(state: TooltipState = { show: false }, action: Action) {
   }
 }
 
+/**
+ * set mouse position state
+ *
+ * @param state
+ * @param action
+ */
 function mouse(state = { x: 0, y: 0 }, action: Action) {
   switch (action.type) {
     case ActionType.MOUSE_MOVE: {
@@ -79,28 +95,12 @@ function mouse(state = { x: 0, y: 0 }, action: Action) {
   }
 }
 
-function showLegend(state = true, action: Action) {
-  switch (action.type) {
-    case ActionType.SHOW_LEGEND:
-      return true;
-    case ActionType.HIDE_LEGEND:
-      return false;
-    default:
-      return state;
-  }
-}
-
-function bounds(state = null, action: Action) {
-  switch (action.type) {
-    case ActionType.SET_BOUNDS: {
-      return action.payload.bounds;
-    }
-
-    default:
-      return state;
-  }
-}
-
+/**
+ * set urbanicity filter (when state selected)
+ *
+ * @param state
+ * @param action
+ */
 function urbanicityFilter(state = UrbanicityFilter.ALL, action: Action) {
   switch (action.type) {
     case ActionType.SET_URBAN_FILTER: {
@@ -112,6 +112,12 @@ function urbanicityFilter(state = UrbanicityFilter.ALL, action: Action) {
   }
 }
 
+/**
+ * mobile / desktop mode
+ *
+ * @param state
+ * @param action
+ */
 function mobile(state = INITIAL_WINDOW_SIZE, action: Action) {
   switch (action.type) {
     case ActionType.SCREEN_RESIZE: {
@@ -123,6 +129,12 @@ function mobile(state = INITIAL_WINDOW_SIZE, action: Action) {
   }
 }
 
+/**
+ * mapbox ready event
+ *
+ * @param state
+ * @param action
+ */
 function mapReady(state = false, action: Action) {
   switch (action.type) {
     case ActionType.MAP_READY: {
@@ -134,6 +146,12 @@ function mapReady(state = false, action: Action) {
   }
 }
 
+/**
+ * scroll to article event
+ *
+ * @param state
+ * @param action
+ */
 function articleFocus(state = false, action: Action) {
   switch (action.type) {
     case ActionType.ARTICLE_FOCUS_COMPLETE: {
@@ -148,6 +166,12 @@ function articleFocus(state = false, action: Action) {
   }
 }
 
+/**
+ * map positioning data
+ *
+ * @param state
+ * @param action
+ */
 function mapTarget(
   state: { zoom: [number]; center: [number, number] } = {
     zoom: INITIAL_ZOOM,

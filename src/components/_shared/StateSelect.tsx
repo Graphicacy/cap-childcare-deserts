@@ -1,8 +1,8 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
 import { style } from 'typestyle';
-import { Dispatch, State, selectStateAndCenter } from '../../store';
-import { stateList, StateName, stateData } from '../../data';
+import { stateData, stateList, StateName } from '../../data';
+import { Dispatch, selectStateAndCenter, State } from '../../store';
 import { Colors } from '../colors';
 
 const selectClass = style({

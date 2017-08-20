@@ -1,22 +1,49 @@
 import { StateName } from '../data';
 import { UrbanicityFilter } from './actions';
+
 /**
  * type describing the entire app state
  */
 export type State = Readonly<{
+  /**
+   * selected us state (with data), or 'All states'
+   */
   selectedState: StateName;
+  /**
+   * mapbox has loaded tiles
+   */
   mapReady: boolean;
+  /**
+   * ?embed=true query string present
+   */
   embed: boolean;
-  bounds: number[][] | null;
+  /**
+   * tooltip position + hide/show data
+   */
   tooltip: TooltipState;
-  showLegend: boolean;
+  /**
+   * urbanicity filter button state (when state is selected)
+   */
   urbanicityFilter: UrbanicityFilter;
+  /**
+   * whether the size of the screen should
+   * result in mobile / desktop view
+   */
   mobile: boolean;
+  /**
+   * article focus active
+   */
   articleFocus: boolean;
+  /**
+   * mapbox position information
+   */
   mapTarget: {
     zoom: [number];
     center: [number, number];
   };
+  /**
+   * mouse position information
+   */
   mouse: {
     x: number;
     y: number;
@@ -25,39 +52,39 @@ export type State = Readonly<{
 
 export type TooltipState = TooltipHideState | TooltipShowState;
 
-export type TooltipHideState = {
+export interface TooltipHideState {
   show: false;
-};
+}
 
-export type TooltipShowState = {
+export interface TooltipShowState {
   data: ToolTipData;
   show: true;
-};
+}
 
 export type ToolTipData =
   | TractToolTipData
   | StateToolTipData
   | ChartToolTipData;
 
-export type ChartToolTipData = {
+export interface ChartToolTipData {
   kind: 'chart';
   properties: {
     label: string;
     value: string;
   };
-};
+}
 
-export type TractToolTipData = {
+export interface TractToolTipData {
   kind: 'tract';
   properties: TractProperties;
-};
+}
 
-export type StateToolTipData = {
+export interface StateToolTipData {
   kind: 'state';
   properties: {
     state: StateName;
   };
-};
+}
 
 export interface TractProperties {
   STATEFP: string;

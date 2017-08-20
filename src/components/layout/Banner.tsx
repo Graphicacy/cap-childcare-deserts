@@ -1,15 +1,15 @@
+import { content } from 'csstips';
 import { createElement } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { style } from 'typestyle';
-import { content } from 'csstips';
 
-import Title from './Title';
-import StateSelect from '../_shared/StateSelect';
-import { Colors } from '../colors';
-import { stateList, StateName, stateData } from '../../data';
+import { stateData, stateList, StateName } from '../../data';
 import { selectStateAndCenter, State } from '../../store';
+import StateSelect from '../_shared/StateSelect';
 import { percent } from '../charts/format';
+import { Colors } from '../colors';
+import Title from './Title';
 
 const bannerContainerClass = style(content, {
   padding: 40,

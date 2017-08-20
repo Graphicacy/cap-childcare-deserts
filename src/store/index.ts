@@ -1,16 +1,16 @@
-import { default as reducer } from './reducers';
+import { applyMiddleware, compose, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import {
   Action,
   ActionType,
-  selectStateAndCenter,
   Dispatch,
+  selectStateAndCenter,
   setScreenSize
 } from './actions';
-import { startZoom, mobileStartZoom } from './constants';
-import { State } from './state';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { mobileStartZoom, startZoom } from './constants';
 import queryString from './query-string';
+import { default as reducer } from './reducers';
+import { State } from './state';
 
 export * from './state';
 export * from './actions';

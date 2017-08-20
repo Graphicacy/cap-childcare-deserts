@@ -1,18 +1,18 @@
-import { createElement, Component } from 'react';
+import { content, flex } from 'csstips';
+import { Component, createElement } from 'react';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
-import { style, media } from 'typestyle';
-import { content, flex } from 'csstips';
+import { media, style } from 'typestyle';
 import * as zenscroll from 'zenscroll';
 
-import Title from './Title';
-import { StateBarChart } from '../charts/';
 import { StateName } from '../../data';
-import { State, Dispatch, focusArticleComplete } from '../../store/';
-import { Info } from './Icons';
+import { Dispatch, focusArticleComplete, State } from '../../store/';
+import { StateBarChart } from '../charts/';
 import { Colors } from '../colors';
 import { HEADER_HEIGHT } from './Header';
+import { Info } from './Icons';
 import { VISUALS_SUPPORTED } from './SupportMessage';
+import Title from './Title';
 
 const ARTICLE_MAX_WIDTH = 750;
 
@@ -84,13 +84,13 @@ type ArticleProps = Readonly<{
 }>;
 
 class Article extends Component<ArticleProps> {
-  componentDidMount() {
+  public componentDidMount() {
     const defaultDuration = 500;
     const edgeOffset = HEADER_HEIGHT;
     zenscroll.setup(defaultDuration, edgeOffset);
   }
 
-  componentDidUpdate() {
+  public componentDidUpdate() {
     this.ensureVisible();
   }
 
@@ -98,7 +98,7 @@ class Article extends Component<ArticleProps> {
    * if a scroll event has been dispatched,
    * scroll the window to this element.
    */
-  ensureVisible() {
+  public ensureVisible() {
     const { active, deactivate } = this.props;
     if (active) {
       const node = findDOMNode(this);
@@ -107,7 +107,7 @@ class Article extends Component<ArticleProps> {
     }
   }
 
-  render() {
+  public render() {
     const { selectedState } = this.props;
     return (
       <div className={articleContainerClass}>
