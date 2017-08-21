@@ -45,9 +45,10 @@ class LayerToggle extends Component<LayerToggleProps> {
 
   private lastUrbanicity?: UrbanicityFilter;
   private toggleTractUrbanicity(urbanicity: UrbanicityFilter) {
-    const { map } = this.context;
     if (urbanicity === this.lastUrbanicity) return;
     this.lastUrbanicity = urbanicity;
+
+    const { map } = this.context;
 
     map.setPaintProperty(
       'locations-with-state',
