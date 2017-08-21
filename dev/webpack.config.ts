@@ -93,7 +93,7 @@ export default function(env: any = {}) {
       new HTMLPlugin({
         filename: 'index.html',
         templateContent,
-        ...env.prod || env.inline ? { inlineSource: '.(js|css)$' } : {}
+        ...env.inline ? { inlineSource: '.(js|css)$' } : {}
       }),
       ...(env.analyze ? [new AnalyzePlugin()] : [])
     ]
