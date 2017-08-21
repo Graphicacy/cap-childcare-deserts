@@ -43,8 +43,11 @@ class LayerToggle extends Component<LayerToggleProps> {
     this.toggleStateDots(selectedState === 'All states' ? '' : selectedState);
   }
 
-  public toggleTractUrbanicity(urbanicity: UrbanicityFilter) {
+  private lastUrbanicity?: UrbanicityFilter;
+  private toggleTractUrbanicity(urbanicity: UrbanicityFilter) {
     const { map } = this.context;
+    if (urbanicity === this.lastUrbanicity) return;
+    this.lastUrbanicity = urbanicity;
 
     map.setPaintProperty(
       'locations-with-state',
@@ -60,7 +63,11 @@ class LayerToggle extends Component<LayerToggleProps> {
     });
   }
 
-  public toggleStateDots(state: StateName | '') {
+  private lastState?: StateName | '';
+  private toggleStateDots(state: StateName | '') {
+    if (state === this.lastState) return;
+    this.lastState = state;
+
     const { map } = this.context;
     map.setFilter('locations-with-state', [
       '==',
@@ -69,7 +76,11 @@ class LayerToggle extends Component<LayerToggleProps> {
     ]);
   }
 
-  public toggleStateLayers(visible: boolean) {
+  private lastStateLayerVisible?: boolean;
+  private toggleStateLayers(visible: boolean) {
+    if (this.lastStateLayerVisible === visible) return;
+    this.lastStateLayerVisible = visible;
+
     const { map } = this.context;
 
     /**
@@ -80,7 +91,11 @@ class LayerToggle extends Component<LayerToggleProps> {
     });
   }
 
-  public toggleInteraction(enable: boolean) {
+  private lastInteractionState?: boolean;
+  private toggleInteraction(enable: boolean) {
+    if (this.lastInteractionState === enable) return;
+    this.lastInteractionState = enable;
+
     const { map } = this.context;
     const toggle = enable ? 'enable' : 'disable';
 

@@ -101,13 +101,11 @@ class Mouse extends FeatureQuery<MouseProps> {
   }
 
   public highlight(state: StateName, id = '') {
+    if (this.hoverPolygonId === id) return;
     const { map } = this.context;
-
-    if (this.hoverPolygonId !== id) {
-      this.hoverPolygonId = id;
-      this.hoverState = state;
-      map.setFilter(hoverLayerName(state), ['==', hoverId(state), id]);
-    }
+    this.hoverPolygonId = id;
+    this.hoverState = state;
+    map.setFilter(hoverLayerName(state), ['==', hoverId(state), id]);
   }
 
   public render() {

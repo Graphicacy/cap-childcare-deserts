@@ -26,7 +26,10 @@ interface UrbanicityChartProps {
 
 const eventCache: { [key: string]: any } = {};
 const dataCache: {
-  [key in StateName]?: { desert: DataArray; nonDesert: DataArray }
+  [key in StateName]?: {
+    desert: DataArray;
+    nonDesert: DataArray;
+  }
 } = {};
 
 const colorScale = [Colors.ORANGE, Colors.GRAY];

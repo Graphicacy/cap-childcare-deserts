@@ -11,15 +11,6 @@ import { style } from 'typestyle';
 import { Colors } from '../colors';
 import { percent } from './format';
 
-const donutTitleClass = style({
-  textAlign: 'center',
-  width: '100%'
-});
-
-const percentClass = style({
-  fontFamily: 'Open Sans'
-});
-
 export type DonutProps = Readonly<{
   n: number;
   name: string;
@@ -29,14 +20,6 @@ export type DonutProps = Readonly<{
   onMouseOut(): void;
 }>;
 
-const svgStyle = { width: '100%' };
-const animate = { duration: 500 };
-
-/**
- * need to have empty string function to hide labels
- */
-const noLabel = (x: any) => '';
-
 interface DonutDatum {
   y: number;
   fill: Colors;
@@ -44,6 +27,23 @@ interface DonutDatum {
   stroke: string;
   strokeWidth: number;
 }
+
+const donutTitleClass = style({
+  textAlign: 'center',
+  width: '100%'
+});
+
+const percentClass = style({
+  fontFamily: 'Open Sans'
+});
+
+const svgStyle = { width: '100%' };
+const animate = { duration: 500 };
+
+/**
+ * need to have empty string function to hide labels
+ */
+const noLabel = (x: any) => '';
 
 const dataCache: { [key: string]: DonutDatum[] } = {};
 function generateData(n: number) {

@@ -41,7 +41,7 @@ export default class Geocoder extends FeatureQuery<
   GeocoderProps,
   GeocoderState
 > {
-  public geocoder = new MapboxGeocoder({
+  private geocoder = new MapboxGeocoder({
     accessToken,
     placeholder: 'Search for an address or city',
     country: 'us'
