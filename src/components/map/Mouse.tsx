@@ -18,19 +18,20 @@ class Mouse extends FeatureQuery<MouseProps> {
 
   public componentDidMount() {
     const { map } = this.context;
-    this.registerHoverSources();
-    this.registerEventHandlers();
+    this.initHover('All states');
+    this.initHandlers();
   }
 
   public componentDidUpdate() {
-    const { tractMode } = this.props;
+    const { tractMode, selectedState } = this.props;
     if (tractMode) {
       // remove state highlight if dropped to tract mode
       this.highlight('All states');
+      this.initHover(selectedState);
     }
   }
 
-  public registerEventHandlers() {
+  public initHandlers() {
     const { map } = this.context;
     const { onMouseMove, onClick } = this.props;
 
@@ -71,37 +72,35 @@ class Mouse extends FeatureQuery<MouseProps> {
     }
   }
 
-  /**
-   * add cached sources + layers for the hover effect
-   */
-  public registerHoverSources() {
+  private registered: { [K in StateName]?: boolean } = {};
+  private initHover(state: StateName) {
+    if (this.registered[state]) return;
+    this.registered[state] = true;
     const { map } = this.context;
 
-    Object.keys(hoverSources).forEach((state: StateName) => {
-      const sourceData = hoverSources[state];
-      if (sourceData) {
-        map.addSource(hoverSourceName(state), {
-          type: 'vector',
-          url: `mapbox://${sourceData.source}`
-        });
+    const sourceData = hoverSources[state];
+    if (sourceData) {
+      map.addSource(hoverSourceName(state), {
+        type: 'vector',
+        url: `mapbox://${sourceData.source}`
+      });
 
-        map.addLayer({
-          id: hoverLayerName(state),
-          type: 'line',
-          source: hoverSourceName(state),
-          'source-layer': sourceData.sourceLayer,
-          paint: {
-            'line-color': Colors.HOVER_COLOR,
-            'line-width': 2
-          },
-          filter: ['==', hoverId(state), '']
-        });
-      }
-    });
+      map.addLayer({
+        id: hoverLayerName(state),
+        type: 'line',
+        source: hoverSourceName(state),
+        'source-layer': sourceData.sourceLayer,
+        paint: {
+          'line-color': Colors.HOVER_COLOR,
+          'line-width': 2
+        },
+        filter: ['==', hoverId(state), '']
+      });
+    }
   }
 
-  public highlight(state: StateName, id = '') {
-    if (this.hoverPolygonId === id) return;
+  private highlight(state: StateName, id = '') {
+    if (this.hoverPolygonId === id || !this.registered[state]) return;
     const { map } = this.context;
     this.hoverPolygonId = id;
     this.hoverState = state;
