@@ -1,9 +1,9 @@
-import * as webpack from 'webpack';
 import * as HTMLPlugin from 'html-webpack-plugin';
 import * as path from 'path';
+import * as webpack from 'webpack';
 
-const AnalyzePlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const AnalyzePlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; // tslint:disable-line
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin'); // tslint:disable-line
 
 const templateContent = `
 <!DOCTYPE html>

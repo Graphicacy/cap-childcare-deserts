@@ -1,13 +1,13 @@
-import * as csv from 'csv-parse';
+import { exec, ExecOptions } from 'child_process';
 import * as commander from 'commander';
+import * as csv from 'csv-parse';
 import * as fs from 'fs-extra';
+import * as glob from 'glob';
 import * as path from 'path';
 import { format } from 'prettier';
-import * as glob from 'glob';
 import * as shapefile from 'shapefile';
-import { exec, ExecOptions } from 'child_process';
 
-const { merge } = require('@mapbox/geojson-merge');
+const { merge } = require('@mapbox/geojson-merge'); // tslint:disable-line
 
 if (require.main === module) run().catch(console.error);
 
@@ -92,10 +92,11 @@ async function prepStateJson(globString: string) {
   mkdirp(json);
 
   const result = await readCsv<StateDataResult>('./data/state-data.csv');
+  const reducedOut: { [key: string]: StateDataResult } = {};
   const reduced = result.reduce((out, d) => {
     out[d.Abbr] = d;
     return out;
-  }, {} as { [key: string]: StateDataResult });
+  }, reducedOut);
 
   const exclude = new Set(['AK', 'HI']);
 
@@ -144,10 +145,11 @@ async function prepShapefiles(globString: string) {
   mkdirp(json);
 
   const data = await readCsv<TractDataResult>('./data/tract_data.csv');
+  const tractHashOut: { [key: string]: TractDataResult } = {};
   const tractHash = data.reduce((out, d) => {
     out[d.tract.toString()] = d;
     return out;
-  }, {} as { [key: string]: TractDataResult });
+  }, tractHashOut);
 
   await Promise.all(
     files.map(async file => {
@@ -156,7 +158,7 @@ async function prepShapefiles(globString: string) {
 
       const result = await shapefile.read(file);
       result.features.forEach((f: any) => {
-        const tract = Number(f.properties['GEOID']);
+        const tract = Number(f.properties.GEOID);
         const tractData = tractHash[tract];
         if (tractData) {
           Object.keys(tractData).forEach((k: keyof TractDataResult) => {
@@ -201,8 +203,8 @@ async function prepStateData(filename: string) {
   // https://gist.github.com/mishari/5ecfccd219925c04ac32
   const bounds = require('../data/bounds.json').bounds;
 
-  const boundsByState = bounds.reduce((out: any, bounds: any) => {
-    const data = bounds[0];
+  const boundsByState = bounds.reduce((out: any, stateBounds: any) => {
+    const data = stateBounds[0];
     const state = data.display_name.split(',')[0].trim();
     out[state] = data;
     return out;
@@ -406,7 +408,7 @@ function mkdirp(dir: string) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 }
 
-type StateDataResult = {
+interface StateDataResult {
   State: string;
   'Percent in deserts - All': number;
   'Percent in deserts - Black': number;
@@ -420,9 +422,9 @@ type StateDataResult = {
   'Children under 5 not in deserts- urban': number;
   'Text box': string;
   'Abbr': string;
-};
+}
 
-type TractDataResult = {
+interface TractDataResult {
   state: string;
   tract: number;
   ccdesert: number;
@@ -436,4 +438,4 @@ type TractDataResult = {
   urbanicity: string;
   noproviders: number;
   state_fips: number;
-};
+}

@@ -3,11 +3,12 @@
   "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
     "quotemark": ["single", "jsx-double"],
-    "interface-name": false,
-    "member-ordering": false,
+    "interface-name": [false],
+    "member-ordering": [false],
     "jsdoc-format": false,
     "object-literal-sort-keys": false,
-    "curly": false
+    "curly": false,
+    "no-console": [false]
   },
   "rulesDirectory": []
 }

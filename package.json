@@ -7,10 +7,10 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config ./dev/webpack.config.ts",
-    "test": "npm run prettier && tslint --type-check --fix --format stylish -p ./src/",
+    "test": "npm run prettier && tslint --type-check --fix --format stylish -p ./",
     "build:dev": "rm -rf ./public && webpack --config ./dev/webpack.config.ts",
     "build": "npm run build:dev -- --env.prod --env.inline && rm -rf ./public/bundles",
-    "prettier": "prettier --single-quote --write './src/**/*.{ts,tsx}'",
+    "prettier": "prettier --single-quote --write './{dev,src}/**/*.{ts,tsx}'",
     "data": "ts-node ./dev/data.ts",
     "deploy": "npm run build && cp ./images/favicon.ico ./public/ && gh-pages -d ./public"
   },
