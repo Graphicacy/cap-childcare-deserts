@@ -140,6 +140,7 @@ async function prepShapefiles(globString: string) {
   const files = glob.sync(globString);
   const tmp = path.join(__dirname, '../data/tmp');
   const json = path.join(__dirname, '../data/json');
+  const outStream = fs.createWriteStream('./data/tmp/all-tracts.json');
 
   mkdirp(tmp);
   mkdirp(json);
@@ -150,6 +151,9 @@ async function prepShapefiles(globString: string) {
     out[d.tract.toString()] = d;
     return out;
   }, tractHashOut);
+
+  outStream.write(`{"type":"FeatureCollection","features":[`);
+  let first = true;
 
   await Promise.all(
     files.map(async file => {
@@ -171,15 +175,22 @@ async function prepShapefiles(globString: string) {
         }
       });
 
-      await fs.writeFile(
-        path.join(json, `${name}.json`),
-        JSON.stringify(result)
+      if (!first) outStream.write(',');
+      first = false;
+      outStream.write(
+        result.features.map(f => JSON.stringify(f) + '\n').join(',')
       );
-      await prun(
-        `tippecanoe -o ./data/tmp/${name}.mbtiles -Z 2 -zg ./data/json/${name}.json`
-      );
-      console.log(`Converted ${name}...`);
+
+      console.log(`wrote ${name}...`);
     })
+  );
+
+  outStream.write(']}');
+  outStream.end();
+
+  console.log(`generating tiles...`);
+  await prun(
+    `tippecanoe -o ./data/tmp/all-tracts-combined.mbtiles -f -Z 2 -zg ./data/tmp/all-tracts.json`
   );
 
   console.log(`finished!`);
