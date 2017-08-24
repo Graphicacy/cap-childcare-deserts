@@ -34,3 +34,12 @@ npm run build
 ### Data Prep
 
 Expects [`tippecanoe`](https://github.com/mapbox/tippecanoe) to be in your $PATH
+
+
+### Keys
+
+You will need a `keys.json` file in the root of the project which looks like: ```
+{
+  "accessToken": "<mapbox key>"
+}
+```
