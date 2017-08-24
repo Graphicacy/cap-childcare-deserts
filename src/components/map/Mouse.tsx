@@ -2,9 +2,14 @@ import { GeoJSONSource, MapMouseEvent } from 'mapbox-gl';
 import { Component, createElement } from 'react';
 import { StateName } from '../../data';
 import { Colors } from '../colors';
-import { HoverSources, mapboxStyle } from './constants';
+import {
+  mapboxStyle,
+  STATE_HOVER_ID,
+  STATE_HOVER_LAYER,
+  TRACT_HOVER_ID,
+  TRACT_HOVER_LAYER
+} from './constants';
 import { FeatureQuery, FeatureQueryResult } from './FeatureQuery';
-import { getTractLayerForState } from './tracts';
 
 type MouseProps = Readonly<{
   selectedState: StateName;
@@ -18,8 +23,19 @@ class Mouse extends FeatureQuery<MouseProps> {
 
   public componentDidMount() {
     const { map } = this.context;
-    this.initHover('All states');
     this.initHandlers();
+    this.initHover({
+      sourceLayer: 'allstates',
+      source: 'bsouthga.bkxp0vhq',
+      id: STATE_HOVER_ID,
+      layerName: STATE_HOVER_LAYER
+    });
+    this.initHover({
+      sourceLayer: 'alltracts',
+      source: 'bsouthga.0fr0sq3u',
+      id: TRACT_HOVER_ID,
+      layerName: TRACT_HOVER_LAYER
+    });
   }
 
   public componentDidUpdate() {
@@ -27,7 +43,6 @@ class Mouse extends FeatureQuery<MouseProps> {
     if (tractMode) {
       // remove state highlight if dropped to tract mode
       this.highlight('All states');
-      this.initHover(selectedState);
     }
   }
 
@@ -72,35 +87,34 @@ class Mouse extends FeatureQuery<MouseProps> {
     }
   }
 
-  private registered: { [K in StateName]?: boolean } = {};
-  private initHover(state: StateName) {
-    if (this.registered[state]) return;
-    this.registered[state] = true;
+  private initHover(opts: {
+    source: string;
+    sourceLayer: string;
+    id: string;
+    layerName: string;
+  }) {
     const { map } = this.context;
 
-    const sourceData = hoverSources[state];
-    if (sourceData) {
-      map.addSource(hoverSourceName(state), {
-        type: 'vector',
-        url: `mapbox://${sourceData.source}`
-      });
+    map.addSource(opts.source, {
+      type: 'vector',
+      url: `mapbox://${opts.source}`
+    });
 
-      map.addLayer({
-        id: hoverLayerName(state),
-        type: 'line',
-        source: hoverSourceName(state),
-        'source-layer': sourceData.sourceLayer,
-        paint: {
-          'line-color': Colors.HOVER_COLOR,
-          'line-width': 2
-        },
-        filter: ['==', hoverId(state), '']
-      });
-    }
+    map.addLayer({
+      id: opts.layerName,
+      type: 'line',
+      source: opts.source,
+      'source-layer': opts.sourceLayer,
+      paint: {
+        'line-color': Colors.HOVER_COLOR,
+        'line-width': 2
+      },
+      filter: ['==', opts.id, '']
+    });
   }
 
   private highlight(state: StateName, id = '') {
-    if (this.hoverPolygonId === id || !this.registered[state]) return;
+    if (this.hoverPolygonId === id) return;
     const { map } = this.context;
     this.hoverPolygonId = id;
     this.hoverState = state;
@@ -119,34 +133,21 @@ export interface HoverSource {
   source: string;
 }
 
-export const hoverSources: { [key in StateName]?: HoverSource } = {
+export const hoverSources = {
   'All states': {
     sourceLayer: 'allstates',
     source: 'bsouthga.bkxp0vhq'
   },
-  California: {
+  tract: {
     sourceLayer: 'tl_2016_06_tract',
     source: 'bsouthga.4820m6au'
   }
 };
 
 function hoverId(state: StateName) {
-  switch (state) {
-    case 'All states':
-      return 'id';
-    default:
-      return 'GEOID';
-  }
+  return state === 'All states' ? STATE_HOVER_ID : TRACT_HOVER_ID;
 }
 
 function hoverLayerName(state: StateName) {
-  return allCapSnake(state) + '-HOVER';
-}
-
-function hoverSourceName(state: StateName) {
-  return allCapSnake(state) + '-HOVER-SOURCE';
-}
-
-function allCapSnake(str: string) {
-  return str.split(/\s+/).map(s => s.toUpperCase()).join('-');
+  return state === 'All states' ? STATE_HOVER_LAYER : TRACT_HOVER_LAYER;
 }

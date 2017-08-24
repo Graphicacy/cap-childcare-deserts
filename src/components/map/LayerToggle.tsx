@@ -4,7 +4,6 @@ import { Component, createElement } from 'react';
 import { stateData, StateName } from '../../data';
 import { UrbanicityFilter } from '../../store';
 import { stateModeLayers } from './constants';
-import { tractLayers } from './tracts';
 
 interface LayerToggleProps {
   tractMode: boolean;
@@ -31,24 +30,31 @@ class LayerToggle extends Component<LayerToggleProps> {
   };
 
   public componentDidMount() {
+    const { map } = this.context;
     this.toggleInteraction(false);
-    this.toggleStateDots('');
+    this.toggleStateDots('All states');
+    this.toggleStateTracts('All states');
   }
 
   public componentDidUpdate() {
     const { tractMode, selectedState, urbanicityFilter } = this.props;
     this.toggleStateLayers(!tractMode);
     this.toggleInteraction(tractMode);
-    this.toggleTractUrbanicity(urbanicityFilter);
-    this.toggleStateDots(selectedState === 'All states' ? '' : selectedState);
+    this.toggleTractUrbanicity(urbanicityFilter, selectedState);
+    this.toggleStateDots(selectedState);
+    this.toggleStateTracts(selectedState);
   }
 
-  private lastUrbanicity?: UrbanicityFilter;
-  private toggleTractUrbanicity(urbanicity: UrbanicityFilter) {
+  private lastUrbanicity?: string;
+  private toggleTractUrbanicity(
+    urbanicity: UrbanicityFilter,
+    state: StateName
+  ) {
     if (urbanicity === this.lastUrbanicity) return;
-    this.lastUrbanicity = urbanicity;
+    this.lastUrbanicity = `${urbanicity}-${state}`;
 
     const { map } = this.context;
+    const abbr = state === 'All states' ? '' : stateData[state].abbr;
 
     map.setPaintProperty(
       'locations-with-state',
@@ -56,16 +62,26 @@ class LayerToggle extends Component<LayerToggleProps> {
       urbanicity === 'All' ? 1 : 0.2
     );
 
-    tractLayers.forEach(layer => {
-      map.setFilter(
-        layer,
-        urbanicity === 'All' ? ['all'] : ['==', 'urbanicity', urbanicity]
-      );
-    });
+    map.setFilter(
+      'alltracts',
+      urbanicity === 'All'
+        ? ['==', 'state', abbr]
+        : ['all', ['==', 'urbanicity', urbanicity], ['==', 'state', abbr]]
+    );
   }
 
-  private lastState?: StateName | '';
-  private toggleStateDots(state: StateName | '') {
+  private lastStateTracts?: StateName;
+  private toggleStateTracts(state: StateName) {
+    if (state === this.lastStateTracts) return;
+    this.lastStateTracts = state;
+    const { map } = this.context;
+    const abbr = state === 'All states' ? '' : stateData[state].abbr;
+
+    map.setFilter('alltracts', ['==', 'state', abbr]);
+  }
+
+  private lastState?: StateName;
+  private toggleStateDots(state: StateName) {
     if (state === this.lastState) return;
     this.lastState = state;
 
@@ -73,7 +89,7 @@ class LayerToggle extends Component<LayerToggleProps> {
     map.setFilter('locations-with-state', [
       '==',
       'abbr',
-      state ? stateData[state].abbr : ''
+      state === 'All states' ? '' : stateData[state].abbr
     ]);
   }
 

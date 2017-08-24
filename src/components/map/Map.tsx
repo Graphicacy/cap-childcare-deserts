@@ -27,7 +27,7 @@ import {
 import { Colors } from '../colors';
 import { HEADER_HEIGHT } from '../layout/Header';
 import Attribution from './Attribution';
-import { accessToken, HoverSources, mapboxStyle } from './constants';
+import { accessToken, mapboxStyle } from './constants';
 import Controls from './Controls';
 import { FeatureQueryResult } from './FeatureQuery';
 import Geocoder from './Geocoder';

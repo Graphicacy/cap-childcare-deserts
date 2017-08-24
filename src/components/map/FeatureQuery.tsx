@@ -61,7 +61,7 @@ export class FeatureQuery<P extends {} = {}, S = {}> extends Component<
 }
 
 export function getDataLayers(tractMode: boolean) {
-  return tractMode ? ['tl-2016-06-tract'] : ['allstates'];
+  return tractMode ? ['alltracts'] : ['allstates'];
 }
 
 export function normalizeFeature(
@@ -82,7 +82,7 @@ export function normalizeFeature(
     /**
        * individual tract features
        */
-    case 'tl-2016-06-tract': {
+    case 'alltracts': {
       return {
         kind: 'tract',
         feature,
