@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { media, style } from 'typestyle';
 import * as zenscroll from 'zenscroll';
 
-import { StateName } from '../../data';
+import { stateData, StateName } from '../../data';
 import { Dispatch, focusArticleComplete, State } from '../../store/';
 import { StateBarChart } from '../charts/';
 import { Colors } from '../colors';
@@ -121,54 +121,44 @@ class Article extends Component<ArticleProps> {
           <Title>
             {' '}Child Care Access in {selectedState}{' '}
           </Title>
+          {stateData[selectedState].textBox.split('PPP').map((par, index) =>
+            <p
+              className={index === 0 ? paragraphClass : ''}
+              key={`${selectedState}-${index}`}
+            >
+              {par}
+            </p>
+          )}
+          <Title> About the Data </Title>
           <p className={paragraphClass}>
-            {' '}Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin
-            reris etur? Re am consed que dolut lam erum quate velenisti dolora
-            nimporiti o ctiis et ipid quis nissinciae cum verem dit, nobitatecto
-            o cid ullaut occab ipsaper spe- rum nobitatemqui dolestisi desequam
-            aut es eostiae caboreritas minvers perenient eturepuda ipisimus ut
-            lab il et eaqui oUllector esequi rem aliquae nis dolorist volupta
-            ectiunt quo mi, consectio blaceste aliquos eaque et, o c to- tatus
-            citibus sandisini autem fuga. Ur, voluptatur accuptusdant occuptur
-            rem etustis. Re am consed que dolut lam erum quate velenisti dolora
-            nimporiti o ctiis et ipid quis nissinciae cum verem dit, nobitatecto
-            o cid ullaut occab ipsaper sperum nobitatemqui dolestisi desequam
-            aut es eostiae caboreritas minvers perenient eturepuda ipisimus ut
-            lab il et eaqui oUllector esequi rem aliquae nis dolorist volupta
-            ectiunt quo mi, consectio blaceste aliquos eaque et, o c totatus
-            citibus sandisini autem fuga. Ur, voluptatur accuptusdant occuptur
-            rem etustis.{' '}
-          </p>
-
-          <Title> About the Study </Title>
-          <p className={paragraphClass}>
-            Derat. Bea quodi blanimi nullabo. Bus estecte molorro qui sin reris
-            etur? Re am consed que dolut lam erum quate velenisti dolora
-            nimporiti o ctiis et ipid quis nissinciae cum verem dit, nobitatecto
-            o cid ullaut occab ipsaper sperum nobitatemqui dolestisi desequam
-            aut es eostiae caboreritas min- vers perenient eturepuda ipisimus ut
-            lab il et eaqui oUllector esequi rem aliquae nis dolorist volupta
-            ectiunt quo mi, consectio blaceste aliquos eaque et, o c totatus
-            citibus sandisini autem fuga. Ur, voluptatur accuptusdant occuptur
-            rem etustis.
+            CAP collected data on the location and licensed capacity of nearly
+            150,000 licensed or registered child care providers from 22 states.
+            The authors included all child care centers; family child care
+            providers; Head Start providers; and public and private preschools
+            in these states in order to get a full picture of the supply of
+            licensed child care options available to nearby communities.
           </p>
           <p>
-            Hendam et pel im quodi idignamet que nobis velent lam, volupta num
-            exero optae corrumq uiatu- scieni rem nis re in ped qui beatibea
-            quam, niae exererum velectur? Qui vollor aut volore occabore rem
-            quibeatecat disquat quiantis et lab iment ut in rerferferis ex et
-            idel ilignam evelestibus si qui cus sim enit, conseque moloreprati
-            autatem.
+            Each child care provider was geocoded based on the physical address
+            provided on their license, giving the authors a precise latitude and
+            longitude for every provider. In cases where the precise address was
+            not available, the authors used the ZIP code to approximate the
+            address. The authors then grouped providers by census tract and
+            added up the total licensed capacity of the locations in each tract.
+            This information was merged with a variety of census estimates on
+            population demographics, population density, family income, poverty,
+            and maternal labor force participation, among other variables. All
+            data are publicly available, and a list of data sources and census
+            variables can be found in the accompanying report’s Appendix.
           </p>
           <p>
-            Et vel minctota dem harum que nam iur mi, exeriam sed magnim et mi,
-            quiam si optaturiate volup- tassi blandis se volut assequis recabor
-            eperspel ma quod ut lab ius as qui reribus, eatem que vent et
-            alicius dia voluptur acestium hilignatio. Nemodis exceaquae res id
-            quideli tionecum rempor aut inve- leseque nonseque volupta sed
-            expedis deniento conet, sunt et faccatur si occati nimpore henihit
-            pra anda volum eum sum ipis erectiat laniatem rentet fugiatiam dio
-            veniend eliberia
+            Using this original dataset, the authors applied the child care
+            deserts definition to more than 45,000 census tracts, a geographic
+            unit sometimes used by city planners to approximate neighborhoods.
+            Census tracts generally have a population size of between 1,200 and
+            8,000 people, with most tracts housing around 4,000 people. These
+            geographic units usually cover a contiguous area, and their
+            boundaries commonly follow identifiable features.
           </p>
           <a className={anchorClass} href="#" target="_blank">
             download the report <Info />

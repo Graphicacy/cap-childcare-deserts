@@ -73,7 +73,8 @@ export const stateData = {
     InDesertsLowIncome: 0.54,
     InDesertsHighIncome: 0.47,
     abbr: 'US',
-    textBox: ''
+    textBox:
+      'CAP analyzed the locations of licensed child care providers in 22 states, covering two-thirds of the U.S. population, and found that approximately half of Americans live in "child care deserts." Specifically, this analysis defines child care deserts as neighborhoods or communities that are either lacking any child care options or have so few child care providers that there are more than three children for every licensed child care slot. According to research published by the U.S. Census Bureau, one-third of children under age 5 are regularly in nonrelative care; therefore, in places where there are more than three children for every child care slot, there may be child care waiting lists, unlicensed child care arrangements, or effects on parents\' employment decisions.PPPPPThis study finds that 58 percent of rural census tracts qualify as child care deserts, while only 44 percent of suburban neighborhoods fit the definition. Urban areas where the median family income is below average also have high rates of child care deserts. Additionally, Hispanic/Latino and American Indian and Alaska Native (AIAN) communities are disproportionately represented in child care deserts, with roughly 60 percent of their combined population living in areas with a low supply of child care. More than 75 percent of the rural AIAN population lives in a child care desert.PPPPPChild care deserts have, on average, maternal labor force participation rates 3 percentage points lower than communities where there is adequate child care supply. In communities where median family incomes are below the national average, this maternal employment gap is even wider.'
   },
   Arizona: {
     state: 'Arizona',
@@ -90,7 +91,8 @@ export const stateData = {
     InDesertsLowIncome: 0.57,
     InDesertsHighIncome: 0.37,
     abbr: 'AZ',
-    textBox: 'Text about Arizona',
+    textBox:
+      "In Arizona, 48 percent of all residents live in a child care desert. However, 55 percent of Arizona's Hispanic/Latino population lives in a child care desert. Child care supply is especially low in Arizona's rural areas, where 68 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Arizona, the maternal labor force participation rate in child care deserts is 2.5 percentage points lower than it is in neighborhoods with adequate licensed child care.  ",
     bounds: [
       31.3321762084961,
       37.0042610168457,
@@ -114,7 +116,8 @@ export const stateData = {
     InDesertsLowIncome: 0.7,
     InDesertsHighIncome: 0.56,
     abbr: 'CA',
-    textBox: 'Text about California',
+    textBox:
+      "In California, 62 percent of all residents live in a child care desert. However, 69 percent of California's Hispanic/Latino population lives in a child care desert. Child care supply is especially low in California's rural areas, where 64 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In California, the maternal labor force participation rate in child care deserts is 2.9 percentage points lower than it is in neighborhoods with adequate licensed child care. Note: The California Department of Social Services does not provide addresses of family child care providers, though it does include their ZIP codes. These child care providers are not shown on the map, but their capacity data have been included at the census tract level.  ",
     bounds: [
       32.5295219421387,
       42.0095024108887,
@@ -138,7 +141,8 @@ export const stateData = {
     InDesertsLowIncome: 0.42,
     InDesertsHighIncome: 0.23,
     abbr: 'CO',
-    textBox: 'Text about Colorado',
+    textBox:
+      "In Colorado, 30 percent of all residents live in a child care desert. However, 38 percent of Colorado's Hispanic/Latino population lives in a child care desert. Child care supply is especially low in Colorado's urban areas, where 35 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Colorado, the maternal labor force participation rate in child care deserts is 3.4 percentage points lower than it is in neighborhoods with adequate licensed child care.  ",
     bounds: [
       36.9924240112305,
       41.0023612976074,
@@ -162,7 +166,8 @@ export const stateData = {
     InDesertsLowIncome: 0.54,
     InDesertsHighIncome: 0.41,
     abbr: 'CT',
-    textBox: 'Text about Connecticut',
+    textBox:
+      "In Connecticut, 44 percent of all residents live in a child care desert. However, 51 percent of Connecticut's Hispanic/Latino population lives in a child care desert. Child care supply is especially low in Connecticut's rural areas, where 50 percent of residents live in areas without enough licensed child care providers. Also, lower-income communities in Connecticut are 30 percent more likely to be child care deserts than higher-income areas.",
     bounds: [
       40.9667053222656,
       42.0505905151367,
@@ -186,7 +191,8 @@ export const stateData = {
     InDesertsLowIncome: 0.29,
     InDesertsHighIncome: 0.23,
     abbr: 'DE',
-    textBox: 'Text about Deleware',
+    textBox:
+      "In Delaware, 25 percent of all residents live in a child care desert. Child care deserts are especially rare in Delaware's urban areas, where only 18 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Delaware, the maternal labor force participation rate in child care deserts is 2.9 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       38.4511260986328,
       39.8394355773926,
@@ -210,7 +216,8 @@ export const stateData = {
     InDesertsLowIncome: 0.38,
     InDesertsHighIncome: 0.38,
     abbr: 'FL',
-    textBox: 'Text about Florida',
+    textBox:
+      "In Florida, 38 percent of all residents live in a child care desert. Child care supply is especially low in Florida's rural areas, where 51 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Florida, the maternal labor force participation rate in child care deserts is 1 percentage point lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       24.3963069915771,
       31.0009689331055,
@@ -234,7 +241,8 @@ export const stateData = {
     InDesertsLowIncome: 0.49,
     InDesertsHighIncome: 0.39,
     abbr: 'GA',
-    textBox: 'Text about Georgia',
+    textBox:
+      "In Georgia, 45 percent of all residents live in a child care desert. However, 49 percent of Georgia's Hispanic/Latino population lives in a child care desert. Child care supply is especially low in Georgia's rural areas, where 61 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Georgia, the maternal labor force participation rate in child care deserts is 1.6 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       30.3557567596436,
       35.0008316040039,
@@ -257,8 +265,9 @@ export const stateData = {
     ruralNondeserts: 598739,
     InDesertsLowIncome: 0.6,
     InDesertsHighIncome: 0.59,
-    abbr: 'IA',
-    textBox: 'Text about Iowa',
+    abbr: 'IL',
+    textBox:
+      "In Illinois, 59 percent of all residents live in a child care desert. However, 68 percent of Illinois' Hispanic/Latino population lives in a child care desert. Child care supply is especially low in Illinois' rural areas, where 69 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Illinois, the maternal labor force participation rate in child care deserts is 1.8 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       36.9701309204102,
       42.5083045959473,
@@ -281,8 +290,9 @@ export const stateData = {
     ruralNondeserts: 785177,
     InDesertsLowIncome: 0.25,
     InDesertsHighIncome: 0.24,
-    abbr: 'IL',
-    textBox: 'Text about Illinois',
+    abbr: 'IA',
+    textBox:
+      "In Iowa, 24 percent of all residents live in a child care desert. However, child care supply is especially low in Iowa's rural areas, where 37 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Iowa, the maternal labor force participation rate in child care deserts is 2.2 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       40.3755989074707,
       43.5011367797852,
@@ -306,7 +316,8 @@ export const stateData = {
     InDesertsLowIncome: 0.57,
     InDesertsHighIncome: 0.38,
     abbr: 'KY',
-    textBox: 'Text about Kentucky',
+    textBox:
+      "In Kentucky, 50 percent of all residents live in a child care desert. Child care supply is especially low in Kentucky's rural areas, where 69 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Kentucky, the maternal labor force participation rate in child care deserts is 5.4 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       36.4967155456543,
       39.1474609375,
@@ -330,7 +341,8 @@ export const stateData = {
     InDesertsLowIncome: 0.48,
     InDesertsHighIncome: 0.45,
     abbr: 'MI',
-    textBox: 'Text about Michigan',
+    textBox:
+      "In Michigan, 46 percent of all residents live in a child care desert. However, 50 percent of Michigan's non-Hispanic, black/African American population lives in a child care desert. Child care supply is especially low in Michigan's rural areas, where 50 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Michigan, the maternal labor force participation rate in child care deserts is 1.5 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       41.6960868835449,
       48.3060646057129,
@@ -354,7 +366,8 @@ export const stateData = {
     InDesertsLowIncome: 0.33,
     InDesertsHighIncome: 0.23,
     abbr: 'MN',
-    textBox: 'Text about Minnesota',
+    textBox:
+      "In Minnesota, 26 percent of all residents live in a child care desert. However, 32 percent of Minnesota's Hispanic/Latino population lives in a child care desert. Child care supply is especially low in Minnesota's urban areas, where 45 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Minnesota, the maternal labor force participation rate in child care deserts is 2.5 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       43.4994277954102,
       49.3844909667969,
@@ -378,7 +391,8 @@ export const stateData = {
     InDesertsLowIncome: 0.45,
     InDesertsHighIncome: 0.29,
     abbr: 'MS',
-    textBox: 'Text about Mississippi',
+    textBox:
+      "In Mississippi, 41 percent of all residents live in a child care desert. Child care supply is especially low in Mississippi's rural areas, where 55 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Mississippi, the maternal labor force participation rate in child care deserts is 3 percentage points lower than it is in neighborhoods with adequate licensed child care. Note: Mississippi does not provide public data on family child care providers.",
     bounds: [
       30.1477890014648,
       34.9960556030273,
@@ -402,7 +416,8 @@ export const stateData = {
     InDesertsLowIncome: 0.6,
     InDesertsHighIncome: 0.49,
     abbr: 'MO',
-    textBox: 'Text about Missouri',
+    textBox:
+      "In Missouri, 55 percent of all residents live in a child care desert. However, 61 percent of Missouri's Hispanic/Latino population lives in a child care desert. Child care supply is especially low in Missouri's rural areas, where 71 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Missouri, the maternal labor force participation rate in child care deserts is 1.5 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       35.9956817626953,
       40.6136360168457,
@@ -426,7 +441,8 @@ export const stateData = {
     InDesertsLowIncome: 0.56,
     InDesertsHighIncome: 0.46,
     abbr: 'NJ',
-    textBox: 'Text about New Jersey',
+    textBox:
+      "In New Jersey, 48 percent of all residents live in a child care desert. However, 53 percent of New Jersey's Hispanic/Latino population lives in a child care desert. Child care supply is especially low in New Jersey's urban areas, where 54 percent of residents live in areas without enough licensed child care providers. Also, lower-income communities in New Jersey are 20 percent more likely to be child care deserts than higher-income areas. Note: New Jersey does not provide public data on family child care providers.",
     bounds: [
       38.7887535095215,
       41.3574256896973,
@@ -450,7 +466,8 @@ export const stateData = {
     InDesertsLowIncome: 0.61,
     InDesertsHighIncome: 0.62,
     abbr: 'NY',
-    textBox: 'Text about New York',
+    textBox:
+      "In New York, 61 percent of all residents live in a child care desert. However, child care supply is especially low in New York's rural areas, where 74 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In New York, the maternal labor force participation rate in child care deserts is 1.1 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       40.4773979187012,
       45.0158615112305,
@@ -474,7 +491,8 @@ export const stateData = {
     InDesertsLowIncome: 0.62,
     InDesertsHighIncome: 0.57,
     abbr: 'PA',
-    textBox: 'Text about Pennsylvania',
+    textBox:
+      "In Pennsylvania, 59 percent of all residents live in a child care desert. However, child care supply is especially low in Pennsylvania's rural areas, where 73 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Pennsylvania, the maternal labor force participation rate in child care deserts is 1.6 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       39.7197647094727,
       42.5146903991699,
@@ -498,7 +516,8 @@ export const stateData = {
     InDesertsLowIncome: 0.5,
     InDesertsHighIncome: 0.51,
     abbr: 'RI',
-    textBox: 'Text about Rhode Island',
+    textBox:
+      "In Rhode Island, 50 percent of all residents live in a child care desert. However, child care supply is especially low in Rhode Island's rural areas, where 56 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Rhode Island, the maternal labor force participation rate in child care deserts is 2.4 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       41.055534362793,
       42.018856048584,
@@ -522,7 +541,8 @@ export const stateData = {
     InDesertsLowIncome: 0.42,
     InDesertsHighIncome: 0.56,
     abbr: 'SC',
-    textBox: 'Text about South Carolina',
+    textBox:
+      "In South Carolina, 47 percent of all residents live in a child care desert. However, 50 percent of South Carolina's Hispanic/Latino population lives in a child care desert. CAP finds that child care deserts are associated with fewer mothers in the workforce. In South Carolina, the maternal labor force participation rate in child care deserts is 1.3 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       32.0333099365234,
       35.2155418395996,
@@ -546,7 +566,8 @@ export const stateData = {
     InDesertsLowIncome: 0.53,
     InDesertsHighIncome: 0.43,
     abbr: 'SD',
-    textBox: 'Text about South Dakota',
+    textBox:
+      "In South Dakota, 47 percent of all residents live in a child care desert. However, 51 percent of South Dakota's Hispanic/Latino population lives in a child care desert. Child care supply is especially low in South Dakota's rural areas, where 58 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In South Dakota, the maternal labor force participation rate in child care deserts is 2.2 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       42.4798889160156,
       45.9454536437988,
@@ -570,7 +591,8 @@ export const stateData = {
     InDesertsLowIncome: 0.56,
     InDesertsHighIncome: 0.4,
     abbr: 'TX',
-    textBox: 'Text about Texas',
+    textBox:
+      "In Texas, 48 percent of all residents live in a child care desert. However, 54 percent of Texas' Hispanic/Latino population lives in a child care desert. Child care supply is especially low in Texas' rural areas, where 62 percent of residents live in areas without enough licensed child care providers. CAP finds that child care deserts are associated with fewer mothers in the workforce. In Texas, the maternal labor force participation rate in child care deserts is 3.3 percentage points lower than it is in neighborhoods with adequate licensed child care.",
     bounds: [
       25.8370609283447,
       36.5007057189941,
@@ -594,7 +616,8 @@ export const stateData = {
     InDesertsLowIncome: 0.35,
     InDesertsHighIncome: 0.38,
     abbr: 'VT',
-    textBox: 'Text about Vermont',
+    textBox:
+      "In Vermont, 37 percent of all residents live in a child care desert. However, child care supply is particularly low in Vermont's rural areas, where 43 percent of residents live in areas without enough licensed child care providers.",
     bounds: [
       42.7269325256348,
       45.0166664123535,
