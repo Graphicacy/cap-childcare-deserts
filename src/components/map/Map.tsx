@@ -117,7 +117,7 @@ type MapProps = Readonly<{
   onMouseMove(feature?: FeatureQueryResult): void;
   onClick(feature?: FeatureQueryResult): void;
   onReady(): void;
-  onGeocoderResult(feature?: FeatureQueryResult): void;
+  onGeocoderResult(state?: StateName): void;
 }>;
 
 const Map: React.StatelessComponent<MapProps> = props =>
@@ -182,14 +182,9 @@ const mapStateToProps = (state: State) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onGeocoderResult(feature?: FeatureQueryResult) {
-    if (!feature || feature.kind !== 'tract') return;
-    const abbr = feature.properties.state;
-
-    // if the geocoder result is in a state we have data for,
-    // select that state -- otherwise back out to all states
-    if (abbr in statesByAbbr) {
-      dispatch(selectState(statesByAbbr[abbr]));
+  onGeocoderResult(state?: StateName) {
+    if (state) {
+      dispatch(selectState(state));
     } else {
       dispatch(selectStateAndCenter('All states'));
     }

@@ -140,12 +140,12 @@ async function prepShapefiles(globString: string) {
   const files = glob.sync(globString);
   const tmp = path.join(__dirname, '../data/tmp');
   const json = path.join(__dirname, '../data/json');
-  const outStream = fs.createWriteStream('./data/tmp/all-tracts.json');
 
   mkdirp(tmp);
   mkdirp(json);
 
-  const data = await readCsv<TractDataResult>('./data/tract_data.csv');
+  const outStream = fs.createWriteStream('./data/tmp/all-tracts.json');
+  const data = await readCsv<TractDataResult>('./data/tract_data_cleaned.csv');
   const tractHashOut: { [key: string]: TractDataResult } = {};
   const tractHash = data.reduce((out, d) => {
     out[d.tract.toString()] = d;
@@ -190,7 +190,7 @@ async function prepShapefiles(globString: string) {
 
   console.log(`generating tiles...`);
   await prun(
-    `tippecanoe -o ./data/tmp/all-tracts-combined.mbtiles -f -Z 2 -zg ./data/tmp/all-tracts.json`
+    `tippecanoe -o ./data/tmp/all-tracts.mbtiles -f -Z 2 -zg ./data/tmp/all-tracts.json`
   );
 
   console.log(`finished!`);

@@ -5,13 +5,14 @@ import { Component, createElement } from 'react';
 import { findDOMNode } from 'react-dom';
 import { style } from 'typestyle';
 
+import { stateData, StateName } from '../../data';
 import { accessToken } from './constants';
 import { FeatureQuery, FeatureQueryResult } from './FeatureQuery';
 import { TRACT_CONTROL_INDENT } from './tracts';
 
 type GeocoderProps = Readonly<{
   style?: React.CSSProperties;
-  onResult?(result: FeatureQueryResult | void): void;
+  onResult?(result: StateName | void): void;
 }>;
 
 type GeocoderState = Readonly<{
@@ -55,28 +56,30 @@ export default class Geocoder extends FeatureQuery<
     const node = findDOMNode(this);
     node.appendChild(geocoder.onAdd(map));
 
-    /**
-     * Add listener on second invocation of result event,
-     * deals with issue:
-     * https://github.com/mapbox/mapbox-gl-geocoder/issues/99
-     */
-    let cache = '';
     geocoder
       .on('error', console.error)
       .on('result', (e: GeocoderResultEvent) => {
         const center = e.result.center.toString();
-        if (cache === center && onResult)
+        if (onResult)
           map.once('moveend', () => {
-            const point = map.project(e.result.center);
-            onResult(this.queryFeatures(point));
+            const state = getStateIfExists(e.result);
+            onResult(state);
           });
-        cache = center;
       });
   }
 
   public render() {
     return <div className={geocoderClass} style={this.props.style} />;
   }
+}
+
+const STATE_CODE_MATCH = /^US-.*/g;
+function getStateIfExists(result: Result) {
+  const context = result.context;
+  const stateContainer =
+    context && context.filter(s => STATE_CODE_MATCH.test(s.short_code));
+  const state = stateContainer.length && stateContainer[0].text;
+  if (state && state in stateData) return state as StateName;
 }
 
 export interface Properties {

@@ -32,7 +32,7 @@ class Mouse extends FeatureQuery<MouseProps> {
     });
     this.initHover({
       sourceLayer: 'alltracts',
-      source: 'bsouthga.0fr0sq3u',
+      source: 'bsouthga.3x5f8aeo',
       id: TRACT_HOVER_ID,
       layerName: TRACT_HOVER_LAYER
     });

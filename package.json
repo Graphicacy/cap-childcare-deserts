@@ -11,7 +11,7 @@
     "build:dev": "rm -rf ./public && webpack --config ./dev/webpack.config.ts",
     "build": "npm run build:dev -- --env.prod --env.inline && rm -rf ./public/bundles",
     "prettier": "prettier --single-quote --write './{dev,src}/**/*.{ts,tsx}'",
-    "data": "ts-node ./dev/data.ts",
+    "data": "ts-node --max_old_space_size=4096 ./dev/data.ts",
     "deploy": "npm run build && cp ./images/favicon.ico ./public/ && gh-pages -d ./public"
   },
   "dependencies": {

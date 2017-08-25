@@ -10,12 +10,13 @@ import {
   TooltipState,
   TractToolTipData
 } from '../../store';
-import { percent } from '../charts/format';
+import { niceNumber, percent } from '../charts/format';
 import { Colors } from '../colors';
 import { HEADER_HEIGHT } from '../layout/Header';
 
 const toolTipClass = style({
   position: 'fixed',
+  width: 300,
   display: 'block',
   backgroundColor: Colors.INFO_BACKGROUND,
   padding: 15,
@@ -81,25 +82,34 @@ const tractRowClass = style({
 const titleStyle: React.CSSProperties = { fontWeight: 'bold' };
 const italic: React.CSSProperties = { fontStyle: 'italic' };
 
+const formatDisplay = (display: string) => {
+  const [tract, county] = display.split(',');
+  return (
+    <div>
+      {tract} <br /> {county}
+    </div>
+  );
+};
+
 const TractTooltip = ({ properties }: TractToolTipData) =>
   <div>
     <span style={titleStyle}>
-      Census Tract {Number(properties.GEOID)}
+      {formatDisplay(properties.geodisplaylabel)}
       {properties.ccdesert
         ? <div style={italic}>Child Care Desert </div>
         : <div> &nbsp; </div>}
     </span>
     <div className={tractRowClass}>
-      Licensed child care providers: {properties.noproviders} <br />
-      Total child care capacity: XX
+      Licensed child care providers: {properties.num_providers} <br />
+      Total child care capacity: {properties.capacity}
     </div>
     <div className={tractRowClass}>
-      Population (total): XXX <br />
-      Population (under 5): XXX
+      Population (total): {properties.pop_total} <br />
+      Population (under 5): {properties.pop_u5}
     </div>
     <div className={tractRowClass}>
-      Median family income: $XX,XXX <br />
-      Maternal labor force participation: XX%
+      Median family income: ${niceNumber(properties.median_fam_inc)} <br />
+      Maternal labor force participation: {percent(properties.LFP_mom / 100)}
     </div>
     <div className={tractRowClass}>
       Percent White: {percent(properties.per_white)} <br />

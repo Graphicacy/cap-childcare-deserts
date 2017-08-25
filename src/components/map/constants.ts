@@ -1,6 +1,6 @@
 declare const __ACCESS_TOKEN__: string;
 export const accessToken = __ACCESS_TOKEN__;
-export const mapboxStyle = 'mapbox://styles/bsouthga/cj6pnybtu2rxk2so8bl7ma1m7';
+export const mapboxStyle = 'mapbox://styles/bsouthga/cj6r5cx7g43ku2rme479ujrmk';
 export const stateModeLayers = [
   // 'all-states-json-hover',
   'allstates-stroke',

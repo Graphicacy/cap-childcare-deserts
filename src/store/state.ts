@@ -100,7 +100,12 @@ export interface TractProperties {
   INTPTLAT: string;
   INTPTLON: string;
   state: string;
+  geodisplaylabel: string;
   ccdesert: number;
+  num_providers: number;
+  capacity: number;
+  pop_total: number;
+  pop_u5: number;
   per_latino: number;
   per_white: number;
   per_black: number;
@@ -108,7 +113,7 @@ export interface TractProperties {
   per_asian: number;
   per_nhpi: number;
   per_twomore: number;
+  median_fam_inc: number;
+  LFP_mom: number;
   urbanicity: string;
-  noproviders: number;
-  state_fips: number;
 }
