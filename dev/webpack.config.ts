@@ -72,7 +72,7 @@ export default function(env: any = {}) {
            * inline + minimize logo
            */
           test: /\.png$/i,
-          use: ['url-loader', 'img-loader']
+          use: ['url-loader', 'img-loader?limit=20000']
         }
       ]
     },
