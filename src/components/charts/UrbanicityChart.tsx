@@ -55,7 +55,7 @@ const padding = {
 
 const UrbanicityChart: React.StatelessComponent<UrbanicityChartProps> = props =>
   <ChartContainer
-    title="Children in a child care desert, by ubanicity"
+    title="Children in a child care desert, by urbanicity"
     style={props.style}
   >
     <VictoryChart domainPadding={domainPadding} padding={padding} height={200}>
@@ -71,17 +71,17 @@ const UrbanicityChart: React.StatelessComponent<UrbanicityChartProps> = props =>
           x="type"
           y="value"
           style={strokeStyle}
-          events={createEvents(props, false)}
+          events={createEvents(props, true)}
           animate={animate}
-          data={getData(props.selectedState).nonDesert}
+          data={getData(props.selectedState).desert}
         />
         <VictoryBar
           x="type"
           y="value"
           style={strokeStyle}
-          events={createEvents(props, true)}
+          events={createEvents(props, false)}
           animate={animate}
-          data={getData(props.selectedState).desert}
+          data={getData(props.selectedState).nonDesert}
         />
       </VictoryStack>
       <VictoryAxis style={tickStyles} tickFormat={niceNumber} tickCount={3} />
