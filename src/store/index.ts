@@ -5,10 +5,11 @@ import {
   ActionType,
   Dispatch,
   selectStateAndCenter,
-  setScreenSize
+  setScreenSize,
+  UrbanicityFilter
 } from './actions';
 import { mobileStartZoom, startZoom } from './constants';
-import queryString from './query-string';
+import { getParamsOnLoad, syncQueryString } from './query-string';
 import { default as reducer } from './reducers';
 import { State } from './state';
 
@@ -16,18 +17,19 @@ export * from './state';
 export * from './actions';
 export * from './reducers';
 
-const middleware = [thunk];
+const middleware = [thunk, syncQueryString];
 
 export function initStore() {
   const composeEnhancers =
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  const query = queryString();
-  const store = createStore(
+  const query = getParamsOnLoad();
+  const store = createStore<State>(
     reducer,
     {
-      embed: query.embed
-    },
+      embed: query.embed === 'true',
+      urbanicityFilter: query.urbanicity || UrbanicityFilter.ALL
+    } as any,
     composeEnhancers(applyMiddleware(...middleware))
   );
 
@@ -46,6 +48,20 @@ export function initStore() {
       store.dispatch(selectStateAndCenter(selectedState));
     }, 500);
   });
+
+  /**
+   * select query string state on load
+   */
+  const queryState = query.state;
+  if (queryState && queryState !== 'All states') {
+    const destroy = store.subscribe(() => {
+      const state = store.getState();
+      if (state.mapReady) {
+        destroy();
+        store.dispatch(selectStateAndCenter(queryState));
+      }
+    });
+  }
 
   return store;
 }

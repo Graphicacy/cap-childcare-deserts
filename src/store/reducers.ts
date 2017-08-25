@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { Action, ActionType, UrbanicityFilter } from './actions';
 import { mobileStartZoom, startCenter, startZoom } from './constants';
-import { TooltipState } from './state';
+import { State, TooltipState } from './state';
 
 const INITIAL_WINDOW_SIZE = window.innerWidth <= 768;
 
@@ -14,7 +14,7 @@ const INITIAL_CENTER = startCenter as [number, number];
 /**
  * combine reducers into state properties
  */
-export default combineReducers({
+export default combineReducers<State>({
   selectedState,
   embed,
   tooltip,
