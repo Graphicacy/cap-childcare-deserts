@@ -97,8 +97,8 @@ const StateTooltip = ({ properties }: StateToolTipData) => {
   return (
     <div>
       <div>
-        <b>{percent(data.percentInDesertsAll)}</b> of people in {state} live in
-        a childcare desert.
+        <b>{percent(data.peopleLivingInDeserts)}</b> of people in {state} live
+        in a childcare desert.
       </div>
       <div style={{ fontStyle: 'italic', marginTop: 5, opacity: 0.8 }}>
         Click for detail

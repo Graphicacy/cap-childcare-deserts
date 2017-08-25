@@ -136,30 +136,30 @@ function getData(name: StateName) {
   const desert = [
     {
       type: 'Rural',
-      value: data.chidrenUnder5InDesertsRural
+      value: data.ruralInDeserts
     },
     {
       type: 'Suburban',
-      value: data.childrenUnder5InDesertsSuburban
+      value: data.suburbanInDeserts
     },
     {
       type: 'Urban',
-      value: data.childrenUnder5InDesertsUrban
+      value: data.urbanInDeserts
     }
   ].map(addWidth);
 
   const nonDesert = [
     {
       type: 'Rural',
-      value: data.childrenUnder5NotInDesertsRural
+      value: data.ruralNondeserts
     },
     {
       type: 'Suburban',
-      value: data.childrenUnder5NotInDesertsSuburban
+      value: data.suburbanNondeserts
     },
     {
       type: 'Urban',
-      value: data.childrenUnder5NotInDesertsUrban
+      value: data.urbanNondeserts
     }
   ].map(addWidth);
 

@@ -38,7 +38,7 @@ const IncomeChart: React.StatelessComponent<IncomeChartProps> = ({
         <Donut
           onMouseOut={onMouseOut}
           onMouseOver={onMouseOver}
-          n={stateData[selectedState].percentInDesertsBlack}
+          n={stateData[selectedState].InDesertsLowIncome}
           name="belowavg"
           title={
             <span>
@@ -51,7 +51,7 @@ const IncomeChart: React.StatelessComponent<IncomeChartProps> = ({
         <Donut
           onMouseOut={onMouseOut}
           onMouseOver={onMouseOver}
-          n={stateData[selectedState].percentInDesertsWhite}
+          n={stateData[selectedState].InDesertsHighIncome}
           name="aboveavg"
           title={
             <span>

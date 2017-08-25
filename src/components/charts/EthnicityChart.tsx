@@ -26,7 +26,7 @@ const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
         <Donut
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
-          n={stateData[props.selectedState].percentInDesertsWhite}
+          n={stateData[props.selectedState].WhiteInDeserts}
           title="White"
           name="white"
         />
@@ -35,7 +35,7 @@ const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
         <Donut
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
-          n={stateData[props.selectedState].percentInDesertsBlack}
+          n={stateData[props.selectedState].BlackInDeserts}
           title="Black"
           name="black"
         />
@@ -44,9 +44,9 @@ const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
         <Donut
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
-          n={stateData[props.selectedState].percentInDesertsHispanic}
-          title="Hispanic"
-          name="hispanic"
+          n={stateData[props.selectedState].LatinoInDeserts}
+          title="Latino"
+          name="latino"
         />
       </div>
     </div>

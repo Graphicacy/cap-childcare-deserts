@@ -16,7 +16,7 @@ import ChartContainer from './ChartContainer';
 import { percent } from './format';
 
 const data = stateList.filter(s => s !== 'All states').map(s => ({
-  percent: stateData[s].percentInDesertsAll,
+  percent: stateData[s].peopleLivingInDeserts,
   abbr: stateData[s].abbr,
   state: s
 }));

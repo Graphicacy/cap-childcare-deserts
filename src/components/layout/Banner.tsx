@@ -40,12 +40,13 @@ const desertPercentClass = style({
 });
 
 const getPercentInDeserts = (state: StateName) =>
-  percent(stateData[state || 'All states'].percentInDesertsAll);
+  percent(stateData[state || 'All states'].peopleLivingInDeserts);
 
 const TitleText = ({ state }: { state: StateName }) =>
   <Title>
     <span className={desertPercentClass}>{getPercentInDeserts(state)}</span>
-    of children in {state || 'these states'} live in a child care desert.
+    of children in {state === 'All states' ? 'these states' : state} live in a
+    child care desert.
   </Title>;
 
 type BannerProps = Readonly<{
