@@ -4,15 +4,19 @@ import { style } from 'typestyle';
 import { stateData } from '../../data';
 import {
   ChartToolTipData,
+  Dispatch,
+  hideTooltip,
   State,
   StateToolTipData,
   ToolTipData,
   TooltipState,
   TractToolTipData
 } from '../../store';
+
 import { niceNumber, percent } from '../charts/format';
 import { Colors } from '../colors';
 import { HEADER_HEIGHT } from '../layout/Header';
+import { Close } from '../layout/Icons';
 
 const toolTipClass = style({
   position: 'fixed',
@@ -27,11 +31,26 @@ const toolTipClass = style({
   pointerEvents: 'none'
 });
 
+const mobileCloseClass = style({
+  position: 'absolute',
+  top: 10,
+  right: 10,
+  display: 'block',
+  $nest: {
+    '& svg': {
+      width: 15,
+      height: 15
+    }
+  }
+});
+
 type ToolTipProps = Readonly<{
   state: TooltipState;
   embed: boolean;
+  mobile: boolean;
   x: number;
   y: number;
+  hideTooltip(): void;
 }>;
 
 function getToolTipPosition({ state, x, y, embed }: ToolTipProps) {
@@ -47,16 +66,29 @@ export const ToolTip = (props: ToolTipProps) =>
   !props.state.show
     ? <div style={{ display: 'none' }} />
     : <div className={toolTipClass} style={getToolTipPosition(props)}>
+        {props.mobile
+          ? <span className={mobileCloseClass} onClick={props.hideTooltip}>
+              <Close />
+            </span>
+          : null}
         {getTooltipContent(props.state.data)}
       </div>;
 
-export default connect((state: State) => {
-  return {
-    ...state.mouse,
-    state: state.tooltip,
-    embed: state.embed
-  };
-})(ToolTip);
+export default connect(
+  (state: State) => {
+    return {
+      ...state.mouse,
+      state: state.tooltip,
+      embed: state.embed,
+      mobile: state.mobile
+    };
+  },
+  (dispatch: Dispatch) => ({
+    hideTooltip() {
+      dispatch(hideTooltip());
+    }
+  })
+)(ToolTip);
 
 const StateTooltip = ({ properties }: StateToolTipData) => {
   const state = properties.state;
