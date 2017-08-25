@@ -8,7 +8,7 @@ const titleClass = style(
     width: '100%',
     fontSize: 24,
     fontFamily: 'Roboto Slab',
-    lineHeight: '3em'
+    lineHeight: '1.5em'
   },
   media(
     { maxWidth: 768 },
