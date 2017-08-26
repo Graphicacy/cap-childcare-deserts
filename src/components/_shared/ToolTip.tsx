@@ -27,12 +27,14 @@ type ToolTipProps = Readonly<{
   hideTooltip(): void;
 }>;
 
-function getToolTipPosition({ state, x, y, embed }: ToolTipProps) {
+function getToolTipPosition({ state, x, y, embed, mobile }: ToolTipProps) {
   // tract is fixed in corner
   if (state.show === true && state.data.kind === 'tract')
     return {
-      right: embed ? 'auto' : 40,
-      top: (embed ? 0 : HEADER_HEIGHT) + 30
+      right: embed && mobile ? '50%' : 40,
+      top: embed && mobile ? '50%' : HEADER_HEIGHT + 30,
+      transform: embed && mobile ? 'translate(50%, -50%)' : '',
+      pointerEvents: embed && mobile ? 'all' : 'none'
     };
 
   // otherwise render above mouse
