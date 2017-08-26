@@ -6,7 +6,9 @@
     "importHelpers": true,
     "outDir": "dist",
     "lib": ["es2015", "dom"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "jsx": "react",
+    "jsxFactory": "createElement"
   },
   "include": ["dev"],
   "exclude": ["node_modules", "dist"]
