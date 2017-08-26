@@ -16,7 +16,12 @@ import { niceNumber, percent } from '../charts/format';
 import { Colors } from '../colors';
 import { Close } from '../layout/Icons';
 import { HEADER_HEIGHT } from '../layout/styles';
-import { mobileCloseClass, toolTipClass, tractRowClass } from './styles';
+import {
+  mobileCloseClass,
+  toolTipClass,
+  tractRowClass,
+  tractTooltipClass
+} from './styles';
 
 type ToolTipProps = Readonly<{
   state: TooltipState;
@@ -44,7 +49,14 @@ function getToolTipPosition({ state, x, y, embed, mobile }: ToolTipProps) {
 export const ToolTip = (props: ToolTipProps) =>
   !props.state.show
     ? <div style={{ display: 'none' }} />
-    : <div className={toolTipClass} style={getToolTipPosition(props)}>
+    : <div
+        className={
+          toolTipClass +
+          ' ' +
+          (props.state.data.kind === 'tract' ? tractTooltipClass : '')
+        }
+        style={getToolTipPosition(props)}
+      >
         {props.mobile
           ? <span className={mobileCloseClass} onClick={props.hideTooltip}>
               <Close />

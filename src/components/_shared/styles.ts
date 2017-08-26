@@ -14,18 +14,21 @@ export const selectClass = style({
   height: 40
 });
 
-export const toolTipClass = style(
+export const toolTipClass = style({
+  position: 'fixed',
+  display: 'inline-block',
+  backgroundColor: Colors.INFO_BACKGROUND,
+  padding: 15,
+  border: '1px solid #ccc',
+  zIndex: 10,
+  fontFamily: 'Open Sans',
+  fontSize: 14,
+  pointerEvents: 'none'
+});
+
+export const tractTooltipClass = style(
   {
-    position: 'fixed',
-    width: 300,
-    display: 'block',
-    backgroundColor: Colors.INFO_BACKGROUND,
-    padding: 15,
-    border: '1px solid #ccc',
-    zIndex: 10,
-    fontFamily: 'Open Sans',
-    fontSize: 14,
-    pointerEvents: 'none'
+    width: 300
   },
   media(
     { maxWidth: 300 },

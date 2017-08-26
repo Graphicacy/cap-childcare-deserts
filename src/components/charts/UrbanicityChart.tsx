@@ -40,7 +40,7 @@ const strokeStyle = {
   }
 };
 
-const labelStyles = { fontFamily: 'Open Sans' };
+const labelStyles = { fontFamily: 'Open Sans', fontSize: 17 };
 const tickStyles = { tickLabels: labelStyles };
 const stackLabel = (datum: { type: string }) => datum.type;
 const animate = { duration: 500 };

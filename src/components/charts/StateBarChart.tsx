@@ -29,7 +29,7 @@ type StateBarChartProps = Readonly<{
   onClick(state: StateName): void;
 }>;
 
-const tickStyles = { tickLabels: { fontFamily: 'Open Sans' } };
+const tickStyles = { tickLabels: { fontFamily: 'Open Sans', fontSize: 14 } };
 const barStyles = { data: { width: 15, cursor: 'pointer' } };
 const animate = { duration: 500 };
 const padding = { top: 0, left: 50, bottom: 50 };
