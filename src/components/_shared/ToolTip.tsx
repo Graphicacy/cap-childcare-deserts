@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import { style } from 'typestyle';
+import { media, style } from 'typestyle';
 import { stateData } from '../../data';
 import {
   ChartToolTipData,
@@ -18,18 +18,26 @@ import { Colors } from '../colors';
 import { HEADER_HEIGHT } from '../layout/Header';
 import { Close } from '../layout/Icons';
 
-const toolTipClass = style({
-  position: 'fixed',
-  width: 300,
-  display: 'block',
-  backgroundColor: Colors.INFO_BACKGROUND,
-  padding: 15,
-  border: '1px solid #ccc',
-  zIndex: 10,
-  fontFamily: 'Open Sans',
-  fontSize: 14,
-  pointerEvents: 'none'
-});
+const toolTipClass = style(
+  {
+    position: 'fixed',
+    width: 300,
+    display: 'block',
+    backgroundColor: Colors.INFO_BACKGROUND,
+    padding: 15,
+    border: '1px solid #ccc',
+    zIndex: 10,
+    fontFamily: 'Open Sans',
+    fontSize: 14,
+    pointerEvents: 'none'
+  },
+  media(
+    { maxWidth: 300 },
+    {
+      width: '100%'
+    }
+  )
+);
 
 const mobileCloseClass = style({
   position: 'absolute',
@@ -56,7 +64,10 @@ type ToolTipProps = Readonly<{
 function getToolTipPosition({ state, x, y, embed }: ToolTipProps) {
   // tract is fixed in corner
   if (state.show === true && state.data.kind === 'tract')
-    return { right: 40, top: (embed ? 0 : HEADER_HEIGHT) + 30 };
+    return {
+      right: embed ? 'auto' : 40,
+      top: (embed ? 0 : HEADER_HEIGHT) + 30
+    };
 
   // otherwise render above mouse
   return { left: x, top: y - 10, transform: 'translate(-50%, -100%)' };

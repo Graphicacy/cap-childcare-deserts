@@ -1,3 +1,2 @@
-import { StateName } from '../../data';
-
 export const TRACT_CONTROL_INDENT = 40;
+export const EMBED_TRACT_CONTROL_INDENT = 5;

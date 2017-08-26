@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { style } from 'typestyle';
+import { media, style } from 'typestyle';
 import StateSelect from '../_shared/StateSelect';
 
 const selectWidth = 250;
@@ -12,7 +12,37 @@ const stateSelectClass = style({
   marginLeft: -(selectWidth / 2)
 });
 
-const MapStateSelect: React.StatelessComponent<{ embed?: boolean }> = props =>
-  props.embed ? <StateSelect above className={stateSelectClass} /> : null;
+const tractResponsive = style(
+  media(
+    { maxWidth: 768 },
+    {
+      bottom: 60
+    }
+  )
+);
+
+const stateResponsive = style(
+  media(
+    { maxWidth: 768 },
+    {
+      bottom: 120
+    }
+  )
+);
+
+const MapStateSelect: React.StatelessComponent<{
+  embed?: boolean;
+  tractMode?: boolean;
+}> = props =>
+  props.embed
+    ? <StateSelect
+        above
+        className={
+          stateSelectClass +
+          ' ' +
+          (props.tractMode ? tractResponsive : stateResponsive)
+        }
+      />
+    : null;
 
 export default MapStateSelect;

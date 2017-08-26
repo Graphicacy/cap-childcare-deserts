@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { media, style } from 'typestyle';
 import { Dispatch, setUrbanFilter, State, UrbanicityFilter } from '../../store';
 import { Colors } from '../colors';
-import { TRACT_CONTROL_INDENT } from './tracts';
+import { EMBED_TRACT_CONTROL_INDENT, TRACT_CONTROL_INDENT } from './tracts';
 
 const noop = () => {}; // tslint:disable-line
 
@@ -33,6 +33,12 @@ const buttonClass = style(
     }
   )
 );
+
+const embedStyle = {
+  left: EMBED_TRACT_CONTROL_INDENT
+};
+
+const nonEmbedStyle = {};
 
 type ControlProps = Readonly<{
   embed?: boolean;
@@ -66,7 +72,10 @@ const Button: React.StatelessComponent<{
   </div>;
 
 const Controls: React.StatelessComponent<ControlProps> = props =>
-  <div className={controlClass}>
+  <div
+    className={controlClass}
+    style={props.embed ? embedStyle : nonEmbedStyle}
+  >
     <Button
       text="all"
       active={props.filter === UrbanicityFilter.ALL}

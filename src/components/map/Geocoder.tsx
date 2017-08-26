@@ -8,10 +8,11 @@ import { style } from 'typestyle';
 import { stateData, StateName } from '../../data';
 import { accessToken } from './constants';
 import { FeatureQuery, FeatureQueryResult } from './FeatureQuery';
-import { TRACT_CONTROL_INDENT } from './tracts';
+import { EMBED_TRACT_CONTROL_INDENT, TRACT_CONTROL_INDENT } from './tracts';
 
 type GeocoderProps = Readonly<{
   style?: React.CSSProperties;
+  embed?: boolean;
   onResult?(result: StateName | void): void;
 }>;
 
@@ -37,6 +38,12 @@ const geocoderClass = style({
     }
   }
 });
+
+const embedGeocoderStyles: React.CSSProperties = {
+  left: EMBED_TRACT_CONTROL_INDENT + 40
+};
+
+const geocoderStyles = {};
 
 export default class Geocoder extends FeatureQuery<
   GeocoderProps,
@@ -69,7 +76,13 @@ export default class Geocoder extends FeatureQuery<
   }
 
   public render() {
-    return <div className={geocoderClass} style={this.props.style} />;
+    const { embed } = this.props;
+    return (
+      <div
+        className={geocoderClass}
+        style={embed ? embedGeocoderStyles : geocoderStyles}
+      />
+    );
   }
 }
 

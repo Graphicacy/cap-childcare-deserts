@@ -37,7 +37,7 @@ import LoadingIndicator from './LoadingIndicator';
 import MapStateSelect from './MapStateSelect';
 import Mouse from './Mouse';
 import TractLegend from './TractLegend';
-import { TRACT_CONTROL_INDENT } from './tracts';
+import { EMBED_TRACT_CONTROL_INDENT, TRACT_CONTROL_INDENT } from './tracts';
 
 const MapBoxMap = ReactMapboxGl({
   accessToken,
@@ -57,6 +57,11 @@ const zoomStyles: React.CSSProperties = {
   right: 'auto'
 };
 
+const zoomEmbedStyles: React.CSSProperties = {
+  ...zoomStyles,
+  left: EMBED_TRACT_CONTROL_INDENT
+};
+
 const desktopLegendStyles: React.CSSProperties = {
   position: 'absolute',
   bottom: 100,
@@ -67,6 +72,13 @@ const desktopLegendStyles: React.CSSProperties = {
 const mobileLegendStyles: React.CSSProperties = {
   margin: '0 auto',
   width: 300
+};
+
+const embedMobileLegendStyles: React.CSSProperties = {
+  width: '100%',
+  textAlign: 'center',
+  position: 'absolute',
+  bottom: 0
 };
 
 const mapClass = style(
@@ -137,7 +149,7 @@ const Map: React.StatelessComponent<MapProps> = props =>
         props.onReady();
       }}
     >
-      <Attribution tractMode={props.tractMode} />
+      <Attribution embed={props.embed} tractMode={props.tractMode} />
       <Mouse
         tractMode={props.tractMode}
         selectedState={props.selectedState}
@@ -153,18 +165,21 @@ const Map: React.StatelessComponent<MapProps> = props =>
         ? <span>
             <Controls />
             <TractLegend />
-            <ZoomControl style={zoomStyles} />
+            <ZoomControl style={props.embed ? zoomEmbedStyles : zoomStyles} />
             <Geocoder
+              embed={props.embed}
               tractMode={props.tractMode}
               onResult={props.onGeocoderResult}
             />
           </span>
-        : (!props.mobile || props.embed) &&
-          <Legend style={desktopLegendStyles} />}
+        : !props.mobile && <Legend style={desktopLegendStyles} />}
     </MapBoxMap>
-    <MapStateSelect embed={props.embed} />
-    {!props.embed && props.mobile
-      ? <Legend horizontal style={mobileLegendStyles} />
+    <MapStateSelect embed={props.embed} tractMode={props.tractMode} />
+    {props.mobile && !props.tractMode
+      ? <Legend
+          horizontal
+          style={props.embed ? embedMobileLegendStyles : mobileLegendStyles}
+        />
       : null}
   </div>;
 

@@ -14,7 +14,10 @@ const attributionClass = style({
 interface AttributionProps {
   style?: React.CSSProperties;
   tractMode?: boolean;
+  embed?: boolean;
 }
+
+const embedStyle = { top: 0, bottom: 'auto', right: 0 };
 
 export default class Attribution extends Component<AttributionProps> {
   public static contextTypes = {
@@ -33,13 +36,17 @@ export default class Attribution extends Component<AttributionProps> {
   }
 
   public render() {
-    const { tractMode } = this.props;
+    const { tractMode, embed } = this.props;
     return (
       <div
         className={attributionClass}
-        style={{
-          bottom: tractMode ? 30 : 0
-        }}
+        style={
+          embed
+            ? embedStyle
+            : {
+                bottom: tractMode ? 30 : 0
+              }
+        }
       />
     );
   }
