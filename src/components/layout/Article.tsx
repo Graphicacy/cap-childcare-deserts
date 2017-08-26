@@ -61,7 +61,8 @@ class Article extends Component<ArticleProps> {
           : null}
         <div className={articleClass}>
           <Title>
-            {' '}Child Care Access in {selectedState}{' '}
+            {' '}Child Care Access in{' '}
+            {selectedState === 'All states' ? 'All States' : selectedState}{' '}
           </Title>
           {stateData[selectedState].textBox.split('PPP').map((par, index) =>
             <p
