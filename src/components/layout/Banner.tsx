@@ -37,7 +37,7 @@ const Banner: React.StatelessComponent<BannerProps> = props =>
       <TitleText state={props.selectedState} />
       <p>
         A child care desert is any census tract with more than 50 children under
-        age 5. that contains either no child care providers or so few options
+        age 5 that contains either no child care providers or so few options
         that there are more than three times as many children as licensed child
         care slots.
       </p>
