@@ -30,7 +30,9 @@ const templateContent = `
     <style>
       html {box-sizing: border-box;}
       *, *:before, *:after {box-sizing: inherit;}
-      ${Object.keys(styles).length ? getStyles() : ''}
+    </style>
+    <style id="styles-target">
+    ${Object.keys(styles).length ? getStyles() : ''}
     </style>
   </head>
   <body><div id="root"></div></body>
