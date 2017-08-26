@@ -1,6 +1,12 @@
 import { createElement } from 'react';
-import { style } from 'typestyle';
 import { Colors } from '../colors';
+import {
+  legendBinClass,
+  legendClass,
+  legendItemClass,
+  legendSquareClass,
+  legendTitleClass
+} from './styles';
 import { TRACT_CONTROL_INDENT } from './tracts';
 
 const bins = [
@@ -10,40 +16,6 @@ const bins = [
   ['30-40%', Colors.STEP_30_40],
   ['-30%', Colors.STEP_30]
 ];
-
-const legendClass = style({
-  backgroundColor: Colors.INFO_BACKGROUND,
-  padding: 15,
-  borderRadius: 5,
-  lineHeight: '1em',
-  display: 'block',
-  zIndex: 3
-});
-
-const legendItemClass = style({
-  position: 'relative',
-  height: 20
-});
-
-const legendSquareClass = style({
-  width: 20,
-  height: 20,
-  display: 'inline-block'
-});
-
-const legendBinClass = style({
-  marginLeft: 10,
-  position: 'relative',
-  top: '50%',
-  display: 'inline-block'
-});
-
-const legendTitleClass = style({
-  fontWeight: 'bold',
-  fontSize: 14,
-  marginBottom: 10,
-  lineHeight: '1.25em'
-});
 
 interface LegendProps {
   style?: React.CSSProperties;

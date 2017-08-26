@@ -1,25 +1,9 @@
-import { flex, horizontal } from 'csstips';
 import { createElement } from 'react';
-import { style } from 'typestyle';
 
 import { stateData, StateName } from '../../data';
 import ChartContainer from './ChartContainer';
 import Donut from './Donut';
-
-const flexClass = style(flex);
-
-const containerClass = style(flex, horizontal, {
-  maxWidth: 370,
-  margin: '0 auto',
-  $nest: {
-    '>:first-child': {
-      paddingLeft: '16.66%'
-    },
-    '>:last-child': {
-      paddingRight: '16.66%'
-    }
-  }
-});
+import { containerClass, flexClass } from './styles';
 
 type IncomeChartProps = Readonly<{
   onMouseOver(value: string, label: string): void;

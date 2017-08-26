@@ -1,7 +1,8 @@
 import { createElement } from 'react';
 import { style } from 'typestyle';
 import * as social from '../../social-content';
-import { Colors } from '../colors';
+
+import { socialIconClass } from './styles';
 
 const body = encodeURIComponent(
   'Many census tracts in these 22 states are #ChildCareDeserts - is yours? ' +
@@ -12,16 +13,6 @@ const longBody = encodeURIComponent(social.DESCRIPTION + ' ' + social.URL);
 const tweet = 'http://twitter.com/intent/tweet?text=' + body;
 const facebook = 'https://www.facebook.com/sharer/sharer.php?u=' + social.URL;
 const mailto = 'mailto:?body=' + longBody;
-
-const socialIconClass = style({
-  marginRight: 10,
-  display: 'inline-block',
-  $nest: {
-    '& svg': {
-      fill: Colors.HEADER_GRAY
-    }
-  }
-});
 
 export const Mail: React.StatelessComponent<{}> = () =>
   <a className={socialIconClass} href={mailto}>

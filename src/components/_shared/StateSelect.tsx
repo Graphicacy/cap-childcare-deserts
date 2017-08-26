@@ -1,22 +1,8 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import { style } from 'typestyle';
 import { stateData, stateList, StateName } from '../../data';
 import { Dispatch, selectStateAndCenter, State } from '../../store';
-import { Colors } from '../colors';
-
-const selectClass = style({
-  maxWidth: 200,
-  width: '100%',
-  display: 'block',
-  margin: '0 auto',
-  textAlignLast: 'center',
-  background: Colors.SELECT_BACKGROUND,
-  border: '1px solid ' + Colors.GRAY,
-  cursor: 'pointer',
-  fontSize: 14,
-  height: 40
-});
+import { selectClass } from './styles';
 
 type StateSelectProps = Readonly<{
   above?: boolean;

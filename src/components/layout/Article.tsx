@@ -1,81 +1,23 @@
-import { content, flex } from 'csstips';
 import { Component, createElement } from 'react';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
-import { media, style } from 'typestyle';
 import * as zenscroll from 'zenscroll';
 
 import { stateData, StateName } from '../../data';
 import { Dispatch, focusArticleComplete, State } from '../../store/';
 import { StateBarChart } from '../charts/';
-import { Colors } from '../colors';
-import { HEADER_HEIGHT } from './Header';
 import { Info } from './Icons';
+import {
+  anchorClass,
+  articleClass,
+  articleContainerClass,
+  HEADER_HEIGHT,
+  paragraphClass,
+  ruleClass,
+  stateBarChartClass
+} from './styles';
 import { VISUALS_SUPPORTED } from './SupportMessage';
 import Title from './Title';
-
-const ARTICLE_MAX_WIDTH = 750;
-
-const articleClass = style(content, {
-  textAlign: 'left',
-  maxWidth: ARTICLE_MAX_WIDTH,
-  margin: '0 auto',
-  lineHeight: '2em',
-  $nest: {
-    '& p': {
-      lineHeight: '24px',
-      fontSize: '14px'
-    }
-  }
-});
-
-const anchorClass = style(
-  {
-    width: '100%',
-    display: 'block',
-    textAlign: 'center',
-    fontSize: '14px',
-    color: Colors.HEADER_GRAY
-  },
-  media(
-    { minWidth: 789 },
-    {
-      display: 'none'
-    }
-  )
-);
-
-const articleContainerClass = style(
-  flex,
-  {
-    padding: 60,
-    paddingTop: 0
-  },
-  media(
-    { maxWidth: 768 },
-    {
-      padding: 30
-    }
-  )
-);
-
-const stateBarChartClass = style(content, {
-  maxWidth: 600,
-  margin: '0 auto',
-  textAlign: 'center'
-});
-
-const ruleClass = style({
-  width: '100%',
-  maxWidth: ARTICLE_MAX_WIDTH,
-  padding: 0,
-  margin: '0 auto',
-  marginBottom: 40
-});
-
-const paragraphClass = style({
-  marginTop: 0
-});
 
 type ArticleProps = Readonly<{
   selectedState: StateName;

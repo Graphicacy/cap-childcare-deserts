@@ -1,33 +1,10 @@
 import { createElement } from 'react';
 import { cssRaw, media, style } from 'typestyle';
-import { HEADER_HEIGHT } from '../layout/Header';
-
-const loadingContainerClass = style({
-  position: 'absolute',
-  top: 0,
-  width: '100%',
-  zIndex: 10,
-  backgroundColor: 'white',
-  marginTop: HEADER_HEIGHT
-});
-
-const embededLoadingClass = style({
-  width: '100vw',
-  height: '100vh',
-  marginTop: 0
-});
-
-const nonEmbedClass = style(
-  {
-    height: 475
-  },
-  media(
-    { maxWidth: 768 },
-    {
-      height: 300
-    }
-  )
-);
+import {
+  embededLoadingClass,
+  loadingContainerClass,
+  nonEmbedClass
+} from './styles';
 
 const Loader: React.StatelessComponent<{}> = () => <div className="loader" />;
 

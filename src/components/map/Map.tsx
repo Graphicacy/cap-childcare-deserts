@@ -9,8 +9,6 @@ import {
 } from 'react-mapbox-gl';
 
 import { Map as MapboxMap } from 'mapbox-gl';
-import { media, style } from 'typestyle';
-
 import { stateData, StateName } from '../../data';
 import {
   Dispatch,
@@ -23,9 +21,10 @@ import {
   TractProperties,
   UrbanicityFilter
 } from '../../store';
+import { HEADER_HEIGHT } from '../layout/styles';
+import { mapClass, mapContainerClass } from './styles';
 
 import { Colors } from '../colors';
-import { HEADER_HEIGHT } from '../layout/Header';
 import Attribution from './Attribution';
 import { accessToken, mapboxStyle } from './constants';
 import Controls from './Controls';
@@ -44,11 +43,6 @@ const MapBoxMap = ReactMapboxGl({
   dragRotate: false,
   scrollZoom: false,
   attributionControl: false
-});
-
-const mapContainerClass = style({
-  position: 'relative',
-  zIndex: 1
 });
 
 const zoomStyles: React.CSSProperties = {
@@ -80,18 +74,6 @@ const embedMobileLegendStyles: React.CSSProperties = {
   position: 'absolute',
   bottom: 0
 };
-
-const mapClass = style(
-  {
-    height: 475
-  },
-  media(
-    { maxWidth: 768 },
-    {
-      height: 300
-    }
-  )
-);
 
 const statesByAbbrResult: { [key: string]: StateName } = {};
 const statesByAbbr = Object.keys(stateData).reduce((out, state: StateName) => {

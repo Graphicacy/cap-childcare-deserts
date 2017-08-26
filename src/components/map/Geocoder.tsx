@@ -3,11 +3,11 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { Component, createElement } from 'react';
 import { findDOMNode } from 'react-dom';
-import { style } from 'typestyle';
 
 import { stateData, StateName } from '../../data';
 import { accessToken } from './constants';
 import { FeatureQuery, FeatureQueryResult } from './FeatureQuery';
+import { geocoderClass } from './styles';
 import { EMBED_TRACT_CONTROL_INDENT, TRACT_CONTROL_INDENT } from './tracts';
 
 type GeocoderProps = Readonly<{
@@ -19,25 +19,6 @@ type GeocoderProps = Readonly<{
 type GeocoderState = Readonly<{
   selection?: GeocoderResultEvent;
 }>;
-
-const geocoderClass = style({
-  position: 'absolute',
-  left: TRACT_CONTROL_INDENT + 40,
-  top: 40,
-  right: 'auto',
-  $nest: {
-    '& .mapboxgl-ctrl-geocoder': {
-      zIndex: 3
-    },
-    '& .mapboxgl-ctrl-geocoder input': {
-      height: 35,
-      padding: '7.5px 10px 7.5px 40px'
-    },
-    '& .mapboxgl-ctrl-geocoder .geocoder-icon-search': {
-      top: '7.5px'
-    }
-  }
-});
 
 const embedGeocoderStyles: React.CSSProperties = {
   left: EMBED_TRACT_CONTROL_INDENT + 40

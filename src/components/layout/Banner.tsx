@@ -1,43 +1,19 @@
-import { content } from 'csstips';
 import { createElement } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { style } from 'typestyle';
 
 import { stateData, stateList, StateName } from '../../data';
 import { selectStateAndCenter, State } from '../../store';
 import StateSelect from '../_shared/StateSelect';
 import { percent } from '../charts/format';
 import { Colors } from '../colors';
+import {
+  bannerClassName,
+  bannerContainerClass,
+  desertPercentClass,
+  selectContainerClass
+} from './styles';
 import Title from './Title';
-
-const bannerContainerClass = style(content, {
-  padding: 40,
-  paddingTop: 20,
-  paddingBottom: 35
-});
-
-const bannerClassName = style({
-  margin: '0 auto',
-  maxWidth: 800,
-  textAlign: 'center',
-  $nest: {
-    '& p': {
-      lineHeight: '24px',
-      fontSize: 14,
-      margin: '0px 0px 12px'
-    }
-  }
-});
-
-const selectContainerClass = style({
-  width: '100%'
-});
-
-const desertPercentClass = style({
-  color: Colors.ORANGE,
-  marginRight: 5
-});
 
 const getPercentInDeserts = (state: StateName) =>
   percent(stateData[state || 'All states'].peopleLivingInDeserts);

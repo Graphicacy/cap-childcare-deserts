@@ -2,14 +2,8 @@ import { AttributionControl, Map } from 'mapbox-gl';
 import * as PropTypes from 'prop-types';
 import { Component, createElement } from 'react';
 import { findDOMNode } from 'react-dom';
-import { style } from 'typestyle';
 
-const attributionClass = style({
-  position: 'absolute',
-  right: 15,
-  bottom: 0,
-  zIndex: 10
-});
+import { attributionClass } from './styles';
 
 interface AttributionProps {
   style?: React.CSSProperties;

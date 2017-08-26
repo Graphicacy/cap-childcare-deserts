@@ -7,9 +7,9 @@ import {
   VictoryPie
 } from 'victory';
 
-import { style } from 'typestyle';
 import { Colors } from '../colors';
 import { percent } from './format';
+import { donutTitleClass, percentClass } from './styles';
 
 export type DonutProps = Readonly<{
   n: number;
@@ -27,15 +27,6 @@ interface DonutDatum {
   stroke: string;
   strokeWidth: number;
 }
-
-const donutTitleClass = style({
-  textAlign: 'center',
-  width: '100%'
-});
-
-const percentClass = style({
-  fontFamily: 'Open Sans'
-});
 
 const svgStyle = { width: '100%' };
 const animate = { duration: 500 };

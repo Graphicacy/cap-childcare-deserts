@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import { media, style } from 'typestyle';
 import { stateData } from '../../data';
 import {
   ChartToolTipData,
@@ -15,42 +14,9 @@ import {
 
 import { niceNumber, percent } from '../charts/format';
 import { Colors } from '../colors';
-import { HEADER_HEIGHT } from '../layout/Header';
 import { Close } from '../layout/Icons';
-
-const toolTipClass = style(
-  {
-    position: 'fixed',
-    width: 300,
-    display: 'block',
-    backgroundColor: Colors.INFO_BACKGROUND,
-    padding: 15,
-    border: '1px solid #ccc',
-    zIndex: 10,
-    fontFamily: 'Open Sans',
-    fontSize: 14,
-    pointerEvents: 'none'
-  },
-  media(
-    { maxWidth: 300 },
-    {
-      width: '100%'
-    }
-  )
-);
-
-const mobileCloseClass = style({
-  position: 'absolute',
-  top: 10,
-  right: 10,
-  display: 'block',
-  $nest: {
-    '& svg': {
-      width: 15,
-      height: 15
-    }
-  }
-});
+import { HEADER_HEIGHT } from '../layout/styles';
+import { mobileCloseClass, toolTipClass, tractRowClass } from './styles';
 
 type ToolTipProps = Readonly<{
   state: TooltipState;
@@ -117,10 +83,6 @@ const StateTooltip = ({ properties }: StateToolTipData) => {
     </div>
   );
 };
-
-const tractRowClass = style({
-  marginTop: 10
-});
 
 const titleStyle: React.CSSProperties = { fontWeight: 'bold' };
 const italic: React.CSSProperties = { fontStyle: 'italic' };

@@ -1,41 +1,10 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import { media, style } from 'typestyle';
 
 import { StateName } from '../../data';
 import { Dispatch, hideTooltip, showTooltip, State } from '../../store/';
 import { EthnicityChart, IncomeChart, UrbanicityChart } from '../charts/';
-
-/**
- * break between charts in columns and rows at 780px
- */
-const chartContainerClass = style(
-  {
-    display: 'flex',
-    flexWrap: 'wrap',
-    padding: 40,
-    paddingTop: 0,
-    maxWidth: 1200,
-    margin: '0 auto'
-  },
-  media(
-    { maxWidth: 780 },
-    {
-      $nest: {
-        '& div': {
-          marginBottom: 10
-        }
-      }
-    }
-  )
-);
-
-const chartClass = style({
-  flexGrow: 1,
-  // flexShrink: 0,
-  flexBasis: 370,
-  justifyContent: 'center'
-});
+import { chartClass, chartContainerClass } from './styles';
 
 const urbanicityStyle: React.CSSProperties = {
   maxWidth: 370,

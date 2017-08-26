@@ -1,7 +1,9 @@
 import * as HTMLPlugin from 'html-webpack-plugin';
 import * as path from 'path';
+import { getStyles } from 'typestyle';
 import * as webpack from 'webpack';
 
+import * as styles from '../src/components/styles';
 import * as social from '../src/social-content';
 
 const AnalyzePlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; // tslint:disable-line
@@ -26,12 +28,9 @@ const templateContent = `
     <title>Childcare Deserts</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto+Slab:700" rel="stylesheet">
     <style>
-      html {
-        box-sizing: border-box;
-      }
-      *, *:before, *:after {
-        box-sizing: inherit;
-      }
+      html {box-sizing: border-box;}
+      *, *:before, *:after {box-sizing: inherit;}
+      ${Object.keys(styles).length ? getStyles() : ''}
     </style>
   </head>
   <body><div id="root"></div></body>

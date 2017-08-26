@@ -1,42 +1,6 @@
 import { createElement } from 'react';
-import { media, style } from 'typestyle';
-import { Colors } from '../colors';
+import { footerClass, imageClass, linkContainerClass } from './styles';
 
-const FOOTER_HEIGHT = 50;
-const FOOTER_PADDING = 20;
-
-const footerClass = style({
-  display: 'block',
-  padding: FOOTER_PADDING,
-  minHeight: FOOTER_HEIGHT + FOOTER_PADDING * 2,
-  color: Colors.FONT_GRAY,
-  backgroundColor: Colors.GRAY,
-  $nest: {
-    '& a': {
-      color: Colors.FONT_GRAY
-    },
-    '& a:not(:last-child)': {
-      marginRight: '1rem'
-    }
-  }
-});
-
-const imageClass = style(
-  {
-    float: 'right',
-    height: FOOTER_HEIGHT,
-    width: FOOTER_HEIGHT,
-    marginLeft: '20px'
-  },
-  media(
-    { maxWidth: 768 },
-    {
-      display: 'none'
-    }
-  )
-);
-
-const linkContainerClass = style({ float: 'right', textAlign: 'right' });
 const imgSrc = require('../../../images/ho_CAPlogo.png'); // tslint:disable-line
 
 export const Footer: React.StatelessComponent<{}> = () =>

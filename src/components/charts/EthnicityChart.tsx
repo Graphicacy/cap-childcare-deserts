@@ -1,10 +1,9 @@
-import { content, flex, horizontal } from 'csstips';
 import { createElement } from 'react';
-import { style } from 'typestyle';
 
 import { stateData, StateName } from '../../data/';
 import ChartContainer from './ChartContainer';
 import Donut from './Donut';
+import { flexClass, horizontalFlexClass } from './styles';
 
 type EthnicityChartProps = Readonly<{
   selectedState: StateName;
@@ -13,16 +12,13 @@ type EthnicityChartProps = Readonly<{
   onMouseOut(): void;
 }>;
 
-const chartContainerClass = style(flex, horizontal);
-const chartClass = style(flex);
-
 const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
   <ChartContainer
     title="Children in a child care desert, by race"
     style={props.style}
   >
-    <div className={chartContainerClass}>
-      <div className={chartClass}>
+    <div className={horizontalFlexClass}>
+      <div className={flexClass}>
         <Donut
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
@@ -31,7 +27,7 @@ const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
           name="white"
         />
       </div>
-      <div className={chartClass}>
+      <div className={flexClass}>
         <Donut
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
@@ -40,7 +36,7 @@ const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
           name="black"
         />
       </div>
-      <div className={chartClass}>
+      <div className={flexClass}>
         <Donut
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}

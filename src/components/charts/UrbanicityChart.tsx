@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 import { connect } from 'react-redux';
-import { style } from 'typestyle';
 import {
   VictoryAxis,
   VictoryBar,
