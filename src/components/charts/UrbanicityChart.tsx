@@ -54,7 +54,7 @@ const padding = {
 
 const UrbanicityChart: React.StatelessComponent<UrbanicityChartProps> = props =>
   <ChartContainer
-    title="Children in a child care desert, by urbanicity"
+    title="Share of people in child care deserts, by urbanicity"
     style={props.style}
   >
     <VictoryChart domainPadding={domainPadding} padding={padding} height={200}>

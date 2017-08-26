@@ -25,7 +25,7 @@ const templateContent = `
     <meta name="twitter:card" content="photo">
     <meta name="twitter:title" content="${social.TITLE}">
     <meta name="twitter:image:src" content="https://childcaredeserts.org/images/social_image.png">
-    <title>Childcare Deserts</title>
+    <title>Do you live in a child care desert?</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto+Slab:700" rel="stylesheet">
     <style>
       html {box-sizing: border-box;}

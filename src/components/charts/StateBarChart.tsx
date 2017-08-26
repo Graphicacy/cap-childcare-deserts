@@ -66,7 +66,7 @@ const StateBarChart: React.StatelessComponent<StateBarChartProps> = ({
   onMouseOut,
   onMouseOver
 }) =>
-  <ChartContainer title="Percent in a child care desert, by state">
+  <ChartContainer title="Share of people in child care deserts, by state">
     <VictoryChart padding={padding} width={600} domainPadding={domainPadding}>
       <VictoryBar
         y="percent"

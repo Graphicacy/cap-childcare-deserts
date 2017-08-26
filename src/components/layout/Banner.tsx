@@ -16,13 +16,15 @@ import {
 import Title from './Title';
 
 const getPercentInDeserts = (state: StateName) =>
-  percent(stateData[state || 'All states'].peopleLivingInDeserts);
+  Math.round(stateData[state || 'All states'].peopleLivingInDeserts * 100);
 
 const TitleText = ({ state }: { state: StateName }) =>
   <Title>
-    <span className={desertPercentClass}>{getPercentInDeserts(state)}</span>
-    of children in {state === 'All states' ? 'these states' : state} live in a
-    child care desert.
+    <span className={desertPercentClass}>
+      {getPercentInDeserts(state)}
+    </span>{' '}
+    percent of people in {state === 'All states' ? 'these states' : state} live
+    in a child care desert.
   </Title>;
 
 type BannerProps = Readonly<{
@@ -34,10 +36,10 @@ const Banner: React.StatelessComponent<BannerProps> = props =>
     <div className={bannerClassName}>
       <TitleText state={props.selectedState} />
       <p>
-        A child care desert is any ZIP code with more than 30 children under age
-        5 that contains either zero child care centers or so few centers that
-        there are more than three times as many children as spaces in the
-        centers.
+        A child care desert is any census tract with more than 50 children under
+        age 5. that contains either no child care providers or so few options
+        that there are more than three times as many children as licensed child
+        care slots.
       </p>
       <div className={selectContainerClass}>
         <StateSelect />

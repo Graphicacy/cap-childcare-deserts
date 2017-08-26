@@ -16,7 +16,7 @@ const IncomeChart: React.StatelessComponent<IncomeChartProps> = ({
   onMouseOut,
   onMouseOver
 }) =>
-  <ChartContainer title="Children in a child care desert, by income">
+  <ChartContainer title="Share of people in child care deserts, by income">
     <div className={containerClass}>
       <div className={flexClass}>
         <Donut
@@ -26,7 +26,7 @@ const IncomeChart: React.StatelessComponent<IncomeChartProps> = ({
           name="belowavg"
           title={
             <span>
-              {' '}Below Avg.<br /> Income{' '}
+              {' '}Below-average<br /> income{' '}
             </span>
           }
         />
@@ -39,7 +39,7 @@ const IncomeChart: React.StatelessComponent<IncomeChartProps> = ({
           name="aboveavg"
           title={
             <span>
-              {' '}Above Avg.<br /> Income{' '}
+              {' '}Above-average<br /> income{' '}
             </span>
           }
         />

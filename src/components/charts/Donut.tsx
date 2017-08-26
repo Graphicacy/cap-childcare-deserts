@@ -74,7 +74,7 @@ function getHoverHandlers(
         onMouseOut,
         onMouseOver(event: any, props: any) {
           const { datum: { inDesert, y } } = props;
-          onMouseOver(percent(y), `${inDesert ? '' : 'not '}in desert`);
+          onMouseOver(percent(y), `${inDesert ? 'I' : 'Not i'}n desert`);
         }
       }
     }

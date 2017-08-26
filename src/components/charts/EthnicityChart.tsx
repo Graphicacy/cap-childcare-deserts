@@ -14,7 +14,7 @@ type EthnicityChartProps = Readonly<{
 
 const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
   <ChartContainer
-    title="Children in a child care desert, by race"
+    title="Share of people in child care deserts, by race"
     style={props.style}
   >
     <div className={horizontalFlexClass}>
@@ -23,7 +23,11 @@ const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
           n={stateData[props.selectedState].WhiteInDeserts}
-          title="White"
+          title={
+            <span>
+              Non-Hispanic,<br />white
+            </span>
+          }
           name="white"
         />
       </div>
@@ -32,7 +36,11 @@ const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
           n={stateData[props.selectedState].BlackInDeserts}
-          title="Black"
+          title={
+            <span>
+              Non-Hispanic,<br />black/African American
+            </span>
+          }
           name="black"
         />
       </div>
@@ -41,7 +49,7 @@ const EthnicityChart: React.StatelessComponent<EthnicityChartProps> = props =>
           onMouseOver={props.onMouseOver}
           onMouseOut={props.onMouseOut}
           n={stateData[props.selectedState].LatinoInDeserts}
-          title="Latino"
+          title={<span>Hispanic/Latino</span>}
           name="latino"
         />
       </div>
