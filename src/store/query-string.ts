@@ -55,7 +55,7 @@ export const syncQueryString: Middleware = <S>() => (next: Dispatch<S>) => (
     }
   }
   const queryString = query.toString();
-  if (queryString === lagQuery) return;
+  if (queryString === lagQuery) return next(action);
   lagQuery = queryString;
 
   history.replaceState(
