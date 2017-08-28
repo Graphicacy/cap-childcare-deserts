@@ -25,6 +25,7 @@ export function getParamsOnLoad() {
  *
  * @param api redux middleware api
  */
+let lagQuery: string = '';
 export const syncQueryString: Middleware = <S>() => (next: Dispatch<S>) => (
   action: Action | ThunkAction<any, S, any>
 ) => {
@@ -54,6 +55,9 @@ export const syncQueryString: Middleware = <S>() => (next: Dispatch<S>) => (
     }
   }
   const queryString = query.toString();
+  if (queryString === lagQuery) return;
+  lagQuery = queryString;
+
   history.replaceState(
     {},
     '',
