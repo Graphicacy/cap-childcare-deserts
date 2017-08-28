@@ -72,6 +72,9 @@ class Article extends Component<ArticleProps> {
               {par}
             </p>
           )}
+          <p>
+            <a href="https://www.americanprogress.org/?p=437988">Download the Report</a>
+          </p>
           <Title> About the Data </Title>
           <p className={paragraphClass}>
             CAP collected data on the location and licensed capacity of nearly
