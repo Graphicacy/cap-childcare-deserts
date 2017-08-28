@@ -68,13 +68,15 @@ export const paragraphClass = style({
 export const bannerContainerClass = style(content, {
   padding: 40,
   paddingTop: 20,
-  paddingBottom: 35
+  paddingBottom: 35,
 });
 
 export const bannerClassName = style({
   margin: '0 auto',
   maxWidth: 800,
   textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'column',
   $nest: {
     '& p': {
       lineHeight: '24px',
@@ -85,8 +87,16 @@ export const bannerClassName = style({
 });
 
 export const selectContainerClass = style({
-  width: '100%'
-});
+    width: '100%'
+  },
+  media(
+    { maxWidth: 780 },
+    {
+      order: -3,
+      marginBottom: '15px'
+    }
+  )
+);
 
 export const desertPercentClass = style({
   color: Colors.ORANGE,
@@ -186,7 +196,6 @@ export const headerClass = style({
 
 export const logoClass = style({
   display: 'inline-block',
-  marginLeft: 20,
   marginTop: -10
 });
 
@@ -261,7 +270,7 @@ export const titleClass = style(
   media(
     { maxWidth: 768 },
     {
-      lineHeight: '1.5em',
+      lineHeight: '1.2em',
       marginBottom: 15
     }
   )
