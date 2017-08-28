@@ -6,6 +6,7 @@ import * as glob from 'glob';
 import * as path from 'path';
 import { format } from 'prettier';
 import * as shapefile from 'shapefile';
+import { stateData, StateName } from '../src/data';
 
 const { merge } = require('@mapbox/geojson-merge'); // tslint:disable-line
 
@@ -91,12 +92,11 @@ async function prepStateJson(globString: string) {
   mkdirp(tmp);
   mkdirp(json);
 
-  const result = await readCsv<StateDataResult>('./data/state-data.csv');
-  const reducedOut: { [key: string]: StateDataResult } = {};
-  const reduced = result.reduce((out, d) => {
-    out[d.Abbr] = d;
-    return out;
-  }, reducedOut);
+  const abbrToState: { [key: string]: StateName | void } = {};
+  Object.keys(stateData).forEach((state: StateName) => {
+    const abbr = stateData[state].abbr;
+    abbrToState[abbr] = state;
+  });
 
   const exclude = new Set(['AK', 'HI']);
 
@@ -108,10 +108,11 @@ async function prepStateJson(globString: string) {
       const id = feature.id.replace('USA-', '');
       feature.properties.id = id;
       if (!exclude.has(id)) {
-        const data = reduced[id];
+        const stateName = abbrToState[id];
+        const data = stateName && stateData[stateName];
         if (data) {
-          Object.keys(data).forEach((k: keyof StateDataResult) => {
-            feature.properties[camelcase(k)] = data[k];
+          Object.keys(data).forEach((k: keyof typeof data) => {
+            if (k !== 'textBox') feature.properties[k] = data[k];
           });
         }
       }
@@ -126,11 +127,11 @@ async function prepStateJson(globString: string) {
 
   await fs.writeFile(
     path.join(json, `all-states.json`),
-    JSON.stringify(merged)
+    JSON.stringify(merged, null, 2)
   );
 
   await prun(
-    `tippecanoe -o ./data/tmp/all-states.mbtiles -Z 2 -zg ./data/tmp/state-json/all-states.json`
+    `tippecanoe -o ./data/tmp/all-states-updated.mbtiles -f -Z 2 -zg ./data/tmp/state-json/all-states.json`
   );
 
   console.log(`finished!`);
@@ -209,7 +210,7 @@ async function readCsv<T>(filename: string) {
 }
 
 async function prepStateData(filename: string) {
-  const result = await readCsv<StateDataResult>(filename);
+  const result = await readCsv<any>(filename);
 
   // https://gist.github.com/mishari/5ecfccd219925c04ac32
   const bounds = require('../data/bounds.json').bounds;
@@ -417,22 +418,6 @@ function camelcase(p: string) {
 
 function mkdirp(dir: string) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-}
-
-interface StateDataResult {
-  State: string;
-  'Percent in deserts - All': number;
-  'Percent in deserts - Black': number;
-  'Percent in deserts - White': number;
-  'Percent in deserts - Hispanic': number;
-  'Chidren under 5 in deserts- rural': number;
-  'Children under 5 not in deserts- rural': number;
-  'Children under 5 in deserts- suburban': number;
-  'Children under 5 not in deserts- suburban': number;
-  'Children under 5  in deserts- urban': number;
-  'Children under 5 not in deserts- urban': number;
-  'Text box': string;
-  'Abbr': string;
 }
 
 interface TractDataResult {
