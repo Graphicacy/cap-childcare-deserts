@@ -25,7 +25,7 @@ const Header: React.StatelessComponent<{}> = () =>
       <Mail />
     </div>
     <div className={textLinkClass}>
-      <a className={headerAnchorClass} href="#" target="_blank">
+      <a className={headerAnchorClass} href="https://www.americanprogress.org/?p=437988" target="_blank">
         Download the Report <Info />
       </a>
       <ArticleFocusButton className={headerAnchorClass} />

@@ -12,6 +12,7 @@ import {
   articleClass,
   articleContainerClass,
   HEADER_HEIGHT,
+  headerAnchorClass,
   paragraphClass,
   ruleClass,
   stateBarChartClass
@@ -72,9 +73,6 @@ class Article extends Component<ArticleProps> {
               {par}
             </p>
           )}
-          <p>
-            <a href="https://www.americanprogress.org/?p=437988">Download the Report</a>
-          </p>
           <Title> About the Data </Title>
           <p className={paragraphClass}>
             CAP collected data on the location and licensed capacity of nearly
@@ -106,8 +104,8 @@ class Article extends Component<ArticleProps> {
             geographic units usually cover a contiguous area, and their
             boundaries commonly follow identifiable features.
           </p>
-          <a className={anchorClass} href="#" target="_blank">
-            download the report <Info />
+          <a className={anchorClass} href="https://www.americanprogress.org/?p=437988" target="_blank">
+            Download the Report <Info />
           </a>
         </div>
       </div>
