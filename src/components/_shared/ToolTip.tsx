@@ -140,7 +140,14 @@ const TractTooltip = ({ properties }: TractToolTipData) =>
     </div>
 
     {!properties.median_fam_inc
-      ? <div><br/><small><i>* $0 for median family income are actually topcoded at $250,000+</i></small></div>
+      ? <div>
+          <br />
+          <small>
+            <i>
+              * $0 for median family income are actually topcoded at $250,000+
+            </i>
+          </small>
+        </div>
       : ''}
   </div>;
 

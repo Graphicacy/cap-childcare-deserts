@@ -68,7 +68,7 @@ export const paragraphClass = style({
 export const bannerContainerClass = style(content, {
   padding: 40,
   paddingTop: 20,
-  paddingBottom: 35,
+  paddingBottom: 35
 });
 
 export const bannerClassName = style({
@@ -86,7 +86,8 @@ export const bannerClassName = style({
   }
 });
 
-export const selectContainerClass = style({
+export const selectContainerClass = style(
+  {
     width: '100%'
   },
   media(

@@ -104,7 +104,11 @@ class Article extends Component<ArticleProps> {
             geographic units usually cover a contiguous area, and their
             boundaries commonly follow identifiable features.
           </p>
-          <a className={anchorClass} href="https://www.americanprogress.org/?p=437988" target="_blank">
+          <a
+            className={anchorClass}
+            href="https://www.americanprogress.org/?p=437988"
+            target="_blank"
+          >
             Download the Report <Info />
           </a>
         </div>
